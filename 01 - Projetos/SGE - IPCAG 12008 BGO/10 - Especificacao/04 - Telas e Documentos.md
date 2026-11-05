@@ -747,7 +747,7 @@ flowchart TD
 - **Dados de Entrada (Inputs):**
   | Bloco | Campo | Tipo | Obrigatório | Regra (`RN-09`) |
   | :--- | :--- | :---: | :---: | :--- |
-  | **1. Borderô** | `meio_pagamento` | `ENUM` | Sim | `'TRANSFERENCIA_DEPOSITO_BANCARIO'`, `'TPA_MULTICAIXA'`, `'MULTICAIXA_EXPRESS'`, `'RUPE'` 🟡 (só se os emolumentos estatais forem pagos por RUPE — `Q-034`, `Q-C10-17`; E1). |
+  | **1. Borderô** | `meio_pagamento` | `ENUM` | Sim | `'TRANSFERENCIA_DEPOSITO_BANCARIO'`, `'TPA_MULTICAIXA'`, `'MULTICAIXA_EXPRESS'`, `'RUPE'` (emolumentos do Estado: guarda a referência e o comprovativo RUPE, **sem documento fiscal do IPCAG** — `DEC-011`). |
   | | `banco_id` | `UUID` | Sim | Banco angolano. |
   | | `numero_operacao_bordero` | `VARCHAR(60)` | Sim | `UNIQUE(banco_id, numero_operacao_bordero)`. |
   | | `data_hora_operacao_banco` / `valor_total_talao_kz` | `TIMESTAMP` / `NUMERIC(14,2)` | Sim | Como impressos no talão. |
@@ -778,7 +778,7 @@ flowchart TD
   - **Fecho de Caixa:** `sessao_caixa_id`, `data_movimento`, `turno_caixa`, `operador_tesouraria_id`, `observacoes_conferencia`; no fecho administrativo: `motivo`, `comprovativos_conferidos`, `diferencas_apuradas[]`.
 - **Regras de Validação Sistémica (`RN-09`, `RN-09.2`, `RN-13.18`, `RN-13.20`):**
   1. Nenhum documento fiscal emitido sofre `DELETE` ou `UPDATE`. A **Nota de Crédito** é um documento sequencial próprio, com referência ao documento original; reabre a dívida na Conta Corrente.
-  2. O fecho soma separadamente os canais (TPA, Depósito/Transferência, Multicaixa Express e RUPE 🟡), abate as notas de crédito do turno e tranca a sessão. Uma nota de crédito sobre um caixa já homologado entra na sessão aberta na data em que é emitida.
+  2. O fecho soma separadamente os canais (TPA, Depósito/Transferência, Multicaixa Express e RUPE — `DEC-011`), abate as notas de crédito do turno e tranca a sessão. Uma nota de crédito sobre um caixa já homologado entra na sessão aberta na data em que é emitida.
   3. O **fecho administrativo** (operador ausente) imprime a menção própria no `DOF-11C`.
 - **Outputs:** **`DOF-11B`** (Nota de Crédito) e **`DOF-11C`** (Mapa de Fecho de Caixa por Turno).
 
@@ -1276,7 +1276,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
   | TPA (Multicaixa presencial) | `[__]` | `[_,00 Kz]` | `[_,00 Kz]` | **`[_,00 Kz]`** |
   | Transferência / Depósito (borderô) | `[__]` | `[_,00 Kz]` | `[_,00 Kz]` | **`[_,00 Kz]`** |
   | Multicaixa Express | `[__]` | `[_,00 Kz]` | `[_,00 Kz]` | **`[_,00 Kz]`** |
-  | RUPE 🟡 (`Q-034`) | `[__]` | `[_,00 Kz]` | `[_,00 Kz]` | **`[_,00 Kz]`** |
+  | RUPE — emolumentos do Estado (`DEC-011`) | `[__]` | `[_,00 Kz]` | `[_,00 Kz]` | **`[_,00 Kz]`** |
   | **Total do turno** | **`[__]`** | **`[_,00 Kz]`** | **`[_,00 Kz]`** | **`[_,00 Kz]`** |
 - **Fecho administrativo:** menção *"Fecho administrativo — executado por [título/nome] em DD/MM/AAAA, por ausência do operador"* com as diferenças apuradas (`RN-13.18`).
 
@@ -1470,6 +1470,11 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 ---
 
 ## Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-011 — Pagamentos por RUPE no fecho de caixa|DEC-011]] — RUPE (2026-11-05)
+
+- Borderô (`meio_pagamento = RUPE`), fecho e `DOF-11C`: a RUPE é um canal do caixa, deixa de ser 🟡 e não gera documento fiscal do IPCAG.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]] — migração (2026-11-05)
 

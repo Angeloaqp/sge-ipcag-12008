@@ -59,6 +59,7 @@ tags:
 | [[#DEC-008 — Fora do âmbito\|DEC-008]] | D8 | Fora do âmbito | (a) Lista recomendada | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
 | [[#DEC-009 — Avançar com pendências de validação\|DEC-009]] | Equipa | Pendências de validação | Avançar para a construção; regulamento interno, recálculo de pautas e homologação resolvidos durante o projeto, com regras parametrizáveis e pontos de controlo | `decidida` | 2026-11-02 | Equipa do projeto | pendente |
 | [[#DEC-010 — Integrar os ajustes da migração no modelo de dados\|DEC-010]] | VER-01 (#6) | Ajustes da migração (MIG-10 `AJ-nn`) | Aceitar todos; BI opcional com pendência; conta técnica própria; consola `MOD-MIG-01` na E1 | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
+| [[#DEC-011 — Pagamentos por RUPE no fecho de caixa\|DEC-011]] | VER-01 (#7); `Q-034` | RUPE no fecho de caixa | Canal próprio do caixa, sem documento fiscal do IPCAG, fora da receita e da conciliação bancária | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -346,6 +347,39 @@ flowchart LR
 
 ---
 
+### DEC-011 — Pagamentos por RUPE no fecho de caixa
+
+- **Origem:** verificação de consistência [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]], grupo G7 ([issue #7](https://github.com/Angeloaqp/sge-ipcag-12008/issues/7)); `Q-034` · **Estado:** `decidida` · **Data:** 2026-11-05 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Os documentos contradiziam-se:
+- **Fora do caixa:** o DOC-05 (lista 16) dizia que a RUPE ficava fora do caixa.
+- **Dentro do caixa:** o DOC-04, o `RF-C10-08` e a `US-TES-05` tratavam-na como canal do fecho.
+
+As entrevistas dizem duas coisas:
+- os emolumentos estatais pagam-se por RUPE (DESC-RESP R15);
+- o fecho tem uma linha RUPE "quando aplicável" (R13).
+
+**Opções.**
+- (a) Fora do caixa, com registo do comprovativo e um quadro só informativo.
+- (b) Canal do caixa.
+- (c) Ignorar a RUPE.
+
+**Decisão.** (b) **A RUPE é um canal do caixa**, ao lado de TPA, Transferência/Depósito e Multicaixa Express. Para respeitar a lei e manter as contas certas:
+1. O balcão regista a **referência e o comprovativo RUPE**. **Não** se emite Fatura, Fatura-Recibo nem Recibo do IPCAG, porque o dinheiro é do Estado.
+2. O fecho tem um **`Subtotal RUPE`**, e o caixa mostra também o **`Total Receita IPCAG`** (o total líquido menos a RUPE).
+3. A RUPE **não é receita do IPCAG** (`RN-13.11.9`) e **não entra na conciliação bancária**, porque não passa pela conta da escola.
+
+**Ainda por confirmar com a escola.** Que rubricas são estatais (lista 63). Isto é parametrizado na tabela de preços e não muda a arquitetura.
+
+**Impacto.**
+- **DOC-01:** `RN-09` (fecho), `RN-13.11.2` e `RN-13.11.9`.
+- **DOC-02:** Fluxo 07 e Exceção E12.7.
+- **DOC-04:** borderô, fecho e `DOF-11C`.
+- **DOC-05:** lista 16 e `sessoes_fecho_caixa`.
+- **RF-07:** `RF-C10-08`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -383,7 +417,7 @@ flowchart LR
 | Q-031 | **Transição na 12ª Classe:** a Língua Portuguesa só existe na 10ª e na 11ª, por isso o veto "LP + nuclear" da RN-02 não se aplica na 12ª. Qual é a regra de transição e de conclusão na 12ª? | DESC-L1 A7; Q-LEG-06 | C07; RN-02; E4 | `SUB_PED` | B | `respondida — a confirmar` | Na 12ª não há transição com deficiência: aprova a todas e tem 0 cadeiras em atraso — [[Sintese das Respostas da Fase B\|DESC-RESP]] §1. (2026-11-02) |
 | Q-032 | **Faltas e comportamento:** o boletim distingue "faltas por indisciplina", "faltas por não comparência" e "comportamento"; a justificação é um formulário numerado assinado pelo Director de Turma **e** pelo Coordenador para a Área Pedagógica (a RN-03 só prevê o Director de Turma). Que tipos de falta e de avaliação do comportamento existem, e qual é o circuito de justificação? | DESC-L1 A8 | C05; C13; RN-03 | Directores de Turma; `SUB_PED` | B | `respondida — a confirmar` | Faltas por indisciplina vs. não comparência; comportamento por trimestre; justificação numerada assinada por DT + Coordenador Pedagógico — [[Sintese das Respostas da Fase B\|DESC-RESP]] R2–R3. Falta a escala do comportamento. (2026-11-02) |
 | Q-033 | **Termos da escola:** os documentos usam "Período" (Manhã/Tarde) em vez de "Turno" e "Cadeira" como sinónimo de "Disciplina". Ficam como sinónimos aceites nos documentos impressos, mantendo um só termo no sistema? | DESC-L1 A9 | Glossário DOC-01; R-04 da VIS-06 | `SUB_PED`; equipa do projeto | C | `aberta` | — |
-| Q-034 | **Emolumentos e RUPE:** o formulário de pedido de declaração não tem campo de pagamento, e os pedidos do pessoal usam a RUPE (Referência Única de Pagamento ao Estado). Há taxa para as declarações dos alunos? Taxas e emolumentos dos alunos pagam-se por RUPE (ao Estado) ou à escola? | DESC-L1 A11 e A15; Q-LEG-14 | DEC-005; DEC-002; C10; C09 | Secretaria Pedagógica; Tesouraria | B | `respondida — a confirmar` | Emolumentos estatais por RUPE; emolumentos internos nas contas da escola — [[Sintese das Respostas da Fase B\|DESC-RESP]] R15. (2026-11-02) |
+| Q-034 | **Emolumentos e RUPE:** o formulário de pedido de declaração não tem campo de pagamento, e os pedidos do pessoal usam a RUPE (Referência Única de Pagamento ao Estado). Há taxa para as declarações dos alunos? Taxas e emolumentos dos alunos pagam-se por RUPE (ao Estado) ou à escola? | DESC-L1 A11 e A15; Q-LEG-14 | DEC-005; DEC-002; C10; C09 | Secretaria Pedagógica; Tesouraria | B | `respondida — a confirmar` | Emolumentos estatais por RUPE; emolumentos internos nas contas da escola — [[Sintese das Respostas da Fase B\|DESC-RESP]] R15. (2026-11-02). Tratamento no sistema decidido na `DEC-011` (2026-11-05); falta confirmar com a escola **que rubricas** são estatais (lista 63). |
 | Q-035 | **Cabeçalho e rodapé reais:** o cabeçalho diz "República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação" e não menciona o MED nem a Diocese de Caxito; o rodapé traz códigos como `IPCAG.SG-ACE` e `DEE-PEEP-001-ACE`. Qual é o modelo oficial a usar e o que significam os códigos? | DESC-L1 A14 | C09 (`DOF-01` a `DOF-12`); DOC-04 Parte 2 | Comissão de Gestão; Gabinete Provincial | B | `respondida — a confirmar` | Cabeçalho: República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação / IPCAG; códigos de rodapé IPCAG.SG-ACE e DEE-PEEP-001-ACE — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
 | Q-036 | **Avaliação de desempenho do pessoal** (10 indicadores, classificação quantitativa e qualitativa, homologação pelo Gabinete Provincial): entra na C11, ou fica fora do âmbito como o processamento salarial (DEC-008)? | DESC-L1 A15 | C11; DEC-008 | Comissão de Gestão; `CHEFE_SEC_GER` | B | `aberta` | — |
 | Q-037 | **SMS antes da E5?** A C12 propõe uma central de avisos (impresso + SMS) que não abre dados à internet; pode entrar na E3 com os avisos de faltas e propinas, deixando o portal na E5 (`DEC-003`)? Com que orçamento mensal? | [[C12 - Comunicacao com Encarregados e Alunos\|CAP-C12]] `Q-C12-01` | C12; C10; E3 | Comissão de Gestão; `SUB_ADM` | B | `aberta` | — |

@@ -1439,7 +1439,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
    - Um borderô `Esgotado / Trancado` é rejeitado com alerta de **Tentativa de Reutilização de Talão Esgotado**; um borderô em conciliação `NAO_ENCONTRADO` ou `DIVERGENTE` não pode ser alocado (`RN-13.16.3`).
 6. **Fecho de Caixa por Turno de Atendimento (`RN-09.2`):**
    - Cada `OP_TES` opera numa sessão de caixa do seu turno de atendimento (`Manhã` ou `Tarde`), aberta a partir de uma sessão de utilizador `BALCAO` (`RN-16.13.3`).
-   - No fecho, o sistema totaliza os documentos de quitação e as Notas de Crédito do período, em 3 subtotais: **TPA**, **Transferência / Depósito Bancário** e **Multicaixa Express / Referência**. 🟡 Pagamentos por RUPE, se existirem, são pagamentos ao Estado e **não** entram no caixa do IPCAG (`RN-13.11.9`, `Q-034`).
+   - No fecho, o sistema totaliza os documentos de quitação e as Notas de Crédito do período, em 4 subtotais: **TPA**, **Transferência / Depósito Bancário**, **Multicaixa Express / Referência** e **RUPE** (`DEC-011`). Os pagamentos por RUPE são emolumentos do Estado: entram no caixa como **canal próprio**, registados com o comprovativo RUPE e **sem documento fiscal do IPCAG**; ficam fora da conciliação bancária e da receita do IPCAG (`RN-13.11.2`, `RN-13.11.9`).
    - O mapa é **conferido pela Secretaria Geral (`CHEFE_SEC_GER`)** e **homologado pelo `SUB_ADM`** (DESC-RESP R13).
    - **Imutabilidade do Caixa Fechado:** depois de fechado e homologado, nenhum documento altera o mapa. Uma Nota de Crédito emitida hoje sobre um documento antigo conta na **sessão aberta na data da Nota de Crédito**, e a dívida reabre de imediato.
 7. **Crédito do Aluno com o Excedente do Talão (`RN-09.3`):** 🟡 (DESC-RESP R10, validar em E1)
@@ -1769,14 +1769,14 @@ Parâmetros opcionais que avisam sem impedir a publicação: (1) máximo de temp
 
 #### RN-13.11 — Receita reconhecida e dimensões de análise
 1. **Receita do período** $[t_1, t_2]$: $\sum$ documentos de quitação emitidos no período $-\ \sum$ Notas de Crédito do período. **Um mês fechado nunca muda** por uma Nota de Crédito posterior (`RN-09.2`).
-2. **Controlo:** a receita de um dia é igual à soma dos totais líquidos das sessões de caixa desse dia; uma diferença aparece como erro de integridade.
+2. **Controlo:** a receita de um dia é igual à soma dos totais líquidos das sessões de caixa desse dia, **deduzido o subtotal RUPE** (`RN-13.11.9`, `DEC-011`); uma diferença aparece como erro de integridade.
 3. **Por canal:** usa o canal de cada borderô na proporção do `valor_alocado`; a Nota de Crédito reparte-se pelos canais do documento original.
 4. **Por curso, classe e turno escolar:** propinas → matrícula da prestação; emolumentos → matrícula ativa na data; taxa do teste de seleção → curso e turno da **1ª Opção**, na categoria `Candidaturas`.
 5. **Turno de atendimento** (da sessão de caixa) é dimensão **diferente** do turno escolar; os relatórios mostram as duas sem as confundir.
 6. **Por rubrica:** `PROPINA_MENSAL`, multas cobradas (separadas) e cada emolumento.
 7. **Saldo de borderôs por alocar** (crédito das famílias — `RN-09.3`): $\sum$ `saldo_disponivel` dos borderôs não `Invalidado por Fraude`; não é receita.
 8. **Pagamentos anteriores ao SGE:** prestações migradas `Paga` sem documento do SGE não contam como receita; o relatório começa no arranque (`DEC-007`: 2027/2028).
-9. **Valores cobrados para o Estado:** emolumentos pagos por RUPE (`Q-C10-17`) não são receita do IPCAG, salvo indicação da Direção.
+9. **Valores cobrados para o Estado:** os emolumentos pagos por RUPE passam pelo caixa como canal próprio (`DEC-011`), mas **não são receita do IPCAG**: os relatórios de receita mostram-nos à parte, como "cobrado para o Estado" (`RF-C10-24`).
 
 #### RN-13.12 — Custo das bolsas, descontos e multas perdoadas
 1. $\sum$ `valor_desconto` das prestações não canceladas com mês de referência no período, por tipo de benefício (`BOLSA_100`, `BOLSA_50`, `BOLSA_PARCIAL_OUTRA`, `ISENCAO_DIOCESE_CAXITO`, `DESCONTO_IRMAOS`, `FILHO_FUNCIONARIO`), curso, classe e turno; nas `Isenta`, o desconto é igual ao bruto.
@@ -2335,6 +2335,11 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-011 — Pagamentos por RUPE no fecho de caixa|DEC-011]] — RUPE (2026-11-05)
+
+- `RN-09` (fecho): a RUPE é o 4.º canal do caixa, sem documento fiscal do IPCAG. `RN-13.11.2` e `RN-13.11.9`: a RUPE fica fora da receita do IPCAG e da conciliação bancária.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]] — migração (2026-11-05)
 

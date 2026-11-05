@@ -748,7 +748,7 @@ flowchart TD
    - o `OP_TES` emite o **Mapa de Fecho de Caixa** (`DOF-11`) com totais separados por canal: **TPA**, **Depósito/Transferência** e **Multicaixa Express**;
    - o **`CHEFE_SEC_GER`** confere os talões físicos com o mapa;
    - o **`SUB_ADM`** homologa o fecho do turno, após reautenticação.
-   > 🟡 **Provisória** — a coluna **RUPE** só existe se a escola receber pagamentos por RUPE que lhe pertençam; os emolumentos estatais pagos por RUPE não são receita do IPCAG (`Q-034`, `Q-C10-17`, `RN-13.11.9`) (`DEC-009`).
+   > **RUPE (`DEC-011`):** a coluna **RUPE** faz parte do fecho como canal próprio. São emolumentos do Estado, registados com o comprovativo RUPE e sem documento fiscal do IPCAG; não são receita do IPCAG nem entram na conciliação bancária (`RN-13.11.9`).
 
 ### 7.5 Caminhos de Exceção, Erros e Travas de Segurança (*Edge Cases & Rollbacks*)
 - **Exceção E7.1 — Reutilização de Talão Esgotado:** bloqueio imediato; o ecrã mostra os documentos e os alunos onde o talão já foi usado e grava alerta em `audit_logs`.
@@ -1259,7 +1259,7 @@ flowchart LR
 - **Exceção E12.4 — Uso do Saldo de um Borderô em Investigação:** recusado (`HTTP 409 — BORDERÔ EM INVESTIGAÇÃO`). Origem: E-C10.10.
 - **Exceção E12.5 — Diferença no Fecho Administrativo:** registada como diferença apurada com motivo, sem alterar documentos. Origem: E-C10.11.
 - **Exceção E12.6 — Correspondência Confirmada por Engano:** só pode ser desfeita antes da homologação, por quem a confirmou ou pelo `SUB_ADM`, com motivo; nunca se apaga — regista-se a anulação.
-- **Exceção E12.7 — Pagamento por RUPE:** não é receita do IPCAG e não entra na conciliação, salvo indicação da Direção (`Q-C10-17`) 🟡.
+- **Exceção E12.7 — Pagamento por RUPE:** canal do caixa (`DEC-011`), mas não é receita do IPCAG e não entra na conciliação bancária, porque o dinheiro vai para a conta do Estado.
 
 ### 12.6 Pós-condições e Registos Gerados
 - Período de conciliação `Fechado / Homologado` com `DOF-20`; correspondências *append-only*.
@@ -1613,6 +1613,11 @@ flowchart TD
 ---
 
 ## Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-011 — Pagamentos por RUPE no fecho de caixa|DEC-011]] — RUPE (2026-11-05)
+
+- Fluxo 07 (fecho) e Exceção E12.7: a RUPE é um canal do caixa, fora da receita e da conciliação.
+
 
 ### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
 
