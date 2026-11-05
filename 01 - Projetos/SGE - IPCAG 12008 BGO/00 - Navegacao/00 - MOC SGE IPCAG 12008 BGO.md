@@ -77,6 +77,7 @@ flowchart LR
 | `PLN-00` | [[00.1 - Plano de Engenharia de Requisitos]] | Lacunas, mapa de 20 capacidades, fases, entregas E1–E5, *Definition of Ready* | `ativo` |
 | `INT-V2` | [[00.2 - Mapa de Integracao v2.0]] | Numeração final (RN-11..18, DOF-13..26, épicos) e convenções da v2.0 | `ativo` |
 | `ORG-00` | [[00.3 - Proposta de Organizacao Documental]] | Onde vive cada informação e as 5 fases até à construção | `ativo` |
+| `VER-01` | [[00.4 - Relatorio de Verificacao v2.0-rc1]] | Verificação de consistência da v2.0-rc1: 10 grupos de problemas e issues #1–#10 | `ativo` |
 | `MTR-07` | [[Matriz de Rastreabilidade]] | Objetivo → Capacidade → RF → RN → US → Módulo/DOF → Tabela | `rascunho` |
 | — | [[Painel Documentacao SGE.base]] · [[Arquitetura SGE IPCAG 12008 BGO.canvas]] | Vista dinâmica e mapa visual | — |
 
@@ -159,7 +160,7 @@ As notas [[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribu
 
 > [!todo] Do estado atual à construção
 > - [x] **Fase 1 — Arrumar:** pastas por função, capacidades arquivadas, ficheiros vazios removidos, índices atualizados (2026-11-05).
-> - [ ] **Fase 2 — Verificar:** consistência entre DOC-01…05, 07 e a Matriz (IDs provisórios, referências cruzadas, contagens, Mermaid, RF sem US).
+> - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). Falta corrigir.
 > - [ ] **Fase 3 — Fechar o que está em aberto:** todas as questões e lacunas num mapa no GitHub; questionários para a escola; decisões da equipa.
 > - [ ] **Fase 4 — Congelar a v2.0:** versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
 > - [ ] **Fase 5 — Ponte para o código:** `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.
