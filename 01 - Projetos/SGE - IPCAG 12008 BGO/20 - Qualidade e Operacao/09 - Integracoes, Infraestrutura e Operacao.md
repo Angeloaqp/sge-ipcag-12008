@@ -27,7 +27,7 @@ tags:
 > - **Especificação (v1.2):** [[01 - Dominio e Regras]] → [[02 - Fluxos de Trabalho]] → [[03 - User Stories]] → [[04 - Telas e Documentos]] → [[05 - Modelagem de Dados]]
 > - **Definição complementar:** [[06 - Visao e Ambito]] | [[07 - Catalogo de Requisitos Funcionais]] | [[08 - Requisitos Nao Funcionais]] | [[10 - Migracao de Dados e Implantacao]] | [[11 - Protecao de Dados (APD)]] | [[12 - Registo de Decisoes e Questoes em Aberto]]
 > - **Áreas e Recursos:** [[Arquitetura de Software e DDD]] | [[Quadro Legal MED AGT e APD Angola]] | [[Verificacao das Referencias Legais]]
-> - **Capacidades relacionadas:** [[C14 - Gestao de Contas e Acesso]] (perfil `ADMIN_TEC`, MFA, recuperação de acesso) | [[C10 - Cobranca, Relatorios Financeiros e Conciliacao]] (conciliação bancária)
+> - **Capacidades relacionadas:** [[01 - Dominio e Regras|DOC-01]] `RN-16` (perfil `ADMIN_TEC`, MFA, recuperação de acesso) | [[01 - Dominio e Regras|DOC-01]] `RN-13` (conciliação bancária)
 
 > [!important] Objetivo deste documento
 > Definir **com que sistemas externos o SGE comunica**, **em que infraestrutura corre** e **como é operado no dia a dia** (backups, recuperação de desastre, monitorização, atualizações, administração técnica, suporte, formação e custos) para cumprir as metas de [[08 - Requisitos Nao Funcionais]]. Fecha a lacuna **L10** e a capacidade **C18 — Operação do sistema** do [[00.1 - Plano de Engenharia de Requisitos|plano]], e prepara a decisão da lacuna **L7** (faturação AGT) descrevendo as alternativas.
@@ -209,7 +209,7 @@ flowchart LR
 | Energia | UPS/gerador para servidor e rede | Só PCs, rede e *router* — mas sem internet nada funciona | UPS/gerador para servidor e rede |
 | Internet | Precisa para réplica e portal, não para o balcão | **Crítica**: no mínimo 2 ligações de operadores diferentes | Mínima |
 | Complexidade de operação | A maior (2 locais, replicação, monitorização de ambos) | A menor localmente; depende do fornecedor | Média |
-| Dados fora de Angola (RNF-PRV-07) | Réplica e portal: proposta da nota 11 é alojar **em Angola**, salvo notificação ou autorização prévia da APD (`RNF-P-APD-06`, `Q-016`) | Todo o sistema sujeito à mesma regra | Não |
+| Dados fora de Angola (RNF-PRV-07) | Réplica e portal: proposta da nota 11 é alojar **em Angola**, salvo notificação ou autorização prévia da APD (`RNF-PRV-07`, `Q-016`) | Todo o sistema sujeito à mesma regra | Não |
 | Natureza dos custos recorrentes | Equipamento local, nuvem e internet | Nuvem e internet redundante | Equipamento local e internet básica |
 | Compatibilidade com a especificação atual | É o desenho descrito no RN-10 §4 | Obriga a rever o RN-10 §4 e o desenho do balcão | Obriga a rever o RN-10 §4 (sem réplica) e o portal QR |
 
@@ -506,12 +506,12 @@ flowchart TD
 ### 5.5 Perfil de administração técnica
 
 **Papel:** **Administrador Técnico do SGE**, com **um suplente** treinado (para não haver uma única pessoa de quem tudo depende). **Não é um dos 12 cargos RBAC** do DP n.º 93/21 (DOC-01 §2.1). Tem dois planos de acesso, que não se misturam:
-- **Na aplicação:** o perfil técnico `ADMIN_TEC` proposto na [[C14 - Gestao de Contas e Acesso]] (fora dos 12 cargos, numa lista fechada nova de perfis técnicos). Gere contas, sessões, fatores MFA e dispositivos, **sem acesso a notas, faltas, dados financeiros ou processos de alunos** (`RN-P-C14-17`). A sua aprovação passa pela homologação da C14 e pela alteração da lista controlada 1 do DOC-05 §1.3 (Q09-08).
+- **Na aplicação:** o perfil técnico `ADMIN_TEC` definido no [[01 - Dominio e Regras|DOC-01]] (§2 e `RN-16`) (fora dos 12 cargos, numa lista fechada nova de perfis técnicos). Gere contas, sessões, fatores MFA e dispositivos, **sem acesso a notas, faltas, dados financeiros ou processos de alunos** (`RN-16.17`). A sua aprovação passa pela homologação da C14 e pela alteração da lista controlada 1 do DOC-05 §1.3 (Q09-08).
 - **Na infraestrutura:** credenciais do sistema operativo, da base de dados, das cópias e da nuvem, guardadas fora da aplicação. É sobre estas que valem a regra das 2 pessoas e a conta de emergência (abaixo).
 
 **Responsabilidades:**
 - Verificação diária do painel de estado; troca semanal do disco rotativo; restauro mensal de amostra; participação no ensaio trimestral.
-- Gestão de contas segundo a C14: executar as atribuições aprovadas pelos cargos competentes, desativar no próprio dia da saída, registar fatores MFA presencialmente e repor acessos com conferência do BI (`RN-P-C14-12`, `RN-P-C14-16`; RNF-SEG-05); revisão trimestral de acessos com o `SUB_ADM` (`RN-P-C14-19`).
+- Gestão de contas segundo a C14: executar as atribuições aprovadas pelos cargos competentes, desativar no próprio dia da saída, registar fatores MFA presencialmente e repor acessos com conferência do BI (`RN-16.12`, `RN-16.16`; RNF-SEG-05); revisão trimestral de acessos com o `SUB_ADM` (`RN-16.19`).
 - Manter o **documento de segurança** (RNF-SEG-15) com o `SUB_ADM`: aprovado antes da E1, revisto anualmente.
 - Primeira linha técnica (N2): impressoras, rede, postos, telemóveis com problemas de instalação.
 - Aplicação de atualizações com o N3 (§5.4); execução do procedimento de recuperação de desastre (§5.2).
@@ -520,7 +520,7 @@ flowchart TD
 **Competências:** operação básica de servidores e redes; backups e restauro; noções de PostgreSQL; segurança básica; boa comunicação com utilizadores de literacia digital variável. Pode ser uma pessoa interna (por exemplo, um professor ou funcionário com formação em informática) ou externa — a decidir (Q09-07).
 
 **Regras de segregação:**
-- **Nenhuma permissão de negócio** no perfil `ADMIN_TEC` (RNF-SEG-12). As acumulações seguem a C14 (`RN-P-C14-05`): o `ADMIN_TEC` é incompatível com `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED`, `OP_PED`, `CHEFE_SEC_GER` e `OP_TES`; pode acumular com `PROF`, `DIR_TURMA` ou coordenações **só com autorização expressa do `DIR_GERAL`**, e as operações que fizer sobre contas de colegas são notificadas ao titular.
+- **Nenhuma permissão de negócio** no perfil `ADMIN_TEC` (RNF-SEG-12). As acumulações seguem a C14 (`RN-16.5`): o `ADMIN_TEC` é incompatível com `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED`, `OP_PED`, `CHEFE_SEC_GER` e `OP_TES`; pode acumular com `PROF`, `DIR_TURMA` ou coordenações **só com autorização expressa do `DIR_GERAL`**, e as operações que fizer sobre contas de colegas são notificadas ao titular.
 - Acesso direto à base de dados **só quando necessário e sempre registado** (RNF-SEG-12, RNF-AUD-02).
 - **Regra das 2 pessoas** para: restauro em produção, troca da chave HMAC, abertura dos envelopes de chaves, uso da conta de emergência.
 - **Conta de emergência:** credenciais em envelope selado, usada só com autorização do `DIR_GERAL`; cada uso é alertado (§5.3) e as credenciais são trocadas a seguir.
@@ -669,7 +669,7 @@ Questões a transcrever para [[12 - Registo de Decisoes e Questoes em Aberto]] (
 | Q09-13 | Os professores usam dados móveis pagos por si? A escola oferece Wi-Fi ou comparticipa dados? | §4, §5.8 | `DIR_GERAL`, `SUB_ADM` | `DSC-03` B.6 (uso); custo: nova |
 | Q09-14 | Os funcionários e professores têm email? (se não, a recuperação de palavra-passe é presencial) | INT-05, RNF-SEG-05 | `CHEFE_SEC_GER` | `Q-C14-03` |
 | Q09-15 | A Diocese de Caxito precisa de receber relatórios periódicos (bolsas, isenções, mapas financeiros)? Em que formato e periodicidade? | INT-09 | `SUB_ADM` | Nova |
-| Q09-16 | Há restrições à localização dos dados na nuvem (em Angola ou no estrangeiro)? | `DEC-006`, RNF-PRV-07, nota 11 | Nota 11; confirmação legal | `Q-016`; `RNF-P-APD-06` |
+| Q09-16 | Há restrições à localização dos dados na nuvem (em Angola ou no estrangeiro)? | `DEC-006`, RNF-PRV-07, nota 11 | Nota 11; confirmação legal | `Q-016`; `RNF-PRV-07` |
 | Q09-17 | Como se trata um documento fiscal impresso que se perdeu na base num desastre (sem reutilizar o número)? | §5.2 passo 7, RN-09, `DEC-002` | `SUB_ADM`; confirmação legal | Nova; depende de `DEC-002` |
 | Q09-18 | A Plataforma Nacional de Certificação do DP n.º 227/25 já funciona? Como se registam os títulos e se obtém o QR (ficheiro, formulário, integração)? | INT-10, RNF-AUD-08, §2.3 | `CHEFE_SEC_PED`; MED | `Q-LEG-14` |
 

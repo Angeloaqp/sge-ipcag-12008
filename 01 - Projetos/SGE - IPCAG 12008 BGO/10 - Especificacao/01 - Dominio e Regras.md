@@ -459,7 +459,7 @@ Legenda igual à do §2.2. Onde a nota de origem não tinha uma coluna, a célul
 | **D2. Registo de entrega e digitalização** | `R` | `R` | `—` | `C, R, U` | `C, R, U` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **D3. Validação, rejeição e dispensa** | `R` | `R, H` *(dispensa)* | `—` | `R, H` *(valida/rejeita; propõe dispensa)* | `R` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **D4. Cópias de documentos de identificação (BI/cédula)** | `R` | `R` | `—` | `R` | `R` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
-| **D4a. Informação de saúde (atestados, "problema de saúde") — RF-P-APD-05** | *só estado* | `R` | `—` | `R` | `C` *(carrega, não reabre)* | `—` | `—` | *só estado* | *só estado* | *só estado* + alerta de emergência | *só estado* + alerta de emergência | *só estado* | `—` |
+| **D4a. Informação de saúde (atestados, "problema de saúde") — RF-C19-05** | *só estado* | `R` | `—` | `R` | `C` *(carrega, não reabre)* | `—` | `—` | *só estado* | *só estado* | *só estado* + alerta de emergência | *só estado* + alerta de emergência | *só estado* | `—` |
 | **D5. Estado das pendências (sem ficheiros)** | `R, P` | `R, P` | `—` | `R, P` | `R, P` | `—` | `—` | `R*` | `—` | `R*` | `R*, P*` | `—` | `—` |
 | **D6. Dados de contacto do aluno e do encarregado** | `R` | `R` | `R` *(benefícios)* | `C, R, U` | `C, R, U` | `—` | `R` *(básico)* | `R*` | `—` | `R*` | `R*` | `—` | `—` |
 | **D7. Dados de identificação civil (pedidos de alteração)** | `R` | `R` | `—` | `R, U, H` | `C, R` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
@@ -1141,7 +1141,7 @@ stateDiagram-v2
 | `Planeado` | `abrirITrimestre` | `Em Curso` | `SUB_PED`, `DIR_GERAL` | Guardas do §3.1 (`abrirPeriodoLetivo`) **e** ano anterior `Encerrado` (`RN-18.1.4`). |
 | `Em Curso` | `encerrarIIITrimestre` | `Em Encerramento` | `SUB_PED` | III Trimestre `Encerrado Oficialmente`. |
 | `Em Encerramento` | `concluirAnoLetivo` | `Encerrado` | `SUB_PED` + `DIR_GERAL` | Bloqueantes B1–B8 cumpridos (`RN-18.3`); passagem definitiva executada; cópia anual de fecho verificada. Ativa o modo só de leitura (`RN-18.12`), termina as atribuições de cargo do ano (`RN-16.19.2`), caduca os cartões anuais e encerra o plano de distribuição. Evento `ANO_LETIVO_ENCERRADO`; emite o `DOF-25`. |
-| `Encerrado` | `arquivarAnoAposPrazoConservacao` | `Arquivado` | `DIR_GERAL` | Lotes de conservação do ano aprovados e executados (APD-11, RF-P-APD-13). Depende da `C19`. |
+| `Encerrado` | `arquivarAnoAposPrazoConservacao` | `Arquivado` | `DIR_GERAL` | Lotes de conservação do ano aprovados e executados (APD-11, RF-C19-13). Depende da `C19`. |
 
 > [!note] Sem reabertura do ano
 > Não existe `Encerrado` → `Em Encerramento`. As correções fazem-se pela reabertura auditada de uma pauta (`RN-18.12.2c`, `RN-18.13`).
@@ -1492,7 +1492,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 #### RN-11.2 — Catálogo Parametrizável de Documentos do Processo
 1. O `CHEFE_SEC_PED` mantém o catálogo (`tipos_documento_processo`) e os requisitos por **tipo de ingresso** (`MATRICULA_INICIAL_10A`, `CONFIRMACAO_INTERNA`, `TRANSFERENCIA_ENTRADA`) e por classe (`requisitos_documentais`); a `SUB_PED` homologa.
 2. Cada requisito define: obrigatório?; exige conferência do original?; exige digitalização?; tem validade (e qual)?; prazo de entrega após a matrícula; efeito da falta (`ALERTA` ou `BLOQUEIA_CERTIFICACAO` — `RN-11.7`); categoria de dados (`IDENTIFICACAO`, `ACADEMICO`, `SAUDE`, `FOTOGRAFIA`, `OUTRO`) para o controlo de acesso (`RN-11.12`).
-3. **Proposta inicial a validar** (quantidades e validades em branco): BI ou Cédula do aluno (obrigatório na matrícula inicial e na transferência; na confirmação só se caducou ou mudou — `Q-C03-12`); Certificado da 9ª Classe (obrigatório na matrícula inicial — `Q-C03-04`); Atestado Médico **só como indicador entregue / não entregue, sem ficheiro** (RF-P-APD-07 — `Q-C03-03`, `Q-APD-05`); Fotografias (`Q-C03-02`); Guia de Transferência e Certificado de Habilitações Parcial (obrigatórios na transferência de entrada — `RN-06.1`); documento do encarregado e, se não for pai nem mãe, documento de representação (`Q-C03-05`, `Q-C03-17`, `Q-APD-13`); Boletim (`DOF-03`) assinado, gerado pelo sistema (arquivo digitalizado? — `Q-C03-13`).
+3. **Proposta inicial a validar** (quantidades e validades em branco): BI ou Cédula do aluno (obrigatório na matrícula inicial e na transferência; na confirmação só se caducou ou mudou — `Q-C03-12`); Certificado da 9ª Classe (obrigatório na matrícula inicial — `Q-C03-04`); Atestado Médico **só como indicador entregue / não entregue, sem ficheiro** (RF-C19-07 — `Q-C03-03`, `Q-APD-05`); Fotografias (`Q-C03-02`); Guia de Transferência e Certificado de Habilitações Parcial (obrigatórios na transferência de entrada — `RN-06.1`); documento do encarregado e, se não for pai nem mãe, documento de representação (`Q-C03-05`, `Q-C03-17`, `Q-APD-13`); Boletim (`DOF-03`) assinado, gerado pelo sistema (arquivo digitalizado? — `Q-C03-13`).
 4. Documentos que já têm tabela própria (atestado da `DISP`, comprovativo de bolsa, guia de transferência) **continuam nas suas tabelas** e aparecem na vista; o catálogo não os duplica (`RN-11.5.5`).
 5. Alterar o catálogo a meio do ano só afeta as matrículas futuras; as exigências já geradas mantêm-se, salvo dispensa (`RN-11.3.5`).
 
@@ -1541,7 +1541,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 2. **Mudança:** o `CHEFE_SEC_PED` regista o novo encarregado (pesquisado pelo BI, reutilizando o registo se existir), data de início, motivo e comprovativo (`Q-C03-05`); o vínculo anterior recebe data de fim; evento `MUDANCA_ENCARREGADO`.
 3. **Efeitos financeiros:** o desconto de irmãos (`RN-07.1`) é recalculado **só nas prestações vincendas**; os documentos fiscais já emitidos mantêm o encarregado da altura (`RN-09`); antes de gravar, o `OP_PED` vê o efeito previsto.
 4. **Encarregado partilhado:** alterar o contacto altera-o para todos os educandos; o ecrã mostra os educandos afetados antes de gravar.
-5. **Maioridade:** lista diária dos alunos que fazem 18 anos para reconfirmar consentimentos (RF-P-APD-04); se o aluno maior pode ser o próprio responsável é a `Q-C03-10` — até lá, o encarregado é sempre obrigatório.
+5. **Maioridade:** lista diária dos alunos que fazem 18 anos para reconfirmar consentimentos (RF-C19-04); se o aluno maior pode ser o próprio responsável é a `Q-C03-10` — até lá, o encarregado é sempre obrigatório.
 
 #### RN-11.10 — Cartão de Estudante
 1. **Direito:** aluno com matrícula `Ativa` no Ano Letivo corrente.
@@ -1560,7 +1560,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 
 #### RN-11.12 — Acesso a Dados Sensíveis do Processo
 1. Ficheiros `IDENTIFICACAO` só visíveis a `OP_PED`, `CHEFE_SEC_PED`, `SUB_PED` e `DIR_GERAL` (proposta — `Q-C03-16`).
-2. **Saúde** (RF-P-APD-05): detalhe só para `CHEFE_SEC_PED` e `SUB_PED`; o `OP_PED` regista e carrega, mas não reabre; os restantes, incluindo o `DIR_GERAL`, veem só o estado. Com consentimento, o **alerta de emergência** resumido aparece ao `DIR_TURMA` e ao `COORD_TURNO`. 🟡 A escola pede que o "problema de saúde" seja visível à Direção, à Secretaria Pedagógica e ao Director de Turma (DESC-RESP R8): a diferença é a resolver na `C19`.
+2. **Saúde** (RF-C19-05): detalhe só para `CHEFE_SEC_PED` e `SUB_PED`; o `OP_PED` regista e carrega, mas não reabre; os restantes, incluindo o `DIR_GERAL`, veem só o estado. Com consentimento, o **alerta de emergência** resumido aparece ao `DIR_TURMA` e ao `COORD_TURNO`. 🟡 A escola pede que o "problema de saúde" seja visível à Direção, à Secretaria Pedagógica e ao Director de Turma (DESC-RESP R8): a diferença é a resolver na `C19`.
 3. `DIR_TURMA`, `COORD_CURSO` e `COORD_TURNO` veem **só o estado** das pendências; `PROF`, `OP_TES`, `CHEFE_SEC_GER` e `SUB_ADM` não veem documentos do processo.
 4. **Registo das consultas:** cada consulta ao processo fica em `audit_logs` (RNF-PRV-02); ver/descarregar um ficheiro `IDENTIFICACAO` grava `ACESSO_ANEXO_SENSIVEL`; ler dados de saúde grava `ACESSO_DADOS_SAUDE`.
 5. O atestado usado na justificação de faltas segue as regras do módulo de faltas e da APD-11; esta regra aplica-se aos documentos do processo.
@@ -2310,7 +2310,7 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 #### RN-18.15 — Arquivo
 1. **Dossiê de Encerramento (digital):** antes de encerrar, cada turma de `N` tem as versões finais do `DOF-04` (por disciplina) e do `DOF-05` (anual) em `documentos_oficiais_emitidos` com código de verificação; se faltar, o sistema gera-a. O `DOF-12` anual é aviso.
 2. **Arquivo físico:** lista dos processos a passar ao arquivo histórico e registo da localização física (`RN-11.1.3`).
-3. **`ARQUIVADO`:** marca o ano cujos lotes de conservação foram aprovados e executados pelo motor de conservação da APD-11 (RF-P-APD-13; PC-05, PC-30…). Os registos académicos que sustentam certificados e diplomas **não são eliminados** (`Q-C16-14`).
+3. **`ARQUIVADO`:** marca o ano cujos lotes de conservação foram aprovados e executados pelo motor de conservação da APD-11 (RF-C19-13; PC-05, PC-30…). Os registos académicos que sustentam certificados e diplomas **não são eliminados** (`Q-C16-14`).
 4. Antes da homologação, faz-se e verifica-se a **cópia anual de fecho** (RNF-BKP-08).
 
 #### RN-18.16 — Execução Repetível e Homologação

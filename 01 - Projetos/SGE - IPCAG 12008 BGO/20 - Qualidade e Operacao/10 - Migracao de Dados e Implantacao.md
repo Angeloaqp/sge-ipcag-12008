@@ -714,13 +714,13 @@ A conta técnica é desativada logo após o Termo de Aceitação da última onda
 
 ### 7.7 Proteção de dados durante a migração
 - **Minimização:** só os campos dos ficheiros modelo; nenhum dado que o SGE não use. Em concreto: **não se migram** motivos clínicos nem atestados de `DISP` (`PC-05`); dos **antigos alunos sem dívida** não se migram telefones nem moradas (`PC-08`: contactos eliminados 1 ano após a saída); de candidatos só entram os admitidos (`PC-02`).
-- **Onde ficam os ficheiros:** no servidor local da escola (`DEC-006`), em Angola (`RNF-P-APD-06`), cifrados, com acesso só da equipa de migração. **Proibido** enviar por correio eletrónico pessoal, aplicações de mensagens, redes sociais ou serviços de nuvem não aprovados.
+- **Onde ficam os ficheiros:** no servidor local da escola (`DEC-006`), em Angola (`RNF-PRV-07`), cifrados, com acesso só da equipa de migração. **Proibido** enviar por correio eletrónico pessoal, aplicações de mensagens, redes sociais ou serviços de nuvem não aprovados.
 - **Equipa de migração externa** = subcontratado (tratamento `TRT-30` da nota 11): contrato com as obrigações do art. 23.º antes de tocar em dados reais.
-- **Dados reais e ensaios (`RNF-P-APD-08`):** a nota 11 proíbe dados reais em desenvolvimento, testes e formação, **incluindo nos ensaios de migração**. Proposta de compatibilização, a decidir com a nota 11 (`MIG-Q41`):
+- **Dados reais e ensaios (`RNF-PRV-06`):** a nota 11 proíbe dados reais em desenvolvimento, testes e formação, **incluindo nos ensaios de migração**. Proposta de compatibilização, a decidir com a nota 11 (`MIG-Q41`):
   - o **desenvolvimento e o teste da consola de migração** usam só dados sintéticos ou anonimizados (cumpre a regra tal como está);
   - a **área de preparação, o ensaio-piloto e os ensaios gerais** correm no **servidor de produção da escola**, numa base separada, com os mesmos controlos da produção (cifra, MFA, `audit_logs`, acesso nominal) e operados só por pessoas autorizadas. Fazem parte do próprio tratamento de migração (`TRT-30`) e não são um ambiente de teste;
   - **sem esta compatibilização**, os ensaios só podem usar cópias anonimizadas: servem para medir tempos e testar regras, mas **não permitem ensaiar a reconciliação da dívida nem as amostras conferidas** com dados reais (risco `MIG-R13`).
-- **Ambiente de formação:** só dados fictícios (`RNF-P-APD-08`; `RNF-PRV-06` da nota 08).
+- **Ambiente de formação:** só dados fictícios (`RNF-PRV-06`; `RNF-PRV-06` da nota 08).
 - Compromisso de confidencialidade assinado por quem digita ou confere (alinhado com o termo de sigilo da `ALT-05-17`).
 - Destruição ou arquivo dos ficheiros intermédios e das imagens no fim do prazo a definir (`MIG-Q36`). Os **registos migrados** seguem os prazos da nota 11: registo académico permanente (`PC-01`), financeiro 10 anos (`PC-10`).
 - Base legal, informação aos titulares e prazos de conservação: [[11 - Protecao de Dados (APD)]].
@@ -787,7 +787,7 @@ flowchart TD
 
 ### 8.4 Ensaios
 - **Ensaio-piloto**: valida os ficheiros modelo, mede a produtividade da digitação e testa as regras de qualidade com dados reais de poucas turmas.
-- **Onde correm os ensaios com dados reais:** no servidor de produção da escola, em base separada e com controlos de produção — proposta sujeita à compatibilização com a `RNF-P-APD-08` (§7.7, `MIG-Q41`).
+- **Onde correm os ensaios com dados reais:** no servidor de produção da escola, em base separada e com controlos de produção — proposta sujeita à compatibilização com a `RNF-PRV-06` (§7.7, `MIG-Q41`).
 - **Ensaio geral** (pelo menos dois): o **mesmo procedimento** da carga final, no servidor de produção (`DEC-006`), com uma cópia completa das fontes; cronometrado dentro da janela prevista; produz todos os relatórios do §6; gera em modo de ensaio o `DOF-03`, o `DOF-09B` e extratos de conta corrente para a conferência; inclui o ensaio da reversão (restauro do estado anterior à carga).
 - **Critério de sucesso**: 0 bloqueantes; reconciliações fechadas; duração dentro da janela; nenhum passo manual fora do **guião de arranque** (cada passo com responsável, duração prevista e forma de verificação).
 
@@ -849,7 +849,7 @@ flowchart TD
 1. **No momento certo**: cada cargo é formado **até 2 semanas antes** de precisar da funcionalidade, por entrega (E1–E4).
 2. **Em cascata**: a equipa do projeto forma os **utilizadores-chave** (os do nível `N1` da nota 09: 1 na Secretaria Pedagógica, 1 na Tesouraria / Secretaria Geral, 1 na Direção e 1 professor por turno — proposta), que formam os colegas do seu sector, com a equipa presente nas primeiras sessões.
 3. **Prática primeiro**: pelo menos dois terços do tempo em exercícios com casos típicos da escola, representados com dados fictícios.
-4. **Dados fictícios**: o ambiente de formação nunca tem dados reais (`RNF-P-APD-08`, `RNF-PRV-06`).
+4. **Dados fictícios**: o ambiente de formação nunca tem dados reais (`RNF-PRV-06`).
 5. **Meta de usabilidade** (`RNF-USA-01`): cada cargo executa as tarefas principais após **≤ 2 h** de formação, e ≥ 90% concluem sem ajuda. As horas extra da tabela do §9.2 são **prática supervisionada** ou **aprofundamento de utilizadores-chave**, não fazem parte da formação base.
 6. **Aptidão antes da conta**: a conta de produção só é ativada depois de verificada a aptidão (§9.4; liga a `C14`).
 
@@ -948,7 +948,7 @@ Estas questões devem entrar no [[Guiao de Entrevistas por Cargo]] da Fase B e s
 | `MIG-Q40` | Se os números de processo legados não forem únicos, a escola prefere renumerar (e reetiquetar as pastas) ou manter o número legado com um prefixo? | `SUB_PED`, `DIR_GERAL` | E1 |
 | `MIG-Q42` | Que tipos de documento têm série anual própria? Cada série reinicia por ano civil ou por ano letivo? Onde fica registado o último número usado? A "ocupação do pai" da ficha de matrícula tem alguma finalidade? | `CHEFE_SEC_PED` | E1 |
 | `MIG-Q43` | Qual é o número oficial da instituição: **12008** (matrícula, Pauta Geral) ou **8009** (boletins, mini-pauta, declarações, justificações)? Um substituiu o outro? Qual deve aparecer nos documentos do SGE? (Achados A3; parâmetro da instituição, `DEC-001`) | Comissão de Gestão | E1 |
-| `MIG-Q41` | A área de preparação e os ensaios de migração com dados reais podem correr no servidor de produção da escola, com controlos de produção, como parte do tratamento `TRT-30`, sem violar a `RNF-P-APD-08` (§7.7)? | Nota 11 (jurista / `DIR_GERAL`) | E1 |
+| `MIG-Q41` | A área de preparação e os ensaios de migração com dados reais podem correr no servidor de produção da escola, com controlos de produção, como parte do tratamento `TRT-30`, sem violar a `RNF-PRV-06` (§7.7)? | Nota 11 (jurista / `DIR_GERAL`) | E1 |
 
 ---
 
@@ -1030,7 +1030,7 @@ Cada dado necessário às entregas E1–E4, com fonte (ou questão), destino e m
 | `MIG-R06` | Tratamento fiscal dos recibos anteriores ao SGE e da numeração por definir (`DEC-002`) | Alta (hoje sem resposta) | Alto: risco legal | Não recriar recibos; questões `MIG-Q14`/`Q15` levadas à verificação legal antes da E1 |
 | `MIG-R07` | Colisão de Livro/Folha/Termo com registos físicos antigos | Média | Alto: documentos com coordenadas duplicadas | Verificação presencial; ponto de passagem por livro; carga delta até à E4 |
 | `MIG-R08` | Arranque a meio do ano (Cenário B), se um "Não avançar" em 2027 levar a arrancar num trimestre em vez de adiar para 2028/2029 | Baixa (a `DEC-007` prefere adiar um ano) | Alto: muito mais dados e regras de congelamento | Preparar o Cenário A; cumprir o calendário do §8.2 com margem para os ensaios; se houver novo adiamento, preferir 2028/2029 (Cenário A) |
-| `MIG-R13` | A regra `RNF-P-APD-08` (nenhum dado real em ensaios de migração) não é compatibilizada | Média | Alto: reconciliação da dívida e amostras só verificadas na carga final, sem ensaio prévio | Decidir a `MIG-Q41` com a nota 11 antes do ensaio-piloto; ensaios com dados reais no servidor de produção, com controlos de produção |
+| `MIG-R13` | A regra `RNF-PRV-06` (nenhum dado real em ensaios de migração) não é compatibilizada | Média | Alto: reconciliação da dívida e amostras só verificadas na carga final, sem ensaio prévio | Decidir a `MIG-Q41` com a nota 11 antes do ensaio-piloto; ensaios com dados reais no servidor de produção, com controlos de produção |
 | `MIG-R14` | O verão de 2027 junta o fecho de 2026/2027, a digitação do histórico e a preparação das matrículas na mesma Secretaria | Alta | Alto: atraso da Onda 1 | Digitar as pautas de 2026/2027 ao longo do ano (§0.3); reforço temporário de digitação (`MIG-Q26`) |
 | `MIG-R09` | Fuga de dados pessoais de menores durante a migração | Média | **Alto** (APD) | §7.7: local controlado, cifra, minimização, confidencialidade, destruição |
 | `MIG-R10` | Matrizes históricas desconhecidas ou com disciplinas renomeadas | Média | Alto: notas ligadas à disciplina errada no certificado | Recolher as matrizes oficiais (`MIG-Q07`); correspondência aprovada; bloqueante se faltar |
@@ -1050,7 +1050,7 @@ Cada dado necessário às entregas E1–E4, com fonte (ou questão), destino e m
 | `DEC-008` (Fora do âmbito) | Confirma o que não se migra (§1.2) |
 | [[08 - Requisitos Nao Funcionais]] | Anos de histórico consultável; meta de formação ≤ 2 h; tempos de resposta do suporte |
 | [[09 - Integracoes, Infraestrutura e Operacao]] | Servidor, cópias de segurança, contingência, suporte e formação técnica |
-| [[11 - Protecao de Dados (APD)]] | Base legal; tratamento `TRT-30`; compatibilização com a `RNF-P-APD-08` (`MIG-Q41`); prazos `PC-01`, `PC-05`, `PC-08`, `PC-10`; separação BI/NIF (`ALT-05-01`); verificação pública de documentos antigos |
+| [[11 - Protecao de Dados (APD)]] | Base legal; tratamento `TRT-30`; compatibilização com a `RNF-PRV-06` (`MIG-Q41`); prazos `PC-01`, `PC-05`, `PC-08`, `PC-10`; separação BI/NIF (`ALT-05-01`); verificação pública de documentos antigos |
 | [[12 - Registo de Decisoes e Questoes em Aberto]] | Registo das questões `MIG-Q01`…`MIG-Q43`, fundindo as sobreposições do §10 |
 | [[Achados dos Documentos Reais - Lote 1]] e [[Plano de Validacao de Pautas]] | Formatos reais da matrícula (A12), das pautas (A1, A2) e da numeração (A13); fórmulas a validar antes de recalcular o histórico migrado |
 | [[C14 - Gestao de Contas e Acesso]] | Criação das contas a partir do `MIG-D07`; conta técnica de migração (`AJ-14`), distinta do `ADMIN_TEC` |

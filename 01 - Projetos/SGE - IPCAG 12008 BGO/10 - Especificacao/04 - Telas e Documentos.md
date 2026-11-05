@@ -261,7 +261,7 @@ flowchart TD
   4. Num ano já `Encerrado`, a retificação segue a análise de impacto da `RN-18.13` (`US-PAS-08`).
 - **Ações Disparo e Dados de Saída (Outputs):**
   - **Comandos:** `ReabrirPautaComDespacho`, `TrancarPautaRetificada`.
-  - **Outputs:** Nova versão da pauta (`versao_pauta + 1`; a anterior passa a `SUBSTITUIDO` no portal QR — RF-P-APD-11) e comprovativo de auditoria.
+  - **Outputs:** Nova versão da pauta (`versao_pauta + 1`; a anterior passa a `SUBSTITUIDO` no portal QR — RF-C19-11) e comprovativo de auditoria.
 
 ---
 
@@ -274,8 +274,8 @@ flowchart TD
   - **Filtro Auditoria:** intervalo de datas, `usuario_id`, `papel`, `tipo_evento` (`REABERTURA_PAUTA`, `ALTERACAO_NOTA_POS_FECHO`, `NOTA_CREDITO_EMITIDA`, `TENTATIVA_REUTILIZACAO_BORDERO`, `CONCESSAO_BOLSA` e os eventos novos da APD-11: `EXPORTACAO_DADOS`, `ACESSO_DADOS_SAUDE`, `PEDIDO_TITULAR`, `EXECUCAO_CONSERVACAO`, `INCIDENTE_SEGURANCA` — `ALT-04-09`), filtro `contem_dados_sensiveis`.
 - **Regras de Validação Sistémica:**
   1. Os dados do GEPE agregam-se das matrículas e pautas homologadas, por **Género (`M` / `F`)** e **Idade**; a secção de aproveitamento usa o mesmo cálculo do `IND-29` (`RN-17.14`).
-  2. A consola `audit_logs` é *read-only*; a eliminação só ocorre por lote de conservação aprovado (`MOD-GOV-09`; RNF-P-APD-14).
-  3. Cada exportação com dados pessoais fica em `audit_logs` e o ficheiro leva a identificação de quem o gerou (RF-P-APD-19).
+  2. A consola `audit_logs` é *read-only*; a eliminação só ocorre por lote de conservação aprovado (`MOD-GOV-09`; RNF-AUD-03, RNF-AUD-07).
+  3. Cada exportação com dados pessoais fica em `audit_logs` e o ficheiro leva a identificação de quem o gerou (RF-C19-19).
 - **Ações Disparo e Dados de Saída (Outputs):**
   - **Outputs:** **`DOF-12`** (Mapa Estatístico) em PDF/A4 e Excel/CSV; diffs JSON (`old_value` vs. `new_value`).
 
@@ -314,7 +314,7 @@ flowchart TD
 - **Filtros:** Ano Letivo, trimestre ou mês, curso, classe, período, turma.
 - **Regras:** `RN-17.1` a `RN-17.7`, `RN-17.10`, `RN-17.11`; detalhe até ao aluno dentro da RLS; etiqueta `PROVISÓRIO`/`OFICIAL`. Inclui o painel semanal pedido pela Direção (DESC-RESP R28): receita vs. dívida, assiduidade docente e aulas não dadas, alunos em risco, pedidos pendentes há mais de 3 dias, estado das Mini-Pautas.
 - **Comandos:** `AbrirPainel`, `DetalharIndicador`, `CompararPeriodos`, `ExportarIndicador`.
-- **Saídas:** painel; exportações PDF/CSV com *hash* e registo em `audit_logs` (RF-P-APD-19).
+- **Saídas:** painel; exportações PDF/CSV com *hash* e registo em `audit_logs` (RF-C19-19).
 
 ### `MOD-GOV-08`: Catálogo de Indicadores e Limiares — C15
 - **Perfis:** `SUB_PED` (pedagógicos), `SUB_ADM` (financeiros), `DIR_GERAL` (homologa); leitura por todos os internos.
@@ -327,13 +327,13 @@ flowchart TD
 - **Perfis:** `DIR_GERAL` e o **ponto de contacto de proteção de dados**, que não é um dos 12 papéis.
   > 🟡 **Provisória** — quem é o ponto de contacto e com que papel no sistema; validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-04`, `Q-APD-01`. Fonte: APD-11 §8.2.
 - **Funções:**
-  1. **Pedidos dos titulares** (acesso, retificação, eliminação, oposição): registo, legitimidade do requerente, prazo de **60 dias úteis** com alerta aos 40 (RF-P-APD-08).
-  2. **Relatório de acesso** do titular em PDF (RF-P-APD-09).
-  3. **Consentimentos** por finalidade (`CON-01` a `CON-08`) e **avisos** entregues (`AV-01` a `AV-12`) — consulta e revogação (RF-P-APD-01/02).
-  4. **Políticas e lotes de conservação**: proposta mensal, aprovação pela Direção, relatório de execução (RF-P-APD-13).
-  5. **Incidentes de segurança** e minuta de comunicação à APD (RF-P-APD-23).
-  6. **Registo de comunicações a destinatários externos** (MED/GEPE, AGT, empresas de estágio, outras escolas, Diocese — RF-P-APD-22).
-  7. **Bloqueio** de registos (RF-P-APD-12).
+  1. **Pedidos dos titulares** (acesso, retificação, eliminação, oposição): registo, legitimidade do requerente, prazo de **60 dias úteis** com alerta aos 40 (RF-C19-08).
+  2. **Relatório de acesso** do titular em PDF (RF-C19-09).
+  3. **Consentimentos** por finalidade (`CON-01` a `CON-08`) e **avisos** entregues (`AV-01` a `AV-12`) — consulta e revogação (RF-C19-01/02).
+  4. **Políticas e lotes de conservação**: proposta mensal, aprovação pela Direção, relatório de execução (RF-C19-13).
+  5. **Incidentes de segurança** e minuta de comunicação à APD (RF-C19-23).
+  6. **Registo de comunicações a destinatários externos** (MED/GEPE, AGT, empresas de estágio, outras escolas, Diocese — RF-C19-22).
+  7. **Bloqueio** de registos (RF-C19-12).
 - **Saídas:** relatório de acesso; relatório de conservação; minuta de comunicação de incidente (documentos internos, sem `DOF`).
 
 ---
@@ -415,7 +415,7 @@ flowchart TD
   | | `escola_origem` / `media_9a_classe` | `VARCHAR` / `NUMERIC(4,2)` | Sim | 🟡 **Provisória** — uso da média da 9ª como critério de seleção ou desempate só se a Direção Provincial o validar; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-11`. Fonte: `COR-LEG-09`. |
   | | `curso_1a_opcao_id` / `turno_1a` | `UUID` / `ENUM` | Sim | Curso e período pretendidos. |
   | | `curso_2a_opcao_id` / `turno_2a` | `UUID` / `ENUM` | Não | 🟡 **Provisória** — repescagem na 2ª opção é **prática interna** sem base nos diplomas lidos; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-12`. Fonte: `COR-LEG-10`. |
-  | | `representante_legal` (nome, BI, título) | `VARCHAR` / `ENUM` | Sim *(menor)* | Pai, mãe, tutor ou outro (`ALT-04-02`; RF-P-APD-03). |
+  | | `representante_legal` (nome, BI, título) | `VARCHAR` / `ENUM` | Sim *(menor)* | Pai, mãe, tutor ou outro (`ALT-04-02`; RF-C19-03). |
   | | `aviso_av01_entregue` | `BOOLEAN` | Sim | Aviso de privacidade AV-01 (finalidade, publicação da pauta, conservação dos não admitidos). |
   | **2. Lançamento Cego** | `codigo_anonimato` | `VARCHAR(20)` | Sim | Grelha cega (oculta nome e BI). |
   | | `nota_lingua_portuguesa` / `nota_matematica` | `NUMERIC(4,2)` | Sim | `0,00` a `20,00` (ou `faltou_exame = TRUE`). 🟡 **Provisória** — se o teste é único com secções e como se calcula a nota final do teste; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-10`. Fonte: `COR-LEG-08`. |
@@ -425,7 +425,7 @@ flowchart TD
   2. Na vista de lançamento (`US-ADM-03`), a API não serializa `nome_completo` nem `numero_bi_cedula`.
   3. **Apuramento (`RN-01.2`):** é **admitido** o candidato com **≥ 10 valores em cada prova** e posicionado dentro das vagas; o desempate na última vaga faz-se pela **menor idade** (DE n.º 361/26, art. 16.º, n.º 2, c) — `COR-LEG-09`). Resultados possíveis: `ADMITIDO`, `ADMITIDO (2ª Opção)` 🟡, `NÃO ADMITIDO (Fora das Vagas)`, `NÃO ADMITIDO (Nota Inferior a 10 numa Prova)`, `FALTOU`. Não há admissão abaixo de 10 por despacho (`COR-LEG-08`).
   4. **Prazos:** lista de selecionados até **72 h** após o teste; reclamações; lista definitiva só depois da homologação do Director (`COR-LEG-12`).
-  5. Os candidatos não admitidos são anonimizados no fim do prazo PC-02, mantendo os campos estatísticos (RF-P-APD-14).
+  5. Os candidatos não admitidos são anonimizados no fim do prazo PC-02, mantendo os campos estatísticos (RF-C19-14).
 - **Ações Disparo e Dados de Saída (Outputs):**
   - **Comandos:** `InscreverCandidato`, `LancarNotaAnonimato`, `DescodificarEApurar`, `PublicarListaSelecionados`, `RegistarReclamacao`, `DecidirReclamacao`, `HomologarListaDefinitiva`, `ExecutarRepescagem2aOpcao` 🟡.
   - **Outputs:** **`DOF-01`** (Ficha de Inscrição + Talão de Anonimato) e **`DOF-02`** (Pauta de Resultados, em versão pública minimizada e versão integral de arquivo).
@@ -443,14 +443,14 @@ flowchart TD
   | Identificação civil: nome, filiação (pai e mãe), data de nascimento, naturalidade, sexo, n.º do BI e **data de emissão**, nacionalidade | `VARCHAR` / `DATE` | Sim | A data de emissão do BI só com finalidade registada (ALT-05-21). A **nacionalidade** não consta do boletim real mas é impressa no `DOF-10A` (`Q-C03-20`). |
   | Residência e município | `VARCHAR` | Sim | Com finalidade registada (ALT-05-21). |
   | Telefones do encarregado (dois) | `VARCHAR` | Sim | `+244 9XX XXX XXX`. 🟡 **Provisória** — o boletim real não identifica o encarregado por nome nem BI, mas o desconto de irmãos e a Tesouraria dependem do BI; validar em **E1** (`DEC-009`). Bloqueado por `Q-C03-17`. Fonte: C03 `RN-11.9`. |
-  | Representante legal (título, nome, BI) | `ENUM` / `VARCHAR` | Sim *(menor)* | Pode não ser o encarregado (`ALT-04-04`; RF-P-APD-03; `Q-APD-13`). |
+  | Representante legal (título, nome, BI) | `ENUM` / `VARCHAR` | Sim *(menor)* | Pode não ser o encarregado (`ALT-04-04`; RF-C19-03; `Q-APD-13`). |
   | Escola, classe, ano e resultado anteriores | `VARCHAR` / `ENUM` | Sim *(só matrícula inicial)* | Na 10ª podem vir de `candidaturas_10a`. |
   | Turma e sala do ano anterior; cadeiras em atraso (até duas) | Derivados | — *(confirmação)* | **Não se digitam**: vêm da matrícula anterior e de `cadeiras_em_atraso` (`RN-18.6.3`, `RN-18.9.5`). |
   | Classe, curso e **período** pretendidos | `UUID` / `ENUM` | Sim | `turma_destino_id` com `vagas_ocupadas < capacidade_maxima_alunos`. |
-  | "Possui algum problema de saúde? Qual?" | `TEXT` | **Não** (facultativo) | Só com consentimento **CON-07**, finalidade escrita junto ao campo; guardado no compartimento de saúde, válido um ano letivo (RF-P-APD-29; `ALT-04-17`). |
-  | Ocupação ou local de trabalho do pai | `VARCHAR` | Não | 🟡 **Provisória** — o campo só existe se a Direção confirmar uma finalidade; com CON-08; nunca impresso; validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-29`. Fonte: RF-P-APD-32. |
+  | "Possui algum problema de saúde? Qual?" | `TEXT` | **Não** (facultativo) | Só com consentimento **CON-07**, finalidade escrita junto ao campo; guardado no compartimento de saúde, válido um ano letivo (RF-C19-29; `ALT-04-17`). |
+  | Ocupação ou local de trabalho do pai | `VARCHAR` | Não | 🟡 **Provisória** — o campo só existe se a Direção confirmar uma finalidade; com CON-08; nunca impresso; validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-29`. Fonte: RF-C19-32. |
   | Consentimentos facultativos | `BOOLEAN` × 5 | Não | Caixas separadas, **desmarcadas por defeito**: CON-03 (imagem), CON-05 (comunicações facultativas — `RN-14.9`), CON-06 (publicação nominal), CON-07, CON-08 (`ALT-04-04`). |
-  | Atestado médico de matrícula | `BOOLEAN` | Condicional | Só "entregue sim/não", sem carregamento de ficheiro (RF-P-APD-07; `Q-APD-05`). |
+  | Atestado médico de matrícula | `BOOLEAN` | Condicional | Só "entregue sim/não", sem carregamento de ficheiro (RF-C19-07; `Q-APD-05`). |
 - **Documentos entregues:** o campo `documentos_entregues_checklist` (`JSONB`) da v1.2 foi **retirado**: a lista de documentos é gerada pela matrícula e tratada no **`MOD-PIN-02`** (`RN-11.2`).
 - **Regras de Validação Sistémica:**
   1. **Confirmação de matrícula (`COR-LEG-15`; DESC-RESP R5):** a confirmação parte da **proposta pré-gerada** pela passagem de ano (`MOD-PAS-02`), no modo `BALCAO` ou `AUTOMATICA`, e é **anulada automaticamente 60 dias após o início do ano** se o processo continuar incompleto (DP n.º 167/23, art. 50.º, n.º 4 e 8).
@@ -506,10 +506,10 @@ flowchart TD
   | Campo | Tipo | Obrigatório | Formato / Restrição |
   | :--- | :---: | :---: | :--- |
   | `requerimento.numero` | `VARCHAR(30)` | Auto | Série anual `Requerente N.º nnn/IPCAG/AAAA` (DESC-L1 A11, A13). |
-  | `requerimento.requerente` / `legitimidade` | `VARCHAR` / `ENUM` | Sim | Aluno maior; representante legal de aluno menor; terceiro com autorização escrita do titular (RF-P-APD-31). |
+  | `requerimento.requerente` / `legitimidade` | `VARCHAR` / `ENUM` | Sim | Aluno maior; representante legal de aluno menor; terceiro com autorização escrita do titular (RF-C19-31). |
   | `aluno_id` (`num_processo`) | `UUID` | Sim | Titular do documento. |
   | `tipo_documento` | `ENUM` | Sim | `'BOLETIM'` (`DOF-06`), `'DECLARACAO_ESTUDANTE'` (`DOF-09A`), `'DECLARACAO_COM_NOTAS'` (`DOF-09B`), `'GUIA_TRANSFERENCIA_SAIDA'` (`DOF-09C`), `'CERTIFICADO'` (`DOF-10A`), `'PEDIDO_DIPLOMA_MINISTERIO'` (`DOF-10B`). O tipo `DIPLOMA_TECNICO_MEDIO` da v1.2 foi retirado: o Diploma é emitido pelo Ministério (`COR-LEG-18`). |
-  | `efeito_declaracao` | `ENUM` | Condicional | Lista fechada de efeitos aprovada pela Direção; cada efeito define os campos impressos (RF-P-APD-30). 🟡 **Provisória** — lista de efeitos e campos (estado civil e residência só quando exigidos); validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-30`. Fonte: `ALT-04-18`. |
+  | `efeito_declaracao` | `ENUM` | Condicional | Lista fechada de efeitos aprovada pela Direção; cada efeito define os campos impressos (RF-C19-30). 🟡 **Provisória** — lista de efeitos e campos (estado civil e residência só quando exigidos); validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-30`. Fonte: `ALT-04-18`. |
   | `recibo_item_emolumento_id` / `referencia_rupe` | `UUID` / `VARCHAR` | Condicional | 🟡 **Provisória** — se a declaração tem taxa e se os emolumentos se pagam à escola ou ao Estado por **RUPE** (DP n.º 227/25, art. 10.º, n.º 4); validar em **E1** (`DEC-009`). Bloqueado por `Q-034`, `Q-LEG-14`. Fonte: DESC-L1 A11, A15. |
   | `livro_registo` / `numero_registo` / `folha` / `termo` | `VARCHAR(20)` | Condicional | Obrigatório para o `DOF-10A` (livro de **Certificados**). Folha e termo 🟡 (`COR-LEG-19`, `Q-LEG-14`). |
 - **Regras de Validação Sistémica:**
@@ -547,12 +547,12 @@ flowchart TD
 ### `MOD-PIN-04`: Atualização de Dados Pessoais e do Encarregado (`US-PIN-06`, `US-PIN-07`) — C03
 - **Perfis:** `OP_PED` (contactos; pedidos de alteração), `CHEFE_SEC_PED` (aprova identificação civil; muda encarregado).
 - **Entradas:** campo, valor novo, comprovativo; para o encarregado: BI do novo encarregado, data de início, motivo, comprovativo.
-- **Regras:** `RN-11.8`, `RN-11.9`; ao aprovar uma alteração civil, lista os documentos emitidos com o dado antigo, para reemissão (RF-P-APD-10).
+- **Regras:** `RN-11.8`, `RN-11.9`; ao aprovar uma alteração civil, lista os documentos emitidos com o dado antigo, para reemissão (RF-C19-10).
 - **Saídas:** pré-visualização do efeito no desconto de irmãos; lista de educandos afetados.
 
 ### `MOD-PIN-05`: Emissão do Cartão de Estudante (`US-PIN-08`) — C03
 - **Perfis:** `OP_PED` (pedido, emissão, entrega), `CHEFE_SEC_PED` (anulação, 2ª via).
-- **Entradas:** `matricula_id`, `fotografia` (finalidade "identificação" — RF-P-APD-28), `item_recibo_id` (ou isenção), `motivo_anulacao`.
+- **Entradas:** `matricula_id`, `fotografia` (finalidade "identificação" — RF-C19-28), `item_recibo_id` (ou isenção), `motivo_anulacao`.
 - **Regras:** `RN-11.10`, `RN-11.11`; emissão em lote por turma no início do ano.
 - **Saídas:** **`DOF-13`**; lista de cartões por emitir.
 
@@ -598,11 +598,11 @@ flowchart TD
   | **Chamada** | `aula_registada_id` | `UUID` | Sim | Escolhida em "Aulas de hoje" (`MOD-HOR-04`); `data_aula` e `tempos_aula` deixam de ser digitados (`RN-12.13`). |
   | | `faltas[].matricula_id` / `tempos[]` / `tipo_falta` | `UUID` / `SMALLINT[]` / `ENUM` | Sim | Cada tempo em falta = 1 falta (tempo duplo = 2 faltas — DESC-RESP R1); `NAO_COMPARENCIA` ou `INDISCIPLINA` (`RN-15.1`). A falta por indisciplina exige ocorrência ligada (`MOD-DIS-01`). |
   | **Justificação** | `numero_justificacao` | `VARCHAR(30)` | Auto | Formulário numerado `N.º nnn/IPCAG N.º <n.º> BGO/AAAA` (DESC-L1 A8, A13). |
-  | | `periodo_dias` / `mes` / `categoria_motivo` / `anexo` | `DATE[]` / `ENUM` / `FILE` | Sim | **Lista fechada de motivos**, sem texto clínico livre; o anexo médico vai para o **compartimento de saúde** com aviso AV-03 e consentimento CON-01 (`ALT-04-05`; RF-P-APD-05/06). |
+  | | `periodo_dias` / `mes` / `categoria_motivo` / `anexo` | `DATE[]` / `ENUM` / `FILE` | Sim | **Lista fechada de motivos**, sem texto clínico livre; o anexo médico vai para o **compartimento de saúde** com aviso AV-03 e consentimento CON-01 (`ALT-04-05`; RF-C19-05/06). |
   | **Dispensa (`DISP`)** | `matricula_id` + `disciplina_id` + `atestado` | `UUID` / `FILE` | Sim | Só se `permite_dispensa_medica`; atestado no compartimento de saúde (CON-01). |
 - **Regras de Validação Sistémica:**
   1. **Justificação aprovada abate a falta em todas as disciplinas afetadas** (DESC-RESP R3), sem o aluno ter de a mostrar a cada professor. As faltas por indisciplina não se justificam (`RN-15.1.3`; 🟡 `Q-C13-03`).
-  2. Ao gravar uma falta injustificada, recalcula o limite (`RN-03`): ao ultrapassá-lo, propõe **`Retido por Faltas (RF)`** — proposta sujeita a confirmação humana (RF-P-APD-21).
+  2. Ao gravar uma falta injustificada, recalcula o limite (`RN-03`): ao ultrapassá-lo, propõe **`Retido por Faltas (RF)`** — proposta sujeita a confirmação humana (RF-C19-21).
   3. **Alertas** aos **50% e 80%** do limite para o `DIR_TURMA` (`RN-17.8`; `MOD-ALR`) e aviso ao encarregado pela Central de Avisos (`RN-14.5`).
   4. `PROF`, `DIR_TURMA` e `COORD_*` veem só `DISP`, a abrangência e o estado; o atestado só `CHEFE_SEC_PED` e `SUB_PED` (`ALT-04-05`).
   5. Ao homologar `DISP`, as células da disciplina ficam `'DISP'` e o denominador de disciplinas válidas desce `-1` (`RN-01`).
@@ -628,7 +628,7 @@ flowchart TD
   1. **Motor local (`RN-10.4`):** a grelha carrega os alunos para uma *store* **cifrada** no `IndexedDB`; cada nota é validada localmente (`0 <= nota <= 20`), as médias calculam-se com o mesmo motor do servidor e cada mutação vai para a fila assinada (`idempotency_key`, `matricula_id`, `turma_disciplina_id`, `trimestre`, componentes, `timestamp_local`).
   2. **Sincronização resiliente:** na LAN do IPCAG ou na internet, o *Service Worker* despacha o lote (`BATCH UPSERT`). Também funciona nos 1–2 PCs da Sala de Professores (DESC-RESP R31).
   3. **Desacoplamento docente (`RN-04`):** na substituição, a grelha abre para o novo professor com os valores intactos.
-  4. **Proteção dos dados no dispositivo (`ALT-04-06`):** aviso **AV-08** na instalação; o dispositivo apaga as operações confirmadas pelo servidor e a lista de alunos quando a alocação termina; os dados expiram após N dias sem sincronizar (PC-18; RF-P-APD-26; RNF-P-APD-12); o servidor pode ordenar a limpeza (dispositivo perdido, conta desativada — `RN-16.9`).
+  4. **Proteção dos dados no dispositivo (`ALT-04-06`):** aviso **AV-08** na instalação; o dispositivo apaga as operações confirmadas pelo servidor e a lista de alunos quando a alocação termina; os dados expiram após N dias sem sincronizar (PC-18; RF-C19-26; RNF-OFF-11, RNF-PRV-08, RNF-SEG-07); o servidor pode ordenar a limpeza (dispositivo perdido, conta desativada — `RN-16.9`).
 - **Ações Disparo e Dados de Saída (Outputs):**
   - **Comandos:** `GuardarRascunhoMiniPautaOffline`, `SincronizarMiniPauta`, `SubmeterMiniPautaAoDirectorTurma`, `SubstituirDocenteAlocado`, `ImprimirMiniPauta`.
   - **Outputs:** **`DOF-04`** com o rodapé estatístico calculado pelo `IND-28` (`RN-17.14`).
@@ -646,7 +646,7 @@ flowchart TD
 - **Regras de Validação Sistémica (`RN-01`, `RN-02`):**
   1. Impede o fecho com células por preencher em alunos ativos (as `PENDENTE_2A_CHAMADA` bloqueiam até à 2.ª chamada) ou com conflitos de sincronização pendentes (`IND-13`).
   2. Calcula `CF`, `CA` e, com recurso, a nota final — 🟡 **Provisória**: fórmula da nota depois do recurso por confirmar; validar em **E2** (`DEC-009`). Bloqueado por `Q-025`, `Q-LEG-03`. Fonte: `COR-LEG-26`. A ponderação 40%/60% da v1.2 foi retirada (sem fonte; o modelo real tem 0,6/0,4 sobre `CF` e `PG`).
-  3. **Proposta de deliberação anual** (sujeita a homologação humana — RF-P-APD-21):
+  3. **Proposta de deliberação anual** (sujeita a homologação humana — RF-C19-21):
      - `0` disciplinas reprovadas → **Transita** (ou **Apto para a 13ª Classe** na 12ª sem cadeiras em atraso);
      - na 10ª ou 11ª, até **2** disciplinas com 7–9, sem reprovar ao mesmo tempo Língua Portuguesa e uma nuclear → **Transita com Deficiência** (cria `cadeiras_em_atraso`); com esse veto → **Não Transita**;
      - restantes casos → **Não Transita** (repete a classe inteira — DESC-RESP §1); retenção por faltas → **Não Transita (Faltas)**.
@@ -737,7 +737,7 @@ flowchart TD
   1. Deteta irmãos pelo `encarregado_educacao_id` entre matrículas ativas do mesmo ano.
   2. Ao homologar uma bolsa, recalcula as prestações vincendas (ou `Isenta` se `100%`). Como se documenta fiscalmente a bolsa de 100% é a `Q-LEG-18` 🟡 (E1).
   3. A renovação para o ano seguinte é decidida no `MOD-PAS-04` (`RN-18.11`).
-- **Outputs:** tabela de emolumentos ativa; listagem de bolseiros para a Direção e para a Diocese (envio registado — RF-P-APD-22; 🟡 `Q-APD-09`).
+- **Outputs:** tabela de emolumentos ativa; listagem de bolseiros para a Direção e para a Diocese (envio registado — RF-C19-22; 🟡 `Q-APD-09`).
 
 ---
 
@@ -755,7 +755,7 @@ flowchart TD
 - **Regras de Validação Sistémica (`RN-09`, `RN-09.1`):**
   1. **Pesquisa do borderô:** se não existir, cria-o `Registado`; se `Parcialmente Utilizado`, mostra o consumido e o saldo; se `Esgotado` ou `Invalidado por Fraude`, bloqueia com `HTTP 409 — TENTATIVA DE REUTILIZAÇÃO DE TALÃO ESGOTADO` e regista em `audit_logs`.
   2. **Excedente do talão = crédito do aluno** para o mês seguinte; um talão com valor a menos **não quita** a prestação (DESC-RESP R10; sub-regra nova da `RN-09`). Suporta `N borderôs -> 1 documento`.
-  3. **Fraude sem marca sobre a pessoa:** o estado `INVALIDADO_POR_FRAUDE` qualifica o **documento bancário**, nunca o encarregado; o detalhe só é visível a `SUB_ADM` e `DIR_GERAL` (`ALT-04-08`; RF-P-APD-25; 🟡 `Q-APD-17`).
+  3. **Fraude sem marca sobre a pessoa:** o estado `INVALIDADO_POR_FRAUDE` qualifica o **documento bancário**, nunca o encarregado; o detalhe só é visível a `SUB_ADM` e `DIR_GERAL` (`ALT-04-08`; RF-C19-25; 🟡 `Q-APD-17`).
   4. Atualiza o **Semáforo Financeiro (`RN-08`)** em tempo real.
   5. **Documento fiscal:** a liquidação gera o **Recibo** (`DOF-11A`) de uma Fatura já emitida, ou a **Fatura-Recibo** (`DOF-11E`) quando o serviço é faturado e pago no ato.
      > 🟡 **Provisória** — modelo "fatura mensal + recibo" ou "fatura-recibo" no pagamento; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-16`, `DEC-002`. Fonte: LEG-VER §4.2.
@@ -792,13 +792,13 @@ flowchart TD
   | Avisos | `nivel` (`1`, `2`, `3`), `canal` | `ENUM` | Sim | Níveis aos 5, 30 e 60 dias de atraso (parâmetros — `RN-13.5`); canal pela Central de Avisos (`MOD-COM-01`). |
   | Acordo | `encarregado_id`, `parcelas[].prestacao_ids[]`, `parcelas[].data_limite`, `liberta_semaforo`, `perdao_multa`, `documento_assinado_pdf` | `UUID` / `DATE` / `BOOLEAN` / `FILE` | Sim | Só prestações `Em Atraso`; prestações inteiras; um acordo ativo por encarregado (`RN-13.7`). |
   | Perdão | `prestacao_id`, `valor_perdao_kz`, `numero_despacho`, `justificacao` | `UUID` / `NUMERIC` / `VARCHAR` / `TEXT` | Sim | `0 < valor <= multa`; justificação ≥ 30 caracteres. |
-- **Regras:** a dívida nunca é mostrada a professores, Directores de Turma ou coordenadores; não há listas públicas de devedores (`RN-13.6`). Os **boletins de alunos com dívida ficam retidos** na reunião de entrega (DESC-RESP R12) — 🟡 **Provisória**: retenção como parâmetro, com desbloqueio pontual pelo `SUB_ADM` (RF-P-APD-21); validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-05`, `Q-APD-16`. Fonte: DESC-RESP R12.
+- **Regras:** a dívida nunca é mostrada a professores, Directores de Turma ou coordenadores; não há listas públicas de devedores (`RN-13.6`). Os **boletins de alunos com dívida ficam retidos** na reunião de entrega (DESC-RESP R12) — 🟡 **Provisória**: retenção como parâmetro, com desbloqueio pontual pelo `SUB_ADM` (RF-C19-21); validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-05`, `Q-APD-16`. Fonte: DESC-RESP R12.
 - **Comandos:** `ConsultarAntiguidade`, `GerarLoteAvisos`, `RegistarEntregaAviso`, `RegistarPropostaAcordo`, `HomologarAcordo`, `RejeitarAcordo`, `AnularAcordo`, `PerdoarMulta`, `EmitirExtratoContaCorrente`.
 - **Saídas:** **`DOF-17`**, **`DOF-18`**, **`DOF-19`**; mapa de antiguidade (interno).
 
 ### `MOD-TES-REL`: Relatórios Financeiros de Gestão (`US-COB-07` a `10`) — C10
 - **Perfis:** `DIR_GERAL`, `SUB_ADM` *(todos)*; `CHEFE_SEC_GER` *(agregados)*; `OP_TES` *(só o próprio caixa)*.
-- **Relatórios internos (sem código `DOF`):** `REL-FIN-01` Receita; `REL-FIN-02` Dívida e Antiguidade; `REL-FIN-03` Custo de Bolsas, Descontos e Multas Perdoadas; `REL-FIN-04` Emolumentos; `REL-FIN-05` Acordos de Pagamento. Balancetes e lista nominal de bolseiros para a Diocese (DESC-RESP §2) saem daqui. Regras `RN-13.11` a `RN-13.13` e `RN-13.17`; exportação PDF/CSV com *hash* e registo (RF-P-APD-19).
+- **Relatórios internos (sem código `DOF`):** `REL-FIN-01` Receita; `REL-FIN-02` Dívida e Antiguidade; `REL-FIN-03` Custo de Bolsas, Descontos e Multas Perdoadas; `REL-FIN-04` Emolumentos; `REL-FIN-05` Acordos de Pagamento. Balancetes e lista nominal de bolseiros para a Diocese (DESC-RESP §2) saem daqui. Regras `RN-13.11` a `RN-13.13` e `RN-13.17`; exportação PDF/CSV com *hash* e registo (RF-C19-19).
 
 ### `MOD-TES-CON`: Conciliação Bancária (`US-COB-11` a `13`) — C10
 - **Perfis:** `CHEFE_SEC_GER` *(importar, confirmar)*; `SUB_ADM` *(diferenças, borderôs não encontrados, homologação)*; `DIR_GERAL` *(homologar quando o `SUB_ADM` confirmou)*.
@@ -819,7 +819,7 @@ flowchart TD
 - **Regras:**
   1. Aviso **AV-07** ao funcionário; o ponto **não guarda motivos clínicos** (`ALT-04-14`).
   2. Os salários ficam fora do SGE (`DEC-008`); o mapa mensal de efetividade é exportado para os descontos (DESC-RESP R24).
-  3. **Avaliação de desempenho e declarações de serviço** (10 indicadores, homologação do Gabinete Provincial; n.º de agente e RUPE): só se a C11 for alargada — com aviso AV-12, visibilidade restrita ao avaliado, avaliador e homologador, e registo do envio ao Gabinete Provincial (`ALT-04-21`; RF-P-APD-33).
+  3. **Avaliação de desempenho e declarações de serviço** (10 indicadores, homologação do Gabinete Provincial; n.º de agente e RUPE): só se a C11 for alargada — com aviso AV-12, visibilidade restrita ao avaliado, avaliador e homologador, e registo do envio ao Gabinete Provincial (`ALT-04-21`; RF-C19-33).
      > 🟡 **Provisória** — entrada no âmbito; validar em **E1** (`DEC-009`). Bloqueado por `Q-036`, `Q-APD-31`. Fonte: DESC-L1 A15.
 - **Outputs:** Mapa Mensal de Efetividade e Assiduidade do Pessoal (relatório interno).
 
@@ -834,7 +834,7 @@ flowchart TD
 
 ### `MOD-SEG-02`: Autenticação, MFA, Primeiro Acesso, Bloqueio de Ecrã e Reautenticação (`US-CTA-02`, `-07`, `-10`, `-11`)
 - **Perfis:** todos os utilizadores internos.
-- **Ecrãs:** entrada (nome de utilizador + palavra-passe); segundo fator (obrigatório para Direção, Tesouraria, Administração Técnica e cargos com acesso a dados de saúde — `RN-16.12`; RNF-P-APD-10); ativação com código presencial; **primeiro acesso com aceitação do termo de sigilo e do aviso AV-07** — sem aceitação não há acesso, e a aceitação repete-se a cada nova versão (`ALT-04-16`; RF-P-APD-24); ecrã bloqueado por inatividade; diálogo de reautenticação que mostra a ação a executar.
+- **Ecrãs:** entrada (nome de utilizador + palavra-passe); segundo fator (obrigatório para Direção, Tesouraria, Administração Técnica e cargos com acesso a dados de saúde — `RN-16.12`; RNF-SEG-02, RNF-SEG-03); ativação com código presencial; **primeiro acesso com aceitação do termo de sigilo e do aviso AV-07** — sem aceitação não há acesso, e a aceitação repete-se a cada nova versão (`ALT-04-16`; RF-C19-24); ecrã bloqueado por inatividade; diálogo de reautenticação que mostra a ação a executar.
 - **Regras:** mensagens de erro genéricas; validação TOTP no servidor local; nenhuma dependência de serviço externo para entrar.
 
 ### `MOD-SEG-03`: Dispositivos e PIN Local (`US-CTA-09`)
@@ -856,9 +856,9 @@ flowchart TD
 
 ## 7. Portal Público Externo — Verificação de Autenticidade Documental (`MOD-PUB-QR` — `US-DOC-03`)
 
-- **Acesso:** público, sem conta; *rate limiting*, códigos com entropia suficiente e **páginas não indexáveis** (RNF-P-APD-13).
+- **Acesso:** público, sem conta; *rate limiting*, códigos com entropia suficiente e **páginas não indexáveis** (RNF-SEG-09).
 - **Dados de Entrada:** leitura do **QR Code** (URL `/verificar/{codigo_verificacao}`) ou digitação do código alfanumérico impresso no rodapé.
-- **Regras (`ALT-04-10`; RF-P-APD-16 a 18; APD-11 §7.3):**
+- **Regras (`ALT-04-10`; RF-C19-16 a 18; APD-11 §7.3):**
   1. Mostra **aviso de privacidade AV-06** e regista cada consulta (código, data e hora, resultado, IP truncado).
   2. Devolve **só** os campos admitidos para o tipo de documento:
      | Tipo de documento | Campos devolvidos (além de tipo, número, data de emissão, estado e data do último estado) |
@@ -869,7 +869,7 @@ flowchart TD
      | Documentos fiscais (`DOF-11A/B/D/E`) | Valor total e estado — **sem nomes, BI/NIF nem dados bancários** |
      | Outros documentos com QR (`DOF-17`, `DOF-18`, `DOF-21`, `DOF-24`) | Só tipo, número, data e estado |
   3. **Nunca** devolve BI/cédula, NIF, filiação, data de nascimento, naturalidade, morada, contactos, n.º de processo, dados de saúde, bolsas, notas por disciplina, faltas ou comportamento (`ALT-04-20`).
-  4. **Estados:** `VÁLIDO`, `SUBSTITUÍDO` (com o número do novo), `ANULADO`, `ESTORNADO`, `EXPIRADO_PARA_VERIFICACAO`; depois do prazo PC-19, os documentos sem registo em livro respondem só "documento emitido em [data]; para confirmação contacte a Secretaria" (RF-P-APD-18).
+  4. **Estados:** `VÁLIDO`, `SUBSTITUÍDO` (com o número do novo), `ANULADO`, `ESTORNADO`, `EXPIRADO_PARA_VERIFICACAO`; depois do prazo PC-19, os documentos sem registo em livro respondem só "documento emitido em [data]; para confirmação contacte a Secretaria" (RF-C19-18).
   5. 🟡 **Provisória** — nos títulos escolares, a verificação pode passar a ser a da **Plataforma Nacional de Certificação**; o QR próprio fica para os restantes documentos; validar em **E1** (`DEC-009`). Bloqueado por `Q-020`, `Q-LEG-14`. Fonte: `COR-LEG-19`.
 - **Saídas:** bandeira verde **`DOCUMENTO OFICIAL AUTÊNTICO — {designação da instituição}`** ou alerta vermelho **`DOCUMENTO INVÁLIDO, ANULADO OU NÃO RECONHECIDO`**.
 
@@ -928,7 +928,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 ```
 
 1. **Endereço, marca e código do modelo** vêm dos documentos reais (DESC-L1 A14). 🟡 **Provisória** — significado dos códigos (`IPCAG.SG-ACE`, `DEE-PEEP-001-ACE`) e uso da marca do Governo; validar em **E1** (`DEC-009`). Bloqueado por `Q-035`, `Q-LEG-21`. Fonte: DESC-L1 A14.
-2. **Código de verificação e QR (`RN-10.3`):** código alfanumérico não adivinhável (RNF-P-APD-13), calculado com `HMAC-SHA256` sobre os dados críticos e gravado em `documentos_oficiais_emitidos`; o QR aponta para o `MOD-PUB-QR`. Nos títulos escolares, 🟡 QR da Plataforma Nacional de Certificação (`Q-020`, `Q-LEG-14`).
+2. **Código de verificação e QR (`RN-10.3`):** código alfanumérico não adivinhável (RNF-SEG-09), calculado com `HMAC-SHA256` sobre os dados críticos e gravado em `documentos_oficiais_emitidos`; o QR aponta para o `MOD-PUB-QR`. Nos títulos escolares, 🟡 QR da Plataforma Nacional de Certificação (`Q-020`, `Q-LEG-14`).
 3. **Registo em livro (`RN-10.2`):** só nos documentos que o exigem (`DOF-07`, `DOF-08B`, `DOF-10A`); a lei pede "livro de registo e/ou base de dados" com número sequencial; **folha e termo** 🟡 (`COR-LEG-19`, `Q-LEG-14`).
 4. **Linha de proteção de dados (`ALT-04-11`; AV-06):** 🟡 o responsável pelo tratamento e o contacto estão por definir (`Q-APD-01`, `Q-APD-04`; E1).
 5. Documentos fiscais: o rodapé acrescenta as menções obrigatórias do DP n.º 71/25 (ver `DOF-11`).
@@ -1011,7 +1011,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PED-ADM`) | `SUB_PED`; **homologação** `DIR_GERAL` (lista definitiva — `COR-LEG-12`) | Sem série: curso × período × lista (`SELECIONADOS` / `DEFINITIVA`) + versão | Sim (o portal devolve só curso, período, ano e data de homologação) | **Duas versões** (`ALT-04-03`; RF-P-APD-15): **pública minimizada** (n.º de inscrição, nome, resultado) e **integral de arquivo**; aviso AV-05 no rodapé |
+| Secretaria Pedagógica (`MOD-PED-ADM`) | `SUB_PED`; **homologação** `DIR_GERAL` (lista definitiva — `COR-LEG-12`) | Sem série: curso × período × lista (`SELECIONADOS` / `DEFINITIVA`) + versão | Sim (o portal devolve só curso, período, ano e data de homologação) | **Duas versões** (`ALT-04-03`; RF-C19-15): **pública minimizada** (n.º de inscrição, nome, resultado) e **integral de arquivo**; aviso AV-05 no rodapé |
 
 - **Formato:** A4 Retrato ou Paisagem; agrupada por `Ano Letivo -> Curso -> Período`.
 - **Prazos impressos:** data e hora de publicação; limite para reclamação (**24 h**); data da decisão (**24 h**) — `COR-LEG-12`.
@@ -1037,7 +1037,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 - **Formato:** A4 Retrato com comprovativo destacável. Número da instituição impresso: **12008** (🟡 `Q-027`).
 - **Boletim de Matrícula — campos (pela ordem do modelo real):** nome completo; filiação (pai e mãe); data de nascimento; naturalidade; sexo; n.º do bilhete e data de emissão; dois telefones do encarregado; ocupação ou local de trabalho do pai (só se mantido — 🟡 `Q-APD-29`); residência e município; escola, classe, ano e resultado final anteriores; **"possui algum problema de saúde? qual?"** (facultativo, com a finalidade escrita junto ao campo e a caixa CON-07); classe, curso e **período** pretendidos.
 - **Boletim de Confirmação — campos:** os de identificação (pré-preenchidos pela proposta da passagem de ano — `MOD-PAS-02`), **turma e sala do ano anterior** e **até duas cadeiras em atraso** (derivadas, não digitadas), problema de saúde (renovado em cada confirmação — CON-07), classe, curso e período.
-- **Bloco de proteção de dados:** cláusula informativa AV-02 e as caixas de consentimento. Atestado médico só como "entregue: sim / não" (RF-P-APD-07).
+- **Bloco de proteção de dados:** cláusula informativa AV-02 e as caixas de consentimento. Atestado médico só como "entregue: sim / não" (RF-C19-07).
 - **Comprovativo destacável (via do aluno):** número do boletim, nome, curso, classe, período, data e a menção de que deve ser **conservado "para efeito de reclamação"**; nunca dados de saúde nem de terceiros.
 - **Retirado do `DOF-03` na v2.0:** o "Quadro Financeiro e de Benefícios" e o calendário de prestações da v1.2 não constam dos modelos reais; essa informação passa ao **Extrato de Conta Corrente** (`DOF-19`) e ao **Aviso de Confirmação** (`DOF-26`).
 - 🟡 **Provisória** — confirmação ao balcão vs. automática (o boletim real é de balcão; a lei diz automática): os dois modos são suportados; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-05`. Fonte: `COR-LEG-15`; DESC-L1 A12.
@@ -1123,7 +1123,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Coordenação de Curso (`MOD-DOC-13C`) | `COORD_CURSO` (ou Coordenador GIVA, se o cargo existir — `COR-LEG-22`); `DIR_GERAL` (títulos configurados) | Série anual por tipo (§P2.4) | Não | Só os dados necessários à finalidade (RF-P-APD-27); **BI do aluno a rever** (`ALT-04-12`; 🟡 `Q-APD-18`, E1); aviso AV-10 ao supervisor |
+| Coordenação de Curso (`MOD-DOC-13C`) | `COORD_CURSO` (ou Coordenador GIVA, se o cargo existir — `COR-LEG-22`); `DIR_GERAL` (títulos configurados) | Série anual por tipo (§P2.4) | Não | Só os dados necessários à finalidade (RF-C19-27); **BI do aluno a rever** (`ALT-04-12`; 🟡 `Q-APD-18`, E1); aviso AV-10 ao supervisor |
 
 - Dirigida à empresa parceira: nome do aluno, curso, `N.º de Processo`, período do estágio (20 tempos semanais na 13ª), **tutor interno** e **supervisor na empresa**, grelha de avaliação do supervisor em anexo.
 
@@ -1148,11 +1148,11 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PED-DOC`), a pedido por `DOF-09D` | `DIR_GERAL` (*Coordenadora Geral da Comissão de Gestão* no modelo real), "autenticada com o carimbo a óleo" | **`Declaração N.º nnn/IPCAG/AAAA`** — série anual própria (A13) | Sim (nome, curso, classe, ano) | **Campos conforme o efeito** (RF-P-APD-30; `ALT-04-18`): por defeito sem estado civil nem residência |
+| Secretaria Pedagógica (`MOD-PED-DOC`), a pedido por `DOF-09D` | `DIR_GERAL` (*Coordenadora Geral da Comissão de Gestão* no modelo real), "autenticada com o carimbo a óleo" | **`Declaração N.º nnn/IPCAG/AAAA`** — série anual própria (A13) | Sim (nome, curso, classe, ano) | **Campos conforme o efeito** (RF-C19-30; `ALT-04-18`): por defeito sem estado civil nem residência |
 
 - **Formato:** A4 Retrato. Número da instituição impresso: **8009** (🟡 `Q-027`).
 - **Conteúdo do modelo real:** declara que o aluno (nome; filiação; **estado civil** 🟡; idade; naturalidade; BI e data de emissão; **residência** 🟡) frequenta a classe, turma, sala, **período** e curso no ano letivo, e que a declaração se destina a **[efeito]**; data de emissão.
-  > 🟡 **Provisória** — tabela "efeito → campos" aprovada pela Direção; validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-30`. Fonte: DESC-L1 A11; APD-11 RF-P-APD-30.
+  > 🟡 **Provisória** — tabela "efeito → campos" aprovada pela Direção; validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-30`. Fonte: DESC-L1 A11; APD-11 RF-C19-30.
 - **Prazo:** entrega até **5 dias úteis** após o requerimento (DP n.º 227/25, art. 9.º, n.º 6 — `COR-LEG-20`).
 
 ### `DOF-09B` — Declaração com Notas
@@ -1167,7 +1167,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PED-DOC`) | `CHEFE_SEC_PED`; `DIR_GERAL` (títulos configurados) | Série anual por tipo | Sim (nome, curso, classe, ano) | Só os dados necessários à escola de destino (RF-P-APD-27); a comunicação fica no registo de destinatários (RF-P-APD-22) |
+| Secretaria Pedagógica (`MOD-PED-DOC`) | `CHEFE_SEC_PED`; `DIR_GERAL` (títulos configurados) | Série anual por tipo | Sim (nome, curso, classe, ano) | Só os dados necessários à escola de destino (RF-C19-27); a comunicação fica no registo de destinatários (RF-C19-22) |
 
 - Extrato de notas e faltas dos trimestres concluídos no ano corrente, cadeiras em atraso, confirmação de que **não há dívida reescalonada** (`RN-13.8.3`).
 - 🟡 **Provisória** — modelo real da guia ainda não recebido; validar em **E1** (`DEC-009`). Bloqueado por `Q-C03-14`. Fonte: DESC-L1 §6.
@@ -1176,7 +1176,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PED-DOC`) — balcão único | Requerente; `OP_PED` na receção (título configurado). Dirigido ao `DIR_GERAL` (*Coordenadora Geral da Comissão de Gestão* no modelo real) | **`Requerente N.º nnn/IPCAG/AAAA`** — série anual (A13) | Não (o número do requerimento serve para levantar o documento) | Aviso **AV-11**; registo da **legitimidade** do requerente (RF-P-APD-31); o recibo de pedido leva **só o n.º, o nome do aluno e a data** (`ALT-04-19`) |
+| Secretaria Pedagógica (`MOD-PED-DOC`) — balcão único | Requerente; `OP_PED` na receção (título configurado). Dirigido ao `DIR_GERAL` (*Coordenadora Geral da Comissão de Gestão* no modelo real) | **`Requerente N.º nnn/IPCAG/AAAA`** — série anual (A13) | Não (o número do requerimento serve para levantar o documento) | Aviso **AV-11**; registo da **legitimidade** do requerente (RF-C19-31); o recibo de pedido leva **só o n.º, o nome do aluno e a data** (`ALT-04-19`) |
 
 - **Requerimento:** n.º; requerente e qualidade (aluno maior, representante legal, terceiro autorizado); aluno, classe, turma, período e curso; documento pedido; efeito; data; assinatura.
 - **Recibo de Pedido (talão destacável, entregue ao requerente):** n.º do requerimento, nome do aluno, data do pedido e **data limite de entrega** (5 dias úteis).
@@ -1202,7 +1202,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Escola, **para** o Ministério da Educação — o **Diploma é emitido e assinado pelo Ministro**, com o nível do QNQ; o SGE **não o emite** | `CHEFE_SEC_PED` (confere); `DIR_GERAL` (remete) | Série anual de pedidos | Não (não é título escolar) | Envio registado como comunicação a destinatário externo (RF-P-APD-22) |
+| Escola, **para** o Ministério da Educação — o **Diploma é emitido e assinado pelo Ministro**, com o nível do QNQ; o SGE **não o emite** | `CHEFE_SEC_PED` (confere); `DIR_GERAL` (remete) | Série anual de pedidos | Não (não é título escolar) | Envio registado como comunicação a destinatário externo (RF-C19-22) |
 
 - Dados do diplomado e do curso, `MFC`, registo do certificado (`DOF-10A`), em PDF e no formato que o Ministério pedir.
 - 🟡 **Provisória** — formato e canal do pedido do Diploma; validar em **E1** (`DEC-009`). Bloqueado por `Q-021`, `Q-LEG-14`. Fonte: `COR-LEG-18`.
@@ -1232,7 +1232,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Tesouraria (`MOD-TES-EST`) ou software certificado | Operador; **homologação** `SUB_ADM` (ou `DIR_GERAL`) | `NC {série}/{ano fiscal}/nnnnnn` por tipo e ano fiscal | Sim | O motivo nunca qualifica a pessoa como suspeita (RF-P-APD-25) |
+| Tesouraria (`MOD-TES-EST`) ou software certificado | Operador; **homologação** `SUB_ADM` (ou `DIR_GERAL`) | `NC {série}/{ano fiscal}/nnnnnn` por tipo e ano fiscal | Sim | O motivo nunca qualifica a pessoa como suspeita (RF-C19-25) |
 
 - Menção **"anulação"** ou **"rectificação"**, documento original (tipo e número), motivo, valor, efeito na Conta Corrente. O talão falso trata-se por **anulação do recibo**, não por nota de crédito sobre a fatura — 🟡 (`Q-LEG-16`; E1).
 
@@ -1276,7 +1276,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Direção (`MOD-GOV-05`) | `CHEFE_SEC_PED`; `SUB_PED`; `DIR_GERAL` (a Coordenadora Geral assina os mapas — DESC-RESP §2), títulos configurados | Ano letivo × momento (início do ano, fim de cada trimestre, fim do ano) + versão | Não | Agregados; regra para não divulgar células com muito poucos alunos, se o formato o permitir (`ALT-04-15`; 🟡 `Q-APD-12`); envio registado (RF-P-APD-22) |
+| Direção (`MOD-GOV-05`) | `CHEFE_SEC_PED`; `SUB_PED`; `DIR_GERAL` (a Coordenadora Geral assina os mapas — DESC-RESP §2), títulos configurados | Ano letivo × momento (início do ano, fim de cada trimestre, fim do ano) + versão | Não | Agregados; regra para não divulgar células com muito poucos alunos, se o formato o permitir (`ALT-04-15`; 🟡 `Q-APD-12`); envio registado (RF-C19-22) |
 
 - **Formato:** A4 Paisagem, em papel assinado e em Excel (DESC-RESP §2).
 - **Base (`COR-LEG-25`):** **não foi encontrado normativo publicado**; o modelo vem do último mapa enviado e das instruções da Direção Provincial.
@@ -1291,7 +1291,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PIN-05`) | Assinatura digitalizada do `DIR_GERAL` (título configurado) — 🟡 cargo por confirmar (`Q-C03-08`, `Q-028`; E1) | **Série anual por ano letivo** (`RN-11.10.3`, `RN-11.14`) + n.º da via | Sim — estados `VÁLIDO`, `ANULADO`, `CADUCADO`; nunca fotografia, n.º de processo, BI ou contactos (`RN-11.10.7`) | Fotografia com finalidade "identificação" (RF-P-APD-28) |
+| Secretaria Pedagógica (`MOD-PIN-05`) | Assinatura digitalizada do `DIR_GERAL` (título configurado) — 🟡 cargo por confirmar (`Q-C03-08`, `Q-028`; E1) | **Série anual por ano letivo** (`RN-11.10.3`, `RN-11.14`) + n.º da via | Sim — estados `VÁLIDO`, `ANULADO`, `CADUCADO`; nunca fotografia, n.º de processo, BI ou contactos (`RN-11.10.7`) | Fotografia com finalidade "identificação" (RF-C19-28) |
 
 - **Formato:** 🟡 ID-1 (85,60 × 53,98 mm) ou A4 com vários cartões para recorte e plastificação (`Q-C03-08`; E1).
 - **Frente:** nome e número da instituição (parâmetros), fotografia, nome completo, `N.º de Processo`, curso, classe, turma, **período**, ano letivo, validade (por defeito o ano letivo).
@@ -1434,7 +1434,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PAS-02`) | `CHEFE_SEC_PED` (título configurado) | Série anual por tipo | Não | Individual, para o encarregado; situação financeira só do próprio aluno, sem valores de outros; **nunca dados de saúde** (RF-P-APD-29) |
+| Secretaria Pedagógica (`MOD-PAS-02`) | `CHEFE_SEC_PED` (título configurado) | Série anual por tipo | Não | Individual, para o encarregado; situação financeira só do próprio aluno, sem valores de outros; **nunca dados de saúde** (RF-C19-29) |
 
 - **Formato:** A5 ou A4. Aluno, `N.º de Processo`, destino (classe, curso, **período**), cadeiras em atraso (até duas), situação financeira e estado da bolsa, documentos em falta (C03), **prazo e modo de confirmação** (`BALCAO` / `AUTOMATICA`) e efeito da não confirmação (anulação aos 60 dias).
 - 🟡 **Provisória** — modo de confirmação, bloqueio por dívida e prazo; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-05`, `Q-C16-01`. Fonte: C16; `COR-LEG-15`.

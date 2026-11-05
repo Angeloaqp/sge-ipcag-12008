@@ -389,7 +389,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C18-04** | Monitorizar o servidor, a réplica, as cópias e a sincronização e enviar alertas técnicos à administração técnica. | O-08 | S | E2 | OPS-09 §5.3 | RN-17.12 | — | MOD-SEG-01, MOD-ALR | — | `alertas_gestao` | definido |
 | **RF-C18-05** | Aplicar atualizações fora dos períodos críticos do calendário (matrículas, provas, conselhos), com possibilidade de reversão. | O-08 | S | E2 | OPS-09 §5.4, §6; DESC-RESP §3 | — | — | MOD-SEG-01 | — | — | definido |
 | **RF-C18-06** | Registar e acompanhar os pedidos de suporte dos utilizadores. | O-10 | C | E2 | OPS-09 §5.6 | — | — | — | — | — | 🟡 DoR-E2 · `Q-013` (quem dá suporte) |
-| **RF-C18-07** | Disponibilizar um ambiente de formação só com dados sintéticos ou anonimizados, para a formação por cargo (≤ 2 h por cargo). | O-10 | M | E1 | MIG-10 §9; OPS-09 §5.7; APD-11 `RNF-P-APD-08`; PLN-00 §5.3 | — | — | — | — | — | definido |
+| **RF-C18-07** | Disponibilizar um ambiente de formação só com dados sintéticos ou anonimizados, para a formação por cargo (≤ 2 h por cargo). | O-10 | M | E1 | MIG-10 §9; OPS-09 §5.7; APD-11 `RNF-PRV-06`; PLN-00 §5.3 | — | — | — | — | — | definido |
 
 ### C19 — Proteção de dados
 **Âmbito:** dentro · **Entrega:** transversal, desde a E1 (VIS-06) · **Objetivo:** `O-09` · **Fonte:** [[11 - Protecao de Dados (APD)|APD-11]] §7.1 (`RF-C19-nn` = `RF-P-APD-nn`; entrega sugerida pela APD-11; prioridade atribuída aqui) · **Lei:** Lei n.º 22/11

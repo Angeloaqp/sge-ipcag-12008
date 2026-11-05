@@ -1088,7 +1088,7 @@ tags:
   - **Cenário 3 (Sucesso — Campo de saúde facultativo):**
     - **Dado** que o encarregado não quer declarar problemas de saúde,
     - **Quando** o `OP_PED` deixa o campo vazio,
-    - **Então** a matrícula prossegue normalmente; se o campo for preenchido, só é gravado com o consentimento CON-07 e no compartimento de saúde (RF-P-APD-29).
+    - **Então** a matrícula prossegue normalmente; se o campo for preenchido, só é gravado com o consentimento CON-07 e no compartimento de saúde (RF-C19-29).
   - **Cenário 4 (Bloqueio — Alterar ou reutilizar o número):**
     - **Dado** um boletim já numerado,
     - **Quando** um utilizador tenta alterar o número ou reutilizar o número de uma matrícula anulada,
