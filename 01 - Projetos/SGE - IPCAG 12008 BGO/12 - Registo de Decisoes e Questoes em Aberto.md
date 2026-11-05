@@ -1,0 +1,422 @@
+---
+title: "12 - Registo de Decisões e Questões em Aberto (SGE IPCAG N.º 12008 / BGO)"
+aliases:
+  - "12 - Registo de Decisoes e Questoes em Aberto"
+  - "Registo de Decisões SGE"
+  - "REG-12"
+created: 2026-11-02
+updated: 2026-11-02
+status: rascunho
+version: "0.1"
+doc_id: "REG-12"
+project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
+tags:
+  - sge
+  - ipcag-12008
+  - requisitos
+  - decisoes
+  - questoes-em-aberto
+---
+
+# Registo de Decisões e Questões em Aberto — SGE IPCAG N.º 12008 / BGO
+
+> [!abstract] Navegação
+> - **Painel Principal:** [[Inicio|Início do Vault]] | **Índice do Projeto:** [[00 - MOC SGE IPCAG 12008 BGO|MOC]] | **Plano:** [[00.1 - Plano de Engenharia de Requisitos]] (§7 — decisões D1–D8)
+> - **Âmbito resultante:** [[06 - Visao e Ambito]]
+> - **Especificação (v1.2):** [[01 - Dominio e Regras]] → [[02 - Fluxos de Trabalho]] → [[03 - User Stories]] → [[04 - Telas e Documentos]] → [[05 - Modelagem de Dados]]
+> - **Enquadramento:** [[Quadro Legal MED AGT e APD Angola]] | [[Governacao Escolar Ensino Tecnico MED]]
+
+> [!important] Para que serve este registo
+> É a **única fonte** das decisões estratégicas do projeto (`DEC-nnn`) e das dúvidas por responder (`Q-nnn`). Um requisito que dependa de uma decisão `pendente` ou de uma questão `aberta` **não cumpre a *Definition of Ready*** ([[00.1 - Plano de Engenharia de Requisitos#8. Definition of Ready (quando um requisito está pronto para desenvolver)|PLN-00 §8]]).
+
+---
+
+## 0. Regras de Utilização
+
+1. **Numeração:** `DEC-001`, `DEC-002`… e `Q-001`, `Q-002`… sequenciais e nunca reutilizados. As decisões `DEC-001` a `DEC-008` correspondem às decisões `D1` a `D8` do PLN-00 §7.
+2. **Estados de uma decisão:**
+   - `pendente` — analisada, ainda sem escolha.
+   - `aguarda Direção` — a escolha cabe à Direção do IPCAG; a entrada indica **o que é preciso para a fechar**.
+   - `decidida` — escolha registada, com data e quem decidiu.
+3. **Estados de uma questão:** `aberta` ou `respondida` (com a resposta, a fonte e a data).
+4. **Uma decisão `decidida` não se reescreve.** Para a mudar, regista-se uma nova `DEC-nnn` que a substitui e anota-se na antiga "substituída por `DEC-nnn`" (controlo de alterações — PLN-00 §3, princípio 6).
+5. **Nada se inventa.** Factos legais, números e datas sem fonte confirmada ficam como `Q-nnn`, nunca como texto de decisão.
+6. **Outras sessões / outros autores** acrescentam entradas no fim das secções 2 e 3 usando os modelos da secção 4, sem alterar as entradas existentes.
+
+---
+
+## 1. Quadro-Resumo das Decisões
+
+| ID | Origem | Tema | Decisão | Estado | Data | Quem decidiu | Homologação da Direção |
+| :---: | :---: | :--- | :--- | :---: | :---: | :--- | :---: |
+| [[#DEC-001 — Instalação única IPCAG ou produto multi-instituição\|DEC-001]] | D1 | Instalação única ou multi-instituição | (a) Instalação única IPCAG, com dados institucionais parametrizáveis | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-002 — Faturação AGT\|DEC-002]] | D2 | Faturação AGT | — *(proposta: (b) integrar com software certificado, atrás de um adaptador)* | `aguarda Direção` | — | — | — |
+| [[#DEC-003 — Portal ou aplicação para encarregados e alunos\|DEC-003]] | D3 | Portal para encarregados e alunos | (b) Portal na E5; SMS avaliado na especificação da C12 | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-004 — Horários\|DEC-004]] | D4 | Horários | (b) Registo do horário feito à mão, com importação e deteção de choques | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-005 — Pagamentos\|DEC-005]] | D5 | Pagamentos | (a) Registo manual de borderôs na E1, com conciliação bancária na C10; (b) reavaliada depois da E5 | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-006 — Alojamento\|DEC-006]] | D6 | Alojamento | (a) Servidor local + réplica na nuvem, a confirmar na Fase B | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-007 — Data de arranque\|DEC-007]] | D7 | Data de arranque | (a) Início do Ano Letivo 2027/2028, com ponto de controlo na Fase E | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-008 — Fora do âmbito\|DEC-008]] | D8 | Fora do âmbito | (a) Lista recomendada | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
+| [[#DEC-009 — Avançar com pendências de validação\|DEC-009]] | Equipa | Pendências de validação | Avançar para a construção; regulamento interno, recálculo de pautas e homologação resolvidos durante o projeto, com regras parametrizáveis e pontos de controlo | `decidida` | 2026-11-02 | Equipa do projeto | pendente |
+
+> [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
+> - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
+> - **Propõe e decide para a equipa:** o **analista responsável do projeto** (externo ao IPCAG). As decisões `decidida` orientam já o trabalho de definição, mas só ficam firmes para a linha de base `v2.0` depois da homologação da Direção. A coluna "Homologação da Direção" passa a `homologada (data, despacho ou ata)` quando isso acontecer.
+> - **`aguarda Direção`:** decisões que o analista entende caberem à Direção; não avançam sem despacho.
+> - **Ocasião proposta para a homologação:** a apresentação da [[06 - Visao e Ambito]] à Direção Executiva (fim da Fase A).
+>
+> **Atualização (2026-11-02, segundo [[Achados dos Documentos Reais - Lote 1|DESC-L1]] A4):** os documentos reais são assinados por uma **Coordenadora Geral da Comissão de Gestão** e por um **Coordenador para a Área Pedagógica**, e não por um Director Geral e Subdirectores. Mantém-se a escolha do utilizador (a direção da escola aprova), mas **quem exerce hoje a homologação** fica por confirmar ([[#3. Questões em Aberto|Q-028]]). Até lá, onde este registo diz `DIR_GERAL`, `SUB_PED` e `SUB_ADM` deve ler-se "o titular atual desse papel".
+
+### 1.1 Dependências entre decisões
+
+```mermaid
+flowchart LR
+    D1["DEC-001<br>Instalação única ou<br>multi-instituição"]
+    D2["DEC-002<br>Faturação AGT"]
+    D3["DEC-003<br>Portal encarregados"]
+    D4["DEC-004<br>Horários"]
+    D5["DEC-005<br>Pagamentos"]
+    D6["DEC-006<br>Alojamento"]
+    D7["DEC-007<br>Data de arranque"]
+    D8["DEC-008<br>Fora do âmbito"]
+    E["Entregas E1–E5<br>(PLN-00 §6)"]
+    D1 -->|"multi-instituição exige alojamento central"| D6
+    D3 -->|"portal exige acesso pela internet"| D6
+    D2 -->|"software externo condiciona o balcão"| D5
+    D4 -->|"geração automática fica fora"| D8
+    D2 -->|"contrato ou certificação tem prazo"| D7
+    D5 -->|"contrato bancário tem prazo"| D7
+    D6 -->|"equipamento e nuvem têm prazo"| D7
+    D7 -->|"fixa as datas"| E
+```
+
+---
+
+## 2. Decisões
+
+### DEC-001 — Instalação única IPCAG ou produto multi-instituição
+
+- **Origem:** PLN-00 §7 `D1` · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A especificação v1.2 foi escrita só para o IPCAG: o cabeçalho institucional dos documentos oficiais ([[04 - Telas e Documentos]] Parte 2), as 12 salas, os 2 turnos, o protocolo com a Diocese de Caxito (RN-07 em [[01 - Dominio e Regras]]). O [[05 - Modelagem de Dados]] não tem nenhuma entidade "instituição": as 44 tabelas e a RLS separam os dados por cargo, não por escola.
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) Instalação única IPCAG** | Menor complexidade; a especificação atual serve tal como está; regras ajustadas à prática real da escola; entrega mais rápida. | Usar o SGE noutra escola obriga a refazer partes do modelo de dados, da RLS e dos documentos. |
+| **(b) Multi-instituição desde o início** | Produto reutilizável (ex.: outras escolas da Diocese); custos repartidos. | Separar os dados por escola em praticamente todas as 44 tabelas e na RLS; parametrizar regras, cabeçalhos, numeração de recibos e de Livro/Folha/Termo por escola; alojamento central (choca com o servidor local por escola da DEC-006); mais testes; atrasa a E1. |
+| **Variante recomendada de (a)** | Os dados institucionais (nome, número da escola, NIF, logótipo, cabeçalho, salas, turnos) ficam numa configuração única e não escritos no código. Custo baixo e deixa a porta aberta. | Passar mais tarde a multi-instituição continua a exigir trabalho (separação de dados e RLS). |
+
+**Impacto.**
+- *Capacidades:* com (b), C01, C09 (cabeçalhos e numeração por escola), C10 (numeração de recibos por escola), C14 (contas por escola), C15 (indicadores consolidados), C17, C18 e C19 (cada escola é responsável pelo tratamento dos seus dados). Com (a), nenhuma alteração ao que está especificado.
+- *Entregas:* (b) atrasa a E1 e, por arrasto, todas as outras.
+
+**Recomendação: (a) com a variante parametrizável.** O objetivo imediato é pôr o IPCAG a funcionar; a Fase B ainda pode revelar práticas locais que um produto genérico teria de acomodar; não está identificada nenhuma outra escola interessada ([[#3. Questões em Aberto|Q-009]]). A passagem a multi-instituição pode ser pedida depois da linha de base `v2.0`, como pedido de alteração.
+
+> [!success] Decisão (2026-11-02)
+> **(a) Instalação única IPCAG, com dados institucionais parametrizáveis.** Consequências para a Fase C: o [[05 - Modelagem de Dados]] não ganha separação de dados por escola; os dados institucionais (nome, número da escola, NIF, logótipo, cabeçalho dos `DOF`, salas, turnos) ficam numa configuração única, não escritos no código nem nos modelos de documento. A Q-009 deixa de bloquear e passa a informar uma eventual reavaliação futura.
+
+---
+
+### DEC-002 — Faturação AGT
+
+- **Origem:** PLN-00 §7 `D2` (lacuna L7) · **Estado:** `aguarda Direção` · **Data:** — · **Quem decide:** Direção Executiva (`DIR_GERAL`, com parecer do `SUB_ADM`)
+
+**Contexto.** A RN-09 ([[01 - Dominio e Regras]]) e o `DOF-11` (recibo, Nota de Estorno e Mapa de Fecho de Caixa) definem recibos sequenciais imutáveis e anulação apenas por Nota de Estorno, com base no DP n.º 292/18. Não está decidido se o SGE será **software de faturação certificado pela AGT** (com exportação SAF-T AO) ou se **integra com um software já certificado**. Também não está confirmado o que a lei exige ao IPCAG enquanto escola comparticipada ([[#3. Questões em Aberto|Q-001]] a [[#3. Questões em Aberto|Q-004]]).
+
+> [!info] Atualização da base legal (2026-11-02, segundo [[Verificacao das Referencias Legais|LEG-VER]] §4)
+> A verificação legal (L3/L7) concluiu que o **DP n.º 292/18 foi revogado pelo DP n.º 71/25** e que a base atual é o DP n.º 71/25, o DE n.º 683/25 e o Código do IVA. A lei obriga a emitir **fatura ou fatura-recibo** (não só recibo), mesmo com isenção de IVA, e a corrigir por **nota de crédito**; a "Nota de Estorno" da RN-09 não é um tipo legal. Se o IPCAG estiver no Regime Geral do IVA, pode estar obrigado à **fatura eletrónica** comunicada à AGT. A LEG-VER conclui que isto **aumenta o custo da opção (a)** e reforça a (b) com adaptador. **A LEG-VER não é parecer jurídico:** estas conclusões têm de ser confirmadas pelo contabilista (Q-LEG-16 a Q-LEG-20). As correções às notas existentes estão propostas na LEG-VER §5 (`COR-LEG-02`, `COR-LEG-03`, `COR-LEG-05`) e não são aplicadas aqui.
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) SGE certificado como software de faturação, com SAF-T AO** | Controlo total; um só sistema no balcão, sem dupla digitação; a RN-09 já está desenhada neste sentido; funciona *offline* na rede local. | Processo de certificação com requisitos, prazo e custo ainda desconhecidos; obrigação de manter a conformidade a cada alteração legal; a equipa assume responsabilidade fiscal; a E1 fica dependente da certificação. |
+| **(b) Integrar com software de faturação já certificado** | A conformidade fiscal fica com um fornecedor já certificado; a E1 não depende de uma certificação própria. | Dependência e custo de licença; a integração pode não existir (sem API, só importação de ficheiros); risco de dupla digitação no balcão; a numeração dos recibos passa a ser a do software externo; o software externo pode não funcionar *offline*. |
+
+**Impacto.**
+- *Capacidades:* C10 (núcleo da decisão), C09 (`DOF-11`), C15 (relatórios financeiros), C17 (importação de dívidas e de recibos anteriores), C18 (integrações e operação), C19.
+- *Entregas:* **E1 crítica** — há recibos desde a primeira matrícula.
+
+**Recomendação: (b), com um adaptador.** O SGE fica responsável pela Conta Corrente, pelos borderôs (RN-09), pelo semáforo financeiro (RN-08) e pelo fecho de caixa; a emissão do documento fiscal passa por **um único ponto de integração** (adaptador), de modo que se possa mudar para (a) mais tarde sem refazer a Tesouraria. **Condição:** a escolha só fica firme depois de respondidas a Q-001 (obrigação legal) e a Q-002 (software que a escola já usa).
+
+> [!warning] Aguarda Direção (registado a 2026-11-02)
+> O analista responsável entende que esta decisão cabe à Direção Executiva: tem impacto legal, fiscal e de custo. **Para a fechar é preciso:**
+> 1. **Parecer fiscal escrito** (contabilista do IPCAG ou AGT) que responda à [[#3. Questões em Aberto|Q-001]] (obrigação de software certificado e SAF-T AO; tipos de documento), à [[#3. Questões em Aberto|Q-003]] (regime fiscal das propinas e emolumentos; quem é o adquirente) e às Q-LEG-16 a Q-LEG-19 da [[Verificacao das Referencias Legais|LEG-VER]] (documentos emitidos hoje, âmbito da isenção de IVA, bolsas de 100%, NIF e regime de IVA do IPCAG).
+> 2. **Inventário do software de faturação atual** ([[#3. Questões em Aberto|Q-002]]): nome, licença, possibilidade de integração.
+> 3. **Estimativa de custo e prazo** das duas opções (licença e integração em (b); processo de certificação e manutenção em (a)) — depende da [[#3. Questões em Aberto|Q-013]].
+> 4. **Despacho do `DIR_GERAL`**, com parecer do `SUB_ADM`, a escolher (a) ou (b).
+>
+> **Prazo:** antes de a Fase E fechar a E1, porque há recibos desde a primeira matrícula. Com o arranque decidido para 2027/2028 (DEC-007), a decisão é necessária cedo na Fase C, para que a C10 possa ser especificada.
+>
+> **Enquanto aguarda:** a especificação da C10 na Fase C prevê um **único ponto de emissão do documento fiscal**, compatível com (a) e com (b). É um pressuposto de trabalho, não uma decisão. A Q-004 (formato da numeração dos recibos) fica dependente desta decisão.
+
+---
+
+### DEC-003 — Portal ou aplicação para encarregados e alunos
+
+- **Origem:** PLN-00 §7 `D3` · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A capacidade C12 (comunicação com encarregados e alunos) não está especificada. O único acesso externo previsto é o portal público de verificação por QR Code (`MOD-PUB-QR`, `US-DOC-03`). O Encarregado de Educação existe como cadastro (BI e telefone — [[01 - Dominio e Regras#1.2 Registo e Vínculo do Estudante|DOC-01 §1.2]]), mas não tem conta: `usuarios_sistema` só prevê os 12 cargos. A proteção de dados de menores (L8) ainda não está resolvida.
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) Portal na E1/E2** | Transparência desde o início; menos filas na Secretaria e na Tesouraria (consulta de dívidas, faltas e notas). | Contas fora dos 12 cargos (C14); expõe na internet dados de menores antes de L8 estar resolvida; carga em época de matrícula; exige alojamento acessível pela internet (DEC-006); compete com o essencial da E1/E2. |
+| **(b) Portal mais tarde (E5)** | A operação interna estabiliza primeiro; os dados já estão validados quando se abrem; L8 fica resolvida antes. | No primeiro ano, os encarregados continuam a deslocar-se à escola para saber de notas e dívidas. |
+| **(c) Só SMS** | Chega a encarregados sem *smartphone* nem internet; simples. | Custo por mensagem e contrato com um fornecedor (desconhecidos); canal num só sentido; não substitui a consulta; dados pessoais enviados por SMS (APD). |
+
+**Impacto.**
+- *Capacidades:* C12 (núcleo), C14 (contas de encarregados e alunos), C19 (consentimento e direitos dos titulares), C10 e C06 (o que se mostra: dívidas, notas, faltas), C15, C18.
+- *Entregas:* (a) acrescenta trabalho à E1/E2; (b) e (c) ficam na E5.
+
+**Recomendação: (b) Portal na E5**, com o SMS avaliado como canal complementar na especificação da C12 (depende de [[#3. Questões em Aberto|Q-008]]). Abrir dados de menores à internet só depois de fechada a L8 é a opção mais segura.
+
+> [!success] Decisão (2026-11-02)
+> **(b) Portal para encarregados e alunos na E5.** Nas entregas E1 a E4 não há contas para encarregados nem alunos: o único acesso externo é o portal público de verificação por QR Code (`US-DOC-03`). A especificação da C12 (Fase C) decide se o SMS entra como canal complementar, com base na Q-008 e na Q-013 (custo). A L8 (proteção de dados) tem de estar fechada antes de a E5 abrir dados de menores à internet.
+
+---
+
+### DEC-004 — Horários
+
+- **Origem:** PLN-00 §7 `D4` (capacidade C04) · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Existe `alocacoes_docentes` (que professor leciona que disciplina em que turma, e desde quando), mas **não há horário semanal**. O professor regista sumários e faltas **por tempo letivo** (`US-PED-02`); a RN-03 calcula o limite de faltas a partir dos tempos letivos semanais; o DOC-01 diz que o `PROF` acede às turmas "atribuídas no horário letivo atual"; o Fluxo 03 refere uma "gestão de horários/alocações" pelo `SUB_PED` que não está especificada.
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) O SGE gera horários automaticamente** | Poupa trabalho à Direção Pedagógica no início do ano; otimiza a ocupação das 12 salas e dos laboratórios. | Problema de otimização complexo (disponibilidade dos professores, laboratórios, turnos); esforço e risco altos; o resultado acaba quase sempre ajustado à mão; atrasa a E2. |
+| **(b) O SGE regista o horário feito à mão** | Suficiente para sumários, faltas por tempo letivo, ponto docente e ocupação de salas; simples; a deteção de choques (professor, sala, turma) já dá muito valor. | O horário continua a ser elaborado fora do sistema e tem de ser introduzido (atenuável com importação de uma folha de cálculo). |
+
+**Impacto.**
+- *Capacidades:* C04 (núcleo), C05 e C06 (o tempo letivo é a base das faltas e do acesso à mini-pauta), C11 (ponto docente comparado com o horário), C01 (salas e turnos), C16 (horário do ano seguinte).
+- *Entregas:* E2 (o horário tem de existir na primeira semana de aulas).
+
+**Recomendação: (b)**, com deteção de choques e importação a partir de folha de cálculo. A geração automática (a) passa para a lista de fora do âmbito (DEC-008).
+
+> [!success] Decisão (2026-11-02)
+> **(b) O SGE regista o horário semanal feito à mão**, introduzido diretamente ou importado de uma folha de cálculo, com deteção de choques de professor, sala e turma. A C04 é especificada na Fase C para a E2 (nova estrutura de horário no [[05 - Modelagem de Dados]], ligada a `alocacoes_docentes`, salas e tempos letivos). Precisa da Q-011 (quem elabora e aprova) e da Q-012 (duração e número de tempos letivos). A geração automática fica fora do âmbito (DEC-008).
+
+---
+
+### DEC-005 — Pagamentos
+
+- **Origem:** PLN-00 §7 `D5` · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A RN-09 e a máquina de estados 3.7 do DOC-01 especificam o **registo manual de borderôs** pelo `OP_TES`, com unicidade `(banco, n.º de operação)` e controlo de saldo; os canais aceites são TPA, Transferência/Depósito e Multicaixa Express/Referência. A capacidade C10 não tem conciliação bancária (lacuna do PLN-00 §2.1).
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) Registo manual de borderôs (como especificado)** | Já está especificado (RN-09, `US-TES-03`, `DOF-11`); sem contratos externos; funciona *offline* na rede local. | Um talão falso só é detetado por conciliação posterior; filas no balcão em época de matrícula; verificação manual. |
+| **(b) Integração com referências Multicaixa / gateway de pagamento** | O pagamento chega já identificado (referência ligada ao aluno e à propina); elimina talões falsos; reduz filas; conciliação automática. | Contrato com banco ou entidade gestora; custos por transação desconhecidos; confirmação depende da internet; integração técnica e requisitos de segurança; obriga a rever a RN-09 e a máquina 3.7. |
+
+**Impacto.**
+- *Capacidades:* C10 (núcleo), C15 (receitas e dívida), C18 (integração), C09 (bloco bancário do recibo `DOF-11`).
+- *Entregas:* E1.
+
+**Recomendação: (a) na E1, tal como especificado; (b) reavaliada depois da E5**, com dados reais de volume e de fraude (Fase B). Em qualquer das opções, a **conciliação bancária** (por importação de extrato, se o banco o fornecer — [[#3. Questões em Aberto|Q-007]]) deve ser especificada dentro da C10.
+
+> [!success] Decisão (2026-11-02)
+> **(a) Registo manual de borderôs na E1**, tal como especificado na RN-09 e na máquina de estados 3.7. A **conciliação bancária** fica dentro do âmbito da C10 (por importação de extrato, se o banco o fornecer — Q-007). A integração com referências Multicaixa ou gateway (b) **não entra nas entregas E1–E5**: é reavaliada depois da E5, como pedido de alteração, com dados reais de volume e de fraude.
+
+---
+
+### DEC-006 — Alojamento
+
+- **Origem:** PLN-00 §7 `D6` · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A especificação já pressupõe a opção (a): a RN-10, ponto 4 ([[01 - Dominio e Regras]]), e o §1.2 de [[05 - Modelagem de Dados]] descrevem um servidor local na rede interna com replicação assíncrona para a nuvem, e professores a trabalhar *offline* no navegador. O portal de verificação por QR Code (`US-DOC-03`) tem de ser acessível pela internet por entidades externas. A energia e a internet no Panguila são instáveis (DOC-01, RN-10).
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) Servidor local + réplica na nuvem** | Secretaria e Tesouraria funcionam sem internet; cópia fora do edifício; portal QR e futuro portal servidos a partir da nuvem; é o que a especificação já descreve. | Dois ambientes a operar (sincronização e conflitos); equipamento local, UPS e energia; custo da nuvem; alguém tem de cuidar do servidor local (C18). |
+| **(b) Só nuvem** | Operação simples, sem servidor local; cópias de segurança geridas; acesso de qualquer lugar (Direção). | Sem internet, Secretaria e Tesouraria param (só os professores continuam *offline*); depende da qualidade da ligação no Panguila ([[#3. Questões em Aberto|Q-006]]); custo de dados. |
+| **(c) Só local** | Sem custos de nuvem; os dados ficam no edifício. | Portal QR público impossível sem exposição direta à internet; sem cópia fora do edifício (perda total em caso de incêndio ou roubo); sem acesso remoto. |
+
+**Impacto.**
+- *Capacidades:* C18 (núcleo: cópias de segurança, recuperação, atualizações), C05/C06 (*offline* dos professores), C09 (portal QR), C10 (balcão *offline*), C12 (portal futuro), C17, C19 (onde ficam os dados de menores — [[#3. Questões em Aberto|Q-016]]).
+- *Entregas:* a infraestrutura tem de estar instalada **antes da E1**, embora a C18 esteja na E2.
+
+**Recomendação: (a)**, a confirmar com o inventário de infraestrutura da Fase B (Q-006). É preciso clarificar qual dos dois servidores é a autoridade sobre o estado do trimestre ([[#3. Questões em Aberto|Q-015]]).
+
+> [!success] Decisão (2026-11-02)
+> **(a) Servidor local na rede da escola + réplica na nuvem**, como já descrito na RN-10 e no DOC-05 §1.2. **Condições:** (1) o inventário de infraestrutura da Fase B (Q-006) confirma que a escola tem ou pode ter rede local, energia protegida e ligação à internet suficiente para a réplica; se não, a decisão é revista por nova `DEC`; (2) a Q-015 (que servidor é a autoridade central) é resolvida na especificação da C18 (`09 - Integracoes, Infraestrutura e Operacao`); (3) a Q-016 (onde podem ficar alojados dados de menores) é resolvida antes de escolher o fornecedor de nuvem. A [[11 - Protecao de Dados (APD)|APD-11]] §10 propõe, como critério de escolha, alojar em Angola a réplica, as cópias de segurança e o portal QR, salvo notificação ou autorização prévia da APD (`RNF-P-APD-06`, a validar). A infraestrutura local tem de estar instalada antes da E1.
+
+---
+
+### DEC-007 — Data de arranque
+
+- **Origem:** PLN-00 §7 `D7` · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** O princípio 1 do PLN-00 manda arrancar em produção no **início de um Ano Letivo** (ou, no mínimo, de um trimestre), nunca a meio de um período de avaliação. À data deste registo (02/11/2026) decorre o Ano Letivo 2026/2027, que segundo o glossário do DOC-01 vai tipicamente de setembro a julho. A definição ainda tem por fazer as Fases B a F. As datas oficiais do calendário escolar seguinte não estão confirmadas ([[#3. Questões em Aberto|Q-005]]).
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) Início do Ano Letivo 2027/2028** | Respeita o princípio 1; dá cerca de 9–10 meses para as Fases B–F, a construção da E1/E2, a migração e a formação; os dados de 2026/2027 ficam completos para importar. | Prazo apertado; a E4 (junho de 2028) depende de o histórico completo da 10ª à 12ª ter sido importado (aviso do PLN-00 §6); o concurso de admissão de 2027/2028 corre provavelmente fora do SGE ([[#3. Questões em Aberto|Q-017]]). |
+| **(b) Início do II ou III Trimestre de 2026/2027 (piloto)** | Valor mais cedo; aprende-se com uso real. | Arranque a meio do ano; obriga a migrar notas de trimestres já lançados; a definição ainda não está validada (Fases B–D); risco alto para a pauta, o erro mais visível de um SGE. |
+| **(c) Início do Ano Letivo 2028/2029** | Folga para validar e construir com calma. | Mais um ano inteiro em papel; risco de o projeto perder apoio. |
+
+**Impacto.**
+- *Capacidades:* C17 (o que migrar e de que ano), C18 (formação antes do arranque), C02 (o primeiro concurso pode ficar fora do SGE).
+- *Entregas:* fixa a data-limite de **todas** as entregas E1–E5 (PLN-00 §6).
+
+**Recomendação: (a) 2027/2028**, com um ponto de controlo: se a E1 não estiver aprovada na Fase E a tempo de construir, testar, migrar e formar antes das matrículas, o arranque passa para (c), registado como nova decisão.
+
+> [!success] Decisão (2026-11-02)
+> **(a) Arranque em produção no início do Ano Letivo 2027/2028**: a E1 tem de estar em produção antes das matrículas de 2027/2028 e as entregas seguintes antes dos momentos indicados no PLN-00 §6. **Ponto de controlo:** no fecho da Fase E, se a E1 aprovada não couber no tempo que falta para construir, testar, migrar e formar antes das matrículas, regista-se uma nova `DEC` que adia o arranque para 2028/2029. **Falta:** as datas oficiais do calendário escolar de 2027/2028 (Q-005), que transformam os meses indicativos em datas-limite, e saber como corre o primeiro concurso de admissão (Q-017).
+
+---
+
+### DEC-008 — Fora do âmbito
+
+- **Origem:** PLN-00 §7 `D8` · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** O PLN-00 deixa por decidir o processamento salarial (C11) e os recursos e património (C20: biblioteca, inventário, laboratórios). A nota [[Governacao Escolar Ensino Tecnico MED]] atribui o "Património" ao `SUB_ADM`, mas nenhuma nota da especificação o detalha. Sem uma lista explícita do que fica fora, o âmbito cresce sem controlo (L1).
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) Lista recomendada fora do âmbito:** processamento salarial; C20 (biblioteca, inventário e património, gestão de laboratórios); cantina; transporte escolar; contabilidade geral (o SGE faz Conta Corrente do aluno e caixa, não contabilidade da escola); geração automática de horários (DEC-004); ensino a distância e conteúdos pedagógicos; compras e stocks | Foco nas capacidades que a escola precisa para operar o ano letivo; reduz o risco de prazo. | Estes processos continuam fora do SGE (papel ou outros sistemas). |
+| **(b) A lista (a), mas com o processamento salarial dentro** | Um só sistema para o pessoal (cadastro, ponto e salários). | Regras salariais e fiscais próprias (impostos, segurança social) que a especificação não cobre; quem processa hoje os salários não está confirmado ([[#3. Questões em Aberto|Q-010]]). |
+| **(c) A lista (a), mas com a C20 dentro** | Controlo do património e da biblioteca. | Nova capacidade inteira por especificar (Fase C), sem ligação ao calendário letivo. |
+
+**Impacto.**
+- *Capacidades:* C11 fica reduzida a cadastro e ponto (`US-DOC-04`); C20 fica fora; C15 não inclui indicadores de salários nem de património.
+- *Entregas:* nenhuma das capacidades excluídas estava nas entregas E1–E5, por isso a lista não atrasa nada; impede que entrem depois sem pedido de alteração.
+
+**Recomendação: (a).** A C20 pode ser reavaliada depois da E5, como pedido de alteração.
+
+> [!success] Decisão (2026-11-02)
+> **(a) Ficam fora do âmbito da versão inicial (entregas E1–E5):**
+> 1. Processamento salarial (a C11 fica reduzida a cadastro e ponto — `US-DOC-04`);
+> 2. C20 — biblioteca, inventário e património, gestão de laboratórios;
+> 3. Cantina;
+> 4. Transporte escolar;
+> 5. Contabilidade geral da escola (o SGE faz a Conta Corrente do aluno, a Tesouraria e o fecho de caixa);
+> 6. Geração automática de horários (DEC-004);
+> 7. Ensino a distância e conteúdos pedagógicos;
+> 8. Compras e stocks.
+>
+> Qualquer destes processos só entra por pedido de alteração registado neste documento. A Q-010 (quem processa hoje os salários) e a Q-019 (controlo do património fora do SGE) ficam para a Fase B, para documentar a fronteira com os sistemas ou o papel que continuam a existir.
+
+---
+
+### DEC-009 — Avançar com pendências de validação
+
+- **Origem:** decisão da equipa após a Fase B · **Estado:** `decidida` · **Data:** 2026-11-02 · **Quem decidiu:** equipa do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Três validações do PLN-00 ficaram por fazer: (1) obter o **regulamento interno** (tipos de ocorrência, medidas, escala de comportamento — C13); (2) **recalcular pautas preenchidas** do ano anterior para validar as fórmulas (`Q-025`; [[Plano de Validacao de Pautas]]); (3) **homologação das decisões** `DEC-001`–`DEC-009` pela Comissão de Gestão.
+
+**Decisão.** A equipa avança para a integração da especificação e para a construção **sem esperar** por estas três validações, que serão resolvidas **durante o projeto**.
+
+> [!success] Condições para avançar sem risco (2026-11-02)
+> 1. **Tudo o que depende destas validações é parametrizável**, nunca fixo no código: fórmulas de avaliação (`M1`–`M3`, `CF`, `CA`, recurso, `MFC`), limiares (aprovação, deficiência, faltas, avisos), escala de comportamento, catálogo de ocorrências e medidas, títulos dos cargos e número da instituição.
+> 2. **Pontos de controlo obrigatórios**, cada um a bloquear a entrega correspondente:
+>    - **Antes da E2** (notas e faltas em produção): recálculo de pelo menos 3 pautas preenchidas, com zero divergências por explicar.
+>    - **Antes da E3** (primeiro boletim): regulamento interno recebido e parâmetros da C13 configurados.
+>    - **Antes da E1** (arranque): homologação das decisões `DEC-001`–`DEC-009` pela Comissão de Gestão.
+> 3. As regras afetadas mantêm a marca **"provisória"** na especificação `v2.0` e no código, até o ponto de controlo respetivo ser cumprido.
+> 4. Qualquer divergência encontrada muda **parâmetros**, não a arquitetura; se exigir mudar a arquitetura, entra por pedido de alteração neste registo.
+
+**Impacto.** A *Definition of Ready* do PLN-00 §8 passa a aceitar regras `provisórias` desde que parametrizáveis e ligadas a um ponto de controlo. Os itens `Q-025`, `Q-030`, `Q-032`, `Q-C13-02` a `Q-C13-06` e a homologação passam a ser acompanhados como **riscos de projeto**, não como bloqueios da definição.
+
+---
+
+## 3. Questões em Aberto
+
+| ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
+| :---: | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| Q-001 | O IPCAG, como escola comparticipada, está obrigado a emitir os documentos de cobrança de propinas e emolumentos com software de faturação certificado pela AGT e a produzir o ficheiro SAF-T (AO)? Que tipos de documento se aplicam (fatura, fatura-recibo, recibo, nota de crédito) e a "Nota de Estorno" da RN-09 corresponde a algum deles? | L3, L7; RN-09 | DEC-002; C10; E1 | Contabilista do IPCAG; `SUB_ADM`; AGT | B | `aberta` | **Parcial** ([[Verificacao das Referencias Legais\|LEG-VER]] §4, 2026-11-02): a obrigação de emitir fatura/fatura-recibo existe mesmo com isenção de IVA (DP n.º 71/25); corrige-se por nota de crédito. A obrigação de fatura eletrónica depende do regime de IVA (Q-LEG-19). Falta confirmação do contabilista. |
+| Q-002 | O IPCAG já usa algum software de faturação certificado? Qual, com que licença, e permite integração (API ou importação/exportação de ficheiros)? | DEC-002 | DEC-002 | `SUB_ADM`; `CHEFE_SEC_GER` | B | `aberta` | — |
+| Q-003 | Que regime fiscal se aplica às propinas e aos emolumentos (isenções ou impostos)? Quem figura como adquirente no documento: o aluno ou o Encarregado de Educação (o `DOF-11A` mostra "BI/NIF do Encarregado")? | DEC-002; `DOF-11A` | DEC-002; C10 | Contabilista; AGT | B | `aberta` | **Parcial** (LEG-VER §4.4): o ensino está isento de IVA (CIVA, art. 12.º, n.º 1, l)), com menção obrigatória do motivo. Falta saber se a isenção cobre emolumentos e multas (Q-LEG-17) e quem é o adquirente. |
+| Q-004 | O formato da numeração dos recibos é inconsistente entre notas: `RC 2026/00001` (DOC-01 §1.5), `RC IPCAG2026/000001` (RN-09), `RC IPCAG2026/000105` (`DOF-11A`) e `NE 2026/00012` (`US-TES-04`). Qual é o formato oficial? Se a DEC-002 for (b), o formato é o do software certificado. | Leitura DOC-01/03/04 | C09; C10 | `SUB_ADM` | B | `aberta` | **Parcial** (LEG-VER §4.3): a numeração legal é por tipo de documento e por ano fiscal. O formato concreto depende da DEC-002. Nos documentos não fiscais, a escola usa `N.º ___/IPCAG N.º <n.º> BGO/<ano>`, com uma numeração por tipo e por ano ([[Achados dos Documentos Reais - Lote 1\|DESC-L1]] A13). Faltam os recibos reais (DESC-L1 §6). |
+| Q-005 | Quais são as datas oficiais do calendário escolar de 2027/2028 (matrículas e confirmações, início das aulas, fim de cada trimestre, épocas de exame) e que diploma as fixa? | DEC-007 | DEC-007; E1–E5 | `SUB_PED`; Direção Provincial da Educação do Bengo | B | `parcial` | Calendário-tipo descrito (agosto inscrições/admissão … julho recurso e encerramento) — [[Sintese das Respostas da Fase B\|DESC-RESP]] §3. Faltam as datas oficiais de 2027/2028. (2026-11-02) |
+| Q-006 | Que infraestrutura existe hoje: servidor, computadores, rede local e Wi-Fi, ligação à internet (tipo, débito, fiabilidade), energia (rede pública, gerador, UPS)? | DEC-006; PLN-00 §5.2 | DEC-006; C18 | `SUB_ADM`; `CHEFE_SEC_GER` | B | `aberta` | — |
+| Q-007 | Em que bancos o IPCAG recebe hoje as propinas, por que canais, e esses bancos fornecem extratos eletrónicos (para conciliação) ou pagamento por referência? | DEC-005; C10 | DEC-005; C10 | `SUB_ADM`; `OP_TES` | B | `parcial` | Canais: TPA, depósito/transferência, Multicaixa Express; conciliação manual com o extrato — [[Sintese das Respostas da Fase B\|DESC-RESP]]. Faltam bancos e extratos eletrónicos. (2026-11-02) |
+| Q-008 | Que parte dos encarregados tem telemóvel, *smartphone* e internet, e por que canal preferem ser contactados? | DEC-003 | DEC-003; C12 | Secretaria Pedagógica; amostra de encarregados | B | `parcial` | Encarregados preferem SMS/WhatsApp; 20–30% dos telefones estão errados — [[Sintese das Respostas da Fase B\|DESC-RESP]] R26. (2026-11-02) |
+| Q-009 | A Diocese de Caxito tem outras escolas interessadas em usar o SGE? Quem seria o dono de um produto comum? | DEC-001 | Não bloqueia; informa uma eventual reavaliação da DEC-001 | `DIR_GERAL`; Diocese de Caxito | B | `aberta` | — |
+| Q-010 | Quem processa hoje os salários de docentes e funcionários (o IPCAG, a Diocese, o Estado para professores do quadro?) e com que ferramenta? | DEC-008; C11 | Fronteira da C11 (dados de pessoal que o SGE fornece a outro sistema) | `SUB_ADM`; `CHEFE_SEC_GER` | B | `respondida — a confirmar` | Salários fora do SGE; o SGE exporta o mapa mensal de efetividade e faltas — [[Sintese das Respostas da Fase B\|DESC-RESP]] R24. (2026-11-02) |
+| Q-011 | Quem elabora e aprova o horário semanal, com que ferramenta e em que data? O Fluxo 03 atribui a "gestão de horários/alocações" ao `SUB_PED`, e o DOC-01 diz que o `COORD_CURSO` "propõe a distribuição docente". | DEC-004; Fluxo 03 | C04 | `SUB_PED`; `COORD_TURNO` | B | `respondida — a confirmar` | Coordenadores de Curso propõem a distribuição; o Coordenador para a Área Pedagógica consolida o horário em Excel (2–3 semanas em agosto) — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
+| Q-012 | Quanto dura o tempo letivo (o DOC-01 §1.1 admite 45 ou 50 minutos) e quantos tempos cabem em cada turno (Manhã 07h30–12h35, Tarde 13h00–18h05)? | DEC-004; RN-03 | C04; C05 | `SUB_PED` | B | `respondida — a confirmar` | 6 tempos letivos por turno, de 45/50 min — [[Sintese das Respostas da Fase B\|DESC-RESP]] R22. Confirmar a duração exata. (2026-11-02) |
+| Q-013 | Quem desenvolve, quem opera e quem paga o SGE (equipa, orçamento para equipamento, nuvem, licenças, SMS)? | Todas as DEC | Todas; VIS-06 §5 | `DIR_GERAL`; Diocese de Caxito | A/B | `aberta` | — |
+| Q-014 | Quais são os números reais: alunos por classe, curso e turno; turmas; professores; funcionários; pagamentos por dia em época de matrícula? | PLN-00 §5.2 e §5.3 | Metas da VIS-06; RNF (`08`) | Secretaria Pedagógica; Tesouraria | B | `parcial` | Mais de 1.120 alunos, 40–45 por turma, mais de 250 mini-pautas por trimestre, 4–7 turmas por professor — [[Sintese das Respostas da Fase B\|DESC-RESP]] §5. (2026-11-02) |
+| Q-015 | Com servidor local e réplica na nuvem, qual dos dois é a "autoridade central" sobre o estado do trimestre (DOC-05 §1.2, RN-10)? Como se resolvem conflitos entre um balcão *offline* e a nuvem? | DEC-006 | DEC-006; C18 | Equipa técnica | C | `aberta` | — |
+| Q-016 | O tratamento destes dados (menores, alojamento na nuvem, eventualmente fora de Angola) exige notificação ou autorização prévia da APD? Onde podem ficar alojados os dados? | DEC-003; DEC-006; L8 | DEC-006; C19 | APD; jurista | B/C | `aberta` | **Parcial** ([[11 - Protecao de Dados (APD)\|APD-11]] §10): alojar fora de Angola é transferência internacional (notificação ou autorização prévia da APD, arts. 33.º–34.º); proposta `RNF-P-APD-06` de alojar em Angola. Pendente: Q-APD-19 e Q-APD-27. |
+| Q-017 | Se o arranque for no início de 2027/2028, o concurso de admissão à 10ª Classe e as matrículas desse ano correm fora do SGE e os resultados são importados (C17)? A C02 só está prevista para a E5. | DEC-007; PLN-00 §6 | C02; C17; E1 | `SUB_PED`; `CHEFE_SEC_PED` | C | `aberta` | — |
+| Q-018 | Qual é a designação oficial do órgão provincial que recebe os mapas estatísticos? O `DOF-12` refere "Gabinete Provincial da Educação do Bengo" e o PLN-00 refere "Direção Provincial da Educação do Bengo". | Leitura DOC-04 / PLN-00 | C15; L3 | `CHEFE_SEC_PED` | B | `aberta` | **Parcial** (LEG-VER, Q-LEG-15): o DP n.º 93/21 usa "Gabinete Provincial da Educação". Falta confirmar a designação atual no Bengo. |
+| Q-019 | Com a C20 fora do âmbito (DEC-008), como continua a escola a controlar o património (a nota [[Governacao Escolar Ensino Tecnico MED]] atribui-o ao `SUB_ADM`)? | DEC-008 | Fronteira da C20 | `SUB_ADM` | B | `aberta` | **Parcial** (LEG-VER §3.10): o DP n.º 93/21, art. 18.º, a) atribui o património ao Subdirector Administrativo. Falta saber com que ferramenta é gerido hoje. |
+| Q-020 | O registo dos títulos escolares na **Plataforma Nacional de Certificação**, com QR Code dessa plataforma (DP n.º 227/25, segundo a LEG-VER), entra no âmbito da C09? Em que entrega, e por integração automática ou registo manual? A plataforma já está a funcionar (Q-LEG-14)? | LEG-VER §0.1 (8) e `COR-LEG-19` | C09; C18; E4 | Direção Provincial da Educação do Bengo; `CHEFE_SEC_PED` | B/C | `parcial` | A escola refere livros com campos para o código e QR da Plataforma Nacional de Certificação — [[Sintese das Respostas da Fase B\|DESC-RESP]] R17. Decidir o âmbito. (2026-11-02) |
+| Q-021 | Se o Diploma de fim de curso é emitido e assinado pelo Ministro da Educação (LEG-VER §0.1 (7), `COR-LEG-18`), o SGE emite só o Certificado e prepara o pedido do Diploma ao Ministério? Como se pede hoje o Diploma? | LEG-VER | C09 (`DOF-10`); E4 | `CHEFE_SEC_PED`; Direção Provincial | B | `respondida — a confirmar` | A escola emite o Certificado; o Diploma é do Ministério da Educação, o SGE exporta os dados — [[Sintese das Respostas da Fase B\|DESC-RESP]] R18. (2026-11-02) |
+| Q-022 | Existe um **Edital** do concurso de admissão à 10ª Classe? O antigo Quadro Legal §2 referia-o, mas o DOC-04 não o especifica. | Nota da sessão de renomeação DOF (L11) | C02 | `CHEFE_SEC_PED` | B | `aberta` | — |
+| Q-023 | Qual é a base legal do `DOF-07` (Pauta e Termo Oficial de Exame Extraordinário)? | Nota da sessão de renomeação DOF (L11) | C07; L3 | Direção Provincial; `SUB_PED` | B | `aberta` | — |
+| Q-024 | O `DOF-11` (recibo, nota de estorno, fecho de caixa) aparece entre os tipos de `documentos_oficiais_emitidos`, mas recibos e notas de estorno vivem em `recibos_oficiais` e `notas_estorno` (DOC-05). Em que tabela fica o registo de emissão do `DOF-11`? Depende também da DEC-002. | Nota da sessão de renomeação DOF (L11) | C09; C10; DOC-05 | Equipa técnica | C | `aberta` | — |
+| Q-025 | **Fórmulas reais de avaliação.** A Mini Pauta da escola usa `MTP`, `PP`, `PT` por trimestre; no III Trimestre não há `PT`, mas há `PG` (Prova Global) e `CA = MT3 × 0,6 + PG × 0,4` (Classificação Anual). Nada disto existe no RN-01. Como se calculam `M1`/`M2`/`M3` e `CF`; `MT3` é a média do III Trimestre ou a `CF`; a `PG` aplica-se a todas as disciplinas; existe exame de recurso; qual é a nota mínima e o critério de transição com deficiência? | [[Achados dos Documentos Reais - Lote 1\|DESC-L1]] A1 | C06; C07; RN-01; RN-02; O-01; E2 | `SUB_PED` / Coordenador para a Área Pedagógica | B | `parcial` | `M=(MTP+PP+PT)/3` (I e II); `CF` = média de M1–M3; `CA = CF×0,6 + PG×0,4`; aprovação `CA ≥ 10`; recurso com `CA < 10` e `CF ≥ 7`; deficiência: até 2 disciplinas de 7–9 na 10ª/11ª — [[Sintese das Respostas da Fase B\|DESC-RESP]] §1. Faltam a fórmula de `M3` e a do recurso; validar com pautas preenchidas. (2026-11-02) |
+| Q-026 | **Nomenclatura das notas:** o modelo do Gabinete Provincial usa `MTP`/`PP`/`PT`/`MT` e o da escola `MAC`/`NPP`/`NPT`. Qual é a oficial na linguagem ubíqua, e `MAC` corresponde a `MTP`? | DESC-L1 A2 | C06; glossário DOC-01 | `SUB_PED` | B | `respondida — a confirmar` | `MTP`≡`MAC`, `PP`≡`NPP`, `PT`≡`NPT`; um campo, rótulo configurável por modelo — [[Sintese das Respostas da Fase B\|DESC-RESP]] §1. (2026-11-02) |
+| Q-027 | **Número da instituição:** os documentos de matrícula e a Pauta Geral dizem **N.º 12008**; boletins, mini-pauta, declarações e justificações dizem **N.º 8009**. Qual é o oficial atual, e qual deve sair nos documentos do SGE? | DESC-L1 A3 | C01 (parâmetro institucional, DEC-001); C09 | Comissão de Gestão | B | `parcial` | A escola usa os dois números; explicação não conclusiva. Confirmar o oficial com o Gabinete Provincial — [[Sintese das Respostas da Fase B\|DESC-RESP]] §2. (2026-11-02) |
+| Q-028 | **Estrutura de direção real:** os documentos são assinados por uma Coordenadora Geral da Comissão de Gestão e por um Coordenador para a Área Pedagógica. A escola é hoje dirigida por uma Comissão de Gestão (transitória?)? Que cargos existem de facto, quem assina e homologa cada documento e **quem homologa as decisões deste registo**? | DESC-L1 A4 | Autoridade de aprovação (§1); C14 (papéis RBAC vs títulos impressos); C09 | Comissão de Gestão | B | `respondida — a confirmar` | Comissão de Gestão: Coordenadora Geral + Coordenador para a Área Pedagógica (substitui no expediente corrente, não em certificados, pautas finais nem despachos financeiros) — [[Sintese das Respostas da Fase B\|DESC-RESP]] §2. (2026-11-02) |
+| Q-029 | **Cursos oferecidos:** os planos curriculares recebidos são Contabilidade e Gestão, Gestão de Recursos Humanos, Gestão Empresarial e Estatística e Planeamento, todos da Área de Formação "Administração e Serviços", com um campo "Especialidade". O DOC-01 lista Informática de Gestão e Finanças, que não aparecem. São estes os quatro cursos, todos? | DESC-L1 A5 | C01; C02; matrizes | Secretaria Pedagógica | B | `respondida — a confirmar` | 4 cursos da área Administração e Serviços, especialidade `ADM_GESTÃO` — [[Sintese das Respostas da Fase B\|DESC-RESP]] §2. (2026-11-02) |
+| Q-030 | **13ª Classe:** os planos têm "Projecto Tecnológico" (2 h na 12ª, 8 h na 13ª) e Estágio (20 h), e não "PAP". A PAP é a defesa do Projecto Tecnológico? Como se avalia na 12ª e na 13ª, e qual é a fórmula da `MFC`? | DESC-L1 A6; Q-LEG-07 | C08; RN-06; E4 | Coordenadores de curso | B | `parcial` | PAP = defesa pública do projeto/relatório de estágio; pré-requisitos e júri com membros externos descritos — [[Sintese das Respostas da Fase B\|DESC-RESP]] R20–R21. Faltam os pesos da `MFC`. (2026-11-02) |
+| Q-031 | **Transição na 12ª Classe:** a Língua Portuguesa só existe na 10ª e na 11ª, por isso o veto "LP + nuclear" da RN-02 não se aplica na 12ª. Qual é a regra de transição e de conclusão na 12ª? | DESC-L1 A7; Q-LEG-06 | C07; RN-02; E4 | `SUB_PED` | B | `respondida — a confirmar` | Na 12ª não há transição com deficiência: aprova a todas e tem 0 cadeiras em atraso — [[Sintese das Respostas da Fase B\|DESC-RESP]] §1. (2026-11-02) |
+| Q-032 | **Faltas e comportamento:** o boletim distingue "faltas por indisciplina", "faltas por não comparência" e "comportamento"; a justificação é um formulário numerado assinado pelo Director de Turma **e** pelo Coordenador para a Área Pedagógica (a RN-03 só prevê o Director de Turma). Que tipos de falta e de avaliação do comportamento existem, e qual é o circuito de justificação? | DESC-L1 A8 | C05; C13; RN-03 | Directores de Turma; `SUB_PED` | B | `respondida — a confirmar` | Faltas por indisciplina vs. não comparência; comportamento por trimestre; justificação numerada assinada por DT + Coordenador Pedagógico — [[Sintese das Respostas da Fase B\|DESC-RESP]] R2–R3. Falta a escala do comportamento. (2026-11-02) |
+| Q-033 | **Termos da escola:** os documentos usam "Período" (Manhã/Tarde) em vez de "Turno" e "Cadeira" como sinónimo de "Disciplina". Ficam como sinónimos aceites nos documentos impressos, mantendo um só termo no sistema? | DESC-L1 A9 | Glossário DOC-01; R-04 da VIS-06 | `SUB_PED`; equipa do projeto | C | `aberta` | — |
+| Q-034 | **Emolumentos e RUPE:** o formulário de pedido de declaração não tem campo de pagamento, e os pedidos do pessoal usam a RUPE (Referência Única de Pagamento ao Estado). Há taxa para as declarações dos alunos? Taxas e emolumentos dos alunos pagam-se por RUPE (ao Estado) ou à escola? | DESC-L1 A11 e A15; Q-LEG-14 | DEC-005; DEC-002; C10; C09 | Secretaria Pedagógica; Tesouraria | B | `respondida — a confirmar` | Emolumentos estatais por RUPE; emolumentos internos nas contas da escola — [[Sintese das Respostas da Fase B\|DESC-RESP]] R15. (2026-11-02) |
+| Q-035 | **Cabeçalho e rodapé reais:** o cabeçalho diz "República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação" e não menciona o MED nem a Diocese de Caxito; o rodapé traz códigos como `IPCAG.SG-ACE` e `DEE-PEEP-001-ACE`. Qual é o modelo oficial a usar e o que significam os códigos? | DESC-L1 A14 | C09 (`DOF-01` a `DOF-12`); DOC-04 Parte 2 | Comissão de Gestão; Gabinete Provincial | B | `respondida — a confirmar` | Cabeçalho: República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação / IPCAG; códigos de rodapé IPCAG.SG-ACE e DEE-PEEP-001-ACE — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
+| Q-036 | **Avaliação de desempenho do pessoal** (10 indicadores, classificação quantitativa e qualitativa, homologação pelo Gabinete Provincial): entra na C11, ou fica fora do âmbito como o processamento salarial (DEC-008)? | DESC-L1 A15 | C11; DEC-008 | Comissão de Gestão; `CHEFE_SEC_GER` | B | `aberta` | — |
+| Q-037 | **SMS antes da E5?** A C12 propõe uma central de avisos (impresso + SMS) que não abre dados à internet; pode entrar na E3 com os avisos de faltas e propinas, deixando o portal na E5 (`DEC-003`)? Com que orçamento mensal? | [[C12 - Comunicacao com Encarregados e Alunos\|CAP-C12]] `Q-C12-01` | C12; C10; E3 | Comissão de Gestão; `SUB_ADM` | B | `aberta` | — |
+| Q-038 | **Núcleo da C13 na E2/E3?** O boletim real (`DOF-06`) imprime faltas por indisciplina e comportamento desde o I Trimestre; a C13 propõe levar esse núcleo para a E2/E3 e deixar ocorrências e processos disciplinares na E5. Exige pedido de alteração ao [[06 - Visao e Ambito]]. | [[C13 - Disciplina e Comportamento\|CAP-C13]] `Q-C13-01` | C13; DOF-06; E2/E3 | Comissão de Gestão | B | `aberta` | — |
+| Q-039 | **Expediente geral e correspondência:** a Secretaria Geral regista à mão os ofícios de entrada e saída (`Ofício N.º [seq]/IPCAG.SG/ano`). Entra no âmbito do SGE (nova capacidade C21), e em que entrega? | [[Sintese das Respostas da Fase B\|DESC-RESP]] R25 | Âmbito ([[06 - Visao e Ambito]]) | Comissão de Gestão | B | `aberta` | — |
+
+### 3.1 Questões registadas noutras notas
+
+Para manter uma só fonte por facto, as questões abaixo **continuam nas notas onde nasceram**; este registo só as indexa. Uma questão dessas que bloqueie uma `DEC-nnn` ou uma entrega deve ser copiada para a tabela acima com o próximo `Q-nnn`, citando o código de origem.
+
+| Prefixo | Nota de origem | Tema |
+| :--- | :--- | :--- |
+| `Q-LEG-01` … `Q-LEG-20` | [[Verificacao das Referencias Legais\|LEG-VER]] §6 | Regulamento de avaliação do ESTP, admissão, 13ª Classe, faturação e IVA |
+| `Q-APD-nn` | [[11 - Protecao de Dados (APD)\|APD-11]] | Proteção de dados, consentimento, conservação, transferência internacional |
+| `Q-C10-nn`, `Q-C14-nn`, `Q-C15-nn` | Notas da pasta `Capacidades Novas` | Cobrança e conciliação, contas e acesso, painéis da Direção |
+| Questões próprias | [[08 - Requisitos Nao Funcionais\|RNF-08]], [[09 - Integracoes, Infraestrutura e Operacao\|OPS-09]], [[10 - Migracao de Dados e Implantacao\|MIG-10]] | Requisitos não funcionais, integrações e operação, migração |
+
+---
+
+## 4. Modelos para Novas Entradas
+
+> [!tip] Como acrescentar
+> Copia o modelo, usa o próximo número livre e acrescenta a entrada **no fim** da secção 2 (decisões) ou da tabela da secção 3 (questões). Atualiza também o quadro-resumo da secção 1 quando acrescentares uma decisão.
+
+### 4.1 Modelo de decisão
+
+```markdown
+### DEC-nnn — <Tema da decisão>
+
+- **Origem:** <nota e secção, lacuna ou capacidade> · **Estado:** `pendente` · **Data:** — · **Quem decidiu:** —
+
+**Contexto.** <Porque é preciso decidir, citando as notas e as regras afetadas.>
+
+| Opção | Prós | Contras |
+| :--- | :--- | :--- |
+| **(a) …** | … | … |
+| **(b) …** | … | … |
+
+**Impacto.**
+- *Capacidades:* <C01–C20 afetadas e como.>
+- *Entregas:* <E1–E5 afetadas e como.>
+
+**Recomendação:** <opção e fundamento.>
+
+**Decisão:** <opção escolhida, com condições> · **Para fechar (se `aguarda Direção`):** <o que falta>
+```
+
+### 4.2 Modelo de questão (linha da tabela da secção 3)
+
+```markdown
+| Q-nnn | <Pergunta clara, com uma resposta possível> | <Nota, regra ou decisão onde surgiu> | <DEC, C ou E que bloqueia> | <Cargo ou entidade> | <A–F> | `aberta` | — |
+```
+
+---
+
+## 5. Histórico de Alterações
+
+| Versão | Data | Alteração |
+| :---: | :---: | :--- |
+| 0.1 | 2026-11-02 | Criação: análise das decisões `DEC-001` a `DEC-008` (D1–D8 do PLN-00 §7) e questões `Q-001` a `Q-019`. Decisões percorridas com o analista responsável: DEC-001 e DEC-003 a DEC-008 `decidida` (homologação da Direção pendente); DEC-002 `aguarda Direção`. Autoridade de aprovação registada: Direção Executiva. |
+| 0.1 | 2026-11-02 | Integração das conclusões da [[Verificacao das Referencias Legais\|LEG-VER]] (base legal da DEC-002; respostas parciais às Q-001, Q-003, Q-004, Q-005, Q-011, Q-018 e Q-019) e da [[11 - Protecao de Dados (APD)\|APD-11]] (DEC-006, Q-016). Novas questões Q-020 a Q-024 (Plataforma Nacional de Certificação, Diploma, Edital, `DOF-07`, `DOF-11`). Índice das questões noutras notas (§3.1). |
+| 0.1 | 2026-11-02 | Integração dos achados dos documentos reais ([[Achados dos Documentos Reais - Lote 1\|DESC-L1]]): novas questões Q-025 a Q-036 (fórmulas reais, nomenclatura, número 12008/8009, Comissão de Gestão, cursos, Projecto Tecnológico, transição na 12ª, faltas e comportamento, termos, RUPE, cabeçalho, avaliação de desempenho); respostas parciais às Q-004 e Q-014; nota sobre quem exerce hoje a homologação (§1). |
+| 0.2 | 2026-11-02 | Respostas das entrevistas da Fase B ([[Sintese das Respostas da Fase B\|DESC-RESP]]): Q-005, Q-007, Q-008, Q-014, Q-020, Q-025, Q-027, Q-030 parciais; Q-010, Q-011, Q-012, Q-021, Q-026, Q-028, Q-029, Q-031, Q-032, Q-034, Q-035 respondidas, a confirmar na validação. |
+| 0.2 | 2026-11-02 | Especificação da C12 e da C13: novas questões Q-037 (SMS antes da E5) e Q-038 (núcleo da C13 na E2/E3). |
+| 0.3 | 2026-11-02 | `DEC-009`: avançar para a construção com regulamento interno, recálculo de pautas e homologação resolvidos durante o projeto, com regras parametrizáveis e pontos de controlo antes da E1, E2 e E3. |

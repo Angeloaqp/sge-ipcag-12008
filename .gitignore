@@ -1,0 +1,14 @@
+# Fotos de documentos da escola (podem ter dados pessoais)
+imagen_de_doc_da_escola/
+
+# Estado local do Obsidian (muda a cada abertura)
+.obsidian/workspace*.json
+.obsidian/cache
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Entrevistas em PDF (podem ter dados pessoais; o repositório é público)
+01 - Projetos/SGE - IPCAG 12008 BGO/Descoberta e Validacao/*.pdf

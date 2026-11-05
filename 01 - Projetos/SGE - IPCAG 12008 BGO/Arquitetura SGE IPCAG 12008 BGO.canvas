@@ -1,0 +1,31 @@
+{
+	"nodes":[
+		{"id":"a1b2c3d4e5f60002","type":"group","x":-1450,"y":-80,"width":2900,"height":640,"color":"5","label":"Pipeline de Engenharia e Especificação Oficial SGE — IPCAG N.º 12008 / BGO (DOC-01 a DOC-05)"},
+		{"id":"a1b2c3d4e5f60003","type":"group","x":-1450,"y":660,"width":1380,"height":480,"color":"2","label":"02 - Áreas Contínuas (Arquitetura DDD & Governação MED)"},
+		{"id":"a1b2c3d4e5f60004","type":"group","x":70,"y":660,"width":1380,"height":480,"color":"6","label":"03 - Recursos Oficiais (Quadro Legal Angolano & Quadros FigJam)"},
+		{"id":"a1b2c3d4e5f60001","type":"group","x":-600,"y":-520,"width":1200,"height":340,"color":"4","label":"Governação, Entrada e Índice Central (MOC)"},
+		{"id":"b1b2c3d4e5f60011","type":"file","file":"01 - Projetos/SGE - IPCAG 12008 BGO/00 - MOC SGE IPCAG 12008 BGO.md","x":40,"y":-460,"width":520,"height":240,"color":"4"},
+		{"id":"c1b2c3d4e5f60021","type":"file","file":"01 - Projetos/SGE - IPCAG 12008 BGO/01 - Dominio e Regras.md","x":-1400,"y":-10,"width":520,"height":520,"color":"1"},
+		{"id":"c1b2c3d4e5f60022","type":"file","file":"01 - Projetos/SGE - IPCAG 12008 BGO/02 - Fluxos de Trabalho.md","x":-820,"y":-10,"width":520,"height":520,"color":"2"},
+		{"id":"c1b2c3d4e5f60023","type":"file","file":"01 - Projetos/SGE - IPCAG 12008 BGO/03 - User Stories.md","x":-240,"y":-10,"width":520,"height":520,"color":"3"},
+		{"id":"d1b2c3d4e5f60031","type":"file","file":"02 - Areas/Arquitetura de Software e DDD.md","x":-1400,"y":720,"width":620,"height":380,"color":"2"},
+		{"id":"d1b2c3d4e5f60032","type":"file","file":"02 - Areas/Governacao Escolar Ensino Tecnico MED.md","x":-730,"y":720,"width":620,"height":380,"color":"2"},
+		{"id":"c1b2c3d4e5f60024","type":"file","file":"01 - Projetos/SGE - IPCAG 12008 BGO/04 - Telas e Documentos.md","x":340,"y":-10,"width":520,"height":520,"color":"5"},
+		{"id":"c1b2c3d4e5f60025","type":"file","file":"01 - Projetos/SGE - IPCAG 12008 BGO/05 - Modelagem de Dados.md","x":920,"y":-10,"width":480,"height":520,"color":"4"},
+		{"id":"d1b2c3d4e5f60033","type":"file","file":"03 - Recursos/Quadro Legal MED AGT e APD Angola.md","x":110,"y":720,"width":620,"height":380,"color":"6"},
+		{"id":"d1b2c3d4e5f60034","type":"file","file":"03 - Recursos/Quadros de Arquitetura no Figma.md","x":780,"y":720,"width":620,"height":380,"color":"6"},
+		{"id":"b1b2c3d4e5f60010","type":"file","file":"Inicio.md","x":-560,"y":-460,"width":500,"height":240,"color":"4"}
+	],
+	"edges":[
+		{"id":"e1b2c3d4e5f60101","fromNode":"b1b2c3d4e5f60010","fromSide":"right","toNode":"b1b2c3d4e5f60011","toSide":"left","color":"4","label":"Índice do Projeto"},
+		{"id":"e1b2c3d4e5f60102","fromNode":"b1b2c3d4e5f60011","fromSide":"bottom","toNode":"c1b2c3d4e5f60021","toSide":"top","color":"1","label":"DOC-01"},
+		{"id":"e1b2c3d4e5f60103","fromNode":"c1b2c3d4e5f60021","fromSide":"right","toNode":"c1b2c3d4e5f60022","toSide":"left","color":"2","label":"RN-01..10 + 12 Cargos RBAC"},
+		{"id":"e1b2c3d4e5f60104","fromNode":"c1b2c3d4e5f60022","fromSide":"right","toNode":"c1b2c3d4e5f60023","toSide":"left","color":"3","label":"8 Fluxos Swimlanes"},
+		{"id":"e1b2c3d4e5f60105","fromNode":"c1b2c3d4e5f60023","fromSide":"right","toNode":"c1b2c3d4e5f60024","toSide":"left","color":"5","label":"7 Épicos & 32 US BDD"},
+		{"id":"e1b2c3d4e5f60106","fromNode":"c1b2c3d4e5f60024","fromSide":"right","toNode":"c1b2c3d4e5f60025","toSide":"left","color":"4","label":"4 Workspaces & 12 Docs"},
+		{"id":"e1b2c3d4e5f60107","fromNode":"d1b2c3d4e5f60031","fromSide":"top","toNode":"c1b2c3d4e5f60021","toSide":"bottom","color":"2","label":"Padrões DDD & Offline-First"},
+		{"id":"e1b2c3d4e5f60108","fromNode":"d1b2c3d4e5f60032","fromSide":"top","toNode":"c1b2c3d4e5f60022","toSide":"bottom","color":"2","label":"Operação Pedagógica MED"},
+		{"id":"e1b2c3d4e5f60109","fromNode":"d1b2c3d4e5f60033","fromSide":"top","toNode":"c1b2c3d4e5f60024","toSide":"bottom","color":"6","label":"Conformidade MED / AGT / APD"},
+		{"id":"e1b2c3d4e5f60110","fromNode":"d1b2c3d4e5f60034","fromSide":"top","toNode":"c1b2c3d4e5f60025","toSide":"bottom","color":"6","label":"Quadros Dedicados + Geral FigJam"}
+	]
+}

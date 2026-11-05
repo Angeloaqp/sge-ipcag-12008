@@ -1,0 +1,65 @@
+filters:
+  and:
+    - file.ext == "md"
+    - file.hasTag("sge")
+    - '!file.inFolder("99 - Arquivo")'
+    - '!file.inFolder(".agents")'
+formulas:
+  tamanho_kb: (file.size / 1024).round(1) + " KB"
+  estado_formatado: if(status == "concluido", "✅ Concluído", if(status == "ativo", "🟢 Ativo", "📝 Rascunho"))
+properties:
+  file.name:
+    displayName: Nota
+  doc_id:
+    displayName: Código
+  title:
+    displayName: Título Oficial
+  status:
+    displayName: Estado
+  formula.estado_formatado:
+    displayName: Status
+  version:
+    displayName: Versão
+  file.folder:
+    displayName: Pasta no Vault
+  formula.tamanho_kb:
+    displayName: Tamanho
+  figma_board:
+    displayName: Quadro FigJam
+  updated:
+    displayName: Atualizado em
+views:
+  - type: table
+    name: Especificação Core (DOC-00 a DOC-05)
+    filters:
+      and:
+        - file.inFolder("01 - Projetos/SGE - IPCAG 12008 BGO")
+    order:
+      - doc_id
+      - file.name
+      - formula.estado_formatado
+      - version
+      - formula.tamanho_kb
+      - figma_board
+      - updated
+  - type: table
+    name: Todas as Notas do Ecossistema SGE
+    groupBy:
+      property: file.folder
+      direction: ASC
+    order:
+      - file.name
+      - title
+      - formula.estado_formatado
+      - file.folder
+      - formula.tamanho_kb
+      - updated
+  - type: cards
+    name: Vista em Cartões por Estado
+    order:
+      - file.name
+      - title
+      - formula.estado_formatado
+      - doc_id
+      - version
+      - formula.tamanho_kb
