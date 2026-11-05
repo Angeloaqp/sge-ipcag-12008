@@ -34,7 +34,7 @@ tags:
 2. **[[02 - Fluxos de Trabalho|DOC-02 — 16 Fluxos de Trabalho Ponta a Ponta (Swimlanes e Exceções)]]**
 3. **[[03 - User Stories|DOC-03 — 15 Épicos e 116 User Stories com Critérios BDD]]**
 4. **[[04 - Telas e Documentos|DOC-04 — Arquitetura da Informação (5 Workspaces) e 26 Documentos Oficiais (MED/AGT/GEPE)]]**
-5. **[[05 - Modelagem de Dados|DOC-05 — 116 Tabelas em 7 Grupos, Offline-First e RLS]]**
+5. **[[05 - Modelagem de Dados|DOC-05 — 119 Tabelas em 7 Grupos, Offline-First e RLS]]**
 6. **[[07 - Catalogo de Requisitos Funcionais|RF-07 — 224 Requisitos Funcionais por Capacidade e Entrega]]**
 
 > [!todo] Fase atual: organizar, verificar e congelar a especificação v2.0

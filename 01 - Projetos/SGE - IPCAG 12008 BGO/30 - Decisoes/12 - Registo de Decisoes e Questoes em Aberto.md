@@ -58,6 +58,7 @@ tags:
 | [[#DEC-007 — Data de arranque\|DEC-007]] | D7 | Data de arranque | (a) Início do Ano Letivo 2027/2028, com ponto de controlo na Fase E | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
 | [[#DEC-008 — Fora do âmbito\|DEC-008]] | D8 | Fora do âmbito | (a) Lista recomendada | `decidida` | 2026-11-02 | Analista responsável do projeto | pendente |
 | [[#DEC-009 — Avançar com pendências de validação\|DEC-009]] | Equipa | Pendências de validação | Avançar para a construção; regulamento interno, recálculo de pautas e homologação resolvidos durante o projeto, com regras parametrizáveis e pontos de controlo | `decidida` | 2026-11-02 | Equipa do projeto | pendente |
+| [[#DEC-010 — Integrar os ajustes da migração no modelo de dados\|DEC-010]] | VER-01 (#6) | Ajustes da migração (MIG-10 `AJ-nn`) | Aceitar todos; BI opcional com pendência; conta técnica própria; consola `MOD-MIG-01` na E1 | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -314,6 +315,34 @@ flowchart LR
 > 4. Qualquer divergência encontrada muda **parâmetros**, não a arquitetura; se exigir mudar a arquitetura, entra por pedido de alteração neste registo.
 
 **Impacto.** A *Definition of Ready* do PLN-00 §8 passa a aceitar regras `provisórias` desde que parametrizáveis e ligadas a um ponto de controlo. Os itens `Q-025`, `Q-030`, `Q-032`, `Q-C13-02` a `Q-C13-06` e a homologação passam a ser acompanhados como **riscos de projeto**, não como bloqueios da definição.
+
+---
+
+### DEC-010 — Integrar os ajustes da migração no modelo de dados
+
+- **Origem:** verificação de consistência [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]], grupo G6 ([issue #6](https://github.com/Angeloaqp/sge-ipcag-12008/issues/6)) · **Estado:** `decidida` · **Data:** 2026-11-05 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A [[10 - Migracao de Dados e Implantacao|MIG-10]] §3.3 propôs 18 ajustes (`AJ-01` a `AJ-18`) ao DOC-05 para receber os dados antigos da escola. Só 3 estavam integrados. O DOC-05 exigia BI único e obrigatório, o que impedia importar alunos e encarregados antigos sem BI. O `RF-C17-16` apontava para o `ADMIN_TEC`, e não havia ecrã para a migração.
+
+**Opções.**
+- (a) Aceitar todos os ajustes.
+- (b) Aceitar só o essencial (proveniência, lotes e ocorrências).
+- (c) Rejeitar e arrancar sem dados antigos.
+
+**Decisão.**
+1. **(a) Aceitar todos os ajustes.** Entram 3 tabelas novas no Grupo 6 do DOC-05 (`lotes_migracao`, `ocorrencias_migracao`, `livros_registo_fisico`), e o modelo passa de 116 para 119 tabelas. As regras dos registos `MIGRADO` ficam na §4.10 do DOC-05.
+2. **BI opcional com pendência de identificação.** Continua único quando preenchido.
+3. **Conta técnica de migração própria**, diferente do `ADMIN_TEC` (`RN-16.21`).
+4. **Consola de migração `MOD-MIG-01`** no DOC-04, na entrega E1.
+
+**Porquê.** Sem o histórico da 10ª à 12ª dos alunos atuais, a E4 não consegue emitir certificados (PLN-00 §6). As exceções só valem para registos `MIGRADO` em lote aprovado, por isso as regras normais do SGE não ficam mais fracas.
+
+**Impacto.**
+- **DOC-05:** Grupo 6, §4.9, §4.10, §6 e a lista 105.
+- **DOC-01:** `RN-16.21`.
+- **DOC-04:** `MOD-MIG-01`.
+- **RF-07:** os 16 `RF-C17` passam a ter módulo.
+- **Matriz:** a `L-RF-01` fica só sem US, que passa para a Fase 3.
 
 ---
 

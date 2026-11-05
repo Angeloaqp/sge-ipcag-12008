@@ -55,7 +55,7 @@ flowchart LR
         D1["DOC-01 Domínio<br>RN-01..RN-18, RBAC"] --> D2["DOC-02 Fluxos<br>16 fluxos"]
         D2 --> D3["DOC-03 User Stories<br>15 épicos, 116 US"]
         D3 --> D4["DOC-04 Telas e Documentos<br>26 DOF"]
-        D4 --> D5["DOC-05 Dados<br>116 tabelas, 7 grupos"]
+        D4 --> D5["DOC-05 Dados<br>119 tabelas, 7 grupos"]
         RF["07 Requisitos Funcionais<br>224 RF"]
     end
     ESP --> QO["20 - Qualidade e Operacao<br>06, 08, 09, 10, 11"]
@@ -89,7 +89,7 @@ flowchart LR
 | `DOC-02` | [[02 - Fluxos de Trabalho]] | 16 fluxos ponta a ponta com exceções | [DOC-02](https://www.figma.com/board/klMnPKkxorDv9NEfvvpSRq) | `2.0-rc1` |
 | `DOC-03` | [[03 - User Stories]] | 15 épicos e 116 user stories com critérios BDD, distribuídas por E1–E5 | [DOC-03](https://www.figma.com/board/PZgRkbRHrNR6UfehirGDPd) | `2.0-rc1` |
 | `DOC-04` | [[04 - Telas e Documentos]] | 5 workspaces, alertas, portal QR, portal do encarregado; 26 documentos oficiais `DOF-01`–`DOF-26` | [DOC-04](https://www.figma.com/board/ceE1mzcDmB2bT9RUAZxOcN) | `2.0-rc1` |
-| `DOC-05` | [[05 - Modelagem de Dados]] | 116 tabelas em 7 grupos, sincronização *offline-first*, integridade, RLS | [DOC-05](https://www.figma.com/board/lGrzPwEBaxgExyewDXnEAt) | `2.0-rc1` |
+| `DOC-05` | [[05 - Modelagem de Dados]] | 119 tabelas em 7 grupos, sincronização *offline-first*, integridade, RLS | [DOC-05](https://www.figma.com/board/lGrzPwEBaxgExyewDXnEAt) | `2.0-rc1` |
 | `RF-07` | [[07 - Catalogo de Requisitos Funcionais]] | 224 requisitos `RF-Cxx-nn` por capacidade, prioridade e entrega | — | `2.0-rc1` |
 
 ### 2.3 `20 - Qualidade e Operacao` — Como e onde tem de funcionar
@@ -106,7 +106,7 @@ flowchart LR
 
 | Código | Nota | Conteúdo |
 | :---: | :--- | :--- |
-| `REG-12` | [[12 - Registo de Decisoes e Questoes em Aberto]] | Decisões `DEC-001`–`DEC-009` e questões `Q-001`–`Q-039`. Na Fase 3 da ORG-00 recebe também as questões que ainda estão nas notas de capacidades e as lacunas da Matriz |
+| `REG-12` | [[12 - Registo de Decisoes e Questoes em Aberto]] | Decisões `DEC-001`–`DEC-010` e questões `Q-001`–`Q-039`. Na Fase 3 da ORG-00 recebe também as questões que ainda estão nas notas de capacidades e as lacunas da Matriz |
 
 ### 2.5 `40 - Descoberta e Validacao` — Prova vinda da escola
 
@@ -160,7 +160,7 @@ As notas [[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribu
 
 > [!todo] Do estado atual à construção
 > - [x] **Fase 1 — Arrumar:** pastas por função, capacidades arquivadas, ficheiros vazios removidos, índices atualizados (2026-11-05).
-> - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; as 4 que pedem decisão (#5, #6, #7, #9) estão abertas.
+> - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; a #6 (migração) foi decidida na `DEC-010`; #5, #7 e #9 continuam à espera de decisão.
 > - [ ] **Fase 3 — Fechar o que está em aberto:** todas as questões e lacunas num mapa no GitHub; questionários para a escola; decisões da equipa.
 > - [ ] **Fase 4 — Congelar a v2.0:** versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
 > - [ ] **Fase 5 — Ponte para o código:** `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.

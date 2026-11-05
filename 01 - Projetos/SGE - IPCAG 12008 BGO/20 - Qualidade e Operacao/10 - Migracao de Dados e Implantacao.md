@@ -300,6 +300,9 @@ O `N.º de Processo Individual` é **vitalício** e **nunca muda** (`RN-05`). Co
 > Uma matrícula exige uma turma. Quando a fonte só indica curso e classe (ex.: um devedor antigo), propõe-se uma **turma histórica agregadora** por `ano + curso + classe` (ex.: `HIST-IG11-2023`), marcada `MIGRADO` e usada só para histórico e dívidas. A sua criação exige aprovação do `CHEFE_SEC_PED`.
 
 ### 3.3 Ajustes propostos ao DOC-05
+> [!success] Decidido em 2026-11-05 — [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]]
+> Todos os ajustes foram aceites e estão integrados no [[05 - Modelagem de Dados|DOC-05]]: 3 tabelas novas no Grupo 6 (119 no total) e a §4.10 (registos migrados). Os BI ficam opcionais com pendência, a conta técnica é própria (`RN-16.21`) e a consola é o `MOD-MIG-01` (DOC-04, E1). A tabela abaixo fica como histórico.
+
 O DOC-05 v1.2 não prevê dados migrados. Os ajustes seguintes são **propostas** para a próxima versão do DOC-05 (esta nota não altera o DOC-05):
 
 | # | Ajuste | Tabelas | Porquê |

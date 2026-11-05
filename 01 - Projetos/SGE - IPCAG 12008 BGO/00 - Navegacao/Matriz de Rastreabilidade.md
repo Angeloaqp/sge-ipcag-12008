@@ -376,7 +376,7 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 
 | # | Lacuna | Onde se fecha | Bloqueia |
 | :---: | :--- | :--- | :--- |
-| L-RF-01 | Migração (C17) sem US nem módulo | DOC-03 (épico novo) e DOC-04 | E1 (*Definition of Ready*) |
+| L-RF-01 | Migração (C17) sem US *(o módulo `MOD-MIG-01` foi criado em 2026-11-05 — `DEC-010`)* | DOC-03 (épico novo) e DOC-04 | E1 (*Definition of Ready*) |
 | L-RF-02 | Operação (C18) sem US | DOC-03 ou aceitação por RNF-08 | E1/E2 |
 | L-RF-03 | Funções próprias da APD (9 RF) sem US | DOC-03 (`EP-APD`) | E1/E2 |
 | L-RF-04 | Parâmetros institucionais sem US *(a tabela já existe: `parametros_instituicao` — fechado em 2026-11-05)* | DOC-03 (`US-GOV-01`) | E1 |

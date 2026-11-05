@@ -125,6 +125,7 @@ flowchart TD
     WS5 --> S2["MOD-SEG-02 Autenticacao, MFA e Primeiro Acesso (C14)"]
     WS5 --> S3["MOD-SEG-03 Dispositivos e PIN Local (C14)"]
     WS5 --> S4["MOD-SEG-04 A Minha Conta (C14)"]
+    WS5 --> S5["MOD-MIG-01 Consola de Migracao (C17)"]
 ```
 
 ### Índice de módulos (v2.0)
@@ -135,7 +136,7 @@ flowchart TD
 | **02 — Secretaria Pedagógica** | `MOD-PED-ADM`, `MOD-PED-MAT`, `MOD-PED-HIST`, `MOD-PED-DEF`, `MOD-PED-DOC` | `MOD-PIN-01` a `MOD-PIN-05` (C03), `MOD-PAS-02`, `MOD-PAS-05` (C16), `MOD-COM-03` (C12) |
 | **03 — Docência** | `MOD-DOC-DOS`, `MOD-DOC-FAL`, `MOD-DOC-PAU`, `MOD-DOC-CON`, `MOD-DOC-13C` | `MOD-DOC-PNL` (C15), `MOD-HOR-04`, `MOD-HOR-05` (C04; `MOD-HOR-06` também aqui), `MOD-COM-02` (C12), `MOD-DIS-01` a `MOD-DIS-03` (C13) |
 | **04 — Tesouraria e RH** | `MOD-TES-TAB`, `MOD-TES-CXA`, `MOD-TES-EST`, `MOD-GER-RH` | `MOD-TES-COB`, `MOD-TES-REL`, `MOD-TES-CON` (C10), `MOD-PAS-04` (C16); `MOD-HOR-02` partilhado (dados de RH) |
-| **05 — Segurança** *(novo)* | — | `MOD-SEG-01` a `MOD-SEG-04` (C14) |
+| **05 — Segurança** *(novo)* | — | `MOD-SEG-01` a `MOD-SEG-04` (C14), `MOD-MIG-01` (C17 — `DEC-010`) |
 | **Transversal** | — | `MOD-ALR` (C15) |
 | **Portal público** | `MOD-PUB-QR` | — |
 | **Área externa (E5)** *(nova)* | — | `MOD-COM-04` Portal do Encarregado e do Aluno (C12, contas da C14 §11) |
@@ -847,6 +848,32 @@ flowchart TD
 
 ---
 
+### `MOD-MIG-01`: Consola de Migração de Dados (RF-C17-01 a RF-C17-16) — C17
+> Decidido na [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]] (2026-11-05). Fonte: [[10 - Migracao de Dados e Implantacao|MIG-10]]. Entrega **E1**; depois da E4 fica só o modo a pedido.
+- **Perfis:**
+  - **Carregar e validar:** conta técnica de migração (`RN-16.21`).
+  - **Digitar:** equipa de digitação, com `OP_PED`/`OP_TES`.
+  - **Conferir:** `CHEFE_SEC_PED` (dados pedagógicos) e `CHEFE_SEC_GER` (dados financeiros).
+  - **Aprovar o lote:** `SUB_PED` (pedagógicos) e `SUB_ADM` (financeiros e ajustes de saldo), com reautenticação.
+  - **Termo de Aceitação:** `DIR_GERAL`.
+- **Funções:**
+  1. Carregar ficheiros modelo (`MIG-Fnn`) para a **área de preparação**, separada da produção; anexar a imagem da fonte (RF-C17-01, -02, -06).
+  2. Validar com as regras do SGE e as regras de qualidade da MIG-10 §5; relatório de ocorrências por linha (`ocorrencias_migracao`) com decisão (RF-C17-03).
+  3. **Digitação assistida** igual ao papel, com **dupla digitação cega** e resolução das divergências por um terceiro (RF-C17-04, -05).
+  4. Recarga idempotente e carga delta; deteção e fusão controlada de duplicados (RF-C17-07, -08).
+  5. Recálculo de médias, deliberações e `MFC`, com sinalização das divergências face aos valores oficiais (RF-C17-09).
+  6. Relatórios de reconciliação: contagens, totais de controlo, dívida, créditos e bolsas (RF-C17-10).
+  7. Aprovação do lote: os registos passam a produção com `origem_registo = MIGRADO` (RF-C17-11; DOC-05 §4.10).
+  8. Ajuste de saldo migrado com despacho do `SUB_ADM` (RF-C17-13).
+  9. Conferência do histórico antes da primeira certificação (RF-C17-14).
+  10. Lote individual a pedido de um antigo aluno (RF-C17-15).
+  11. Fecho da consola e desativação da conta técnica (RF-C17-16).
+- **Saídas:**
+  - relatório de ocorrências;
+  - relatórios de reconciliação;
+  - **Termo de Aceitação** por lote ou por conjunto (documento interno, sem `DOF`);
+  - documentos de ensaio com a marca de água "ENSAIO — SEM VALIDADE" (RF-C17-12).
+
 ## 6. Componente Transversal — `MOD-ALR`: Caixa de Alertas de Gestão (`US-PNL-08`, `US-PNL-10`) — C15
 - **Perfis:** todos os internos (só os alertas do seu cargo e escopo).
 - **Funções:** ver, abrir, registar tratamento com nota, filtrar por tipo e gravidade; ligação direta ao ecrã onde se resolve (Mini-Pauta, conflito de sincronização, caixa, conta, pedido pendente).
@@ -1443,6 +1470,11 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 ---
 
 ## Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]] — migração (2026-11-05)
+
+- Novo módulo `MOD-MIG-01` Consola de Migração de Dados (Workspace 05), que liga os 16 RF da C17.
+
 
 ### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
 

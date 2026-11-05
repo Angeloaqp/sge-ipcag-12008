@@ -2118,6 +2118,14 @@ Decisão de controlo interno (§2), **proposta a confirmar** (`Q-C14-05`). Uma c
 
 ---
 
+#### RN-16.21 — Conta técnica de migração (MIG-10 `AJ-14`; `DEC-010`)
+1. As cargas de dados antigos são feitas por uma **conta técnica própria** (`tipo_conta = TECNICA_MIGRACAO`), fora dos 12 papéis e **diferente do `ADMIN_TEC`**, que continua sem acesso a notas e a dados financeiros (`RN-16.17`).
+2. A conta só carrega e valida lotes na área de preparação (`MOD-MIG-01`); **não aprova** lotes. A aprovação é do `SUB_PED` (dados pedagógicos) ou do `SUB_ADM` (dados financeiros), com reautenticação, e o Termo de Aceitação é do `DIR_GERAL`.
+3. A conta é **nominal ao técnico** responsável, com MFA, e todas as cargas ficam em `audit_logs` (categoria `MIGRACAO`).
+4. É **desativada** depois do último Termo de Aceitação (RF-C17-16); a migração a pedido de um antigo aluno passa a ser feita pelo `OP_PED` num lote individual (RF-C17-15).
+
+---
+
 ### RN-17: Painéis, Indicadores e Alertas de Gestão (C15)
 
 > 🟡 **Provisória** — parâmetro configurável; validar em E1 (`DEC-009`); os indicadores de notas e a projeção de risco (`RN-17.9`) dependem também do ponto E2. Fonte: [[C15 - Paineis de Gestao da Direcao]] (`RN-P-C15-01` a `14` → `RN-17.1` a `RN-17.14`). Questões: `Q-C15-01` a `Q-C15-12`. A C15 não tem tabelas próprias além do catálogo, instantâneos e alertas; os painéis são vistas.
@@ -2327,6 +2335,11 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]] — migração (2026-11-05)
+
+- Nova `RN-16.21` (conta técnica de migração, diferente do `ADMIN_TEC`).
+
 
 ### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
 
