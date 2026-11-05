@@ -418,25 +418,25 @@ O SGE do IPCAG N.º 12008 / BGO implementa **Controlo de Acesso Baseado em Papé
 
 | Módulo / Recurso / Ação do Sistema | `DIR_GERAL` | `SUB_PED` | `SUB_ADM` | `CHEFE_SEC_PED` | `OP_PED` | `CHEFE_SEC_GER` | `OP_TES` | `COORD_CURSO` | `COORD_DISC` | `COORD_TURNO` | `DIR_TURMA` | `PROF` | `ADMIN_TEC` |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **1. Configuração de Ano Letivo e Calendário de Trimestres** | `R, H` | `C, R, U, H` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `—` |
+| **1. Configuração de Ano Letivo e Calendário de Trimestres** | `R, H` | `C, R, U, H` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` *(parâmetros, sem dados de alunos)* |
 | **2. Áreas de Formação, Cursos, Classes e Matrizes Curriculares** | `R, H` | `C, R, U, H` | `R` | `R, P` | `R` | `R` | `—` | `R*, U*` | `R*` | `R` | `R*` | `R*` | `—` |
-| **3. Turmas, Turnos, Salas e Atribuição Docente** *(desdobrada em H1–H8)* | `R, H` | `C, R, U, H` | `R` | `C, R, U, P` | `R, P` | `R` | `—` | `R*, U*` | `R*` | `R*, U*` | `R*` | `R*` | `—` |
+| **3. Turmas, Turnos, Salas e Atribuição Docente** *(desdobrada em H1–H8)* | `R, H` | `C, R, U, H` | `R` | `C, R, U, P` | `R, P` | `R` | `R` *(dados básicos: nome, classe, turma)* | `R*, U*` | `R*` | `R*, U*` | `R*` | `R*` | `—` |
 | **4. Teste de Seleção à 10ª Classe (Candidatos e Anonimato)** | `R, H, P` | `R, U, H, P` | `R` | `C, R, U, H, P` | `C, R, U, P` | `R` | `R` *(Taxa)* | `R*` | `R*` | `R*` | `—` | `—` | `—` |
 | **5. Matrícula, Confirmação e Processo Individual do Aluno** *(desdobrada em D1–D10)* | `R, P` | `R, H, P` | `R` | `C, R, U, H, A, P` | `C, R, U, P` | `R` | `R` *(Básico)* | `R*` | `—` | `R*` | `R*` | `R*` *(Chamada)* | `—` |
 | **6. Congelamento da Lista de Chamada (`N.º de Ordem`)** | `R, H` | `R, H` | `—` | `R, H, P` | `R, P` | `—` | `—` | `R*` | `—` | `R*` | `R*, P` | `R*, P` | `—` |
-| **7. Transcrição de Histórico Externo (Guia de Transferência)** | `R, H` | `R, H` | `—` | `C, R, U, H, P` | `C, R` | `—` | `—` | `R*` | `—` | `—` | `R*` | `—` | `—` |
+| **7. Transcrição de Histórico Externo (Guia de Transferência)** | `R, H` | `R, H` | `—` | `C, R, U, P` | `C, R` | `—` | `—` | `R*` | `—` | `—` | `R*` | `—` | `—` |
 | **8. Dispensas Médicas (`DISP` - ex.: Educação Física)** | `R, H` | `R, H` | `—` | `C, R, U, P` | `C, R` | `—` | `—` | `R*` | `R*` | `R*` | `R*` | `R*` | `—` |
 | **9. Dosificação e Provas Unificadas (`PT`, `PG`, variantes A/B e 2.ª chamada)** | `R` | `R, H` | `—` | `R` | `—` | `—` | `—` | `R*` | `C, R*, U*, H` | `—` | `R*` | `R*` | `—` |
 | **10. Mini-Pauta: Lançamento de Notas (`MTP`, `PP`, `PT`, `PG`)** | `R, P` | `R, H, P` | `—` | `R, P` | `R, P` | `—` | `—` | `R*` | `R*` | `—` | `R*` | `C*, R*, U*, P*` | `—` |
 | **11. Registo de Faltas de Alunos por Tempo Letivo** *(ver H5)* | `R` | `R` | `—` | `R` | `R` | `—` | `—` | `R*` | `—` | `R*, U*` | `R*` | `C*, R*, U*` | `—` |
-| **12. Justificação de Faltas de Alunos (formulário numerado)** | `R` | `R, H` | `—` | `R, U` | `R` | `—` | `—` | `R*` | `—` | `R*` | `C*, R*, U*, H*` | `R*` | `—` |
-| **13. Pauta Geral e Fecho de Conselho de Notas** | `R, H, P` | `R, H, P` | `—` | `R, U, P` | `R, P` | `—` | `—` | `R*, P*` | `R*` | `R*` | `R*, U*, H*, P*` | `R*` | `—` |
+| **12. Justificação de Faltas de Alunos (formulário numerado)** | `R` | `R, H` | `—` | `C, R, U` *(regista pedidos ao balcão)* | `C, R` *(regista pedidos ao balcão)* | `—` | `—` | `R*` | `—` | `R*` | `C*, R*, U*, H*` | `R*` | `—` |
+| **13. Pauta Geral e Fecho de Conselho de Notas** | `R, H, P` | `R, H, P` | `—` | `R, P` | `R, P` | `—` | `—` | `R*, P*` | `R*` | `R*` | `R*, U*, H*, P*` | `R*` | `—` |
 | **14. Reabertura Excecional de Pauta Pós-Fechamento (`Audit`)** | `H` | `H` | `—` | `R` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **15. Cadeiras em Atraso (Deficiências) e Exame Extraordinário** | `R, H, P` | `R, H, P` | `—` | `C, R, U, H, P` | `C, R, P` | `—` | `R` *(Taxa)* | `R*` | `R*` | `—` | `R*` | `C*, R*` *(Júri)* | `—` |
 | **16. 13ª Classe: Projecto Tecnológico, Estágio e Defesa da PAP** | `R, H, P` | `R, H, P` | `—` | `C, R, U, H, P` | `C, R, U, P` | `—` | `R` *(Taxa)* | `C*, R*, U*, H*, P*` | `—` | `—` | `—` | `R*, U*` *(Orient./Júri)* | `—` |
 | **17. Declarações, Boletins, Certificados e Dados do Diploma (exportação para o MED)** | `R, H, P` | `R, H, P` | `—` | `C, R, U, H, A, P` | `C, R, P` | `—` | `—` | `R*` | `—` | `—` | `R*` *(Boletim)* | `—` | `—` |
-| **18. Tabelas de Propinas, Emolumentos e Multas (`AOA`)** | `R, H` | `R` | `C, R, U, H` | `R` | `R` | `R` | `R` | `—` | `—` | `—` | `—` | `—` | `—` |
-| **19. Bolsas de Estudo, Isenções Diocesanas e Descontos** | `C, R, U, H, A` | `R` | `C, R, U, H` | `R` | `R` | `R` | `R` | `—` | `—` | `—` | `—` | `—` | `—` |
+| **18. Tabelas de Propinas, Emolumentos e Multas (`AOA`)** | `R, H` | `R` | `C, R, U, H` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `—` |
+| **19. Bolsas de Estudo, Isenções Diocesanas e Descontos** | `C, R, U, H, A` | `—` *(só semáforo)* | `C, R, U, H` | `—` *(só semáforo)* | `—` *(só semáforo)* | `R` | `R` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **20. Registo e Validação de Borderô/Talão Bancário (Saldo)** | `R` | `—` | `R, H, A` | `—` | `—` | `R, U` | `C, R, U` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **21. Liquidação de Propinas/Emolumentos e Documento Fiscal de Quitação** | `R, P` | `—` | `R, P` | `R` *(Status)* | `R` *(Status)* | `R, P` | `C, R, P` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **22. Nota de Crédito (anulação / retificação — DP n.º 71/25)** | `R, H, A` | `—` | `C, R, H, A, P` | `—` | `—` | `R, P` | `R, P` *(Solicita)* | `—` | `—` | `—` | `—` | `—` | `—` |
@@ -444,6 +444,7 @@ O SGE do IPCAG N.º 12008 / BGO implementa **Controlo de Acesso Baseado em Papé
 | **24. Cadastro de Funcionários/Docentes e Controlo de Ponto** | `R, H` | `R` *(Docentes)* | `C, R, U, H, P` | `R` *(Docentes)* | `—` | `C, R, U, P` | `—` | `R*` | `R*` | `R*, U*` *(Ponto)* | `—` | `R*` *(Próprio)* | `—` |
 | **25. Mapas Estatísticos Oficiais (GEPE / Gabinete Provincial)** | `R, H, P` | `R, H, P` | `R, P` | `C, R, P` | `R` | `R, P` | `—` | `R*` | `—` | `—` | `—` | `—` | `—` |
 | **26. Logs de Auditoria (`audit_logs` - APD Lei n.º 22/11)** | `R, P` *(incl. `SEGURANCA_CONTAS`)* | `R` *(Pedag.)* | `R` *(Financ. e `SEGURANCA_CONTAS`)* | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `R*` *(só `SEGURANCA_CONTAS`)* |
+| **27. Sincronização *Offline* (`operacoes_sincronizacao`, `conflitos_sincronizacao`)** *(`DEC-012`)* | `R, U` *(resolve ou descarta)* | `R, U` *(resolve ou descarta)* | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `R*` *(conflitos da turma)* | `C*, R*` *(próprias)* | `R` *(só metadados, sem conteúdo)* |
 
 ---
 
@@ -550,7 +551,7 @@ Legenda igual à do §2.2. Onde a nota de origem não tinha uma coluna, a célul
 | **C15-d. Indicadores financeiros (`IND-18` a `24`)** | `R, P` | `—` | `R, P` | `—` | `—` | `R, P` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **C15-e. Higiene de contas (`IND-25`)** | `R` | `—` | `R` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` | `—` |
 | **C15-f. Catálogo de indicadores e limiares** | `H` | `C, U` *(pedagógicos)* | `C, U` *(financeiros)* | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `R` | `—` |
-| **C15-g. Alertas de gestão** | `R, U` *(todos)* | `R, U` *(pedagógicos)* | `R, U` *(financeiros)* | `R*, U*` | `—` | `R*, U*` | `—` | `R*` | `—` | `R*, U*` | `R*, U*` | `—` | `—` |
+| **C15-g. Alertas de gestão** | `R, U` *(todos)* | `R, U` *(pedagógicos)* | `R, U` *(financeiros)* | `R*, U*` | `—` | `R*, U*` | `—` | `R*` | `—` | `R*, U*` | `R*, U*` | `—` | `R*` *(só alertas técnicos)* |
 | **C15-h. Cumprimento de aulas (`IND-27`, com o C04)** | `R, P` | `R, P` | `R` *(por professor)* | `—` | `—` | `—` | `—` | `R*` | `R*` | `R*` | `R*` | `—` | `—` |
 | **C15-i. Estatísticas impressas da Mini-Pauta e da Pauta Geral (`IND-28`, `29`)** | `R, P` | `R, P` | `—` *(só via `IND-15`)* | `R, P` | `R, P` | `—` | `—` | `R*, P*` | `R*` *(sua disciplina)* | `—` | `R*, P*` | `R*, P*` *(sua Mini-Pauta)* | `—` |
 
@@ -730,7 +731,7 @@ stateDiagram-v2
 
 | Estado Origem | Evento / Gatilho | Estado Destino | Quem Dispara (RBAC) | Condições de Guarda (Bloqueios Obrigatórios) |
 | :--- | :--- | :--- | :--- | :--- |
-| `Em Curso` | `homologarAtestadoMedico` | `Dispensado (DISP)` | `SUB_PED` (sob registo de `CHEFE_SEC_PED`) | Disciplinas elegíveis (ex.: Educação Física) com atestado válido (compartimento de saúde da APD-11). Impede reprovação e retira a disciplina do divisor. |
+| `Em Curso` | `homologarAtestadoMedico` | `Dispensado (DISP)` | `SUB_PED` (atestado carregado pelo `OP_PED` e conferido pelo `CHEFE_SEC_PED` — matriz D4a) | Disciplinas elegíveis (ex.: Educação Física) com atestado válido (compartimento de saúde da APD-11). Impede reprovação e retira a disciplina do divisor. |
 | `Em Curso` | `ultrapassarLimiteFaltas` | `Retido por Faltas` | Sistema (ao gravar faltas) + `DIR_TURMA` | `Total_Faltas_Injustificadas > Limite_Faltas` da disciplina (`RN-03`). Bloqueia a `CA` e o acesso a recurso; gera perda do direito à confirmação (`RN-03.6`). |
 | `Em Curso` | `fecharAno` | `Aprovado (CA ≥ 10)`, `Em Recurso` ou `Reprovado` | Sistema (Conselho de Notas final) | `CF = round_med((M1 + M2 + M3) / 3)`; `CA = round_med(CF × 0,6 + PG × 0,4)`. `CA ≥ 10` → aprovado; `CA < 10` e `CF ≥ 7` → `Em Recurso` (julho); `CA < 10` e `CF < 7` → reprovado (`RN-01`). |
 | `Em Recurso` | `lancarNotaRecurso` | `Aprovado Pós-Recurso` ou `Reprovado` | `CHEFE_SEC_PED` + `SUB_PED` | 🟡 Fórmula da nota depois do recurso por confirmar (`Q-025`); até lá é parâmetro obrigatório da Matriz do ano. |
@@ -2335,6 +2336,21 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
+
+- Matriz §2.2/§2.3:
+  - linha 1 (`ADMIN_TEC` lê parâmetros sem dados de alunos);
+  - linha 3 (`OP_TES` lê dados básicos de turma);
+  - linha 7 (`CHEFE_SEC_PED` deixa de homologar transcrições);
+  - linha 12 (a Secretaria regista pedidos de justificação);
+  - linha 13 (`CHEFE_SEC_PED` sem `U` na Pauta Geral);
+  - linha 18 (preços legíveis por todos os cargos internos);
+  - linha 19 (bolsas só para a Tesouraria, `SUB_ADM` e `DIR_GERAL`);
+  - C15-g (`ADMIN_TEC` lê alertas técnicos);
+  - nova linha 27 (sincronização).
+- §3.4: o atestado é carregado pelo `OP_PED`.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-011 — Pagamentos por RUPE no fecho de caixa|DEC-011]] — RUPE (2026-11-05)
 

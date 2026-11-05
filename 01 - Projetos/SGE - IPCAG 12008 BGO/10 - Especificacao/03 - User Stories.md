@@ -83,7 +83,7 @@ tags:
 - **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)**, *quero* **criar o Ano Letivo e parametrizar as janelas temporais do I, II e III Trimestres, da Prova Global e das épocas de Exame de Recurso e Exame Extraordinário**, *para* **garantir que todas as operações de matrícula e avaliação respeitam o calendário escolar fixado pelo decreto executivo anual do MED (2025/2026: DE n.º 686/25 — `COR-LEG-07`)**.
 - **Rastreabilidade:** `RN-01`, `RN-05`, `RN-10`, `RN-18.1` | `Fluxo 01` e `Fluxo 04` | `US-PAS-01`, `US-PAS-05`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
-- **Pré-condições:** Utilizador autenticado com perfil `SUB_PED` ou `DIR_GERAL`; inexistência de outro Ano Letivo com o mesmo código (ex.: `2026/2027`).
+- **Pré-condições:** Utilizador autenticado com perfil `SUB_PED` (cria) — a homologação é do `DIR_GERAL`; inexistência de outro Ano Letivo com o mesmo código (ex.: `2026/2027`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Criação e Homologação do Ano Letivo com o calendário real):**
     - **Dado** que o `SUB_PED` preenche o código `2026/2027`, data de início `01/09/2026`, data de fim `31/07/2027` e os intervalos sem sobreposição do I Trimestre (setembro a dezembro), do II Trimestre (janeiro a março/abril), do III Trimestre com a Prova Global (maio–junho), dos Exames Extraordinários (maio) e dos Exames de Recurso (julho) — calendário descrito pela escola ([[Sintese das Respostas da Fase B|DESC-RESP]] §3),
@@ -434,7 +434,7 @@ tags:
 - **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)**, *quero* **homologar o estado `Dispensado (DISP)` por junta/atestado médico em disciplinas elegíveis (como Educação Física)**, *para* **que o aluno fique isento de avaliação prática sem sofrer reprovação nem redução da sua média geral (`RN-01`)**.
 - **Rastreabilidade:** `RN-01`, `RN-06` | `Fluxo 03`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
-- **Pré-condições:** Disciplina marcada na Matriz Curricular com `permite_dispensa_medica = TRUE`; Atestado Médico anexado pelo `CHEFE_SEC_PED`.
+- **Pré-condições:** Disciplina marcada na Matriz Curricular com `permite_dispensa_medica = TRUE`; Atestado Médico carregado pelo `OP_PED` e conferido pelo `CHEFE_SEC_PED` (matriz D4a).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Homologação de `DISP` e Recálculo do Denominador):**
     - **Dado** que um aluno da 10ª classe possui `10` disciplinas na matriz curricular e apresenta Atestado Médico válido para *Educação Física*,
@@ -532,7 +532,7 @@ tags:
     - **Então** o sistema bloqueia e lista as células e os conflitos pendentes.
   - **Cenário 8 (Sucesso — Comportamento e Estatísticas na Pauta Geral):**
     - **Dado** as propostas de comportamento do `DIR_TURMA` (`US-DIS-04`),
-    - **Quando** o conselho as confirma e o `SUB_PED` homologa a Pauta Geral,
+    - **Quando** o conselho as confirma e o `SUB_PED` e o `DIR_GERAL` homologam a Pauta Geral,
     - **Então** o comportamento fica fechado e a Pauta Geral (`DOF-05`) imprime as estatísticas reais — positivas e negativas por disciplina, transitam, transitam com deficiência, desistentes e não transitam, por género (`US-PNL-12`).
 - **Pós-condições e Efeitos Colaterais:** Pauta Geral trancada em `Fechado / Homologado`; deliberações anuais gravadas; no I Trimestre dispara `lista_chamada_congelada = TRUE`; no III Trimestre alimenta `cadeiras_em_atraso`, as propostas de passagem (`US-PAS-02`) e os mapas do GEPE.
 
@@ -2778,6 +2778,13 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 ---
 
 ## Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
+
+- `US-GOV-01`: o `SUB_PED` cria e o `DIR_GERAL` homologa.
+- `US-PED-03`: o atestado é carregado pelo `OP_PED`.
+- `US-PED-06`: o `SUB_PED` e o `DIR_GERAL` homologam a Pauta Geral.
+
 
 ### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
 

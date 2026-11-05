@@ -355,7 +355,7 @@ flowchart TD
     end
 
     subgraph RaiaSubPed ["Raia 3: Subdirecao Pedagogica e Secretaria (SUB_PED / CHEFE_SEC_PED)"]
-        SP1["CHEFE_SEC_PED: Regista o atestado; SUB_PED homologa a dispensa (DISP)"]
+        SP1["OP_PED: Carrega o atestado; CHEFE_SEC_PED confere; SUB_PED homologa a dispensa (DISP)"]
         SP2["Sistema: DISP isenta de notas e ajusta o denominador"]
         SUB1(["Evento: Substituicao prolongada do professor"]) --> SUB2["SUB_PED: Encerra a alocacao do Professor A e cria a do Professor B"]
         SUB2 --> SUBV{"Professor B fica com choques no horario publicado?"}
@@ -384,7 +384,7 @@ flowchart TD
 3. **Limite de Faltas e Alerta Precoce (`RN-03`, `RN-17.8`):** $\text{Limite\_Faltas}_d = F_{\text{mult}} \times T_{\text{sem}}$. Aos **80%** do limite, o sistema cria o alerta `FALTAS_80` para o `DIR_TURMA`, o `COORD_TURNO` e o `SUB_PED` e gera o aviso ao encarregado (gatilhos `FALTAS_50` e `FALTAS_80` — Fluxo 13); acima do limite, a situação passa a **`Retido por Faltas (RF)`**.
    > 🟡 **Provisória** — fator e forma da regra (anual com multiplicador ou por trimestre e por escalões) são parâmetros; validar com a resposta à `Q-LEG-01` a `03` (`COR-LEG-13`) (`DEC-009`). Fonte: [[Verificacao das Referencias Legais|LEG-VER]] §3.5.
 4. **Justificação de Faltas (`DIR_TURMA` + `SUB_PED` — DESC-L1 A8, DESC-RESP R3):** o encarregado ou o aluno entrega o **formulário numerado** (série anual `N.º __/IPCAG/ano` — `RN-10.6`) com intervalo de dias, motivo, documentos e disciplinas afetadas. Aprovado pelo **Director de Turma e pelo Coordenador para a Área Pedagógica** (🟡 o visto do `SUB_PED` é o parâmetro `exige_visto_sub_ped` — `Q-032`), o sistema **abate a falta automaticamente em todas as disciplinas afetadas** (o aluno deixa de ir a cada professor). Atestados seguem a regra da APD-11: o detalhe de saúde só no compartimento restrito.
-5. **Dispensa Médica (`DISP` — `RN-01`):** o `CHEFE_SEC_PED` carrega o atestado e o `SUB_PED` homologa `Dispensado (DISP)`; a disciplina fica sem notas numéricas e sai do denominador.
+5. **Dispensa Médica (`DISP` — `RN-01`):** o `OP_PED` carrega o atestado no compartimento de saúde, o `CHEFE_SEC_PED` confere e o `SUB_PED` homologa `Dispensado (DISP)`; a disciplina fica sem notas numéricas e sai do denominador.
 6. **Lançamento na Mini-Pauta *Offline-First* (`PROF` — `RN-01`, `RN-10`):**
    - o professor lança **`MTP`**, **`PP`** e **`PT`** (`0` a `20`) mesmo sem rede; a aplicação guarda no `IndexedDB` cifrado e calcula no ecrã:
      $$M_t = \text{round\_med}\left(\frac{MTP_t + PP_t + PT_t}{3}\right) \quad (t = 1, 2)$$
@@ -1613,6 +1613,11 @@ flowchart TD
 ---
 
 ## Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
+
+- Fluxo 03: o atestado é carregado pelo `OP_PED` e conferido pelo `CHEFE_SEC_PED`.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-011 — Pagamentos por RUPE no fecho de caixa|DEC-011]] — RUPE (2026-11-05)
 

@@ -106,7 +106,7 @@ flowchart LR
 
 | Código | Nota | Conteúdo |
 | :---: | :--- | :--- |
-| `REG-12` | [[12 - Registo de Decisoes e Questoes em Aberto]] | Decisões `DEC-001`–`DEC-011` e questões `Q-001`–`Q-039`. Na Fase 3 da ORG-00 recebe também as questões que ainda estão nas notas de capacidades e as lacunas da Matriz |
+| `REG-12` | [[12 - Registo de Decisoes e Questoes em Aberto]] | Decisões `DEC-001`–`DEC-012` e questões `Q-001`–`Q-039`. Na Fase 3 da ORG-00 recebe também as questões que ainda estão nas notas de capacidades e as lacunas da Matriz |
 
 ### 2.5 `40 - Descoberta e Validacao` — Prova vinda da escola
 
@@ -160,7 +160,7 @@ As notas [[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribu
 
 > [!todo] Do estado atual à construção
 > - [x] **Fase 1 — Arrumar:** pastas por função, capacidades arquivadas, ficheiros vazios removidos, índices atualizados (2026-11-05).
-> - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; a #6 (migração) foi decidida na `DEC-010` e a #7 (RUPE) na `DEC-011`; #5 e #9 continuam à espera de decisão.
+> - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; a #6 (migração) foi decidida na `DEC-010`, a #7 (RUPE) na `DEC-011` e a #5 (permissões) na `DEC-012`; a #9 (entregas) continua à espera de decisão.
 > - [ ] **Fase 3 — Fechar o que está em aberto:** todas as questões e lacunas num mapa no GitHub; questionários para a escola; decisões da equipa.
 > - [ ] **Fase 4 — Congelar a v2.0:** versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
 > - [ ] **Fase 5 — Ponte para o código:** `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.

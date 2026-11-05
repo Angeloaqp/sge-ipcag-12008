@@ -60,6 +60,7 @@ tags:
 | [[#DEC-009 — Avançar com pendências de validação\|DEC-009]] | Equipa | Pendências de validação | Avançar para a construção; regulamento interno, recálculo de pautas e homologação resolvidos durante o projeto, com regras parametrizáveis e pontos de controlo | `decidida` | 2026-11-02 | Equipa do projeto | pendente |
 | [[#DEC-010 — Integrar os ajustes da migração no modelo de dados\|DEC-010]] | VER-01 (#6) | Ajustes da migração (MIG-10 `AJ-nn`) | Aceitar todos; BI opcional com pendência; conta técnica própria; consola `MOD-MIG-01` na E1 | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-011 — Pagamentos por RUPE no fecho de caixa\|DEC-011]] | VER-01 (#7); `Q-034` | RUPE no fecho de caixa | Canal próprio do caixa, sem documento fiscal do IPCAG, fora da receita e da conciliação bancária | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
+| [[#DEC-012 — Alinhar permissões RBAC e RLS\|DEC-012]] | VER-01 (#5) | Permissões: RBAC vs RLS | O DOC-01 manda; `ADMIN_TEC` só com dados técnicos; 5 casos da Secretaria; preços para todos e bolsas só para a Tesouraria e a Direção | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -377,6 +378,45 @@ As entrevistas dizem duas coisas:
 - **DOC-04:** borderô, fecho e `DOF-11C`.
 - **DOC-05:** lista 16 e `sessoes_fecho_caixa`.
 - **RF-07:** `RF-C10-08`.
+
+---
+
+### DEC-012 — Alinhar permissões RBAC e RLS
+
+- **Origem:** verificação de consistência [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]], grupo G5 ([issue #5](https://github.com/Angeloaqp/sge-ipcag-12008/issues/5)) · **Estado:** `decidida` · **Data:** 2026-11-05 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A matriz de cargos (RBAC) do DOC-01 §2 e a matriz de segurança da base de dados (RLS) do DOC-05 §5 davam permissões diferentes em 14 casos. Havia ainda 3 incoerências dentro dos próprios documentos: quem homologa a Pauta Geral, quem cria o Ano Letivo e quem carrega o atestado médico.
+
+**Decisão.**
+1. **O DOC-01 manda.** O RLS implementa o RBAC. Quando o RLS tinha algo sensato que faltava, acrescentou-se primeiro ao DOC-01. Nas colunas agrupadas do RLS, cada papel tem só as permissões da sua coluna no DOC-01.
+2. **`ADMIN_TEC`:** vê só dados técnicos:
+   - metadados da sincronização (nova linha 27 do RBAC);
+   - alertas técnicos (C15-g);
+   - parâmetros sem dados de alunos (linha 1).
+3. **Secretaria Pedagógica:**
+   - só o `CHEFE_SEC_PED` cria e edita turmas; o `OP_PED` lê e imprime;
+   - só o `SUB_PED` homologa transcrições;
+   - a Secretaria regista pedidos de justificação entregues ao balcão, que o DT aprova;
+   - o `CHEFE_SEC_PED` só lê e imprime a Pauta Geral;
+   - o atestado é carregado pelo `OP_PED` e conferido pelo `CHEFE_SEC_PED`.
+4. **Tesouraria e bolsas:**
+   - o `OP_TES` vê os dados básicos da turma;
+   - a tabela de preços pode ser lida por todos os cargos internos;
+   - as bolsas só são vistas pela Tesouraria, pelo `SUB_ADM` e pelo `DIR_GERAL`; a Secretaria Pedagógica e o `SUB_PED` veem só o semáforo (`RN-08`).
+5. **Homologações:**
+   - Pauta Geral: `SUB_PED` + `DIR_GERAL`;
+   - Ano Letivo: o `SUB_PED` cria e o `DIR_GERAL` homologa.
+
+**Porquê.**
+- Uma só fonte de permissões evita que o código implemente duas regras diferentes.
+- Quem não decide não tem poder de editar ou homologar.
+- A situação financeira das famílias fica protegida (`RN-08`, APD).
+
+**Impacto.**
+- **DOC-01:** linhas 1, 3, 7, 12, 13, 18, 19, C15-g e a nova linha 27; §3.4.
+- **DOC-02:** Fluxo 03.
+- **DOC-03:** `US-GOV-01`, `US-PED-03` e `US-PED-06`.
+- **DOC-05:** §5, com uma nota de princípio e as linhas 1, 3, 4, 7a, 8, 15, 16, 17 e 21.
 
 ---
 
