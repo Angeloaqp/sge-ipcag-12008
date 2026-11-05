@@ -12,4 +12,4 @@ Default five triage roles (`needs-triage`, `needs-info`, `ready-for-agent`, `rea
 
 ### Domain docs
 
-Single-context: one `GLOSSARY.md` and `docs/adr/` at the root. See `docs/agents/domain.md`.
+Glossary = DOC-01 §1; decisions = REG-12 (no `GLOSSARY.md` or `docs/adr/` in this vault). See `docs/agents/domain.md`.

@@ -2,6 +2,25 @@
 
 How the engineering skills should consume this repo's domain documentation when exploring the codebase.
 
+## This project: where the glossary and decisions live
+
+This repo is an Obsidian vault for the SGE (school management system, IPCAG N.º 12008 / BGO). It has **no `GLOSSARY.md` and no `docs/adr/`**: those roles are filled by existing notes, and each kind of information has exactly one home (see `01 - Projetos/SGE - IPCAG 12008 BGO/00 - Navegacao/00.3 - Proposta de Organizacao Documental.md` §2).
+
+| Role in these skills | File in this vault |
+| :--- | :--- |
+| Glossary (ubiquitous language) | `01 - Projetos/SGE - IPCAG 12008 BGO/10 - Especificacao/01 - Dominio e Regras.md` §1 |
+| Business rules `RN-xx`, RBAC, state machines | same file, §2–§4 |
+| ADRs / decisions (`DEC-xxx`) and open questions (`Q-xxx`) | `01 - Projetos/SGE - IPCAG 12008 BGO/30 - Decisoes/12 - Registo de Decisoes e Questoes em Aberto.md` |
+| ID numbering rules (RN, DOF, épicos) | `01 - Projetos/SGE - IPCAG 12008 BGO/00 - Navegacao/00.2 - Mapa de Integracao v2.0.md` |
+
+Rules for `/domain-modeling` and the skills that use it:
+
+- **Do not create `GLOSSARY.md` or `docs/adr/`.** Add new terms to DOC-01 §1 and new decisions as `DEC-nnn` entries in REG-12, using the templates in REG-12 §4.
+- Notes in `99 - Arquivo/` are history only. Never treat them as the source of truth; `Fontes Integradas v2.0/` (C03–C16) was merged into DOC-01…05.
+- Write in European/Angolan Portuguese, like the rest of the vault.
+
+The generic layout below applies only if the code later lives in its own repo.
+
 ## Before exploring, read these
 
 - **`GLOSSARY.md`** at the repo root, or

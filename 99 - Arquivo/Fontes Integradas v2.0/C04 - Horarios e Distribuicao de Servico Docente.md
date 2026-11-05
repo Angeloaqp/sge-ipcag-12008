@@ -5,8 +5,8 @@ aliases:
   - "CAP-C04"
   - "Horários e Distribuição de Serviço Docente"
 created: 2026-11-02
-updated: 2026-11-02
-status: rascunho
+updated: 2026-11-05
+status: arquivado
 version: "0.2"
 doc_id: "CAP-C04"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
@@ -18,6 +18,17 @@ tags:
   - distribuicao-servico-docente
   - requisitos
 ---
+
+> [!warning] Nota arquivada — fonte já integrada na especificação v2.0
+> Esta nota foi a **fonte de trabalho** da capacidade C04. O conteúdo foi integrado na especificação e **já não é a fonte de verdade**. Não editar: as correções fazem-se nos DOC.
+> - Regras `RN-P-C04-nn` → família **`RN-12`** em [[01 - Dominio e Regras]] (a sub-regra mantém o número)
+> - User stories → épico **EP-HOR (US-HOR-01–11)** em [[03 - User Stories]]
+> - Fluxos → [[02 - Fluxos de Trabalho]] · Ecrãs e documentos → [[04 - Telas e Documentos]] (DOF-15, DOF-16)
+> - Tabelas → [[05 - Modelagem de Dados]] (Grupos 1, 2 e 4) · Requisitos → [[07 - Catalogo de Requisitos Funcionais]]
+> - Questões `Q-C04-nn` → vão ser consolidadas no [[12 - Registo de Decisoes e Questoes em Aberto]] (Fase 3 da [[00.3 - Proposta de Organizacao Documental|ORG-00]])
+>
+> Tabela de correspondência completa: [[00.2 - Mapa de Integracao v2.0]] §2. Arquivada a 2026-11-05.
+
 
 # C04 — Horários e Distribuição de Serviço Docente
 

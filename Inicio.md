@@ -5,7 +5,7 @@ aliases:
   - "Home"
   - "Dashboard"
 created: 2026-10-31
-updated: 2026-11-02
+updated: 2026-11-05
 status: ativo
 tags:
   - dashboard
@@ -29,15 +29,16 @@ tags:
 > - **Mapa Visual Interativo (Canvas):** [[Arquitetura SGE IPCAG 12008 BGO.canvas]]
 > - **Base de Dados de Notas (Obsidian Base):** [[Painel Documentacao SGE.base]]
 
-### Documentos Core da Especificação (`v1.2` Auditada)
-1. **[[01 - Dominio e Regras|DOC-01 — Domínio (DDD), Estrutura Orgânica (RBAC), Máquinas de Estado e Regras de Negócio]]**
-2. **[[02 - Fluxos de Trabalho|DOC-02 — Mapeamento de Fluxos de Trabalho Ponta a Ponta (Swimlanes e Exceções)]]**
-3. **[[03 - User Stories|DOC-03 — User Story Mapping, Épicos e Critérios de Aceitação (BDD)]]**
-4. **[[04 - Telas e Documentos|DOC-04 — Arquitetura da Informação (4 Workspaces) e 12 Documentos Oficiais (MED/AGT/GEPE)]]**
-5. **[[05 - Modelagem de Dados|DOC-05 — Modelagem Conceptual e Organização Lógica da Base de Dados (ERD e RLS)]]**
+### Documentos Core da Especificação (`v2.0-rc1`, pasta `10 - Especificacao`)
+1. **[[01 - Dominio e Regras|DOC-01 — Domínio (DDD), Glossário, RBAC, Máquinas de Estado e Regras RN-01 a RN-18]]**
+2. **[[02 - Fluxos de Trabalho|DOC-02 — 16 Fluxos de Trabalho Ponta a Ponta (Swimlanes e Exceções)]]**
+3. **[[03 - User Stories|DOC-03 — 15 Épicos e 116 User Stories com Critérios BDD]]**
+4. **[[04 - Telas e Documentos|DOC-04 — Arquitetura da Informação (5 Workspaces) e 26 Documentos Oficiais (MED/AGT/GEPE)]]**
+5. **[[05 - Modelagem de Dados|DOC-05 — 116 Tabelas em 7 Grupos, Offline-First e RLS]]**
+6. **[[07 - Catalogo de Requisitos Funcionais|RF-07 — 224 Requisitos Funcionais por Capacidade e Entrega]]**
 
-> [!todo] Fase atual: Definição completa antes do código
-> Siga o **[[00.1 - Plano de Engenharia de Requisitos|PLN-00 — Plano de Engenharia de Requisitos]]**: lacunas, mapa de capacidades do SGE, fases de validação e decisões pendentes.
+> [!todo] Fase atual: organizar, verificar e congelar a especificação v2.0
+> Siga a **[[00.3 - Proposta de Organizacao Documental|ORG-00 — Proposta de Organização Documental]]** (5 fases até à construção) e o **[[00.1 - Plano de Engenharia de Requisitos|PLN-00]]** (capacidades, entregas E1–E5, *Definition of Ready*).
 
 ---
 
@@ -66,11 +67,11 @@ tags:
 | Pasta | Propósito | Notas e Índices Principais |
 | :--- | :--- | :--- |
 | **`00 - Inbox/`** | Material recebido por triar, rascunhos rápidos e novos despachos | [[00 - Guia de Triagem Inbox]] |
-| **`01 - Projetos/`** | Projetos com escopo, entregáveis e ciclo de vida definidos | [[00 - MOC SGE IPCAG 12008 BGO]]<br>[[Arquitetura SGE IPCAG 12008 BGO.canvas]]<br>[[Painel Documentacao SGE.base]] |
+| **`01 - Projetos/`** | Projetos com escopo, entregáveis e ciclo de vida definidos. O SGE está dividido em `00 - Navegacao`, `10 - Especificacao`, `20 - Qualidade e Operacao`, `30 - Decisoes`, `40 - Descoberta e Validacao` e `50 - Construcao` | [[00 - MOC SGE IPCAG 12008 BGO]]<br>[[00.3 - Proposta de Organizacao Documental]]<br>[[Arquitetura SGE IPCAG 12008 BGO.canvas]]<br>[[Painel Documentacao SGE.base]] |
 | **`02 - Areas/`** | Domínios de responsabilidade contínua (Arquitetura e Gestão Escolar) | [[Arquitetura de Software e DDD]]<br>[[Governacao Escolar Ensino Tecnico MED]] |
 | **`03 - Recursos/`** | Legislação angolana, normas técnicas e catálogos de ativos no Figma | [[Quadro Legal MED AGT e APD Angola]]<br>[[Quadros de Arquitetura no Figma]] |
 | **`04 - Modelos/`** | Templates padronizados para criação rápida de novas notas | [[Modelo de Documento de Arquitetura]]<br>[[Modelo de User Story BDD]] |
-| **`99 - Arquivo/`** | Cópias de segurança (`Backup Original Pre-Obsidian`) e ficheiros inativos | Ficheiros preservados por segurança (nunca apagados) |
+| **`99 - Arquivo/`** | Cópias de segurança (`Backup Original Pre-Obsidian`, `Pasta docs Original`), ficheiros inativos e `Fontes Integradas v2.0` (notas C03–C16, só para consulta) | Ficheiros preservados por segurança (nunca apagados) |
 
 ---
 
@@ -80,6 +81,9 @@ tags:
 > - [x] Concluir e auditar a especificação funcional e lógica (`DOC-01` a `DOC-05` — `v1.1`).
 > - [x] Estruturar os 5 quadros exclusivos de arquitetura no FigJam (`DOC-01` a `DOC-05`).
 > - [x] Organizar o Vault no Obsidian com YAML Frontmatter, `[[wikilinks]]`, `.base` e `.canvas`.
-> - [ ] Concluir a fase de definição ([[00.1 - Plano de Engenharia de Requisitos]] — ver o estado no topo do plano e as notas novas no [[00 - MOC SGE IPCAG 12008 BGO|MOC §2.1]]) e aprovar a especificação `v2.0`.
+> - [x] Integrar as capacidades novas, as correções legais e os achados da escola na especificação `v2.0-rc1`.
+> - [x] Arrumar o projeto por pastas, com uma casa única para cada informação ([[00.3 - Proposta de Organizacao Documental|ORG-00]], Fase 1).
+> - [ ] Verificar a consistência, fechar as questões em aberto e congelar a especificação `v2.0` (ORG-00, Fases 2–4).
+> - [ ] Escrever a arquitetura técnica e os planos por entrega (ORG-00, Fase 5).
 > - [ ] Iniciar a geração dos scripts físicos SQL (`DDL PostgreSQL`, Triggers de Imutabilidade e Políticas `RLS`) a partir de [[05 - Modelagem de Dados]].
 > - [ ] Prototipar a API Backend e o motor de sincronização *Offline-First* (`IndexedDB` $\leftrightarrow$ `PostgreSQL`).

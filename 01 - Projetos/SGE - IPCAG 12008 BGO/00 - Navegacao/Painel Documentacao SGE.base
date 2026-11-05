@@ -6,7 +6,7 @@ filters:
     - '!file.inFolder(".agents")'
 formulas:
   tamanho_kb: (file.size / 1024).round(1) + " KB"
-  estado_formatado: if(status == "concluido", "✅ Concluído", if(status == "ativo", "🟢 Ativo", "📝 Rascunho"))
+  estado_formatado: if(status == "concluido", "✅ Concluído", if(status == "ativo", "🟢 Ativo", if(status == "proposta", "💡 Proposta", "📝 Rascunho")))
 properties:
   file.name:
     displayName: Nota
@@ -30,10 +30,26 @@ properties:
     displayName: Atualizado em
 views:
   - type: table
-    name: Especificação Core (DOC-00 a DOC-05)
+    name: Especificação (10 - Especificacao)
+    filters:
+      and:
+        - file.inFolder("01 - Projetos/SGE - IPCAG 12008 BGO/10 - Especificacao")
+    order:
+      - doc_id
+      - file.name
+      - formula.estado_formatado
+      - version
+      - formula.tamanho_kb
+      - figma_board
+      - updated
+  - type: table
+    name: Projeto SGE por Pasta
     filters:
       and:
         - file.inFolder("01 - Projetos/SGE - IPCAG 12008 BGO")
+    groupBy:
+      property: file.folder
+      direction: ASC
     order:
       - doc_id
       - file.name

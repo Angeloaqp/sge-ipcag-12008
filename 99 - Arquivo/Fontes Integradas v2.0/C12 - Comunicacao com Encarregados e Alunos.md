@@ -5,8 +5,8 @@ aliases:
   - "Comunicação com Encarregados e Alunos"
   - "Portal do Encarregado"
 created: 2026-11-02
-updated: 2026-11-02
-status: rascunho
+updated: 2026-11-05
+status: arquivado
 version: "0.1"
 doc_id: "CAP-C12"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
@@ -18,6 +18,17 @@ tags:
   - encarregados
   - requisitos
 ---
+
+> [!warning] Nota arquivada — fonte já integrada na especificação v2.0
+> Esta nota foi a **fonte de trabalho** da capacidade C12. O conteúdo foi integrado na especificação e **já não é a fonte de verdade**. Não editar: as correções fazem-se nos DOC.
+> - Regras `RN-P-C12-nn` → família **`RN-14`** em [[01 - Dominio e Regras]] (a sub-regra mantém o número)
+> - User stories → épico **EP-COM (US-COM-01–08)** em [[03 - User Stories]]
+> - Fluxos → [[02 - Fluxos de Trabalho]] · Ecrãs e documentos → [[04 - Telas e Documentos]] (DOF-21, DOF-22)
+> - Tabelas → [[05 - Modelagem de Dados]] (Grupo 7) · Requisitos → [[07 - Catalogo de Requisitos Funcionais]]
+> - Questões `Q-C12-nn` → vão ser consolidadas no [[12 - Registo de Decisoes e Questoes em Aberto]] (Fase 3 da [[00.3 - Proposta de Organizacao Documental|ORG-00]])
+>
+> Tabela de correspondência completa: [[00.2 - Mapa de Integracao v2.0]] §2. Arquivada a 2026-11-05.
+
 
 # C12 — Comunicação com Encarregados e Alunos
 

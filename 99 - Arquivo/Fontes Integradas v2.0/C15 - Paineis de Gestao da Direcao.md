@@ -5,8 +5,8 @@ aliases:
   - "CAP-C15"
   - "Painéis de Gestão SGE"
 created: 2026-11-02
-updated: 2026-11-02
-status: rascunho
+updated: 2026-11-05
+status: arquivado
 version: "0.2"
 doc_id: "CAP-C15"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
@@ -21,6 +21,17 @@ tags:
   - rls
   - alertas
 ---
+
+> [!warning] Nota arquivada — fonte já integrada na especificação v2.0
+> Esta nota foi a **fonte de trabalho** da capacidade C15. O conteúdo foi integrado na especificação e **já não é a fonte de verdade**. Não editar: as correções fazem-se nos DOC.
+> - Regras `RN-P-C15-nn` → família **`RN-17`** em [[01 - Dominio e Regras]] (a sub-regra mantém o número)
+> - User stories → épico **EP-PNL (US-PNL-01–12)** em [[03 - User Stories]]
+> - Fluxos → [[02 - Fluxos de Trabalho]] · Ecrãs e documentos → [[04 - Telas e Documentos]] (—)
+> - Tabelas → [[05 - Modelagem de Dados]] (Grupo 6 (indicadores e alertas)) · Requisitos → [[07 - Catalogo de Requisitos Funcionais]]
+> - Questões `Q-C15-nn` → vão ser consolidadas no [[12 - Registo de Decisoes e Questoes em Aberto]] (Fase 3 da [[00.3 - Proposta de Organizacao Documental|ORG-00]])
+>
+> Tabela de correspondência completa: [[00.2 - Mapa de Integracao v2.0]] §2. Arquivada a 2026-11-05.
+
 
 # C15 — Painéis de Gestão da Direção
 
