@@ -90,9 +90,9 @@ tags:
     - **Quando** submete a configuração e o `DIR_GERAL` aciona a homologação,
     - **Então** o Ano Letivo é criado com os 3 trimestres no estado `Planeado`, permitindo abrir apenas o `I Trimestre` inicialmente.
   - **Cenário 2 (Bloqueio — Tentativa de Abrir o II ou III Trimestre sem Fechar o Anterior):**
-    - **Dado** que o `I Trimestre` ainda se encontra no estado `Aberto / Em Curso` ou `Em Conselho de Notas`,
-    - **Quando** o `SUB_PED` tenta alterar o estado do `II Trimestre` para `Aberto / Em Curso`,
-    - **Então** o sistema bloqueia a operação com erro `HTTP 422 Unprocessable Entity`: *"Não é permitido abrir o II Trimestre enquanto o I Trimestre não estiver no estado Fechado / Homologado"*.
+    - **Dado** que o `I Trimestre` ainda se encontra no estado `Janela Letiva Aberta` ou `Epoca de Conselhos`,
+    - **Quando** o `SUB_PED` tenta alterar o estado do `II Trimestre` para `Janela Letiva Aberta`,
+    - **Então** o sistema bloqueia a operação com erro `HTTP 422 Unprocessable Entity`: *"Não é permitido abrir o II Trimestre enquanto o I Trimestre não estiver no estado Encerrado Oficialmente"* (DOC-01 §3.1, Nível 1).
   - **Cenário 3 (Segurança RBAC):**
     - **Dado** um utilizador com perfil `CHEFE_SEC_PED`, `OP_PED` ou `PROF`,
     - **Quando** tenta criar ou alterar datas de trimestres,
@@ -245,7 +245,7 @@ tags:
   - **Cenário 2 (Exceção — Média Positiva com uma Prova Abaixo de 10):**
     - **Dado** um candidato com `Nota_LP = 9` e `Nota_Mat_Esp = 15` (`MFA = 12`),
     - **Quando** o apuramento é executado,
-    - **Então** o candidato fica **`NÃO ADMITIDO (Nota Inferior ao Mínimo)`**, mesmo havendo vagas.
+    - **Então** o candidato fica **`NÃO ADMITIDO (Nota Inferior a 10 numa Prova)`** (`NAO_ADMITIDO_NOTA_INFERIOR`), mesmo havendo vagas.
   - **Cenário 3 (Bloqueio — Tentativa de Descodificar com Provas Pendentes):**
     - **Dado** que ainda existem 3 códigos de anonimato sem nota lançada nem marcação de falta,
     - **Quando** o `SUB_PED` tenta executar a descodificação,
@@ -525,7 +525,7 @@ tags:
   - **Cenário 6 (Bloqueio — 12ª Classe: Aprova a Todas e 0 Cadeiras em Atraso):**
     - **Dado** um aluno da `12ª Classe` (que já não tem Língua Portuguesa — DESC-L1 A7) com $\ge 1$ disciplina com `CA < 10` depois do recurso, **ou** com uma cadeira em atraso da 10ª/11ª por eliminar,
     - **Quando** o motor executa a deliberação anual,
-    - **Então** o aluno fica **`Retido na 12ª Classe`** e não passa à 13ª (`Q-031`).
+    - **Então** o aluno fica **`Não Transita (Retido)`** na 12ª Classe e não passa à 13ª (`Q-031`).
   - **Cenário 7 (Bloqueio — Conselho com 2.ª Chamada ou Sincronização Pendente):**
     - **Dado** uma prova de 2.ª chamada por lançar ou um conflito de sincronização por decidir na turma,
     - **Quando** o `DIR_TURMA` tenta passar a turma a `Em Conselho de Notas`,
@@ -587,12 +587,12 @@ tags:
   - **Cenário 1 (Sucesso — Alocação do Estágio e do Projecto Tecnológico):**
     - **Dado** que o aluno se encontra no estado `Apto para 13ª Classe` e já iniciou o Projecto Tecnológico na 12ª (`2` tempos semanais),
     - **Quando** o `COORD_CURSO` associa a empresa parceira, o nome e contacto do Supervisor na empresa, o docente Tutor Interno, o tema do Projecto Tecnológico e o docente Orientador,
-    - **Então** o processo da 13ª classe muda para **`Em Estágio / Elaboração de PAP`** (nome do estado do DOC-01 §3; a PAP é a defesa do relatório de estágio) (Estágio de `20` tempos e Projecto Tecnológico de `8` tempos semanais) e o sistema habilita a emissão da **Carta de Apresentação de Estágio** (`DOF-08A`).
+    - **Então** o processo da 13ª classe muda para **`Em Estágio / Projecto Tecnológico`** (estado do DOC-01 §3.5; lista 13 do DOC-05: `EM_ESTAGIO_E_PROJECTO_TECNOLOGICO`; a PAP é a defesa do relatório de estágio) (Estágio de `20` tempos e Projecto Tecnológico de `8` tempos semanais) e o sistema habilita a emissão da **Carta de Apresentação de Estágio** (`DOF-08A`).
   - **Cenário 2 (Bloqueio — Aluno com Histórico Externo da 10ª/11ª Incompleto):**
     - **Dado** um aluno transferido de outra escola na 11ª ou 12ª classe cuja `Transcrição de Histórico Externo` não tem todas as disciplinas da matriz preenchidas e homologadas,
     - **Quando** tenta avançar no processo da 13ª classe,
     - **Então** o sistema bloqueia a transição exibindo o alerta `Histórico Curricular Incompleto (RN-06)`.
-- **Pós-condições e Efeitos Colaterais:** Registo atualizado em `processos_13_classe` no estado `Em Estágio / Elaboração de PAP`.
+- **Pós-condições e Efeitos Colaterais:** Registo atualizado em `processos_13_classe` no estado `Em Estágio / Projecto Tecnológico`.
 
 ---
 
@@ -600,7 +600,7 @@ tags:
 - **História:** *Como* **Coordenador de Curso (`COORD_CURSO`)** e **Subdirector Pedagógico (`SUB_PED`)**, *queremos* **registar as notas do Estágio e do Projecto Tecnológico, constituir o Júri da PAP (defesa do relatório de estágio) com professores e representantes dos trabalhadores e dos empregadores, emitir a Ata de Defesa e calcular a Média Final do Curso (`MFC`)**, *para* **habilitar o Certificado (emitido pela escola) e o pedido do Diploma (emitido pelo Ministério) sem erros de cálculo (`RN-06`)**.
 - **Rastreabilidade:** `RN-01`, `RN-06`, `RN-08`, `RN-10` | `Fluxo 06` | DESC-RESP R20, R21 | `COR-LEG-16`, `COR-LEG-17`, `COR-LEG-28`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E4`.
-- **Pré-condições:** Processo da 13ª classe em `Em Estágio / Elaboração de PAP`; **estágio concluído com parecer positivo do orientador**, `0` cadeiras em atraso, propinas em dia e Emolumento de Defesa da PAP pago (R20); pesos da `MFC` 🟡 parametrizados na matriz do curso (Média do Plano Curricular, Estágio, Projecto Tecnológico, PAP — `Q-030`, `Q-LEG-07`; ponto de controlo **E2**).
+- **Pré-condições:** Processo da 13ª classe em `Apto para Defesa` (transição `prepararDefesaPublica` a partir de `Em Estágio / Projecto Tecnológico` — DOC-01 §3.5); **estágio concluído com parecer positivo do orientador**, `0` cadeiras em atraso, propinas em dia e Emolumento de Defesa da PAP pago (R20); pesos da `MFC` 🟡 parametrizados na matriz do curso (Média do Plano Curricular, Estágio, Projecto Tecnológico, PAP — `Q-030`, `Q-LEG-07`; ponto de controlo **E2**).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Júri com Membros Externos, Defesa e Cálculo da `MFC`):**
     - **Dado** que o aluno tem `Nota_Estagio = 15` e a nota do Projecto Tecnológico `14` homologadas, o Semáforo Financeiro verde e o Júri constituído por professores e por representantes dos trabalhadores e dos empregadores (empresa parceira),
@@ -2834,7 +2834,7 @@ Numeração aplicada ao integrar (INT-V2 §2.1 e §2.3): regras provisórias de 
 - Tabela de épicos com as colunas **Capacidade**, **Entrega** e **MoSCoW**; épicos 08–15; total de 15 épicos e 116 histórias; propostas `Q-037` e `Q-038` marcadas como pendentes.
 - Linha *Prioridade (proposta) | Entrega* em todas as histórias; secção de distribuição por entrega.
 - Títulos dos épicos 01, 03, 04, 05, 06 e 07 atualizados à terminologia da v2.0.
-- **Mantidos de propósito**, à espera do [[01 - Dominio e Regras|DOC-01]] e do [[05 - Modelagem de Dados|DOC-05]]: o nome do estado `Em Estágio / Elaboração de PAP` e os nomes de tabela `notas_estorno` e `trg_prevent_recibo_mutation`. Os estados `Certificado Emitido` e `Diploma Pedido` (`US-DOC-02`) e `Admitido (2ª Opção — Repescagem)` são os que estas histórias pedem à máquina de estado do DOC-01.
+- **Mantidos de propósito**, à espera do [[01 - Dominio e Regras|DOC-01]] e do [[05 - Modelagem de Dados|DOC-05]]: ~~o nome do estado `Em Estágio / Elaboração de PAP`~~ *(resolvido em 2026-11-05: passa a `Em Estágio / Projecto Tecnológico`, como no DOC-01 — VER-01 G3)* e os nomes de tabela `notas_estorno` e `trg_prevent_recibo_mutation`. Os estados `Certificado Emitido` e `Diploma Pedido` (`US-DOC-02`) e `Admitido (2ª Opção — Repescagem)` são os que estas histórias pedem à máquina de estado do DOC-01.
 
 ---
 

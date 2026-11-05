@@ -423,7 +423,7 @@ flowchart TD
 - **Regras de Validação Sistémica:**
   1. O `codigo_anonimato` e a sala só são gerados com o emolumento de inscrição pago (`RN-08`).
   2. Na vista de lançamento (`US-ADM-03`), a API não serializa `nome_completo` nem `numero_bi_cedula`.
-  3. **Apuramento (`RN-01.2`):** é **admitido** o candidato com **≥ 10 valores em cada prova** e posicionado dentro das vagas; o desempate na última vaga faz-se pela **menor idade** (DE n.º 361/26, art. 16.º, n.º 2, c) — `COR-LEG-09`). Resultados possíveis: `ADMITIDO`, `ADMITIDO (2ª Opção)` 🟡, `NÃO ADMITIDO (Fora das Vagas)`, `NÃO ADMITIDO (Nota Inferior a 10 numa Prova)`, `FALTOU`. Não há admissão abaixo de 10 por despacho (`COR-LEG-08`).
+  3. **Apuramento (`RN-01.2`):** é **admitido** o candidato com **≥ 10 valores em cada prova** e posicionado dentro das vagas; o desempate na última vaga faz-se pela **menor idade** (DE n.º 361/26, art. 16.º, n.º 2, c) — `COR-LEG-09`). Resultados impressos (rótulo → código da lista 7 do DOC-05): `ADMITIDO` → `ADMITIDO_1A_OPCAO`; `ADMITIDO (2ª Opção)` 🟡 → `ADMITIDO_2A_OPCAO_REPESCAGEM`; `NÃO ADMITIDO (Fora das Vagas)` → `NAO_ADMITIDO_FORA_DAS_VAGAS`; `NÃO ADMITIDO (Nota Inferior a 10 numa Prova)` → `NAO_ADMITIDO_NOTA_INFERIOR`; `FALTOU` → `FALTOU_AO_EXAME`. Não há admissão abaixo de 10 por despacho (`COR-LEG-08`).
   4. **Prazos:** lista de selecionados até **72 h** após o teste; reclamações; lista definitiva só depois da homologação do Director (`COR-LEG-12`).
   5. Os candidatos não admitidos são anonimizados no fim do prazo PC-02, mantendo os campos estatísticos (RF-C19-14).
 - **Ações Disparo e Dados de Saída (Outputs):**
@@ -746,7 +746,7 @@ flowchart TD
 - **Dados de Entrada (Inputs):**
   | Bloco | Campo | Tipo | Obrigatório | Regra (`RN-09`) |
   | :--- | :--- | :---: | :---: | :--- |
-  | **1. Borderô** | `meio_pagamento` | `ENUM` | Sim | `'DEPOSITO_TRANSFERENCIA_BANCARIA'`, `'TPA_MULTICAIXA'`, `'MULTICAIXA_EXPRESS'`, `'RUPE'` 🟡 (só se os emolumentos estatais forem pagos por RUPE — `Q-034`, `Q-C10-17`; E1). |
+  | **1. Borderô** | `meio_pagamento` | `ENUM` | Sim | `'TRANSFERENCIA_DEPOSITO_BANCARIO'`, `'TPA_MULTICAIXA'`, `'MULTICAIXA_EXPRESS'`, `'RUPE'` 🟡 (só se os emolumentos estatais forem pagos por RUPE — `Q-034`, `Q-C10-17`; E1). |
   | | `banco_id` | `UUID` | Sim | Banco angolano. |
   | | `numero_operacao_bordero` | `VARCHAR(60)` | Sim | `UNIQUE(banco_id, numero_operacao_bordero)`. |
   | | `data_hora_operacao_banco` / `valor_total_talao_kz` | `TIMESTAMP` / `NUMERIC(14,2)` | Sim | Como impressos no talão. |
@@ -773,7 +773,7 @@ flowchart TD
   - **Fecho Administrativo (`C, H`):** `CHEFE_SEC_GER` ou `SUB_ADM`, homologado por cargo diferente (`RN-13.18`).
 - **Dados de Entrada (Inputs):**
   - **Nota de Crédito (`US-TES-04`):** `documento_original_id`, `mencao` (`'ANULACAO'` ou `'RECTIFICACAO'`), `motivo` (texto obrigatório), `valor` (DP n.º 71/25, art. 8.º, n.º 4–5 — `COR-LEG-03`).
-  - **Talão falso:** `tipo_ocorrencia = 'COMPROVATIVO_BANCARIO_FALSO'` → **anulação do recibo** (o serviço continua faturado; a dívida reabre) — 🟡 **Provisória** — instrumento a confirmar com o contabilista/AGT; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-16`. Fonte: `COR-LEG-03`.
+  - **Talão falso:** borderô passa a `INVALIDADO_POR_FRAUDE` (lista 17) e a Nota de Crédito leva o motivo `Comprovativo Bancário Falso/Fraude` (`notas_estorno`, DOC-05) → **anulação do recibo** (o serviço continua faturado; a dívida reabre) — 🟡 **Provisória** — instrumento a confirmar com o contabilista/AGT; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-16`. Fonte: `COR-LEG-03`.
   - **Fecho de Caixa:** `sessao_caixa_id`, `data_movimento`, `turno_caixa`, `operador_tesouraria_id`, `observacoes_conferencia`; no fecho administrativo: `motivo`, `comprovativos_conferidos`, `diferencas_apuradas[]`.
 - **Regras de Validação Sistémica (`RN-09`, `RN-09.2`, `RN-13.18`, `RN-13.20`):**
   1. Nenhum documento fiscal emitido sofre `DELETE` ou `UPDATE`. A **Nota de Crédito** é um documento sequencial próprio, com referência ao documento original; reabre a dívida na Conta Corrente.
@@ -869,7 +869,7 @@ flowchart TD
      | Documentos fiscais (`DOF-11A/B/D/E`) | Valor total e estado — **sem nomes, BI/NIF nem dados bancários** |
      | Outros documentos com QR (`DOF-17`, `DOF-18`, `DOF-21`, `DOF-24`) | Só tipo, número, data e estado |
   3. **Nunca** devolve BI/cédula, NIF, filiação, data de nascimento, naturalidade, morada, contactos, n.º de processo, dados de saúde, bolsas, notas por disciplina, faltas ou comportamento (`ALT-04-20`).
-  4. **Estados:** `VÁLIDO`, `SUBSTITUÍDO` (com o número do novo), `ANULADO`, `ESTORNADO`, `EXPIRADO_PARA_VERIFICACAO`; depois do prazo PC-19, os documentos sem registo em livro respondem só "documento emitido em [data]; para confirmação contacte a Secretaria" (RF-C19-18).
+  4. **Estados** (lista 104 do DOC-05): `ATIVO`, `SUBSTITUIDO` (com o número do novo), `ANULADO` (inclui os documentos fiscais anulados por Nota de Crédito), `EXPIRADO_PARA_VERIFICACAO`; depois do prazo PC-19, os documentos sem registo em livro respondem só "documento emitido em [data]; para confirmação contacte a Secretaria" (RF-C19-18).
   5. 🟡 **Provisória** — nos títulos escolares, a verificação pode passar a ser a da **Plataforma Nacional de Certificação**; o QR próprio fica para os restantes documentos; validar em **E1** (`DEC-009`). Bloqueado por `Q-020`, `Q-LEG-14`. Fonte: `COR-LEG-19`.
 - **Saídas:** bandeira verde **`DOCUMENTO OFICIAL AUTÊNTICO — {designação da instituição}`** ou alerta vermelho **`DOCUMENTO INVÁLIDO, ANULADO OU NÃO RECONHECIDO`**.
 
@@ -1291,7 +1291,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PIN-05`) | Assinatura digitalizada do `DIR_GERAL` (título configurado) — 🟡 cargo por confirmar (`Q-C03-08`, `Q-028`; E1) | **Série anual por ano letivo** (`RN-11.10.3`, `RN-10.6`) + n.º da via | Sim — estados `VÁLIDO`, `ANULADO`, `CADUCADO`; nunca fotografia, n.º de processo, BI ou contactos (`RN-11.10.7`) | Fotografia com finalidade "identificação" (RF-C19-28) |
+| Secretaria Pedagógica (`MOD-PIN-05`) | Assinatura digitalizada do `DIR_GERAL` (título configurado) — 🟡 cargo por confirmar (`Q-C03-08`, `Q-028`; E1) | **Série anual por ano letivo** (`RN-11.10.3`, `RN-10.6`) + n.º da via | Sim — o portal mostra o estado do cartão (lista 56: `EMITIDO`/`ENTREGUE`, `ANULADO`, `CADUCADO`); nunca fotografia, n.º de processo, BI ou contactos (`RN-11.10.7`) | Fotografia com finalidade "identificação" (RF-C19-28) |
 
 - **Formato:** 🟡 ID-1 (85,60 × 53,98 mm) ou A4 com vários cartões para recorte e plastificação (`Q-C03-08`; E1).
 - **Frente:** nome e número da instituição (parâmetros), fotografia, nome completo, `N.º de Processo`, curso, classe, turma, **período**, ano letivo, validade (por defeito o ano letivo).

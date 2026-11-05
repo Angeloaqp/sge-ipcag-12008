@@ -1013,6 +1013,7 @@ stateDiagram-v2
 | `Enviado` | confirmar | `Entregue` / `Falhou` | Fornecedor SMS | — |
 | `Falhou` | degradar | `ParaImprimir` | Sistema | Incrementa as falhas do telefone (`RN-14.3.3`). |
 | `ParaImprimir` | registar entrega | `EntregueEmMao` | `DIR_TURMA`, `OP_PED` | Indica a quem foi entregue. |
+| `EmFila` | validade ultrapassada | `Expirado` | Sistema | Validade do aviso atingida antes do envio (`RN-14.8.2`). |
 | qualquer não final | cancelar | `Cancelado` | Sistema / emissor | Ex.: propina paga antes do envio. |
 
 ---
