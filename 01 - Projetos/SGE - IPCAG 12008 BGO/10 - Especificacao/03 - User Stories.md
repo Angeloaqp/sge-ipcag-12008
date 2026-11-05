@@ -192,7 +192,7 @@ tags:
     - **Dado** um candidato que só completa 15 anos no ano civil seguinte ao da matrícula,
     - **Quando** o `OP_PED` tenta confirmar a inscrição,
     - **Então** o sistema rejeita com `HTTP 422`: *"Idade mínima de ingresso na 10ª Classe: 15 anos completados no ano da matrícula (DP n.º 167/23, art. 23.º)"*. Não há validação de idade máxima enquanto não houver norma (`Q-LEG-09`).
-- **Pós-condições e Efeitos Colaterais:** Registo criado na tabela `candidaturas` (estado `Inscrito`) e débito de emolumento gerado para pagamento no Caixa.
+- **Pós-condições e Efeitos Colaterais:** Registo criado na tabela `candidaturas_10a` (estado `INSCRITO`) e débito de emolumento gerado para pagamento no Caixa.
 
 ---
 
@@ -292,7 +292,7 @@ tags:
     - **Dado** uma matrícula que continua `Pendente (Aguardando Pagamento Inicial)` 60 dias depois do início do ano letivo (prazo proposto, parâmetro a validar — `Q-LEG-05`, `Q-C16-01`),
     - **Quando** o prazo expira,
     - **Então** a matrícula passa a `Anulada / Desistente` pela transição `expirarPrazoConfirmacao` e o aluno fica `Interrompido` (`RN-18.14`).
-- **Pós-condições e Efeitos Colaterais:** Registo vitalício criado em `alunos`; matrícula criada em `matriculas_anuais` com o número do boletim; documentos do processo gerados em `documentos_processo_aluno`; plano financeiro gerado em `propinas_mensais`.
+- **Pós-condições e Efeitos Colaterais:** Registo vitalício criado em `alunos`; matrícula criada em `matriculas_anuais` com o número do boletim; documentos do processo gerados em `documentos_processo_aluno`; plano financeiro gerado em `conta_corrente_propinas`.
 
 ---
 
@@ -340,7 +340,7 @@ tags:
     - **Dado** um aluno admitido na 11ª ou 12ª classe por transferência externa cuja transcrição da 10ª classe ainda não foi preenchida ou homologada pelo `SUB_PED`,
     - **Quando** o sistema valida a aptidão do aluno para a `13ª Classe` ou para emissão do Certificado,
     - **Então** o sistema bloqueia a progressão exibindo a lista exata das disciplinas da 10ª/11ª classe cujas notas de origem estão em falta.
-- **Pós-condições e Efeitos Colaterais:** Registos criados em `historico_externo_transcricoes` e `historico_externo_notas`; homologação gravada em `audit_logs`.
+- **Pós-condições e Efeitos Colaterais:** Registos criados em `historico_externo_transcricoes` (uma linha por disciplina e classe equivalente); homologação gravada em `audit_logs`.
 
 ---
 
@@ -574,7 +574,7 @@ tags:
     - **Dado** um aluno da 12ª classe que aprovou a todas as disciplinas da 12ª classe, mas obteve nota `8` (`< 10`) no Exame Extraordinário de uma cadeira em atraso da 10ª ou 11ª classe,
     - **Quando** o sistema avalia a conclusão da 12ª classe ou tenta abrir o processo da `13ª Classe`,
     - **Então** a cadeira em atraso retorna a `Transitado com Deficiência` e o processo da 13ª classe fica **estritamente bloqueado** no estado `Bloqueado (Possui Cadeiras em Atraso da 10ª-12ª)`.
-- **Pós-condições e Efeitos Colaterais:** Atualização em `cadeiras_em_atraso` e `termos_exame`; recálculo automático da média anual da classe de origem.
+- **Pós-condições e Efeitos Colaterais:** Atualização em `cadeiras_em_atraso` e `exames_extraordinarios` (registo no Livro de Termos de Exame); recálculo automático da média anual da classe de origem.
 
 ---
 
@@ -643,7 +643,7 @@ tags:
     - **Dado** a tabela de `2026/2027` homologada,
     - **Quando** o `SUB_ADM` tenta mudar o valor da propina,
     - **Então** o sistema recusa a edição direta e exige uma nova versão homologada, aplicada só às prestações vincendas (`RN-07.2`).
-- **Pós-condições e Efeitos Colaterais:** Registos criados em `tabelas_precos_ano_letivo`, `catalogo_emolumentos` e `parametros_cobranca`.
+- **Pós-condições e Efeitos Colaterais:** Registos criados em `tabelas_precos_emolumentos` (propinas e rubricas de emolumento do ano) e `parametros_cobranca`.
 
 ---
 
@@ -1054,7 +1054,7 @@ tags:
   - **Cenário 1 (Sucesso — 1ª via):**
     - **Dado** que `PROC-2026-00412` tem a matrícula `Ativa` em `CG10A-T`, a fotografia `Validado` e o emolumento do cartão pago,
     - **Quando** o `OP_PED` emite o cartão,
-    - **Então** o sistema gera o cartão `N.º 2026/00412` (exemplo de numeração), regista-o em `documentos_oficiais_emitidos` com o código de verificação, marca o `item_recibo` como `Consumido` e o cartão passa a `Emitido`.
+    - **Então** o sistema gera o cartão `N.º 2026/00412` (exemplo de numeração), regista-o em `documentos_oficiais_emitidos` com o código de verificação, marca a linha de `itens_recibo` como `Consumido` e o cartão passa a `Emitido`.
   - **Cenário 2 (Bloqueio — Sem fotografia ou sem emolumento):**
     - **Dado** que a fotografia está `Em Falta` ou o emolumento não está pago (e não há isenção),
     - **Quando** o `OP_PED` tenta emitir,
@@ -1805,7 +1805,7 @@ tags:
     - **Dado** um encarregado que recusou todos os SMS,
     - **Quando** o educando atinge `80%` do limite de faltas,
     - **Então** o aviso `FALTAS_80` sai **pelo impresso** (`RN-14.9.2`).
-- **Pós-condições e Efeitos Colaterais:** `consentimentos_comunicacao` com valor e data; `CONSENTIMENTO_ALTERADO` em `audit_logs`.
+- **Pós-condições e Efeitos Colaterais:** `consentimentos` (finalidade `CON-05` — avisos não essenciais por SMS) com valor e data; `CONSENTIMENTO_ALTERADO` em `audit_logs`.
 
 ---
 

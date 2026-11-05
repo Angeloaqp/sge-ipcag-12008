@@ -271,7 +271,7 @@ flowchart TD
   - **Consola `audit_logs`:** `DIR_GERAL`, `SUB_PED` *(escopo pedagógico)*, `SUB_ADM` *(escopo financeiro)*, `ADMIN_TEC` *(só a categoria `SEGURANCA_CONTAS`)*.
 - **Dados de Entrada (Inputs / Filtros):**
   - **Filtro GEPE:** `ano_letivo_id`, `momento` (início do ano, I, II, III Trimestre, fim do ano — DESC-RESP §2), `curso_id`, `classe`, `turno`.
-  - **Filtro Auditoria:** intervalo de datas, `usuario_id`, `papel`, `tipo_evento` (`REABERTURA_PAUTA`, `ALTERACAO_NOTA_POS_FECHO`, `NOTA_CREDITO_EMITIDA`, `TENTATIVA_REUTILIZACAO_BORDERO`, `CONCESSAO_BOLSA` e os eventos novos da APD-11: `EXPORTACAO_DADOS`, `ACESSO_DADOS_SAUDE`, `PEDIDO_TITULAR`, `EXECUCAO_CONSERVACAO`, `INCIDENTE_SEGURANCA` — `ALT-04-09`), filtro `contem_dados_sensiveis`.
+  - **Filtro Auditoria:** intervalo de datas, `usuario_id`, `papel`, `tipo_evento` (`REABERTURA_PAUTA`, `ALTERACAO_NOTA_POS_FECHO`, `NOTA_CREDITO_EMITIDA`, `TENTATIVA_FRAUDE_BORDERO`, `CONCESSAO_BOLSA` e os eventos novos da APD-11: `EXPORTACAO_DADOS_PESSOAIS`, `ACESSO_ANEXO_SENSIVEL`, `PEDIDO_TITULAR_DECIDIDO`, `EXECUCAO_CONSERVACAO_APROVADA`, `INCIDENTE_SEGURANCA_REGISTADO` — `ALT-04-09`; nomes do catálogo do DOC-05 §4.9), filtro `contem_dados_sensiveis`.
 - **Regras de Validação Sistémica:**
   1. Os dados do GEPE agregam-se das matrículas e pautas homologadas, por **Género (`M` / `F`)** e **Idade**; a secção de aproveitamento usa o mesmo cálculo do `IND-29` (`RN-17.14`).
   2. A consola `audit_logs` é *read-only*; a eliminação só ocorre por lote de conservação aprovado (`MOD-GOV-09`; RNF-AUD-03, RNF-AUD-07).
@@ -1291,7 +1291,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Emitente | Assinantes | Numeração | Verificação QR | Proteção de dados |
 | :--- | :--- | :--- | :--- | :--- |
-| Secretaria Pedagógica (`MOD-PIN-05`) | Assinatura digitalizada do `DIR_GERAL` (título configurado) — 🟡 cargo por confirmar (`Q-C03-08`, `Q-028`; E1) | **Série anual por ano letivo** (`RN-11.10.3`, `RN-11.14`) + n.º da via | Sim — estados `VÁLIDO`, `ANULADO`, `CADUCADO`; nunca fotografia, n.º de processo, BI ou contactos (`RN-11.10.7`) | Fotografia com finalidade "identificação" (RF-C19-28) |
+| Secretaria Pedagógica (`MOD-PIN-05`) | Assinatura digitalizada do `DIR_GERAL` (título configurado) — 🟡 cargo por confirmar (`Q-C03-08`, `Q-028`; E1) | **Série anual por ano letivo** (`RN-11.10.3`, `RN-10.6`) + n.º da via | Sim — estados `VÁLIDO`, `ANULADO`, `CADUCADO`; nunca fotografia, n.º de processo, BI ou contactos (`RN-11.10.7`) | Fotografia com finalidade "identificação" (RF-C19-28) |
 
 - **Formato:** 🟡 ID-1 (85,60 × 53,98 mm) ou A4 com vários cartões para recorte e plastificação (`Q-C03-08`; E1).
 - **Frente:** nome e número da instituição (parâmetros), fotografia, nome completo, `N.º de Processo`, curso, classe, turma, **período**, ano letivo, validade (por defeito o ano letivo).
