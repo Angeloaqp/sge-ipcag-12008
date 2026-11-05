@@ -1403,7 +1403,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 | :--- | :--- | :--- | :--- | :--- |
 | Coordenação de Turno (`MOD-DIS-02`) | Relator; `COORD_TURNO` ou `DIR_TURMA` (títulos configurados) | Série anual por tipo | Não | **Documento interno** (`RN-15.8`): visível ao relator, ao `DIR_TURMA`, ao `COORD_TURNO`, ao `SUB_PED` e à Direção; nunca em declarações, certificados, guias ou portal; uma participação por aluno, sem dados de outros alunos (`RN-15.3.4`) |
 
-- Aluno, data e hora, tempo letivo ou local, tipo, gravidade (`LEVE`, `GRAVE`, `MUITO_GRAVE`), **descrição factual** (sem juízos sobre saúde ou família), testemunhas, medida aplicada.
+- Aluno, data e hora, tempo letivo ou local, tipo, gravidade (🟡 lista 46 — valores do regulamento interno, `Q-C13-04`, E3; proposta: `LEVE`, `GRAVE`, `MUITO_GRAVE`), **descrição factual** (sem juízos sobre saúde ou família), testemunhas, medida aplicada.
 - 🟡 **Provisória** — catálogo de tipos e medidas e prazo de conservação; validar em **E3** (`DEC-009`). Bloqueado por `Q-032`, `Q-APD-32`. Fonte: C13.
 
 ---

@@ -383,7 +383,7 @@ flowchart TD
    > 🟡 **Provisória** — tolerância de atraso (proposta 15 min; a escola refere 10–15 min) e efeito da falta por indisciplina no limite do `RN-03`: parâmetros; validar em **E3** (regulamento interno — `Q-C13-03`, `Q-C13-04`, `Q-032`) (`DEC-009`). Fonte: [[C13 - Disciplina e Comportamento|C13]].
 3. **Limite de Faltas e Alerta Precoce (`RN-03`, `RN-17.8`):** $\text{Limite\_Faltas}_d = F_{\text{mult}} \times T_{\text{sem}}$. Aos **80%** do limite, o sistema cria o alerta `FALTAS_80` para o `DIR_TURMA`, o `COORD_TURNO` e o `SUB_PED` e gera o aviso ao encarregado (gatilhos `FALTAS_50` e `FALTAS_80` — Fluxo 13); acima do limite, a situação passa a **`Retido por Faltas (RF)`**.
    > 🟡 **Provisória** — fator e forma da regra (anual com multiplicador ou por trimestre e por escalões) são parâmetros; validar com a resposta à `Q-LEG-01` a `03` (`COR-LEG-13`) (`DEC-009`). Fonte: [[Verificacao das Referencias Legais|LEG-VER]] §3.5.
-4. **Justificação de Faltas (`DIR_TURMA` + `SUB_PED` — DESC-L1 A8, DESC-RESP R3):** o encarregado ou o aluno entrega o **formulário numerado** (série anual `N.º __/IPCAG/ano` — `RN-10.6`) com intervalo de dias, motivo, documentos e disciplinas afetadas. Aprovado pelo **Director de Turma e pelo Coordenador para a Área Pedagógica**, o sistema **abate a falta automaticamente em todas as disciplinas afetadas** (o aluno deixa de ir a cada professor). Atestados seguem a regra da APD-11: o detalhe de saúde só no compartimento restrito.
+4. **Justificação de Faltas (`DIR_TURMA` + `SUB_PED` — DESC-L1 A8, DESC-RESP R3):** o encarregado ou o aluno entrega o **formulário numerado** (série anual `N.º __/IPCAG/ano` — `RN-10.6`) com intervalo de dias, motivo, documentos e disciplinas afetadas. Aprovado pelo **Director de Turma e pelo Coordenador para a Área Pedagógica** (🟡 o visto do `SUB_PED` é o parâmetro `exige_visto_sub_ped` — `Q-032`), o sistema **abate a falta automaticamente em todas as disciplinas afetadas** (o aluno deixa de ir a cada professor). Atestados seguem a regra da APD-11: o detalhe de saúde só no compartimento restrito.
 5. **Dispensa Médica (`DISP` — `RN-01`):** o `CHEFE_SEC_PED` carrega o atestado e o `SUB_PED` homologa `Dispensado (DISP)`; a disciplina fica sem notas numéricas e sai do denominador.
 6. **Lançamento na Mini-Pauta *Offline-First* (`PROF` — `RN-01`, `RN-10`):**
    - o professor lança **`MTP`**, **`PP`** e **`PT`** (`0` a `20`) mesmo sem rede; a aplicação guarda no `IndexedDB` cifrado e calcula no ecrã:
@@ -420,7 +420,7 @@ flowchart TD
 - **Contextos DDD:** *Coordenação & Docência* $\rightarrow$ *Secretaria Pedagógica* $\rightarrow$ *Direção Executiva* $\rightarrow$ *Auditoria & Estatística GEPE*.
 
 ### 4.2 Pré-condições e Gatilho de Início
-- **Pré-condições:** prazo de lançamento encerrado; Mini-Pautas completas (ou `DISP` / `RF` / `Transferido` / `Anulado`), sem provas de 2.ª chamada pendentes; no fim do ano, Prova Global lançada.
+- **Pré-condições:** prazo de lançamento encerrado; Mini-Pautas completas (ou `DISP` / `RF` / `Transferido` / `Anulado`), sem provas de 2.ª chamada pendentes 🟡 (E2 — `RN-01.3`); no fim do ano, Prova Global lançada.
 - **Gatilho de Início:** convocatória do Conselho de Notas trimestral ou final pela Subdireção Pedagógica.
 
 ### 4.3 Diagrama Visual em Raias (Swimlane Flowchart)
@@ -487,7 +487,7 @@ flowchart TD
 ```
 
 ### 4.4 Passo a Passo Detalhado do Caminho Feliz (*Happy Path*)
-1. **Validação Pré-Conselho (`DIR_TURMA`):** o validador confirma notas completas, **nenhuma prova de 2.ª chamada pendente** e **nenhum conflito de sincronização pendente na turma** (`IND-13`, `RN-17`); a turma passa a **`Em Conselho de Notas`** e os professores deixam de editar.
+1. **Validação Pré-Conselho (`DIR_TURMA`):** o validador confirma notas completas, **nenhuma prova de 2.ª chamada pendente** 🟡 (E2 — `RN-01.3`) e **nenhum conflito de sincronização pendente na turma** (`IND-13`, `RN-17`); a turma passa a **`Em Conselho de Notas`** e os professores deixam de editar.
 2. **Comportamento (`DIR_TURMA` → Conselho — `RN-15.7`):** o Director de Turma propõe a avaliação de comportamento de cada aluno, vendo as ocorrências e as faltas por indisciplina do trimestre; o conselho confirma ou altera e a decisão fica na ata. O comportamento é impresso no boletim (`DOF-06`) e **não entra** no cálculo de `CF`/`CA` nem na transição.
    > 🟡 **Provisória** — escala do comportamento (qualitativa ou numérica) e eventual efeito: parâmetros; validar em **E3** (regulamento interno — `Q-C13-02`) (`DEC-009`). Fonte: [[C13 - Disciplina e Comportamento|C13]].
 3. **Fecho do I Trimestre (`RN-05`):** a homologação ativa `lista_chamada_congelada = TRUE`; o `N.º de Ordem` nunca mais muda (saídas ficam na sua linha com `TRANSFERIDO` / `ANULADO`; entradas recebem `N + 1`).
@@ -545,7 +545,7 @@ flowchart TD
 
     subgraph RaiaTesouraria5 ["Raia 2: Tesouraria (OP_TES)"]
         E4{"Semaforo financeiro verde (RN-08)?"}
-        E5["OP_TES: Cobra o emolumento por disciplina (Fatura-Recibo)"]
+        E5["OP_TES: Cobra o emolumento por disciplina (Fatura-Recibo ou RUPE - a confirmar)"]
         E6["Sistema: Cadeira INSCRITA EM EXAME EXTRAORDINARIO"]
         E_BLOQ["Bloqueia a inscricao ate a regularizacao financeira"]
     end
@@ -577,7 +577,7 @@ flowchart TD
 
 ### 5.4 Passo a Passo Detalhado do Caminho Feliz (*Happy Path*)
 1. **Identificação de Pendências (`OP_PED`):** o processo do aluno destaca as disciplinas `Transitado com Deficiência`.
-2. **Inscrição e Validação Financeira (`OP_PED` $\rightarrow$ `OP_TES` — `RN-08`):** o `OP_PED` inscreve o aluno por disciplina; o sistema exige semáforo verde e o emolumento pago **por disciplina** (DESC-RESP §1), com **Fatura-Recibo** (Fluxo 07).
+2. **Inscrição e Validação Financeira (`OP_PED` $\rightarrow$ `OP_TES` — `RN-08`):** o `OP_PED` inscreve o aluno por disciplina; o sistema exige semáforo verde e o emolumento pago **por disciplina** (DESC-RESP §1), com **Fatura-Recibo** (Fluxo 07) — 🟡 se o emolumento for estatal e pago por RUPE, a prova é o comprovativo da RUPE (`RN-08`, `Q-034`, `Q-LEG-16`).
 3. **Confirmação (`OP_TES`):** com o emolumento pago, a cadeira passa a **`Inscrito em Exame Extraordinário`**.
 4. **Prova e Registo (`CHEFE_SEC_PED` + `SUB_PED` — `RN-10`):** o júri aplica a prova; o `CHEFE_SEC_PED` lança a nota e regista o termo no **livro de termos de exame** (a escola mantém livros separados de Termos de Exame, Certificados e Atas da PAP — DESC-RESP R17); o `SUB_PED` homologa a pauta (`DOF-07`).
    > 🟡 **Provisória** — a lei exige "um livro de registo e/ou uma base de dados", com número sequencial; **folha e termo** ficam como prática a confirmar (`COR-LEG-19`, `Q-LEG-14`) (`DEC-009`). A base legal do `DOF-07` está em aberto (`Q-023`).
@@ -981,7 +981,7 @@ flowchart TD
 > Capacidade [[C04 - Horarios e Distribuicao de Servico Docente|C04]] · Regras `RN-12.1` a `RN-12.18` · Documentos `DOF-15` (Mapa de Distribuição de Serviço Docente) e `DOF-16` (Horário Semanal) · US `US-HOR-01` a `11` · Decisão `DEC-004` (horário registado à mão ou importado; sem geração automática)
 
 ### 10.1 Atores Envolvidos (RBAC) e Contextos (DDD)
-- **Atores RBAC:** `SUB_PED` (formação de turmas e horários — DP n.º 93/21, art. 17.º, a), `COR-LEG-22`), `DIR_GERAL` (visto), `COORD_CURSO`, `COORD_TURNO`, `CHEFE_SEC_GER`, `SUB_ADM`, `DIR_TURMA`, `PROF`.
+- **Atores RBAC:** `SUB_PED` (formação de turmas e horários — DP n.º 93/21, art. 17.º, a), como referência: aplicação ao IPCAG por confirmar, `Q-LEG-13`; `COR-LEG-22`), `DIR_GERAL` (visto), `COORD_CURSO`, `COORD_TURNO`, `CHEFE_SEC_GER`, `SUB_ADM`, `DIR_TURMA`, `PROF`.
 - **Contextos DDD:** *Governação & Direção Executiva* $\leftrightarrow$ *Coordenação & Docência* $\leftrightarrow$ *Secretaria Geral & RH*.
 
 ### 10.2 Pré-condições e Gatilho de Início
@@ -1592,7 +1592,7 @@ flowchart TD
 1. **Autenticação (`RN-16.11`, `RN-16.12`):** palavra-passe com mínimo proposto de 10 caracteres (frases-passe aceites; sem troca periódica forçada); para os cargos com MFA, **código TOTP** validado pelo servidor local (funciona sem internet), SMS só se houver integração, ou código de recuperação impresso.
 2. **Sessões (`RN-16.13`):** `BALCAO` (Tesouraria e Secretarias: bloqueio de ecrã aos 15 min, máximo proposto de 8 h, **uma só sessão para o `OP_TES`**), `PESSOAL` (professores, desbloqueio com PIN) e `ADMINISTRACAO` (`ADMIN_TEC`, 10 min de inatividade). As permissões são avaliadas no servidor em cada pedido.
 3. **Trabalho *Offline* (`RN-16.15`):** só a Mini-Pauta e as faltas funcionam *offline*. O PIN local (6 dígitos, nunca enviado ao servidor) desbloqueia a chave do `IndexedDB` cifrado; o dispositivo aceita lançamentos até **7 dias** sem contacto com o servidor e guarda só as turmas do escopo atual.
-4. **Reautenticação (`RN-16.14`):** antes de cada ação crítica — reabrir ou homologar pautas, descodificar o anonimato, decidir conflitos, emitir Certificado, emitir Nota de Crédito, declarar fraude, homologar fecho de caixa, conceder bolsas, perdoar multa, homologar acordos, aprovar atribuições, exportar listas nominais — pede-se **palavra-passe + segundo fator** (o PIN nunca serve). Vale para um único pedido.
+4. **Reautenticação (`RN-16.14`):** antes de cada ação crítica — reabrir ou homologar pautas, descodificar o anonimato, decidir conflitos, emitir Certificado, emitir Nota de Crédito, declarar fraude, homologar fecho de caixa, conceder bolsas, perdoar multa, homologar acordos, aprovar atribuições, exportar listas nominais — pede-se **palavra-passe + segundo fator** nas contas com MFA e **palavra-passe** nas restantes (`RN-16.14.2`; o PIN nunca serve). Vale para um único pedido.
 5. **Recuperação Presencial (`RN-16.16`):** sem email: o titular apresenta o BI ao `CHEFE_SEC_GER` ou ao `ADMIN_TEC`, que emite um **código de uso único** (24 h); nas contas privilegiadas, exige-se a segunda aprovação. Ninguém repõe o próprio acesso. O titular é notificado no acesso seguinte.
    > 🟡 **Provisória** — comprimento da palavra-passe, número de tentativas, tempos de sessão, prazo *offline* de 7 dias, expiração dos dados de leitura (14 dias) e validade dos códigos são propostas; os valores fixam-se no [[08 - Requisitos Nao Funcionais|RNF-08]] e validam-se em **E1** (`Q-C14-03`, `Q-C14-11`) (`DEC-009`).
 

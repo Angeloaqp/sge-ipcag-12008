@@ -2005,7 +2005,7 @@ Parâmetros opcionais que avisam sem impedir a publicação: (1) máximo de temp
 2. A substituição posterior exige a referência do novo ato e a confirmação de um segundo papel de Direção (`SUB_PED` ou `SUB_ADM`) — **proposta**, porque a entidade que nomeia a direção de uma comparticipada (e de uma Comissão de Gestão) não está documentada (`Q-C14-01`). No DP n.º 93/21 (instituições públicas), as chefias são nomeadas pelo Director (art. 12.º) e, na sua ausência, substitui-o o subdirector que designar (art. 24.º).
 
 #### RN-16.5 — Cargos incompatíveis (segregação de funções)
-Decisão de controlo interno (§2), **proposta a confirmar** (`Q-C14-05`). Uma combinação proibida é recusada na aprovação (`HTTP 409 — CARGOS INCOMPATÍVEIS`):
+Decisão de controlo interno (§2), **proposta a confirmar** (`Q-C14-05`). Uma combinação proibida é recusada na aprovação (`HTTP 409 — CARGOS INCOMPATÍVEIS`). Pela mesma razão, ninguém aprova uma atribuição a si próprio (`HTTP 409 — APROVAÇÃO DE ATRIBUIÇÃO PRÓPRIA NÃO PERMITIDA`):
 
 | Papel A | Incompatível com | Fundamento |
 | :--- | :--- | :--- |

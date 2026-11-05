@@ -500,7 +500,7 @@ tags:
 - **História:** *Como* **Director de Turma (`DIR_TURMA`)** e **Subdirector Pedagógico (`SUB_PED`)**, *queremos* **consolidar a Pauta Geral da turma no Conselho de Notas, calcular a Classificação de Frequência (`CF`) e a Classificação Anual (`CA`) com a Prova Global (`PG`), apurar quem vai a Exame de Recurso, confirmar o comportamento e executar o motor de deliberação anual**, *para* **determinar quem aprova, quem transita com deficiência e quem fica retido, com o veto de Língua Portuguesa + disciplina nuclear só onde se aplica (10ª e 11ª)**.
 - **Rastreabilidade:** `RN-01`, `RN-02`, `RN-03`, `RN-05`, `RN-15.7`, `RN-17.14` | `Fluxo 04` | `US-DIS-04`, `US-PNL-10`, `US-PNL-12` | DESC-L1 A1, A7, A10; DESC-RESP §1 | `COR-LEG-13`, `COR-LEG-26`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E3` (conselho trimestral) / `E4` (deliberação anual, recurso)`.
-- **Pré-condições:** Mini-Pautas da turma sem células em branco e **sem provas de 2.ª chamada pendentes**; **nenhum conflito de sincronização pendente na turma** (`IND-13` — `US-PNL-10`); no fim do ano, `PG` lançada. Fórmulas, limiares e número máximo de deficiências 🟡 parametrizados (ponto de controlo **E2** — `Q-025`, `Q-031`, `Q-LEG-03`, `Q-LEG-06`).
+- **Pré-condições:** Mini-Pautas da turma sem células em branco e **sem provas de 2.ª chamada pendentes** 🟡 (E2 — `RN-01.3`); **nenhum conflito de sincronização pendente na turma** (`IND-13` — `US-PNL-10`); no fim do ano, `PG` lançada. Fórmulas, limiares e número máximo de deficiências 🟡 parametrizados (ponto de controlo **E2** — `Q-025`, `Q-031`, `Q-LEG-03`, `Q-LEG-06`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — `CF`, `PG` e `CA`):**
     - **Dado** um aluno com $M_1 = 8$, $M_2 = 9$ e $M_3 = 9$ ($CF = \text{round\_med}(26/3) = \text{round\_med}(8,67) = 9$ valores) que obtém `PG = 12` valores,
@@ -610,7 +610,7 @@ tags:
       2. $MPC = \text{round\_med}((MA_{10} + MA_{11} + MA_{12}) / 3)$;
       3. a **`MFC`** com os pesos homologados na matriz do curso, encerrada por `round_med` — sem contar o estágio duas vezes (`COR-LEG-16`) —, transitando o processo para **`Defendido e Homologado`** e gerando o PDF da **Ata de Defesa da PAP** (`DOF-08B`).
   - **Cenário 2 (Bloqueio — Pré-requisito da Defesa em Falta):**
-    - **Dado** que o aluno não tem `Nota_Estagio >= 10` lançada, **ou** não tem o parecer positivo do orientador, **ou** tem propina vencida / taxa de defesa por pagar,
+    - **Dado** que o aluno não tem a nota de estágio homologada (🟡 um eventual mínimo é parâmetro, não fixado no DOC-01 — `RN-06.3`), **ou** não tem o parecer positivo do orientador, **ou** tem propina vencida / taxa de defesa por pagar,
     - **Quando** o `COORD_CURSO` tenta passar o aluno a `Apto para Defesa` e agendar o júri,
     - **Então** o sistema bloqueia a operação (`HTTP 403` / `HTTP 422`) indicando o requisito pendente.
   - **Cenário 3 (Bloqueio 🟡 — Pesos da `MFC` por Homologar):**
@@ -684,7 +684,7 @@ tags:
   - **Cenário 2 (Bloqueio Anti-Fraude — Reutilizar um Borderô Esgotado):**
     - **Dado** que o borderô `OP-2026-778899` já está `Esgotado / Trancado`,
     - **Quando** alguém o tenta usar para a propina ou um emolumento de um 3º aluno (ou de outro mês),
-    - **Então** o sistema bloqueia com `HTTP 409 Conflict — ALERTA ANTI-FRAUDE`: *"Este comprovativo bancário (OP-2026-778899) já foi 100% consumido nos documentos FR 2026/00105 e FR 2026/00106. Saldo disponível: 0,00 Kz"*, e grava a tentativa em `audit_logs`.
+    - **Então** o sistema bloqueia com `HTTP 409 Conflict — ALERTA ANTI-FRAUDE`: *"Este comprovativo bancário (OP-2026-778899) já foi 100% consumido nos documentos RC 2026/00105 e RC 2026/00106 (formato ilustrativo — `Q-004`). Saldo disponível: 0,00 Kz"*, e grava a tentativa em `audit_logs`.
   - **Cenário 3 (Bloqueio — Talão com Valor a Menos Não Quita a Prestação):**
     - **Dado** um borderô com `saldo_disponivel = 10.000,00 Kz`,
     - **Quando** o `OP_TES` tenta liquidar uma prestação de `15.000,00 Kz` só com esse borderô,
@@ -1482,7 +1482,7 @@ tags:
   - **Cenário 2 (Bloqueio — Prestação já paga):**
     - **Dado** uma prestação `Paga` com multa incluída no recibo,
     - **Quando** o `SUB_ADM` tenta perdoar a multa,
-    - **Então** o sistema recusa com `HTTP 409 — MULTA JÁ LIQUIDADA: CORREÇÃO SÓ POR NOTA DE ESTORNO (RN-09)`.
+    - **Então** o sistema recusa com `HTTP 409 — MULTA JÁ LIQUIDADA: CORREÇÃO SÓ POR NOTA DE CRÉDITO (RN-09)`.
   - **Cenário 3 (Bloqueio — Perdão do principal):**
     - **Dado** a mesma prestação de Outubro,
     - **Quando** alguém tenta perdoar `16.500,00 Kz`,
@@ -1512,7 +1512,7 @@ tags:
 - **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Nota de Crédito no mês seguinte não altera o mês fechado):**
-    - **Dado** o recibo `RC IPCAG2026/000105` de `15.000,00 Kz` emitido em `20/10/2026` (canal TPA) e estornado em `05/11/2026`,
+    - **Dado** o recibo `RC 2026/00187` (formato ilustrativo — `Q-004`) de `15.000,00 Kz` emitido em `20/10/2026` (canal TPA) e estornado em `05/11/2026`,
     - **Quando** o `DIR_GERAL` gera a receita de Outubro e de Novembro,
     - **Então** Outubro inclui `+15.000,00 Kz` em TPA, Novembro inclui `−15.000,00 Kz` em TPA, e o relatório de Outubro gerado antes e depois da Nota de Crédito mostra os mesmos totais.
   - **Cenário 2 (Sucesso — Pagamento combinado de 2 canais):**
@@ -1897,7 +1897,7 @@ tags:
 - **Pré-condições:** Ocorrência `Registada` ou `Em Análise`; catálogo de medidas aprovado 🟡 (regulamento interno — `Q-C13-06`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Medida simples):**
-    - **Dado** uma ocorrência `LEVE`,
+    - **Dado** uma ocorrência `LEVE` (🟡 escala de gravidade do regulamento interno — lista 46, `Q-C13-04`; E3),
     - **Quando** o `COORD_TURNO` aplica a medida "retenção do cartão de estudante",
     - **Então** a ocorrência passa a `Medida Aplicada`, a medida fica com data, decisor e fundamento, e o `DIR_TURMA` é notificado no sistema.
   - **Cenário 2 (Bloqueio — Suspensão sem processo):**
@@ -2025,7 +2025,7 @@ tags:
   - **Cenário 2 (Bloqueio — Auto-aprovação):**
     - **Dado** um pedido de atribuição `COORD_CURSO` cujo titular é o próprio `SUB_PED`,
     - **Quando** o `SUB_PED` tenta aprová-lo,
-    - **Então** o sistema recusa com `HTTP 403 — APROVAÇÃO DE ATRIBUIÇÃO PRÓPRIA NÃO PERMITIDA` e o pedido fica a aguardar a aprovação do `DIR_GERAL`.
+    - **Então** o sistema recusa com `HTTP 409 — APROVAÇÃO DE ATRIBUIÇÃO PRÓPRIA NÃO PERMITIDA` (`RN-16.5`) e o pedido fica a aguardar a aprovação do `DIR_GERAL`.
   - **Cenário 3 (Bloqueio — Cadastro incompleto):**
     - **Dado** um cadastro sem N.º do BI,
     - **Quando** o `CHEFE_SEC_GER` tenta pedir a conta,
@@ -2180,7 +2180,7 @@ tags:
   - **Cenário 1 (Sucesso — Dia sem rede):**
     - **Dado** que o professor sincronizou na segunda-feira às `07h40`,
     - **Quando** na quarta-feira, sem rede, introduz o PIN e lança `MTP = 12`, `PP = 11`, `PT = 14` para o aluno n.º 7,
-    - **Então** o ecrã mostra `MT = 12` (`round_med(37/3) = round_med(12,33)`), a operação fica na fila cifrada com a sua chave de idempotência e sobe quando houver rede.
+    - **Então** o ecrã mostra `M = 12` (`round_med(37/3) = round_med(12,33)`), a operação fica na fila cifrada com a sua chave de idempotência e sobe quando houver rede.
   - **Cenário 2 (Exceção — PIN errado 5 vezes):**
     - **Dado** 4 operações na fila,
     - **Quando** alguém introduz 5 PIN errados,
@@ -2432,7 +2432,7 @@ tags:
 - **Prioridade (proposta):** `Must` | **Entrega:** `E3`.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Denominador correto):**
-    - **Dado** que a Mini-Pauta de Matemática da `GE10A-M` tem 40 linhas, das quais 1 é de um aluno `TRANSFERIDO` em Outubro, e 27 dos 39 restantes têm `MT1 >= 10` com soma de `MT1 = 429`,
+    - **Dado** que a Mini-Pauta de Matemática da `GE10A-M` tem 40 linhas, das quais 1 é de um aluno `TRANSFERIDO` em Outubro, e 27 dos 39 restantes têm `M1 >= 10` com soma de `M1 = 429`,
     - **Quando** o Director de Turma abre o painel,
     - **Então** vê aproveitamento de `69,2%` (27 ÷ 39) e média `11,0` (429 ÷ 39, uma casa decimal, sem `round_med`).
   - **Cenário 2 (Bloqueio — Outra turma e finanças):**
@@ -2468,7 +2468,7 @@ tags:
 - **Prioridade (proposta):** `Should` | **Entrega:** `E3`.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Veto LP + nuclear):**
-    - **Dado** um aluno da 10ª com `max_deficiencias_transicao = 2`, Língua Portuguesa com `MT1 = 9` e Contabilidade Geral (nuclear) com `MT1 = 8`, e as restantes disciplinas com `MT1 >= 10`,
+    - **Dado** um aluno da 10ª com `max_deficiencias_transicao = 2`, Língua Portuguesa com `M1 = 9` e Contabilidade Geral (nuclear) com `M1 = 8`, e as restantes disciplinas com `M1 >= 10`,
     - **Quando** o cálculo diário corre,
     - **Então** o aluno aparece em `RISCO_ELEVADO` com o motivo *"Veto Língua Portuguesa + disciplina nuclear (RN-02 Caso 3)"*.
   - **Cenário 2 (Sucesso — Risco moderado):**
