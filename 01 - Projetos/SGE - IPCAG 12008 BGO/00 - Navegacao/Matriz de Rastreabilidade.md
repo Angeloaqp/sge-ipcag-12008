@@ -25,7 +25,7 @@ tags:
 > [!important] Como foi feita
 > - Gerada a partir das tabelas do [[07 - Catalogo de Requisitos Funcionais|RF-07]] `2.0-rc1` (224 RF). Cada linha do catálogo é a ligação RF → objetivo, regra, US, módulo, documento e tabela; esta nota agrega-as por objetivo e por capacidade e verifica a cobertura nos dois sentidos (PLN-00 §3, princípio 4: "um requisito sem objetivo é cortado; um objetivo sem requisito é uma lacuna").
 > - **Universo de US:** as 32 US da v1.2 e as 84 dos épicos novos (`EP-PIN` 9, `EP-HOR` 11, `EP-COB` 15, `EP-COM` 8, `EP-DIS` 6, `EP-CTA` 15, `EP-PNL` 12, `EP-PAS` 8) = **116**, lidas nos títulos do DOC-03 e das notas de capacidade.
-> - **Verificações automáticas feitas em 2026-11-03:** todas as regras citadas existem no DOC-01 `2.0-rc1`; todos os módulos existem no DOC-04; todas as tabelas existem no DOC-05 v1.2 ou numa nota-fonte (ver §3.6).
+> - **Verificações automáticas feitas em 2026-11-03:** todas as regras citadas existem no DOC-01 `2.0-rc1`; todos os módulos existem no DOC-04; todas as tabelas existem no DOC-05 v1.2 ou numa nota-fonte (ver §3.6). **Atualização 2026-11-05 ([[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]]):** o DOC-05 `2.0-rc1` já tem as 116 tabelas; todas as tabelas citadas existem, exceto `avaliacoes_desempenho` (condicional).
 > - Se o catálogo mudar, esta nota tem de ser regenerada.
 
 ---
@@ -220,7 +220,7 @@ Ligações tiradas da VIS-06 §3 (coluna "Capacidades"). A C20 não tem objetivo
 | User stories (9) | `US-COM-01`, `US-COM-02`, `US-COM-03`, `US-COM-04`, `US-COM-05`, `US-COM-06`, `US-COM-07`, `US-COM-08`, `US-CTA-14` |
 | Módulos | `MOD-COM-01`, `MOD-COM-02`, `MOD-COM-03`, `MOD-COM-04` |
 | Documentos | `DOF-06`, `DOF-11`, `DOF-21`, `DOF-22` |
-| Tabelas | `alunos`, `avisos`, `consentimentos_comunicacao`, `contactos_encarregado`, `convocatorias`, `modelos_mensagem`, `series_numeracao_documental`, `usuarios_sistema` |
+| Tabelas | `alunos`, `avisos`, `consentimentos`, `contactos_encarregado`, `convocatorias`, `modelos_mensagem`, `series_numeracao_documental`, `usuarios_sistema` |
 
 #### C13 — Disciplina e comportamento
 
@@ -363,6 +363,9 @@ Não são erros: o RF serve mais diretamente outro objetivo do que os listados p
 | C17 | O-09 | RF-C17-16 |
 
 ### 3.6 Tabelas citadas que ainda não estão no DOC-05
+> [!success] Fechado em 2026-11-05
+> O DOC-05 `2.0-rc1` integrou as 72 tabelas novas (116 no total; DOC-05 §6). A divergência da C15 ficou resolvida no DOC-05 §7.1 #1 (3 tabelas no Grupo 6), e os parâmetros institucionais estão em `parametros_instituicao`. A única tabela citada que não existe é `avaliacoes_desempenho`, condicional à `Q-036` (`ALT-05-24`). O texto abaixo fica como histórico.
+
 O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11-03. **68 tabelas** citadas no catálogo existem só nas notas de capacidade e na APD-11 (`ALT-05-nn`) e têm de entrar no DOC-05 pela integração do mapa INT-V2 §2.4: C03 (8), C04 (10), C10 (10), C12 (5), C13 (7), C14 (8), C15 (3), C16 (4) e APD-11 (`avisos_privacidade`, `avisos_entregues`, `consentimentos`, `pedidos_titulares`, `politicas_conservacao`, `execucoes_conservacao`, `comunicacoes_destinatarios`, `incidentes_seguranca`, `documentos_saude`, `informacao_saude_matricula`, `consultas_portal_verificacao`, `requerimentos_declaracao`, `avaliacoes_desempenho`).
 - **Divergência a resolver:** o mapa INT-V2 §2.4 diz que a C15 não tem tabelas; a CAP-C15 §9 propõe `indicadores_catalogo`, `instantaneos_indicadores` e `alertas_gestao`.
 - O `RF-C01-07` (parâmetros institucionais) não tem tabela em nenhuma fonte: o INT-V2 §3.2 exige que o DOC-05 tenha onde os guardar.
@@ -376,9 +379,9 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | L-RF-01 | Migração (C17) sem US nem módulo | DOC-03 (épico novo) e DOC-04 | E1 (*Definition of Ready*) |
 | L-RF-02 | Operação (C18) sem US | DOC-03 ou aceitação por RNF-08 | E1/E2 |
 | L-RF-03 | Funções próprias da APD (9 RF) sem US | DOC-03 (`EP-APD`) | E1/E2 |
-| L-RF-04 | Parâmetros institucionais sem US nem tabela | DOC-03 (`US-GOV-01`), DOC-05 | E1 |
+| L-RF-04 | Parâmetros institucionais sem US *(a tabela já existe: `parametros_instituicao` — fechado em 2026-11-05)* | DOC-03 (`US-GOV-01`) | E1 |
 | L-RF-05 | Catálogo de indicadores e parâmetros do regulamento sem US | DOC-03 (`EP-PNL`, `EP-DIS`) | E3 |
-| L-RF-06 | 68 tabelas novas por integrar no DOC-05; divergência das tabelas da C15 | DOC-05; INT-V2 §2.4 | Todas |
+| ~~L-RF-06~~ | ~~68 tabelas novas por integrar no DOC-05; divergência das tabelas da C15~~ — **fechada em 2026-11-05**: o DOC-05 tem as 116 tabelas ([[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]) | DOC-05 §6 | — |
 | L-RF-07 | Entregas pendentes: central de avisos (`Q-037`, 7 RF) e núcleo da C13 (`Q-038`, 3 RF) | REG-12; VIS-06 (pedido de alteração) | E3 |
 | L-RF-08 | Expediente geral fora do mapa C01–C20 (`Q-039`) | VIS-06; REG-12 | Âmbito |
 

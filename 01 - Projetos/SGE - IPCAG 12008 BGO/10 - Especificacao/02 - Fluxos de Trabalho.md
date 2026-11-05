@@ -1614,6 +1614,13 @@ flowchart TD
 
 ## Alterações da v2.0
 
+### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
+
+- `RF-P-APD-nn` → `RF-C19-nn` (issue #1).
+- Séries anuais de numeração citam `RN-10.6`; `RN-11.14` só para os boletins (issue #2).
+- Marcas 🟡 em falta: 2.ª chamada (`RN-01.3`), visto do `SUB_PED` (`Q-032`), emolumento por RUPE (`Q-034`); reautenticação com 2.º fator só nas contas com MFA; DP n.º 93/21 como referência (`Q-LEG-13`) (issue #4).
+
+
 > [!note] Origem e regra
 > Integração decidida na `DEC-009` e coordenada pelo [[00.2 - Mapa de Integracao v2.0|Mapa de Integração (INT-V2)]] §4. O conteúdo substituído fica registado aqui com a sua origem. Os números das sub-regras novas de `RN-01` (prova de 2.ª chamada) e de `RN-09` (crédito do aluno) são atribuídos no [[01 - Dominio e Regras|DOC-01]]; este documento cita só a regra-mãe.
 

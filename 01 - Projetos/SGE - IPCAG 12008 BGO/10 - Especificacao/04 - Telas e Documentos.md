@@ -1444,6 +1444,14 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 ## Alterações da v2.0
 
+### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
+
+- `RF-P-APD-nn` → `RF-C19-nn` e `RNF-P-APD-nn` → RNF finais (issue #1).
+- Eventos do `MOD-GOV-05` com os nomes do catálogo do DOC-05 §4.9 (issue #2).
+- Rótulos de admissão mapeados à lista 7; `TRANSFERENCIA_DEPOSITO_BANCARIO`; talão falso via `INVALIDADO_POR_FRAUDE`; estados de verificação da lista 104; cartão com a lista 56 (issue #3).
+- Gravidade disciplinar marcada 🟡 (lista 46) (issue #4).
+
+
 > [!info] Origem e regra
 > Integração decidida em `DEC-009` e coordenada pelo [[00.2 - Mapa de Integracao v2.0|Mapa de Integração]] (§4, linha DOC-04). O conteúdo substituído não se apaga sem rasto: esta lista diz o que mudou e de onde veio. A versão `1.2` anterior está no histórico do vault.
 

@@ -840,6 +840,13 @@ Legenda: **L** lê · **E** escreve · **H** homologa · `—` sem acesso · *(E
 
 ## 7. Alterações da v2.0
 
+### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
+
+- `RF-P-APD-nn` → `RF-C19-nn` e `RNF-P-APD-nn` → RNF finais (issue #1).
+- §4.9: eventos novos `ANO_LETIVO_HOMOLOGADO` e `SUBSTITUICAO_DOCENTE` (issue #2).
+- Atributos novos: representante legal em `candidaturas_10a`, título do relatório de estágio em `processos_13_classe`, designação complementar em `parametros_instituicao` (issue #8).
+
+
 > [!info] Versão `2.0-rc1` (2026-11-02)
 > Integrada segundo o [[00.2 - Mapa de Integracao v2.0|Mapa de Integração]] (§4, linha DOC-05). A v1.2 completa continua nos quadros do FigJam até ao congelamento. A versão `2.0` só sai depois da verificação de consistência entre os DOC-01 a DOC-05.
 

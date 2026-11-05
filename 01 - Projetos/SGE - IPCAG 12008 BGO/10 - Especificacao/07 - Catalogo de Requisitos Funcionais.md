@@ -25,7 +25,7 @@ tags:
 > - **Âmbito e objetivos:** [[06 - Visao e Ambito|VIS-06]] (`O-01` a `O-13`, §5.2) | **Decisões:** [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]] (`DEC-001` a `DEC-009`, `Q-001` a `Q-039`)
 > - **Especificação:** [[01 - Dominio e Regras]] (RN) → [[02 - Fluxos de Trabalho]] → [[03 - User Stories]] (US) → [[04 - Telas e Documentos]] (MOD, DOF) → [[05 - Modelagem de Dados]] (tabelas)
 > - **Rastreabilidade e cobertura:** [[Matriz de Rastreabilidade]]
-> - **Fontes:** notas de `Capacidades Novas/` ([[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribuicao de Servico Docente|C04]], [[C10 - Cobranca, Relatorios Financeiros e Conciliacao|C10]], [[C12 - Comunicacao com Encarregados e Alunos|C12]], [[C13 - Disciplina e Comportamento|C13]], [[C14 - Gestao de Contas e Acesso|C14]], [[C15 - Paineis de Gestao da Direcao|C15]], [[C16 - Passagem de Ano Letivo|C16]]) · [[11 - Protecao de Dados (APD)|APD-11]] §7 · [[10 - Migracao de Dados e Implantacao|MIG-10]] §11 · [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] · [[Achados dos Documentos Reais - Lote 1|DESC-L1]] · [[Sintese das Respostas da Fase B|DESC-RESP]] · [[Verificacao das Referencias Legais|LEG-VER]] §5
+> - **Fontes:** notas de capacidade, hoje arquivadas em `99 - Arquivo/Fontes Integradas v2.0/` ([[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribuicao de Servico Docente|C04]], [[C10 - Cobranca, Relatorios Financeiros e Conciliacao|C10]], [[C12 - Comunicacao com Encarregados e Alunos|C12]], [[C13 - Disciplina e Comportamento|C13]], [[C14 - Gestao de Contas e Acesso|C14]], [[C15 - Paineis de Gestao da Direcao|C15]], [[C16 - Passagem de Ano Letivo|C16]]) · [[11 - Protecao de Dados (APD)|APD-11]] §7 · [[10 - Migracao de Dados e Implantacao|MIG-10]] §11 · [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] · [[Achados dos Documentos Reais - Lote 1|DESC-L1]] · [[Sintese das Respostas da Fase B|DESC-RESP]] · [[Verificacao das Referencias Legais|LEG-VER]] §5
 
 > [!important] Estado deste documento
 > - **Rascunho `2.0-rc1`**, criado na integração da especificação v2.0 (`DEC-009`, mapa [[00.2 - Mapa de Integracao v2.0|INT-V2]] §4). Fecha as lacunas **L4** (priorização) e **L6** (capacidades em falta) do PLN-00 do lado do catálogo.
@@ -532,7 +532,7 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 - **0** objetivos sem RF; **0** capacidades dentro do âmbito sem RF; **0** das 116 US sem RF.
 - **40 RF sem US:** C17 (16), C18 (7), C19 (9), e `RF-C01-07`, `RF-C03-15`, `RF-C09-11`, `RF-C10-10`, `RF-C10-24`, `RF-C10-25`, `RF-C13-02`, `RF-C15-01`.
 - **22 RF sem módulo** no DOC-04 (consola de migração e operação).
-- **68 tabelas** citadas ainda não estão no DOC-05 (v1.2 em 2026-11-03); a C15 tem tabelas na nota de capacidade mas não no mapa INT-V2 §2.4.
+- ~~**68 tabelas** citadas ainda não estão no DOC-05 (v1.2 em 2026-11-03); a C15 tem tabelas na nota de capacidade mas não no mapa INT-V2 §2.4.~~ **Fechado em 2026-11-05:** o DOC-05 `2.0-rc1` tem as 116 tabelas e a C15 está no Grupo 6; só `avaliacoes_desempenho` fica condicional (`Q-036`).
 
 ---
 
@@ -541,3 +541,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | Versão | Data | Alteração |
 | :---: | :---: | :--- |
 | 2.0-rc1 | 2026-11-03 | Criação na integração v2.0 (`DEC-009`, INT-V2 §4): 224 RF para C01–C19 a partir das notas de capacidade, da APD-11 §7.1 (`RF-C19-nn`), da MIG-10 §11 (`RF-C17-nn`), da OPS-09, do DESC-L1 (A1–A16), do DESC-RESP (R1–R31), da LEG-VER §5 (`COR-LEG`) e do REG-12; prioridade MoSCoW e entrega propostas para a Fase E; estado segundo os pontos de controlo da `DEC-009`; fora do âmbito e candidatos (`CAND-01` expediente geral — `Q-039`); resumo; [[Matriz de Rastreabilidade]]. |
+| 2.0-rc1 | 2026-11-05 | Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]: `RF-P-APD`/`RNF-P-APD` → IDs finais (#1); coluna Tabelas atualizada e `consentimentos` (#2); §4.4 e fontes atualizadas (#10) |

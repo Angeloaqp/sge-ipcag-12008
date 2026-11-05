@@ -2779,6 +2779,14 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 
 ## Alterações da v2.0
 
+### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
+
+- `RF-P-APD-nn` → `RF-C19-nn` (issue #1).
+- Tabelas inexistentes substituídas: `candidaturas_10a`, `conta_corrente_propinas`, `historico_externo_transcricoes`, `exames_extraordinarios`, `tabelas_precos_emolumentos`, `itens_recibo`, `consentimentos` (issue #2).
+- Estados alinhados com o DOC-01: Trimestre (`Encerrado Oficialmente`), 13ª Classe (`Em Estágio / Projecto Tecnológico`, `Apto para Defesa`), `Não Transita (Retido)` (issue #3).
+- "Nota de Estorno" → "Nota de Crédito"; `MT1` → `M1`; marcas 🟡 em falta; exemplos fiscais uniformizados; auto-aprovação com `HTTP 409` (issue #4).
+
+
 > [!note] Origem
 > Integração decidida na `DEC-009` e coordenada pelo [[00.2 - Mapa de Integracao v2.0|Mapa de Integração (INT-V2)]] §4 (linha DOC-03). O conteúdo substituído fica registado aqui com a sua origem; a versão `1.2` desta nota é a última anterior à integração. Os números das sub-regras novas de `RN-01` (prova de 2.ª chamada) e de `RN-09` (crédito do aluno) são atribuídos no [[01 - Dominio e Regras|DOC-01]]; este documento cita só a regra-mãe.
 

@@ -6,7 +6,7 @@ aliases:
   - "Domínio e Regras SGE"
 created: 2026-10-31
 updated: 2026-11-02
-status: concluido
+status: ativo
 version: "2.0-rc1"
 doc_id: "DOC-01"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
@@ -2327,6 +2327,14 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] (2026-11-05)
+
+- `RF-P-APD-nn` → `RF-C19-nn` nas permissões e regras (issue #1).
+- §3.14: transição `EmFila` → `Expirado`, que estava no diagrama mas faltava na tabela (issue #3).
+- `RN-16.5`: a auto-aprovação de uma atribuição é recusada com `HTTP 409` (issue #4).
+- Estado do documento passa a `ativo` enquanto a versão for `2.0-rc1` (issue #10).
+
 
 > [!info] Rastreabilidade das alterações (INT-V2 §3.14)
 > Versão `2.0-rc1`, de 2026-11-02, integrada segundo o [[00.2 - Mapa de Integracao v2.0|Mapa de Integração]] (§4, linha DOC-01). O conteúdo substituído da v1.2 fica descrito abaixo; a v1.2 completa continua nos quadros do FigJam até ao congelamento. A versão `2.0` só sai depois da verificação de consistência entre os DOC-01 a DOC-05.

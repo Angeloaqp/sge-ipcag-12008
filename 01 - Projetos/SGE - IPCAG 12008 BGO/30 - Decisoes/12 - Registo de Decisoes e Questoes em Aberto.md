@@ -367,9 +367,9 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 
 | Prefixo | Nota de origem | Tema |
 | :--- | :--- | :--- |
-| `Q-LEG-01` … `Q-LEG-20` | [[Verificacao das Referencias Legais\|LEG-VER]] §6 | Regulamento de avaliação do ESTP, admissão, 13ª Classe, faturação e IVA |
+| `Q-LEG-01` … `Q-LEG-23` | [[Verificacao das Referencias Legais\|LEG-VER]] §6 | Regulamento de avaliação do ESTP, admissão, 13ª Classe, faturação e IVA |
 | `Q-APD-nn` | [[11 - Protecao de Dados (APD)\|APD-11]] | Proteção de dados, consentimento, conservação, transferência internacional |
-| `Q-C10-nn`, `Q-C14-nn`, `Q-C15-nn` | Notas da pasta `Capacidades Novas` | Cobrança e conciliação, contas e acesso, painéis da Direção |
+| `Q-C03-nn`, `Q-C04-nn`, `Q-C10-nn`, `Q-C12-nn`, `Q-C13-nn`, `Q-C14-nn`, `Q-C15-nn`, `Q-C16-nn` | Notas de capacidade em `99 - Arquivo/Fontes Integradas v2.0/` (88 citadas na especificação — VER-01 §3) | Processo individual, horários, cobrança e conciliação, comunicação, disciplina, contas e acesso, painéis da Direção, passagem de ano |
 | Questões próprias | [[08 - Requisitos Nao Funcionais\|RNF-08]], [[09 - Integracoes, Infraestrutura e Operacao\|OPS-09]], [[10 - Migracao de Dados e Implantacao\|MIG-10]] | Requisitos não funcionais, integrações e operação, migração |
 
 ---

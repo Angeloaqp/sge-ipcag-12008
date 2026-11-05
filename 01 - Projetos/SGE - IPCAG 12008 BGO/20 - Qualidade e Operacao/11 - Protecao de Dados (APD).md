@@ -733,7 +733,7 @@ Proposta a validar com a especificação da C12 (`DEC-003`). As mensagens podem 
 
 | ID | Onde | Alteração proposta | Requisito |
 | :---: | :--- | :--- | :--- |
-| ALT-04-01 | **Novo módulo `MOD-GOV-06` — Proteção de Dados** (Workspace 01) | Pedidos dos titulares, consentimentos, políticas e lotes de conservação, incidentes, registo de comunicações e relatório de acesso. Perfis: `DIR_GERAL` e o ponto de contacto de proteção de dados, que não é um dos 12 cargos (`Q-APD-04`). | RF-P-APD-08…13, 22, 23 |
+| ALT-04-01 | **Novo módulo `MOD-GOV-09` — Proteção de Dados** (Workspace 01; era `MOD-GOV-06`, renumerado no DOC-04 por conflito com a C14) | Pedidos dos titulares, consentimentos, políticas e lotes de conservação, incidentes, registo de comunicações e relatório de acesso. Perfis: `DIR_GERAL` e o ponto de contacto de proteção de dados, que não é um dos 12 cargos (`Q-APD-04`). | RF-P-APD-08…13, 22, 23 |
 | ALT-04-02 | `MOD-PED-ADM` e `DOF-01` | Aviso AV-01; identificação do representante legal do candidato. | RF-P-APD-01, 03 |
 | ALT-04-03 | `DOF-02` | Duas versões: pública minimizada e integral de arquivo. | RF-P-APD-15 |
 | ALT-04-04 | `MOD-PED-MAT` e `DOF-03` | Aviso AV-02 (cláusula do §4.4) e caixas de consentimento separadas; atestado médico só como "entregue sim/não"; assinatura do **representante legal**. | RF-P-APD-01, 02, 07 |
@@ -774,7 +774,7 @@ Proposta a validar com a especificação da C12 (`DEC-003`). As mensagens podem 
 | **Q-APD-01** | Quem é a **pessoa coletiva responsável** pelo tratamento (o IPCAG tem personalidade jurídica própria ou é a Diocese de Caxito)? Quem assina a notificação à APD? Os documentos reais são assinados por uma **Comissão de Gestão** e usam os n.ºs **12008 e 8009** (DESC-L1 A3, A4). | Notificação; AV-nn | A/B |
 | **Q-APD-02** | O IPCAG é tratado como **sector privado/cooperativo** ou **sector público** (escola comparticipada)? No sector público, os ficheiros exigem diploma legal (art. 40.º). Os cabeçalhos reais mostram "Governo da Província do Bengo / Gabinete Provincial da Educação" e não a Diocese, e o pessoal tem n.º de agente (DESC-L1 A14, A15). | Bases legais | B |
 | **Q-APD-03** | O IPCAG **já notificou a APD** algum tratamento (alunos, pessoal, videovigilância)? Tem algum registo ou número de processo na APD? | Plano de conformidade | B |
-| **Q-APD-04** | Quem será o **ponto de contacto de proteção de dados** (não é um dos 12 cargos)? Quem gere as contas de utilizador (C14)? | `MOD-GOV-06`; TRT-02 | A |
+| **Q-APD-04** | Quem será o **ponto de contacto de proteção de dados** (não é um dos 12 cargos)? Quem gere as contas de utilizador (C14)? | `MOD-GOV-09`; TRT-02 | A |
 | **Q-APD-05** | Para que serve o **atestado médico** pedido na matrícula (a lista de documentos real ainda não foi recebida — DESC-L1 §6)? É exigido por norma do MED? Que regra do regulamento interno se aplica às faltas por doença sem atestado? | TRT-11; CON-01/02 | B |
 | **Q-APD-06** | Para que se usam hoje as **fotografias** dos alunos (processo, cartão, sítio, redes sociais, festas)? | TRT-12; CON-03 | B |
 | **Q-APD-07** | As **pautas de admissão** e as **pautas gerais** são afixadas em público ou publicadas na internet? Com que colunas? Há norma do MED (ex.: DE n.º 361/26) que obrigue à publicação? | TRT-08, TRT-17; PC-03 | B |
