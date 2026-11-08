@@ -82,11 +82,11 @@ tags:
 
 ---
 
-### `US-GOV-01`: Configurar e Homologar Ano Letivo e Calendário dos 3 Trimestres Letivos
-- **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)**, *quero* **criar o Ano Letivo e parametrizar as janelas temporais do I, II e III Trimestres, da Prova Global e das épocas de Exame de Recurso e Exame Extraordinário**, *para* **garantir que todas as operações de matrícula e avaliação respeitam o calendário escolar fixado pelo decreto executivo anual do MED (2025/2026: DE n.º 686/25 — `COR-LEG-07`)**.
-- **Rastreabilidade:** `RN-01`, `RN-05`, `RN-10`, `RN-18.1` | `Fluxo 01` e `Fluxo 04` | `US-PAS-01`, `US-PAS-05`.
+### `US-GOV-01`: Configurar e Homologar Ano Letivo, Calendário dos 3 Trimestres e Parâmetros Institucionais
+- **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)** e **Director Geral (`DIR_GERAL`)**, *quero* **configurar e homologar os parâmetros institucionais de instalação única (designação, número de escola 12008/8009, NIF, cabeçalhos, rodapés e rótulos oficiais) e criar o Ano Letivo parametrizando as janelas dos 3 trimestres, prova global e exames**, *para* **garantir a padronização oficial de todos os documentos emitidos (`modelos_documento`) e assegurar que as operações escolares respeitam o calendário fixado pelo MED (2025/2026: DE n.º 686/25 — `COR-LEG-07`)**.
+- **Rastreabilidade:** `RF-C01-07`, `RF-C09-07` (cabeçalho/rodapé e assinaturas) | `RN-01`, `RN-05`, `RN-10.6`, `RN-10.7`, `RN-18.1` | `DEC-001` | `MOD-GOV-01` | `parametros_instituicao`, `modelos_documento` | `Fluxo 01` e `Fluxo 04` | `US-PAS-01`, `US-PAS-05`, `US-CTA-15`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
-- **Pré-condições:** Utilizador autenticado com perfil `SUB_PED` (cria) — a homologação é do `DIR_GERAL`; inexistência de outro Ano Letivo com o mesmo código (ex.: `2026/2027`).
+- **Pré-condições:** Utilizador autenticado com perfil `SUB_PED` ou `DIR_GERAL` (cria/edita parâmetros) — homologação exclusiva do `DIR_GERAL`; inexistência de outro Ano Letivo com o mesmo código (ex.: `2026/2027`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Criação e Homologação do Ano Letivo com o calendário real):**
     - **Dado** que o `SUB_PED` preenche o código `2026/2027`, data de início `01/09/2026`, data de fim `31/07/2027` e os intervalos sem sobreposição do I Trimestre (setembro a dezembro), do II Trimestre (janeiro a março/abril), do III Trimestre com a Prova Global (maio–junho), dos Exames Extraordinários (maio) e dos Exames de Recurso (julho) — calendário descrito pela escola ([[Sintese das Respostas da Fase B|DESC-RESP]] §3),
@@ -108,7 +108,11 @@ tags:
     - **Dado** que o Ano Letivo `2026/2027` ainda está `Em Encerramento` (pendências no painel de encerramento — `US-PAS-01`),
     - **Quando** o `SUB_PED` tenta abrir o `I Trimestre` de `2027/2028`,
     - **Então** o sistema recusa com `HTTP 422`: *"O I Trimestre só abre depois de o Ano Letivo anterior estar Encerrado"*, e mostra as pendências do ano anterior.
-- **Pós-condições e Efeitos Colaterais:** Registo criado em `anos_letivos`, `trimestres_letivos` e `quadros_vagas_admissao`; evento `ANO_LETIVO_HOMOLOGADO` registado em `audit_logs`.
+  - **Cenário 6 (Sucesso — Parametrização Institucional, Números da Escola, Rótulos e Modelos de Documento — `RF-C01-07`, `RF-C09-07`, `RN-10.6`, `RN-10.7`, `DEC-001`):**
+    - **Dado** que o `DIR_GERAL` (ou o `SUB_PED` sob delegação) acede à consola de parâmetros institucionais (`MOD-GOV-01`),
+    - **Quando** regista e homologa os parâmetros da escola em `parametros_instituicao`: designação oficial (*Instituto Politécnico Católico Alda Geraldo - IPCAG*), NIF institucional, número de escola por tipologia documental (**12008** para o circuito escolar/pedagógico e **8009** para certidões e correspondência com a tutela provincial / Governo do Bengo — `DEC-001`), cabeçalho oficial com a Insígnia da República de Angola e emblema escolar, rodapé com os códigos de procedimento (`IPCAG.SG-ACE` e `DEE-PEEP-001-ACE`), e os rótulos impressos padrão ("Período" para Turno, "Cadeira" para Disciplina — `INT-V2` §3.5),
+    - **Então** todos os modelos de documentos (`modelos_documento`, `DOF-01` a `DOF-26`) herdam automaticamente essa identidade visual e de numeração, e nos blocos de assinatura exibem o título institucional configurado (`US-CTA-15`) e o nome do titular com atribuição ativa na data de emissão do documento (`RF-C09-07`).
+- **Pós-condições e Efeitos Colaterais:** Registo criado/atualizado em `parametros_instituicao`, `modelos_documento`, `anos_letivos`, `trimestres_letivos` e `quadros_vagas_admissao`; eventos `PARAMETROS_INSTITUICAO_HOMOLOGADOS` e `ANO_LETIVO_HOMOLOGADO` registados em `audit_logs`.
 
 ---
 
@@ -3110,6 +3114,12 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 ---
 
 ## Alterações da v2.0
+
+### Parâmetros institucionais e modelos de documento (2026-11-08 — Issue #16)
+
+- Atualizada a `US-GOV-01` com o **Cenário 6**, cobrindo a parametrização institucional de instalação única (`RF-C01-07`) e completando a herança de modelos de documento com cabeçalhos, rodapés e blocos de assinatura (`RF-C09-07`), em conformidade com a `DEC-001` e `US-CTA-15`.
+- Cobertura funcional detalhada: designação oficial (*Instituto Politécnico Católico Alda Geraldo - IPCAG*), números de escola 12008 e 8009 por tipologia de documento, NIF institucional, códigos regulamentares de cabeçalho/rodapé (`IPCAG.SG-ACE`, `DEE-PEEP-001-ACE`), rótulos impressos configuráveis ("Período" = Turno, "Cadeira" = Disciplina) e herança em `modelos_documento` (`DOF-01` a `DOF-26`).
+- Fecha a lacuna `L-RF-04` da Matriz de Rastreabilidade.
 
 ### Épico 17 (EP-APD) — Governação da Proteção de Dados (2026-11-08 — Issue #15)
 
