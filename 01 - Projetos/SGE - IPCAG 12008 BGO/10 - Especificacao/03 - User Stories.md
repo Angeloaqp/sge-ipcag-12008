@@ -656,8 +656,8 @@ tags:
 
 ### `US-TES-02`: Conceder e Homologar Bolsas de Estudo (50%/100%), Isenções Diocesanas e Descontos de Irmãos
 - **História:** *Como* **Subdirector Administrativo (`SUB_ADM`) e Director Geral (`DIR_GERAL`)**, *quero* **associar bolsas de estudo (`50%`, `100%`, quotas sociais da Diocese de Caxito, descontos de irmãos ou filhos de funcionários) à matrícula do aluno**, *para* **que o sistema abata automaticamente o benefício na geração das propinas mensais (`RN-07`)**.
-- **Rastreabilidade:** `RN-07`, `RN-08`, `RN-10` | `Fluxo 02` | `US-PIN-07`, `US-PAS-04`, `US-COB-09`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Rastreabilidade:** `RN-07`, `RN-08`, `RN-10` | `RF-C10-25` | `Fluxo 02` | `US-PIN-07`, `US-PAS-04`, `US-COB-09` | `MOD-TES-TAB`, `beneficios_bolsas_matricula`, `comunicacoes_destinatarios` | OPS-09 `INT-09`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1` (`Cenário 4`: E2).
 - **Pré-condições:** Matrícula do aluno criada; documento comprovativo da bolsa/parentesco registado.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Aplicação de Bolsa de 50% ou Desconto Familiar):**
@@ -672,13 +672,17 @@ tags:
     - **Dado** uma `BOLSA_50` revogada por despacho a partir de Fevereiro,
     - **Quando** o `DIR_GERAL` homologa a revogação,
     - **Então** só as prestações `A Vencer` de Fevereiro a Junho voltam a `15.000,00 Kz`; os documentos fiscais já emitidos de Setembro a Janeiro não mudam (`RN-07.2`).
-- **Pós-condições e Efeitos Colaterais:** Registo criado em `beneficios_bolsas_matricula`; evento `CONCESSAO_BOLSA` gravado em `audit_logs`.
+  - **Cenário 4 (Sucesso — Exportação de Mapas de Bolsas e Isenções para a Diocese de Caxito — `RF-C10-25`, `RN-07`, `OPS-09` `INT-09`):**
+    - **Dado** o encerramento do período de concessão de bolsas ou a prestação periódica de contas à Diocese de Caxito,
+    - **Quando** o `SUB_ADM` acede ao `MOD-TES-TAB` e comanda a emissão do relatório de bolseiros diocesanos,
+    - **Então** o sistema gera o mapa consolidado de bolsas e isenções e a lista nominal de bolseiros (com identificação, curso, classe, percentagem de bolsa e impacto financeiro suportado), registando o envio em `comunicacoes_destinatarios` (`US-DOC-05`, `RF-C19-22`) com salvaguarda das regras de privacidade.
+- **Pós-condições e Efeitos Colaterais:** Registo criado em `beneficios_bolsas_matricula`; exportação em `comunicacoes_destinatarios`; evento `CONCESSAO_BOLSA` gravado em `audit_logs`.
 
 ---
 
 ### `US-TES-03`: Registar Borderô/Talão Bancário `UNIQUE`, Liquidar Propinas de Irmãos ou de Vários Meses e Guardar o Excedente como Crédito do Aluno
 - **História:** *Como* **Operador de Caixa / Tesouraria (`OP_TES`)**, *quero* **registar comprovativos bancários (`Borderô / Talão / Multicaixa Express`) validando a unicidade do número de operação e controlando o `valor_total_talao` vs. `saldo_utilizado`**, *para* **permitir que um Encarregado pague vários meses ou os 2 ou mais irmãos com um único talão verdadeiro, guardar o excedente como crédito do aluno e bloquear o talão quando o saldo chega a `0,00 Kz` (`RN-09`)**.
-- **Rastreabilidade:** `RN-08`, `RN-09.1`, `RN-09` (sub-regra nova de crédito do aluno — numeração no [[01 - Dominio e Regras|DOC-01]]), `RN-10`, `RN-13.16` | `Fluxo 07` | DESC-RESP R10, R14 | `COR-LEG-02`, `COR-LEG-04`.
+- **Rastreabilidade:** `RN-08`, `RN-09.1`, `RN-09` (sub-regra nova de crédito do aluno — numeração no [[01 - Dominio e Regras|DOC-01]]), `RN-09.5`, `RN-10`, `RN-13.11`, `RN-13.16` | `RF-C10-10`, `RF-C10-24` | `Fluxo 07` | DESC-RESP R10, R14, R15 | `COR-LEG-02`, `COR-LEG-04`, `COR-LEG-06`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
 - **Pré-condições:** Sessão de caixa do turno aberta pelo `OP_TES`; aluno(s) com propinas ou emolumentos a pagar. O documento fiscal emitido é **Fatura-Recibo** ou **Recibo** (DP n.º 71/25), com numeração por tipo e ano fiscal; o emissor (SGE ou software certificado) depende da `DEC-002` 🟡 — os números abaixo são ilustrativos (`Q-004`).
 - **Critérios de Aceitação (BDD):**
@@ -704,7 +708,15 @@ tags:
     - **Dado** um borderô marcado `NAO_ENCONTRADO` na conciliação bancária (`US-COB-12`),
     - **Quando** o `OP_TES` tenta usar o seu saldo,
     - **Então** o sistema recusa até a investigação terminar (`RN-13.16`).
-- **Pós-condições e Efeitos Colaterais:** Documento(s) fiscal(is) emitido(s) em `AOA`; propinas atualizadas para `Paga`; `borderos_bancarios` atualizado atomicamente (`SELECT ... FOR UPDATE`).
+  - **Cenário 6 (Condicional 🟡 — Emissão em Modo de Contingência Fiscal — `RF-C10-10`, `RN-09.5`, `DEC-002` (a)):**
+    - **Dado** uma quebra de ligação externa ou indisponibilidade temporária de comunicação com a AGT durante o atendimento na Tesouraria (`MOD-TES-CXA`), assumindo o SGE como emissor certificado (`DEC-002` opção a),
+    - **Quando** o `OP_TES` emite a Fatura-Recibo ou Recibo,
+    - **Então** o sistema emite o documento sob série de contingência homologada pela AGT com a menção expressa *"Emitido em Contingência"*, armazena o hash criptográfico e encaminha automaticamente para transmissão à AGT assim que a conectividade for restabelecida.
+  - **Cenário 7 (Sucesso 🟡 — Registo de Emolumento Liquidado por RUPE — `RF-C10-24`, `RN-08`, `RN-13.11`, `Q-034`):**
+    - **Dado** o pedido de um ato ou documento escolar cujo pagamento deva ser recolhido a favor do Tesouro Nacional via RUPE (Referência Única de Pagamento ao Estado),
+    - **Quando** o encarregado apresenta a prova de liquidação da RUPE e o `OP_TES` valida o comprovativo e insere a referência no sistema,
+    - **Então** o sistema liquida o emolumento associado para libertar o serviço na Secretaria Pedagógica, regista o comprovativo sem gerar documento de faturação comercial ou receita própria do IPCAG, e discrimina esta receita estadual nos mapas de conferência e fecho de caixa (`US-TES-05`).
+- **Pós-condições e Efeitos Colaterais:** Documento(s) fiscal(is) emitido(s) em `AOA`; propinas atualizadas para `Paga`; `borderos_bancarios` e `itens_recibo` atualizados atomicamente (`SELECT ... FOR UPDATE`).
 
 ---
 
@@ -788,7 +800,7 @@ tags:
 
 ### `US-DOC-02`: Emitir o Certificado de Habilitações e Preparar o Pedido do Diploma, com Registo de Arquivo e QR da Plataforma Nacional de Certificação
 - **História:** *Como* **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **emitir o Certificado de Habilitações (emitido pela escola) com registo único no livro de Certificados, e exportar os dados e o pedido do Diploma de Técnico Médio (emitido e assinado pelo Ministro da Educação)**, *para* **cumprir o regime de certificação (DP n.º 167/23, art. 54.º–55.º; DP n.º 227/25) e blindar o IPCAG contra falsificações (`RN-10`)**.
-- **Rastreabilidade:** `RN-06`, `RN-08`, `RN-10`, `RN-11.7`, `RN-13.8.3` | `Fluxo 06` e `Fluxo 08` | `US-PIN-05`, `US-CTA-15` | DESC-L1 A14; DESC-RESP R17, R18 | `COR-LEG-18`, `COR-LEG-19`.
+- **Rastreabilidade:** `RF-C09-11` | `RN-06`, `RN-08`, `RN-10`, `RN-10.2`, `RN-11.7`, `RN-13.8.3` | `Fluxo 06` e `Fluxo 08` | `US-PIN-05`, `US-CTA-15` | `MOD-PED-DOC` | `DOF-10` | DESC-L1 A14; DESC-RESP R17, R18 | `COR-LEG-18`, `COR-LEG-19` | OPS-09 `INT-10`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E4`.
 - **Pré-condições:** Processo da 13ª classe `Defendido e Homologado` com `MFC` calculada; Semáforo Financeiro verde (0 propinas em atraso, dívida reescalonada igual a zero 🟡 `Q-C10-03`, emolumento do Certificado pago); sem pendência documental bloqueante (`US-PIN-05`).
 - **Critérios de Aceitação (BDD):**
@@ -910,7 +922,7 @@ tags:
 
 ### `US-PIN-02`: Registar a Entrega, a Conferência do Original e a Digitalização dos Documentos
 - **História:** *Como* **Operador da Secretaria Pedagógica (`OP_PED`)**, *quero* **marcar no balcão os documentos entregues, confirmar que vi o original e anexar a digitalização**, *para* **que o processo digital corresponda à pasta física e fique pesquisável**.
-- **Rastreabilidade:** `RN-11.3`, `RN-11.4`, `RN-11.5` | `US-MAT-01`, `MOD-PIN-02`.
+- **Rastreabilidade:** `RF-C03-15` | `RN-11.3`, `RN-11.4`, `RN-11.5`, `RN-11.13` | `US-MAT-01`, `MOD-PIN-02` | `documentos_processo_aluno`, `alunos` | 🟡 DoR-E1 · `Q-C03-14`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
 - **Pré-condições:** matrícula criada; documentos gerados em `Em Falta`.
 - **Critérios de Aceitação (BDD):**
@@ -930,7 +942,11 @@ tags:
     - **Dado** que o candidato entregou o certificado da 9ª Classe na inscrição ao Teste de Admissão,
     - **Quando** é convertido em aluno (Fluxo 02, Cenário A),
     - **Então** esse documento entra no processo já como `Entregue`, com a mesma digitalização.
-- **Pós-condições e Efeitos Colaterais:** `documentos_processo_aluno` e `ficheiros_digitalizados` gravados.
+  - **Cenário 5 (Sucesso — Devolução de Originais e Arquivo Histórico na Saída do Aluno — `RF-C03-15`, `RN-11.13`):**
+    - **Dado** um aluno que concluiu o curso (`Concluído`) ou pediu transferência externa de saída (`Transferido`),
+    - **Quando** o `OP_PED` ou `CHEFE_SEC_PED` procede à devolução física dos documentos originais depositados na matrícula (ex.: certificado da 9ª classe) ao encarregado ou aluno maior de idade,
+    - **Então** o sistema regista em `documentos_processo_aluno` a data, hora e identidade do levantador (`devolvido_em`, `devolvido_a`), emite a respetiva guia/protocolo de entrega física e transfere o processo digital para `Arquivo Histórico`, preservando os ficheiros digitalizados e metadados de forma permanente.
+- **Pós-condições e Efeitos Colaterais:** `documentos_processo_aluno`, `ficheiros_digitalizados` e estado do aluno em `alunos` gravados/atualizados.
 
 ---
 
@@ -1943,8 +1959,8 @@ tags:
 
 ### `US-DIS-04`: Propor e Confirmar o Comportamento do Trimestre
 - **História:** *Como* **Director de Turma (`DIR_TURMA`)**, *quero* **propor a avaliação de comportamento de cada aluno vendo as ocorrências e as faltas por indisciplina do trimestre**, *para* **que o conselho de notas decida com base em factos e o boletim saia como o modelo real**.
-- **Rastreabilidade:** `RN-15.7` | `US-PED-06`, `US-DOC-01` (`DOF-06`) | `MOD-DIS-03`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (núcleo da C13 — `DEC-013`; o boletim do I Trimestre já imprime o comportamento).
+- **Rastreabilidade:** `RF-C13-02` | `RN-15.4`, `RN-15.7` | `US-PED-06`, `US-DOC-01` (`DOF-06`) | `MOD-DIS-03`, `MOD-DIS-05` | `tipos_ocorrencia`, `medidas_disciplinares_catalogo`, `comportamento_trimestral` | 🟡 PC-E3 · `Q-C13-06`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (escala do comportamento) / `E5` (resto do regulamento) — `DEC-013`.
 - **Pré-condições:** Trimestre `Em Conselho de Notas`; escala 🟡 parametrizada (qualitativa ou numérica — `Q-C13-02`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Proposta com factos):**
@@ -1959,7 +1975,11 @@ tags:
     - **Dado** um comportamento "Insuficiente",
     - **Quando** o motor calcula `CF` e `CA` e delibera a transição,
     - **Então** o comportamento não entra no cálculo nem na deliberação 🟡 (`RN-15.7.5`, `Q-C13-02`).
-- **Pós-condições e Efeitos Colaterais:** `comportamento_trimestral` fechado com a Pauta Geral; impresso no `DOF-06`; `COMPORTAMENTO_ALTERADO` em `audit_logs` se o conselho alterar a proposta.
+  - **Cenário 4 (Sucesso 🟡 — Parametrização da Escala de Comportamento e do Catálogo Disciplinar — `RF-C13-02`, `RN-15.4`, `MOD-DIS-05`, `DEC-009`, `DEC-013`):**
+    - **Dado** a aprovação do regulamento interno da escola pela Direção (`DIR_GERAL`),
+    - **Quando** o `SUB_PED` acede à consola de configuração disciplinar (`MOD-DIS-05`),
+    - **Então** parametriza para a **E3** a escala oficial de avaliação do comportamento trimestral (qualitativa ou numérica, conforme `Q-C13-02`), e para a **E5** os tipos de ocorrência, graus de gravidade (`LEVE`, `GRAVE`, `MUITO_GRAVE`), catálogo de medidas disciplinares e competências de aplicação (`tipos_ocorrencia`, `medidas_disciplinares_catalogo`), garantindo que nenhuma sanção fora do regulamento possa ser aplicada.
+- **Pós-condições e Efeitos Colaterais:** `comportamento_trimestral` fechado com a Pauta Geral; catálogo disciplinar versionado em `tipos_ocorrencia` e `medidas_disciplinares_catalogo`; impresso no `DOF-06`; `COMPORTAMENTO_ALTERADO` em `audit_logs` se o conselho alterar a proposta.
 
 ---
 
@@ -2325,9 +2345,9 @@ tags:
 
 ---
 
-### `US-PNL-01`: Painel do Director Geral
-- **História:** *Como* **Director Geral (`DIR_GERAL`)**, *quero* **ver numa só página o estado pedagógico, financeiro e operacional da escola**, *para* **preparar as reuniões de Direção sem pedir relatórios a cada área**.
-- **Rastreabilidade:** `RN-17.1` a `RN-17.5`, `RN-17.10` | [[C15 - Paineis de Gestao da Direcao|CAP-C15]] §3, §4.
+### `US-PNL-01`: Painel do Director Geral e Catálogo de Indicadores
+- **História:** *Como* **Director Geral (`DIR_GERAL`)**, *quero* **ver numa só página o estado pedagógico, financeiro e operacional da escola e homologar o catálogo versionado de indicadores de gestão**, *para* **preparar as reuniões de Direção sem pedir relatórios a cada área e garantir que todos os relatórios usam definições matemáticas consistentes**.
+- **Rastreabilidade:** `RF-C15-01` | `RN-17.1` a `RN-17.5`, `RN-17.7`, `RN-17.10`, `RN-17.13` | [[C15 - Paineis de Gestao da Direcao|CAP-C15]] §3, §4 | `MOD-GOV-08` | `indicadores_catalogo`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E3`.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Provisório e oficial):**
@@ -2342,6 +2362,11 @@ tags:
     - **Dado** que o cálculo das 01h00 falhou,
     - **Quando** o `DIR_GERAL` abre o painel às 08h00,
     - **Então** os indicadores diários mostram o valor do dia anterior com a sua data e um aviso de cálculo em atraso.
+  - **Cenário 4 (Sucesso — Catálogo Central de Indicadores Versionado e Homologado — `RF-C15-01`, `RN-17.1`, `RN-17.7`, `RN-17.13`, `MOD-GOV-08`):**
+    - **Dado** o catálogo central de indicadores de gestão (`indicadores_catalogo`) gerido no módulo `MOD-GOV-08`,
+    - **Quando** a Direção (`DIR_GERAL`) homologa uma versão revista de um indicador (ex.: taxa de aproveitamento `IND-01` ou inadimplência `IND-07`), fixando fórmula de cálculo, fontes de dados, regras de agregação/denominador, limiares de alerta e perfis autorizados,
+    - **Então** o sistema congela a versão homologada com histórico de vigência, garante que os instantâneos dos trimestres anteriores mantêm os resultados da fórmula em vigor à data e passa a aplicar a nova métrica prospetivamente nos painéis de gestão.
+- **Pós-condições e Efeitos Colaterais:** Linha atualizada em `indicadores_catalogo`; evento `INDICADOR_HOMOLOGADO` registado em `audit_logs`.
 
 ---
 
@@ -3114,6 +3139,19 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 ---
 
 ## Alterações da v2.0
+
+### Cobertura dos restantes requisitos sem US (2026-11-08 — Issue #17)
+
+- Cobertos integralmente os restantes 7 requisitos funcionais pendentes do catálogo através de cenários específicos nas histórias existentes e explicitação de rastreabilidade:
+  - `RF-C03-15` (devolução de originais e arquivo histórico na saída): coberto em `US-PIN-02` (Cenário 5);
+  - `RF-C09-11` (registo de certificados na Plataforma Nacional de Certificação): coberto em `US-DOC-02` (Cenários 1 e 5) e `DOF-10`;
+  - `RF-C10-10` (emissão em modo de contingência fiscal da AGT, condicional `DEC-002` (a)): coberto em `US-TES-03` (Cenário 6);
+  - `RF-C10-24` (distinção de emolumentos pagos por RUPE ao Estado sem documento fiscal da escola): coberto em `US-TES-03` (Cenário 7);
+  - `RF-C10-25` (mapas de bolsas e isenções para a Diocese de Caxito): coberto em `US-TES-02` (Cenário 4);
+  - `RF-C13-02` (parametrização do regulamento interno, escala do comportamento na E3 e catálogo disciplinar na E5): coberto em `US-DIS-04` (Cenário 4, `MOD-DIS-05`);
+  - `RF-C15-01` (catálogo central versionado e homologado de indicadores): coberto em `US-PNL-01` (Cenário 4, `MOD-GOV-08`).
+- Atingida a **cobertura total de 100% dos requisitos funcionais da linha de base** por histórias de utilizador (0 RF sem US no DOC-07).
+- Fecha a lacuna `L-RF-05` da Matriz de Rastreabilidade.
 
 ### Parâmetros institucionais e modelos de documento (2026-11-08 — Issue #16)
 

@@ -318,11 +318,11 @@ Ligações tiradas da VIS-06 §3 (coluna "Capacidades"). A C20 não tem objetivo
 | Capacidades dentro do âmbito (C01–C19) sem RF | **0** de 19 | ✅ |
 | US sem RF | **0** de 130 | ✅ |
 | RF sem objetivo | **0** de 224 | ✅ |
-| RF sem US | **7** de 224 | ⚠️ ver §3.2 (C01, C17, C18 e C19 fechados) |
+| RF sem US | **0** de 224 | ✅ 100% de cobertura (ver §3.2) |
 | RF sem módulo no DOC-04 | **6** (C18 5, `RF-C10-26` fora; C17 coberto por `MOD-MIG-01`) | ⚠️ ver §3.3 |
 | Objetivos fracos (menos de 5 RF) | **1** — `O-10` (3 RF) | ⚠️ ver §3.4 |
 
-### 3.2 RF sem US (7)
+### 3.2 RF sem US (0 — Cobertura Total)
 
 | Capacidade | RF | Leitura |
 | :---: | :--- | :--- |
@@ -330,11 +330,11 @@ Ligações tiradas da VIS-06 §3 (coluna "Capacidades"). A C20 não tem objetivo
 | ~~C18~~ | ~~`RF-C18-01` a `RF-C18-07` (7)~~ | **Fechado em 2026-11-08 (`DEC-014`, Issue #14):** aceite pelas metas mensuráveis do [[08 - Requisitos Nao Funcionais|RNF-08]] e procedimentos do [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]]; sem US no DOC-03. |
 | ~~C19~~ | ~~`RF-C19-01`, `-04`, `-08`, `-09`, `-12`, `-13`, `-20`, `-23`, `-33` (9)~~ | **Fechado em 2026-11-08 (Issue #15):** criado Épico 17 (`EP-APD`, `US-APD-01` a `US-APD-07`) no DOC-03 cobrindo os 9 RF e o módulo `MOD-GOV-09`. |
 | ~~C01~~ | ~~`RF-C01-07`~~ | **Fechado em 2026-11-08 (Issue #16):** coberto pela `US-GOV-01` (Cenário 6) e `parametros_instituicao` no DOC-03/DOC-07. |
-| C03 | `RF-C03-15` | Devolução de originais na saída (`RN-11.13`): sem US. Depende da `Q-C03-14`. |
-| C09 | `RF-C09-11` | Plataforma Nacional de Certificação: sem US enquanto a `Q-020` não for respondida. |
-| C10 | `RF-C10-10`, `RF-C10-24`, `RF-C10-25` | Contingência AGT (só com `DEC-002` (a)), RUPE (`Q-034`) e mapas para a Diocese: sem US. |
-| C13 | `RF-C13-02` | Parâmetros do regulamento interno (`MOD-DIS-05`): sem US. Necessária para o ponto de controlo da E3. |
-| C15 | `RF-C15-01` | Catálogo de indicadores (`MOD-GOV-08`): sem US. |
+| ~~C03~~ | ~~`RF-C03-15`~~ | **Fechado em 2026-11-08 (Issue #17):** coberto pela `US-PIN-02` (Cenário 5) no DOC-03/DOC-07. |
+| ~~C09~~ | ~~`RF-C09-11`~~ | **Fechado em 2026-11-08 (Issue #17):** coberto pela `US-DOC-02` (Cenários 1 e 5) e `DOF-10` no DOC-03/DOC-07. |
+| ~~C10~~ | ~~`RF-C10-10`, `RF-C10-24`, `RF-C10-25`~~ | **Fechado em 2026-11-08 (Issue #17):** `RF-C10-10` e `RF-C10-24` cobertos pela `US-TES-03` (Cenários 6 e 7); `RF-C10-25` coberto pela `US-TES-02` (Cenário 4). |
+| ~~C13~~ | ~~`RF-C13-02`~~ | **Fechado em 2026-11-08 (Issue #17):** coberto pela `US-DIS-04` (Cenário 4, `MOD-DIS-05`). |
+| ~~C15~~ | ~~`RF-C15-01`~~ | **Fechado em 2026-11-08 (Issue #17):** coberto pela `US-PNL-01` (Cenário 4, `MOD-GOV-08`). |
 
 ### 3.3 RF sem módulo no DOC-04
 - ~~**C17 (16):** a consola de migração não tem `MOD-…` no DOC-04~~ — **Fechado em 2026-11-05 (`DEC-010`):** módulo `MOD-MIG-01` criado no DOC-04 §5.
@@ -380,7 +380,7 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | ~~L-RF-02~~ | ~~Operação (C18) sem US~~ — **fechada em 2026-11-08 (`DEC-014`, Issue #14):** aceite pelas metas do RNF-08 e procedimentos do OPS-09; rastreabilidade registada no DOC-07 e RNF-08. | RNF-08, OPS-09, DOC-07 | — |
 | ~~L-RF-03~~ | ~~Funções próprias da APD (9 RF) sem US~~ — **fechada em 2026-11-08**: criado Épico 17 (`EP-APD`, `US-APD-01` a `US-APD-07`) no DOC-03 cobrindo `RF-C19-01`, `-04`, `-08`, `-09`, `-12`, `-13`, `-20`, `-23`, `-33` e `MOD-GOV-09` (Issue #15). | DOC-03 (`EP-APD`), DOC-07 | — |
 | ~~L-RF-04~~ | ~~Parâmetros institucionais sem US~~ — **fechada em 2026-11-08**: coberto pela `US-GOV-01` (Cenário 6) no DOC-03 cobrindo `RF-C01-07` e `RF-C09-07` (Issue #16). | DOC-03 (`US-GOV-01`), DOC-07 | — |
-| L-RF-05 | Catálogo de indicadores e parâmetros do regulamento sem US | DOC-03 (`EP-PNL`, `EP-DIS`) | E3 |
+| ~~L-RF-05~~ | ~~Catálogo de indicadores e parâmetros do regulamento sem US~~ — **fechada em 2026-11-08**: cobertos `RF-C13-02` em `US-DIS-04` e `RF-C15-01` em `US-PNL-01` (Issue #17). | DOC-03 (`EP-PNL`, `EP-DIS`), DOC-07 | — |
 | ~~L-RF-06~~ | ~~68 tabelas novas por integrar no DOC-05; divergência das tabelas da C15~~ — **fechada em 2026-11-05**: o DOC-05 tem as 116 tabelas ([[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]) | DOC-05 §6 | — |
 | L-RF-07 | Entregas pendentes: central de avisos (`Q-037`, 7 RF) e ~~núcleo da C13 (`Q-038`, 3 RF)~~ *(decidido na `DEC-013`: E2/E3)* | REG-12; VIS-06 (pedido de alteração) | E3 |
 | L-RF-08 | Expediente geral fora do mapa C01–C20 (`Q-039`) | VIS-06; REG-12 | Âmbito |
@@ -396,3 +396,4 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-02`: decidida a aceitação da operação (C18) pelas metas do RNF-08 e procedimentos do OPS-09 conforme `DEC-014` (Issue #14). RF sem US/aceitação desce de 24 para 17. |
 | 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-03`: criado Épico 17 (`EP-APD`, `US-APD-01` a `US-APD-07`) no DOC-03 cobrindo os 9 RF pendentes de C19 e o `MOD-GOV-09` (Issue #15). RF sem US/aceitação desce de 17 para 8. |
 | 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-04`: coberto `RF-C01-07` na `US-GOV-01` (Cenário 6) com `parametros_instituicao` e herança em `modelos_documento` (Issue #16). RF sem US/aceitação desce de 8 para 7. |
+| 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-05` e cobertura total: cobertos os restantes 7 RF (`RF-C03-15` em `US-PIN-02`, `RF-C09-11` em `US-DOC-02`, `RF-C10-10` e `-24` em `US-TES-03`, `RF-C10-25` em `US-TES-02`, `RF-C13-02` em `US-DIS-04`, `RF-C15-01` em `US-PNL-01`) — Issue #17. RF sem US desce de 7 para 0 (100% de cobertura funcional). |
