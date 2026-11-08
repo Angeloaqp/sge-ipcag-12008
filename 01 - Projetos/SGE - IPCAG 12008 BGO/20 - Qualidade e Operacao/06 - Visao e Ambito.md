@@ -276,7 +276,7 @@ Ficam **fora das entregas E1–E5**. Cada um destes pontos só entra com um pedi
 | R-07 | **Dados de menores** e eventual transferência internacional. | Lei n.º 22/11; APD-11 | Sem acesso externo aos dados de alunos antes da E5; localização do alojamento condicionada (Q-016) |
 | R-08 | **Uma escola, uma instalação.** | DEC-001 | Sem separação de dados por instituição |
 | R-09 | **Equipamentos:** computador nos balcões; telemóvel Android nos professores (proposta do PLN-00 §5.3, a validar). | PLN-00 §5.3; RNF-08 | Interfaces adequadas a ecrãs pequenos e a impressão A4 |
-| R-10 | **Equipa e orçamento** ainda por caracterizar. | Q-013 | Pode obrigar a cortar âmbito na Fase E (MoSCoW) ou a acionar o ponto de controlo da DEC-007 |
+| R-10 | **Equipa, operação e orçamento:** IPCAG financia custos locais, nuvem e SMS (sob teto) via propinas; operação N1 local, N2 interna (`ADMIN_TEC`) e N3 externa sob contrato/SLA (`DEC-017`). Resiliência offline a custo zero garantida. | `DEC-017` (responde à `Q-013`) | Autonomia local assegurada mesmo com contingência orçamental externa; teto mensal de SMS pré-aprovado (`RN-14.6`) |
 
 ---
 
@@ -293,7 +293,7 @@ Cada pressuposto é tratado como verdadeiro até à Fase B. Se se revelar falso,
 | PR-05 | Se a DEC-002 for (b), o software de faturação certificado permite integração, ou pelo menos importação e exportação de ficheiros. | Dupla digitação no balcão; o O-05 fica em risco | Q-002 | DEC-002 |
 | PR-06 | O histórico dos alunos atuais (10ª–12ª) e os registos do livro de termos existem em forma recuperável. | A E4 não consegue certificar os finalistas de 2027/2028 | [[10 - Migracao de Dados e Implantacao\|MIG-10]] | DEC-007 |
 | PR-07 | O calendário de 2027/2028 mantém três trimestres, de setembro a julho. | As datas da secção 5.1 mudam | Q-005 | DEC-007 |
-| PR-08 | Existe equipa e orçamento para construir e operar o SGE. | Corte de âmbito ou adiamento para 2028/2029 | Q-013 | DEC-007, DEC-008 |
+| PR-08 | Existe modelo definido de equipa, suporte N1–N3 e sustentabilidade orçamental via receitas próprias da escola (`DEC-017`). | Degradação para operação offline local a custo zero em contingência extrema | `DEC-017` (responde à `Q-013`) | `DEC-007`, `DEC-008`, `DEC-017` |
 | PR-09 | A Direção Executiva homologa as decisões sem alterações de fundo. | As secções 5 e 6 desta nota são revistas | Apresentação desta nota à Direção | DEC-001, DEC-003 a DEC-008 |
 | PR-10 | A estrutura de direção que vai homologar (hoje, segundo os documentos, uma Comissão de Gestão) mantém-se até à aprovação da linha de base `v2.0`. | As aprovações têm de ser repetidas com a nova direção | Q-028 | Todas (aprovação) |
 
@@ -354,3 +354,4 @@ Cada pressuposto é tratado como verdadeiro até à Fase B. Se se revelar falso,
 | 2.0-rc1 | 2026-11-05 | `DEC-013`: alinhamento de entregas E1–E5 (C10 dividida em E1/E2; C11 na E1/E2; núcleo da C13 na E2/E3; C19 transversal desde E1). |
 | 2.0-rc2 | 2026-11-09 | `DEC-015` (Issue #18): central de avisos interna da C12 (`US-COM-01` a `06`) entra na **E3** (Fecho do I Trimestre), com canal impresso garantido e SMS sob teto orçamental; portal web de encarregados e alunos (`US-COM-07`, `08`) permanece na **E5** (`DEC-003`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-016` (Issue #23): avaliação de desempenho do pessoal (`Q-036`) e expediente geral (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 e integrados em `DEC-008` (`F-13` e `F-14`). |
+| 2.0-rc2 | 2026-11-09 | `DEC-017` (Issue #24): modelo de governação, operação (N1/N2/N3) e sustentabilidade financeira formalizados; `R-10` e `PR-08` atualizados com resolução da `Q-013`. |

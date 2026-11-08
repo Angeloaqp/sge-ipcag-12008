@@ -5,9 +5,9 @@ aliases:
   - "Integrações, Infraestrutura e Operação"
   - "OPS-09"
 created: 2026-11-02
-updated: 2026-11-02
-status: rascunho
-version: "0.1"
+updated: 2026-11-09
+status: ativo
+version: "2.0-rc2"
 doc_id: "OPS-09"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -252,10 +252,11 @@ A `Q-015` do REG-12 pergunta qual dos dois servidores (local ou nuvem) é a auto
 
 | Nesta nota | No REG-12 |
 | :--- | :--- |
-| §3.1 | `DEC-002`; `Q-001`, `Q-002`, `Q-003`, `Q-004`, `Q-013` |
+| §3.1 | `DEC-002`; `Q-001`, `Q-002`, `Q-003`, `Q-004`, `Q-013` (resolvida na `DEC-017`) |
 | §3.2 | `DEC-005`; `Q-007`, `Q-008` |
-| §3.3 | `DEC-006`; `Q-006`, `Q-013`, `Q-016` |
+| §3.3 | `DEC-006`; `DEC-017` (modelo financeiro e operação); `Q-006`, `Q-013` (resolvida), `Q-016` |
 | §3.5 | `Q-015` (proposta de resposta) |
+| §5.5, §5.6 | `DEC-017` (governação, operação N1–N3 e sustentabilidade orçamental) |
 
 ---
 

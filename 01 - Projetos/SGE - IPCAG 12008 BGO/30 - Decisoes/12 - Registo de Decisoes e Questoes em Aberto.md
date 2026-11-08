@@ -65,6 +65,7 @@ tags:
 | [[#DEC-014 — Critérios de aceitação da operação (C18)\|DEC-014]] | Issue #14 (`L-RF-02`) | Aceitação de C18 por RNF vs US | (a) Aceitação pelas metas do RNF-08 e procedimentos do OPS-09; sem US funcionais no DOC-03; mapeamento RF ↔ RNF no DOC-07 | `decidida` | 2026-11-08 | Analista responsável do projeto | pendente |
 | [[#DEC-015 — Âmbito e faseamento da Central de Avisos (C12 na E3 e E5)\|DEC-015]] | Issue #18 (`L-RF-07`); `Q-037` | Faseamento da C12: central de avisos vs portal | (b) Central de avisos interna (`US-COM-01` a `06`) na E3; canal impresso garantido e SMS complementar com teto; portal (`US-COM-07`, `08`) na E5 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-016 — Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (Q-036, Q-039)\|DEC-016]] | Issue #23 (`L-RF-08`); `Q-036`, `Q-039` | Âmbito: avaliação de desempenho e expediente geral | (a) Avaliação de desempenho e expediente geral fora das entregas E1–E5 (adicionados a DEC-008 como itens 9 e 10); RF-C19-33 e US-APD-07 passam a Won't | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-017 — Governação, Operação e Sustentabilidade Financeira do SGE (Q-013)\|DEC-017]] | Issue #24; `Q-013` | Governação, operação e sustentabilidade financeira | (a) IPCAG é o dono do sistema e financia custos locais, nuvem e SMS (sob teto) via receitas de propinas; operação local por ADMIN_TEC (N1/N2) e suporte N3 externo sob SLA; resiliência offline garantida | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -546,6 +547,32 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-017 — Governação, Operação e Sustentabilidade Financeira do SGE (Q-013)
+
+- **Origem:** Issue #24 ([issue #24](https://github.com/Angeloaqp/sge-ipcag-12008/issues/24)); questão `Q-013` (e `Q09-07`, `Q09-09`, `Q09-12`); [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] §5.5, §5.6, §5.8; [[06 - Visao e Ambito|VIS-06]] `R-10`, `PR-08` · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A questão estrutural `Q-013` ("Quem desenvolve, quem opera e quem paga o SGE?") condicionava pressupostos orçamentais da infraestrutura (`DEC-006`), da central de avisos por SMS (`DEC-015`) e de eventual licenciamento de software de faturação (`DEC-002`). Era necessário formalizar a divisão de responsabilidades de desenvolvimento, operação por níveis (N1 a N3) e sustentabilidade financeira do sistema no ciclo 2027/2028.
+
+**Decisão.** **Definição formal do modelo de governança, suporte e sustentabilidade financeira:**
+1. **Propriedade e Desenvolvimento:** O SGE é um software sob medida de instalação única para o **IPCAG N.º 12008 / BGO** (`DEC-001`), desenvolvido pela equipa técnica do projeto, com tutela institucional e acompanhamento da Direção da escola e da Diocese de Caxito.
+2. **Modelo de Operação por Níveis:**
+   - **N1 (Utilizadores-Chave):** 1 utilizador-chave na Secretaria Pedagógica, 1 na Tesouraria/Secretaria Geral, 1 na Direção e 1 docente por turno (`OPS-09` §5.6), designados pela Direção para apoio imediato e triagem presencial.
+   - **N2 (Administração Técnica Local):** `ADMIN_TEC` (e suplente) designado internamente pela Direção (docente de informática/gestão ou técnico de secretaria), responsável pela gestão de contas, sessões, fatores MFA, dispositivos, verificação do painel de estado e backups diários 3-2-1 às 19h30 (`DEC-012`, `DEC-014`). O perfil `ADMIN_TEC` não tem acesso a dados pedagógicos nem financeiros (`RN-16.17`).
+   - **N3 (Suporte Remoto e Manutenção):** Prestado pela equipa/fornecedor de desenvolvimento sob contrato de manutenção e SLA (resposta S1 em ≤ 30 min, reposição em ≤ 4 h, atualizações mensais fora de períodos de congelamento — `OPS-09` §5.6).
+3. **Financiamento e Sustentabilidade Orçamental:**
+   - **Custos locais e licenças:** Equipamento (servidor, UPS, PCs de balcão), papel e eventual software fiscal certificado (`DEC-002`) são suportados pelo orçamento operacional da escola a partir das receitas de propinas e emolumentos geridas pela Tesouraria (`C10`).
+   - **Custos de Nuvem e Domínio:** Alojamento da réplica e portal QR (`DEC-006`) com custos mínimos suportados pelo IPCAG.
+   - **Canal SMS:** Suportado pela escola sob **teto orçamental mensal pré-aprovado pelo `SUB_ADM`** (`RN-14.6`, `DEC-015`).
+   - **Resiliência e Independência Operacional a Custo Zero:** O SGE é arquitetado para plena autonomia *offline* na rede local. Na eventualidade de contingência financeira severa (falta temporária de verba para SMS ou renovação de nuvem), o funcionamento letivo, avaliações, matrículas e caixa mantêm-se a 100% no servidor local, e os avisos e convocatórias degradam automaticamente para o canal impresso sem custos adicionais.
+4. A questão `Q-013` é declarada **respondida**, mantendo-se os parâmetros de custo unitário para os questionários de volumetria e infraestrutura (`DSC-03`).
+
+**Impacto.**
+- **VIS-06:** Restrição `R-10` e pressuposto `PR-08` atualizados com referência à `DEC-017`.
+- **OPS-09:** §3.6 atualizado com a formalização da `DEC-017`.
+- **REG-12 / IDX-12:** `Q-013` passa a `respondida (DEC-017)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -562,7 +589,7 @@ As entrevistas dizem duas coisas:
 | Q-010 | Quem processa hoje os salários de docentes e funcionários (o IPCAG, a Diocese, o Estado para professores do quadro?) e com que ferramenta? | DEC-008; C11 | Fronteira da C11 (dados de pessoal que o SGE fornece a outro sistema) | `SUB_ADM`; `CHEFE_SEC_GER` | B | `respondida — a confirmar` | Salários fora do SGE; o SGE exporta o mapa mensal de efetividade e faltas — [[Sintese das Respostas da Fase B\|DESC-RESP]] R24. (2026-11-02) |
 | Q-011 | Quem elabora e aprova o horário semanal, com que ferramenta e em que data? O Fluxo 03 atribui a "gestão de horários/alocações" ao `SUB_PED`, e o DOC-01 diz que o `COORD_CURSO` "propõe a distribuição docente". | DEC-004; Fluxo 03 | C04 | `SUB_PED`; `COORD_TURNO` | B | `respondida — a confirmar` | Coordenadores de Curso propõem a distribuição; o Coordenador para a Área Pedagógica consolida o horário em Excel (2–3 semanas em agosto) — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
 | Q-012 | Quanto dura o tempo letivo (o DOC-01 §1.1 admite 45 ou 50 minutos) e quantos tempos cabem em cada turno (Manhã 07h30–12h35, Tarde 13h00–18h05)? | DEC-004; RN-03 | C04; C05 | `SUB_PED` | B | `respondida — a confirmar` | 6 tempos letivos por turno, de 45/50 min — [[Sintese das Respostas da Fase B\|DESC-RESP]] R22. Confirmar a duração exata. (2026-11-02) |
-| Q-013 | Quem desenvolve, quem opera e quem paga o SGE (equipa, orçamento para equipamento, nuvem, licenças, SMS)? | Todas as DEC | Todas; VIS-06 §5 | `DIR_GERAL`; Diocese de Caxito | A/B | `aberta` | — |
+| Q-013 | Quem desenvolve, quem opera e quem paga o SGE (equipa, orçamento para equipamento, nuvem, licenças, SMS)? | Todas as DEC | Todas; VIS-06 §5 | `DIR_GERAL`; Diocese de Caxito | A/B | `respondida` | **Decidida na `DEC-017`** (2026-11-09): IPCAG é o dono do software e financia custos locais, nuvem e SMS (sob teto mensal) com receitas de propinas/emolumentos; operação N1 local, N2 interna (`ADMIN_TEC`) e N3 externa sob contrato/SLA; resiliência offline a custo zero garantida. |
 | Q-014 | Quais são os números reais: alunos por classe, curso e turno; turmas; professores; funcionários; pagamentos por dia em época de matrícula? | PLN-00 §5.2 e §5.3 | Metas da VIS-06; RNF (`08`) | Secretaria Pedagógica; Tesouraria | B | `parcial` | Mais de 1.120 alunos, 40–45 por turma, mais de 250 mini-pautas por trimestre, 4–7 turmas por professor — [[Sintese das Respostas da Fase B\|DESC-RESP]] §5. (2026-11-02) |
 | Q-015 | Com servidor local e réplica na nuvem, qual dos dois é a "autoridade central" sobre o estado do trimestre (DOC-05 §1.2, RN-10)? Como se resolvem conflitos entre um balcão *offline* e a nuvem? | DEC-006 | DEC-006; C18 | Equipa técnica | C | `aberta` | — |
 | Q-016 | O tratamento destes dados (menores, alojamento na nuvem, eventualmente fora de Angola) exige notificação ou autorização prévia da APD? Onde podem ficar alojados os dados? | DEC-003; DEC-006; L8 | DEC-006; C19 | APD; jurista | B/C | `aberta` | **Parcial** ([[11 - Protecao de Dados (APD)\|APD-11]] §10): alojar fora de Angola é transferência internacional (notificação ou autorização prévia da APD, arts. 33.º–34.º); proposta `RNF-P-APD-06` de alojar em Angola. Pendente: Q-APD-19 e Q-APD-27. |
@@ -656,3 +683,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-08 | `DEC-014`: aceitação da operação (C18) pelas metas mensuráveis do RNF-08 e procedimentos do OPS-09 (Issue #14). |
 | 2.0-rc2 | 2026-11-09 | `DEC-015`: central de avisos interna (`US-COM-01` a `06`) entra na E3 com canal impresso garantido e SMS complementar com teto orçamental; portal web (`US-COM-07`, `08`) permanece na E5 (`DEC-003`). `Q-037` e `Q-C12-01` respondidas; lacuna `L-RF-07` fechada (Issue #18). |
 | 2.0-rc2 | 2026-11-09 | `DEC-016`: avaliação de desempenho do pessoal (`Q-036`) e expediente geral de correspondência (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 e integrados na `DEC-008` (itens 9 e 10); `RF-C19-33` e `US-APD-07` passam a `Won't` (fora da linha de base); lacuna `L-RF-08` fechada (Issue #23). |
+| 2.0-rc2 | 2026-11-09 | `DEC-017`: modelo de governação, operação (N1/N2/N3) e sustentabilidade financeira do SGE formalizado; `Q-013` respondida (Issue #24). |
