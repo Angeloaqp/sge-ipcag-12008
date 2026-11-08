@@ -48,7 +48,7 @@ tags:
 > [!tip] 🎨 Quadro de User Story Mapping no FigJam
 > O quadro mostra ainda os 7 épicos e as 32 histórias da v1.2: [Abrir Quadro DOC-03 no FigJam](https://www.figma.com/board/PZgRkbRHrNR6UfehirGDPd) ou [Ver Secção 03 no Ficheiro Geral](https://www.figma.com/board/OneLIwLlc2kuM1koaIeXG0). Os épicos 08 a 15 só existem nesta nota até à atualização dos quadros.
 
-**Total:** 16 épicos e 123 histórias de utilizador (32 da v1.2, corrigidas, 84 novas das capacidades `C03`, `C04`, `C10`, `C12`, `C13`, `C14`, `C15` e `C16`, e 7 novas da capacidade `C17` — `DEC-010`, Issue #13).
+**Total:** 17 épicos e 130 histórias de utilizador (32 da v1.2, corrigidas, 84 novas das capacidades `C03`, `C04`, `C10`, `C12`, `C13`, `C14`, `C15` e `C16`, 7 de `C17` e 7 de `C19` — `DEC-010`, `DEC-014`, Issues #13 e #15).
 
 | Código do Épico | Nome do Épico / Domínio Funcional | Capacidade | Perfis RBAC Principais | Histórias de Utilizador (`US`) | Regras de Negócio Cobertas | Entrega | MoSCoW |
 | :---: | :--- | :---: | :--- | :---: | :---: | :---: | :---: |
@@ -68,6 +68,7 @@ tags:
 | **`EP-PNL`** | **Épico 14:** Painéis de Gestão da Direção, Alertas e Estatísticas Impressas | C15 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `COORD_CURSO`, `COORD_DISC`, `COORD_TURNO`, `DIR_TURMA` | `US-PNL-01` a `US-PNL-12` (12 US) | `RN-02`, `RN-03`, `RN-17` | **E3** (`US-PNL-08`: E2; `US-PNL-11`: E4) | Must / Should / Could |
 | **`EP-PAS`** | **Épico 15:** Encerramento do Ano Letivo e Passagem de Ano | C16 | `SUB_PED`, `DIR_GERAL`, `CHEFE_SEC_PED`, `OP_PED`, `SUB_ADM` | `US-PAS-01` a `US-PAS-08` (8 US) | `RN-02`, `RN-07`, `RN-10`, `RN-18` | **E4** | Must (`US-PAS-08`: Should) |
 | **`EP-MIG`** | **Épico 16:** Migração de Dados, Cargas Históricas, Digitação Assistida e Reconciliação | C17 | `ADMIN_TEC`, Conta Técnica (`RN-16.21`), `OP_PED`, `OP_TES`, `CHEFE_SEC_PED`, `CHEFE_SEC_GER`, `SUB_PED`, `SUB_ADM`, `DIR_GERAL` | `US-MIG-01` a `US-MIG-07` (7 US) | `RN-01`, `RN-02`, `RN-05`, `RN-06`, `RN-09`, `RN-10`, `RN-16.21` | **E1** (`US-MIG-06`: E2; `US-MIG-07`: E4) | Must |
+| **`EP-APD`** | **Épico 17:** Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade | C19 | `DIR_GERAL`, Ponto de Contacto APD, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED` | `US-APD-01` a `US-APD-07` (7 US) | `RN-10`, `RN-11.12` | **E1** (`US-APD-03`/`-04`: E2; `US-APD-05`: E3; `US-APD-06`/`-07`: E4) | Must (`US-APD-05`: Should; `US-APD-07`: Could) |
 
 > [!warning] 🟡 Propostas de entrega pendentes
 > - **`Q-037` — SMS antes da E5:** a central de avisos (`US-COM-01` a `US-COM-06`) pode entrar na **E3** sem abrir dados à internet; o portal (`US-COM-07`, `US-COM-08`) fica na E5 (`DEC-003`). **Pendente** da Comissão de Gestão.
@@ -2917,6 +2918,166 @@ tags:
 
 ---
 
+## ÉPICO 17 (`EP-APD`): Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade (C19)
+
+> Criado em cumprimento da Issue #15 e da [[12 - Registo de Decisoes e Questoes em Aberto#DEC-014 — Critérios de aceitação da operação (C18)|DEC-014]].  
+> **Capacidade:** C19 ([[11 - Protecao de Dados (APD)|APD-11]]).  
+> **Módulo:** `MOD-GOV-09` Proteção de Dados (Workspace 01 — [[04 - Telas e Documentos|DOC-04]] §5) e `MOD-GER-RH`.  
+> **Base Legal:** Lei n.º 22/11 (Proteção de Dados Pessoais), DP n.º 60/21 e Circular n.º 2/2024 da APD.  
+> **Perfis RBAC:** `DIR_GERAL`, Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`, perfil técnico/institucional), `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED`.
+
+---
+
+### `US-APD-01`: Gestão de Versões dos Avisos de Privacidade e Notificação de Maioridade aos 18 Anos
+- **História:** *Como* **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)** e **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **gerir as versões dos avisos de privacidade (`AV-01` a `AV-12`), registar a entrega nominal a cada titular e receber a lista diária automatizada de alunos que completam 18 anos**, *para* **garantir o dever de informação (art. 25.º) e formalizar a transição dos consentimentos do representante legal para o próprio aluno maior de idade**.
+- **Rastreabilidade:** `RF-C19-01`, `RF-C19-04` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §3, §4, §7.1 | Lei n.º 22/11 arts. 13.º, 14.º, 25.º | `MOD-GOV-09`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Módulo `MOD-GOV-09` configurado; catálogo de modelos de avisos (`AV-01` a `AV-12`) carregado; data de nascimento dos alunos registada.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Criação de versão de aviso e registo de entrega):**
+    - **Dado** que a Direção aprova a versão 2.0 do Aviso de Matrícula (`AV-01`),
+    - **Quando** o ponto de contacto publica a nova versão no `MOD-GOV-09` e a Secretaria emite a confirmação de entrega ao encarregado no balcão,
+    - **Então** o sistema grava o evento em `avisos_entregues` com o código do aviso, versão, identificador do titular, data/hora e o operador emissor, mantendo o histórico de versões anteriores inalterado em `avisos_privacidade`.
+  - **Cenário 2 (Sucesso — Deteção diária de maioridade e notificação de reconfirmação):**
+    - **Dado** um aluno que completa 18 anos de idade no dia corrente,
+    - **Quando** a rotina diária de verificação de maioridade corre às 06h00,
+    - **Então** o aluno é adicionado à lista de trabalho do `MOD-GOV-09` ("Alunos Recém-Maiores"), o sistema gera a pendência `AVISO_MAIORIDADE_PENDENTE`, notifica a Secretaria Pedagógica para entrega presencial do aviso `AV-10` (Maioridade) e disponibiliza o termo de reconfirmação de consentimentos em nome próprio.
+  - **Cenário 3 (Efeito da reconfirmação pelo aluno aos 18 anos):**
+    - **Dado** um aluno que atingiu os 18 anos e compareceu à Secretaria para formalizar a sua autonomia de dados,
+    - **Quando** o `CHEFE_SEC_PED` regista a aceitação do aviso e a opção do aluno sobre os consentimentos facultativos (`CON-01` a `CON-08`),
+    - **Então** os consentimentos anteriormente outorgados pelo encarregado de educação são arquivados como `CESSADOS_POR_MAIORIDADE` e os novos consentimentos do titular assumem plena validade jurídica.
+- **Pós-condições e Efeitos Colaterais:** `avisos_entregues` e `consentimentos` atualizados; auditoria registada em `audit_logs`.
+
+---
+
+### `US-APD-02`: Gestão de Incidentes de Segurança e Notificação Formal à APD (Circular n.º 2/2024)
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)**, *quero* **registar formalmente qualquer incidente de violação de dados pessoais, classificar o seu nível de risco e emitir a minuta de comunicação à APD dentro do prazo regulamentar de 72 horas**, *para* **cumprir a obrigação legal de notificação (art. 30.º da Lei n.º 22/11 e Circular n.º 2/2024 da APD) e mitigar impactos aos titulares**.
+- **Rastreabilidade:** `RF-C19-23` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §8.1; Circular APD 2/2024; Lei n.º 22/11 art. 30.º | `MOD-GOV-09`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Utilizador autenticado com perfil `DIR_GERAL` ou `PONT_CONT_APD`; ocorrência identificada (ex.: extravio de suporte, acesso indevido, ataque cibernético).
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Registo de incidente com contagem de prazo regulamentar):**
+    - **Dado** a deteção de um acesso indevido a dados de estudantes no servidor local,
+    - **Quando** o ponto de contacto regista o incidente no `MOD-GOV-09` indicando data/hora do conhecimento, categorias de dados afetadas, número estimado de titulares e medidas imediatas de contenção adotadas,
+    - **Então** o sistema atribui identificador único `INC-AAAA-NNNN`, inicia o cronómetro regressivo do prazo legal de 72 horas para notificação à APD e emite alerta de severidade alta para o painel da Direção Geral.
+  - **Cenário 2 (Sucesso — Geração de minuta normalizada para a APD):**
+    - **Dado** um incidente registado e classificado com risco aos direitos e liberdades dos titulares,
+    - **Quando** a Direção aciona o comando "Gerar Comunicação Oficial APD",
+    - **Então** o sistema compila os dados técnicos e gera o documento em PDF pré-formatado nos moldes do formulário oficial da Circular n.º 2/2024 da APD, com cabeçalho institucional, descrição das medidas corretivas e campo para assinatura do `DIR_GERAL`.
+  - **Cenário 3 (Fecho e evidência de comunicação):**
+    - **Dado** o protocolo ou recibo de envio do expediente à APD e as recomendações recebidas da autoridade,
+    - **Quando** o ponto de contacto anexa a prova de submissão e regista a data e o número de ofício no `MOD-GOV-09`,
+    - **Então** o incidente transita para o estado `NOTIFICADO_APD` e o processo é arquivado com todos os registos forenses associados.
+- **Pós-condições e Efeitos Colaterais:** Registo gravado em `incidentes_seguranca`; notificação arquivada; cópia retida no dossier de proteção de dados.
+
+---
+
+### `US-APD-03`: Gestão de Pedidos dos Titulares, Prazos de Resposta e Relatório de Acesso em PDF
+- **História:** *Como* **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)** e **Secretaria Pedagógica**, *quero* **registar pedidos de exercício de direitos dos titulares (acesso, retificação, oposição, cancelamento), monitorizar o prazo legal de 60 dias úteis e exportar o Relatório de Acesso do Titular em PDF com salvaguarda médica**, *para* **atender escrupulosamente os direitos conferidos pelos artigos 26.º a 28.º da Lei n.º 22/11**.
+- **Rastreabilidade:** `RF-C19-08`, `RF-C19-09` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §8.3; Lei n.º 22/11 arts. 26.º, 27.º, 28.º | 🟡 DoR-E2 · `Q-APD-21` | `MOD-GOV-09`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
+- **Pré-condições:** Pedido formal apresentado pelo titular ou representante legal munido de documento de identificação comprovado.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Registo de pedido de acesso e contagem de prazo):**
+    - **Dado** um encarregado de educação devidamente legitimado que solicita o acesso integral aos dados escolares e financeiros do seu educando,
+    - **Quando** o operador regista o pedido no `MOD-GOV-09` com número de processo, tipo de direito e contacto preferencial,
+    - **Então** o sistema emite comprovativo numerado com o prazo limite legal de 60 dias úteis e agenda um alerta preventivo aos 40 dias úteis para a Direção caso o pedido não esteja concluído.
+  - **Cenário 2 (Sucesso — Emissão do Relatório de Acesso com mediação de dados clínicos):**
+    - **Dado** um pedido de acesso com despacho de deferimento,
+    - **Quando** o ponto de contacto gera o "Relatório de Dados do Titular em PDF",
+    - **Então** o sistema extrai e estrutura os dados por categoria (identificação, frequência escolar, pautas, pagamentos, comunicações a terceiros), omitindo anotações médicas livres e indicando expressamente que relatórios clínicos detalhados só podem ser entregues através de médico designado pelo titular (art. 26.º n.º 7 da Lei n.º 22/11).
+  - **Cenário 3 (Alerta preventivo de estouro de prazo):**
+    - **Dado** um pedido de direito que atinge o 40.º dia útil sem parecer ou resposta final concluída,
+    - **Quando** a rotina de monitorização corre,
+    - **Então** é gerado alerta amarelo crítico na caixa de alertas (`MOD-ALR`) do `DIR_GERAL` e do ponto de contacto para priorização imediata.
+- **Pós-condições e Efeitos Colaterais:** Registos em `pedidos_titulares`; arquivo da resposta e comprovativo de entrega ao titular.
+
+---
+
+### `US-APD-04`: Auditoria Reforçada de Acesso a Dados Sensíveis (Saúde e Apoio Social)
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)**, *quero* **auditar de forma nominal e segregada todas as consultas, leituras e descarregamentos de dados de saúde e comprovativos socioeconómicos de bolsas**, *para* **garantir a estrita confidencialidade dos dados sensíveis e comprovar a legitimidade funcional de cada acesso (art. 31.º da Lei n.º 22/11)**.
+- **Rastreabilidade:** `RF-C19-20` | `RN-10`, `RN-11.12` | [[11 - Protecao de Dados (APD)|APD-11]] §6.2, §7.1 | `MOD-GOV-09`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
+- **Pré-condições:** Utilizador autenticado a tentar visualizar o compartimento de saúde (`documentos_saude`) ou dados financeiros de carência/bolsa.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Auditoria ativa na leitura de registo de saúde):**
+    - **Dado** que o `SUB_PED` abre um atestado médico no compartimento de saúde para validação de dispensa de Educação Física,
+    - **Quando** o documento é visualizado ou transferido,
+    - **Então** o sistema regista atomicamente em `audit_logs` a categoria `ACESSO_DADO_SENSIVEL_SAUDE`, o ID do funcionário, IP, data/hora precisa, motivo invocado e o ID do documento visualizado, sem registar o conteúdo clínico no log.
+  - **Cenário 2 (Sucesso — Auditoria de consulta a processos de bolseiro):**
+    - **Dado** que um operador autorizado da Tesouraria consulta os comprovativos socioeconómicos de um candidato a bolsa diocesana,
+    - **Quando** o ecrã de detalhe é acedido,
+    - **Então** gera-se registo de auditoria qualificado com a tag `ACESSO_DADO_SOCIOECONOMICO`.
+  - **Cenário 3 (Relatório de acessos a dados sensíveis para fiscalização):**
+    - **Dado** a realização de auditoria interna periódica ou inspeção pela APD,
+    - **Quando** o ponto de contacto extrai o mapa de rastreio de dados sensíveis no `MOD-GOV-09`,
+    - **Então** o sistema devolve o histórico integral cronológico por utilizador e por titular, destacando acessos fora do horário habitual de serviço.
+- **Pós-condições e Efeitos Colaterais:** Inserções invioláveis em `audit_logs`.
+
+---
+
+### `US-APD-05`: Bloqueio de Tratamento de Dados Pessoais em Disputa ou Oposição
+- **História:** *Como* **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)** e **Subdirector Administrativo (`SUB_ADM`)**, *quero* **comutar temporariamente o estado de dados pessoais de um titular para `BLOQUEADO`**, *para* **suspender o seu processamento operacional em caso de oposição fundada ou contestação de exatidão enquanto decorre a averiguação (art. 28.º da Lei n.º 22/11)**.
+- **Rastreabilidade:** `RF-C19-12` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §8.3; Lei n.º 22/11 art. 28.º | `MOD-GOV-09`.
+- **Prioridade (proposta):** `Should` | **Entrega:** `E3`.
+- **Pré-condições:** Pedido formal de oposição deferido ou pendência de averiguação sobre identidade/exatidão de dados.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Ativação do bloqueio de dados):**
+    - **Dado** um aluno cujo encarregado contestou judicialmente a legitimidade de contactos ou morada registada,
+    - **Quando** a chefia aciona o comando "Bloquear Dados Pessoais" no `MOD-GOV-09` anexando o despacho,
+    - **Então** o titular passa a `estado_dados = BLOQUEADO`, os contactos deixam de constar nas centrais de avisos por SMS, as listas públicas omitem os dados contestados e é aposto um aviso de bloqueio no processo individual do aluno.
+  - **Cenário 2 (Tentativa de tratamento operacional sobre registo bloqueado):**
+    - **Dado** um registo no estado `BLOQUEADO`,
+    - **Quando** qualquer operador tenta enviar mensagens promocionais ou comunicações não essenciais ao titular,
+    - **Então** o sistema impede o envio e exibe: *"Tratamento suspenso: registo encontra-se temporariamente bloqueado por determinação de proteção de dados (art. 28.º)"*.
+  - **Cenário 3 (Desbloqueio após resolução da disputa):**
+    - **Dado** a conclusão formal do processo de averiguação com confirmação de retificação ou improcedência,
+    - **Quando** o `SUB_PED` e o ponto de contacto homologam o desbloqueio,
+    - **Então** o registo retorna ao estado ativo regular com gravação da justificativa e autorização em auditoria.
+- **Pós-condições e Efeitos Colaterais:** Estado de bloqueio refletido em `alunos` ou `encarregados_educacao`; logs registados.
+
+---
+
+### `US-APD-06`: Motor de Conservação, Purga Automatizada e Relatório de Execução
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)**, *quero* **configurar os prazos de conservação por categoria (`PC-01` a `PC-32`), avaliar propostas mensais automáticas de purga/anonimização e homologar a sua execução com emissão de relatório formal**, *para* **assegurar o cumprimento do princípio da limitação da conservação (art. 11.º da Lei n.º 22/11 e Lei n.º 14/17 de Arquivos) sem destruir património histórico escolar**.
+- **Rastreabilidade:** `RF-C19-13` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §5; Lei n.º 14/17; Lei n.º 22/11 art. 11.º | 🟡 DoR-E4 | `MOD-GOV-09`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E4`.
+- **Pré-condições:** Catálogo de políticas de conservação configurado com prazos definitivos (ex.: pautas permanentes `PC-01`, recibos 10 anos `PC-10`, dados de migração intermediários 90 dias `PC-28`, processos disciplinares 5 anos `PC-30`).
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Proposta mensal automática de lote de expiração):**
+    - **Dado** que decorreu mais um mês e certos dados temporários (ex.: ficheiros de migração com mais de 90 dias ou comprovativos de justificação de faltas expirados) atingiram o termo do seu prazo de retenção,
+    - **Quando** o motor de conservação corre no primeiro dia do mês,
+    - **Então** agrupa os registos elegíveis num lote de execução em `execucoes_conservacao` com estado `PROPOSTO` e apresenta à Direção um resumo estatístico das categorias e volumes a expurgar/anonimizar.
+  - **Cenário 2 (Proteção de arquivo histórico escolar permanente):**
+    - **Dado** registos de pautas finais, termos de exame, livros de matrícula ou certificados (`PC-01`),
+    - **Quando** o motor de conservação analisa as tabelas do acervo escolar permanente,
+    - **Então** o sistema classifica categoricamente estes registos como de preservação definitiva por força da Lei n.º 14/17, impedindo qualquer sugestão de eliminação física.
+  - **Cenário 3 (Homologação de lote com reautenticação e relatório formal de destruição):**
+    - **Dado** um lote de purga validado pelo ponto de contacto contendo logs técnicos com mais de 12 meses,
+    - **Quando** o `DIR_GERAL` comanda a execução no `MOD-GOV-09` e confirma com palavra-passe e MFA,
+    - **Então** os dados são purgados/anonimizados atomicamente da base de produção, gera-se o Relatório Oficial de Execução de Conservação (com contagens e hash do lote, sem reproduzir o conteúdo apagado) e arquiva-se permanentemente como prova de conformidade perante a APD.
+- **Pós-condições e Efeitos Colaterais:** Purga executada; registo em `execucoes_conservacao` e `audit_logs`.
+
+---
+
+### `US-APD-07`: Confidencialidade e Garantias do Titular na Avaliação de Desempenho Docente (Condicional `Q-036`)
+- **História:** *Como* **Professor Avaliado (`PROF`)** e **Subdirector Pedagógico (`SUB_PED`)**, *quero* **aceder à ficha individual de avaliação de desempenho docente sob estrita confidencialidade, com garantia de vista prévia, registo de observações e manifestação formal de concordância ou discordância**, *para* **respeitar os princípios da lealdade e transparência no tratamento de dados laborais (art. 11.º da Lei n.º 22/11 e DP n.º 28/22)**.
+- **Rastreabilidade:** `RF-C19-33` | [[11 - Protecao de Dados (APD)|APD-11]] §7.1; DP n.º 28/22; Lei n.º 22/11 | 🟡 condicional · `Q-036` | `MOD-GER-RH`.
+- **Prioridade (proposta):** `Could` (condicional) | **Entrega:** `E4` (ou a definir conforme `Q-036`).
+- **Pré-condições:** Decisão formal favorável da Comissão de Gestão quanto à inclusão do módulo de avaliação de desempenho no SGE (`Q-036`); processo de avaliação do ano letivo aberto.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Restrição de visibilidade estrita da avaliação):**
+    - **Dado** uma ficha de avaliação de desempenho preenchida pelo Coordenador de Disciplina ou Subdirector Pedagógico,
+    - **Quando** o registo é guardado no módulo de RH,
+    - **Então** a visualização da ficha e das pontuações atribuídas é restrita exclusivamente ao docente avaliado, ao avaliador direto e ao `DIR_GERAL`, ficando expressamente bloqueada a qualquer outro colega, coordenador não envolvido ou operador da secretaria.
+  - **Cenário 2 (Sucesso — Vista e contraditório do docente avaliado):**
+    - **Dado** um professor notificado da conclusão da sua proposta de avaliação,
+    - **Quando** acede à sua área individual no sistema,
+    - **Então** pode consultar as classificações parcelares, introduzir observações escritas em campo próprio e assinalar expressamente a sua declaração de concordância ou manifestação de reclamação prévia à homologação final pela Direção.
+- **Pós-condições e Efeitos Colaterais:** Registo em `avaliacoes_desempenho` (se ativada); auditoria em `audit_logs`.
+
+---
+
 ## Distribuição das Histórias por Entrega (E1–E5)
 
 Contagem pela **primeira entrega** em que cada história tem de estar em produção (linha *Prioridade (proposta) | Entrega* de cada US). Uma história com duas entregas (ex.: `US-PED-06`: E3 trimestral / E4 anual) conta na primeira.
@@ -2939,15 +3100,23 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 | `EP-PNL` | — | 1 | 10 | 1 | — | — | 12 |
 | `EP-PAS` | — | — | — | 8 | — | — | 8 |
 | `EP-MIG` | 5 | 1 | — | 1 | — | — | 7 |
-| **Total** | **41** | **34** | **13** | **17** | **17** | **1** | **123** |
+| `EP-APD` | 2 | 2 | 1 | 2 | — | — | 7 |
+| **Total** | **43** | **36** | **14** | **19** | **17** | **1** | **130** |
 
-- **MoSCoW proposto:** 99 `Must`, 20 `Should`, 3 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
+- **MoSCoW proposto:** 104 `Must`, 21 `Should`, 4 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
 - 🟡 **Se as propostas pendentes forem aprovadas:** com a `Q-037`, `US-COM-01` a `US-COM-06` passam para a **E3** (E3 = 18, E5 = 13); a `Q-038` foi decidida na `DEC-013` (`US-DIS-01` na **E2**, `US-DIS-04` na **E3**).
 - **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina).
 
 ---
 
 ## Alterações da v2.0
+
+### Épico 17 (EP-APD) — Governação da Proteção de Dados (2026-11-08 — Issue #15)
+
+- Criado o **Épico 17 (`EP-APD`)** com as histórias `US-APD-01` a `US-APD-07`, cobrindo os 9 requisitos funcionais pendentes da capacidade C19 (`RF-C19-01`, `RF-C19-04`, `RF-C19-08`, `RF-C19-09`, `RF-C19-12`, `RF-C19-13`, `RF-C19-20`, `RF-C19-23`, `RF-C19-33`), em conformidade com a Lei n.º 22/11, o DP n.º 60/21 e as orientações da APD (Circular n.º 2/2024).
+- Cobertura funcional detalhada: gestão de versões dos avisos de privacidade `AV-01` a `AV-12` e notificação de maioridade aos 18 anos (`US-APD-01`), registo de incidentes de violação de dados e notificação à APD em 72h (`US-APD-02`), gestão dos direitos do titular, prazo de resposta de 60 dias e relatório de acesso filtrado (`US-APD-03`), auditoria reforçada de acessos a dados sensíveis de saúde e bolsas (`US-APD-04`), bloqueio cautelar de dados contestados (`US-APD-05`), motor automático de conservação e purga com relatório formal de destruição e salvaguarda permanente do arquivo histórico (`US-APD-06`), confidencialidade e garantias na avaliação de desempenho docente (`US-APD-07`, condicional à `Q-036`).
+- Total do documento atualizado para **17 épicos** e **130 histórias de utilizador** (104 Must, 21 Should, 4 Could, 1 Won't). Distribuição: E1 = 43, E2 = 36, E3 = 14, E4 = 19, E5 = 17, Fora = 1.
+- Fecha a lacuna `L-RF-03` da Matriz de Rastreabilidade.
 
 ### Épico 16 (EP-MIG) — Migração de Dados (2026-11-08 — Issue #13)
 
