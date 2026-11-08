@@ -382,7 +382,7 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | L-RF-04 | Parâmetros institucionais sem US *(a tabela já existe: `parametros_instituicao` — fechado em 2026-11-05)* | DOC-03 (`US-GOV-01`) | E1 |
 | L-RF-05 | Catálogo de indicadores e parâmetros do regulamento sem US | DOC-03 (`EP-PNL`, `EP-DIS`) | E3 |
 | ~~L-RF-06~~ | ~~68 tabelas novas por integrar no DOC-05; divergência das tabelas da C15~~ — **fechada em 2026-11-05**: o DOC-05 tem as 116 tabelas ([[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]) | DOC-05 §6 | — |
-| L-RF-07 | Entregas pendentes: central de avisos (`Q-037`, 7 RF) e núcleo da C13 (`Q-038`, 3 RF) | REG-12; VIS-06 (pedido de alteração) | E3 |
+| L-RF-07 | Entregas pendentes: central de avisos (`Q-037`, 7 RF) e ~~núcleo da C13 (`Q-038`, 3 RF)~~ *(decidido na `DEC-013`: E2/E3)* | REG-12; VIS-06 (pedido de alteração) | E3 |
 | L-RF-08 | Expediente geral fora do mapa C01–C20 (`Q-039`) | VIS-06; REG-12 | Âmbito |
 
 ---

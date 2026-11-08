@@ -61,6 +61,7 @@ tags:
 | [[#DEC-010 — Integrar os ajustes da migração no modelo de dados\|DEC-010]] | VER-01 (#6) | Ajustes da migração (MIG-10 `AJ-nn`) | Aceitar todos; BI opcional com pendência; conta técnica própria; consola `MOD-MIG-01` na E1 | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-011 — Pagamentos por RUPE no fecho de caixa\|DEC-011]] | VER-01 (#7); `Q-034` | RUPE no fecho de caixa | Canal próprio do caixa, sem documento fiscal do IPCAG, fora da receita e da conciliação bancária | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-012 — Alinhar permissões RBAC e RLS\|DEC-012]] | VER-01 (#5) | Permissões: RBAC vs RLS | O DOC-01 manda; `ADMIN_TEC` só com dados técnicos; 5 casos da Secretaria; preços para todos e bolsas só para a Tesouraria e a Direção | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
+| [[#DEC-013 — Entregas e prioridades\|DEC-013]] | VER-01 (#9); `Q-038` | Entregas E1–E5 e prioridades | Saúde na E1; núcleo da C13 na E2/E3; C10 dividida em E1/E2; 3 regras de alinhamento RF ↔ US | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -420,6 +421,42 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-013 — Entregas e prioridades
+
+- **Origem:** verificação de consistência [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]], grupo G9 ([issue #9](https://github.com/Angeloaqp/sge-ipcag-12008/issues/9)); `Q-038` · **Estado:** `decidida` · **Data:** 2026-11-05 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Havia 12 desalinhamentos de entrega (E1–E5) e de prioridade (MoSCoW) entre o RF-07, o DOC-03, a VIS-06 e o PLN-00. Exemplos:
+- o compartimento de saúde estava na E2, mas era usado na E1;
+- o boletim da E3 dependia da C13, que estava pendente;
+- a C10 tinha 13 RF na E2, mas a VIS-06 e o PLN-00 punham-na toda na E1;
+- havia 11 diferenças MoSCoW entre RF e US.
+
+**Decisão.**
+1. **Saúde:** o compartimento de saúde (`RF-C19-05`) sobe para a **E1**, com a matrícula. Os atestados da `DISP` usam-no a partir da E2.
+2. **Boletim:** o **núcleo da C13** é antecipado (`Q-038`): tipos de falta (`US-DIS-01`, `RF-C13-01`) na **E2**; escala e comportamento trimestral (`US-DIS-04`, `RF-C13-02`/`-03`) na **E3**. Ocorrências, medidas e processos ficam na **E5**.
+3. **Tesouraria:** a **C10 fica dividida**: E1 (balcão, propinas, bolsas, documentos fiscais, caixa) e E2 (dívidas, acordos, relatórios, conciliação). A VIS-06 e o PLN-00 §6 foram atualizados.
+4. **Regras de alinhamento RF ↔ US:**
+   - (1) uma US tem a entrega mais cedo e a prioridade mais alta dos RF de que é a única ou a primeira consumidora;
+   - (2) um RF de proteção de dados ou de segurança vale desde a primeira entrega que o usa;
+   - (3) um RF com partes em entregas diferentes indica as duas e conta na primeira.
+
+**Aplicação.**
+- `RF-C19-10` passa para a E1.
+- `RF-C19-27` passa a ter duas entregas: guia na E2, carta de estágio na E4.
+- `RF-C19-02` passa a ligar também à `US-PIN-09`.
+- `RF-C05-03` deixa de ligar à `US-COM-08`.
+- `US-CTA-14`, `US-DIS-02` e `US-DIS-06` passam a `Must`.
+- A regra 🟡 da `DEC-002` passa a valer também para `RF-C10-08`, `-17`, `-20` e `RF-C19-11`.
+- As contagens do RF-07 §4 e do DOC-03 foram recalculadas.
+- Fica explícito que `RF-C10-26` (fora da linha de base) e `RF-C19-33` (condicional) não entram nos 222 da linha de base.
+
+**Porquê.**
+- Cada entrega tem de funcionar sozinha na data do calendário escolar.
+- O primeiro boletim tem de sair completo, como o atual.
+- A proteção de dados aplica-se desde o primeiro dado recolhido.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -461,7 +498,7 @@ As entrevistas dizem duas coisas:
 | Q-035 | **Cabeçalho e rodapé reais:** o cabeçalho diz "República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação" e não menciona o MED nem a Diocese de Caxito; o rodapé traz códigos como `IPCAG.SG-ACE` e `DEE-PEEP-001-ACE`. Qual é o modelo oficial a usar e o que significam os códigos? | DESC-L1 A14 | C09 (`DOF-01` a `DOF-12`); DOC-04 Parte 2 | Comissão de Gestão; Gabinete Provincial | B | `respondida — a confirmar` | Cabeçalho: República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação / IPCAG; códigos de rodapé IPCAG.SG-ACE e DEE-PEEP-001-ACE — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
 | Q-036 | **Avaliação de desempenho do pessoal** (10 indicadores, classificação quantitativa e qualitativa, homologação pelo Gabinete Provincial): entra na C11, ou fica fora do âmbito como o processamento salarial (DEC-008)? | DESC-L1 A15 | C11; DEC-008 | Comissão de Gestão; `CHEFE_SEC_GER` | B | `aberta` | — |
 | Q-037 | **SMS antes da E5?** A C12 propõe uma central de avisos (impresso + SMS) que não abre dados à internet; pode entrar na E3 com os avisos de faltas e propinas, deixando o portal na E5 (`DEC-003`)? Com que orçamento mensal? | [[C12 - Comunicacao com Encarregados e Alunos\|CAP-C12]] `Q-C12-01` | C12; C10; E3 | Comissão de Gestão; `SUB_ADM` | B | `aberta` | — |
-| Q-038 | **Núcleo da C13 na E2/E3?** O boletim real (`DOF-06`) imprime faltas por indisciplina e comportamento desde o I Trimestre; a C13 propõe levar esse núcleo para a E2/E3 e deixar ocorrências e processos disciplinares na E5. Exige pedido de alteração ao [[06 - Visao e Ambito]]. | [[C13 - Disciplina e Comportamento\|CAP-C13]] `Q-C13-01` | C13; DOF-06; E2/E3 | Comissão de Gestão | B | `aberta` | — |
+| Q-038 | **Núcleo da C13 na E2/E3?** O boletim real (`DOF-06`) imprime faltas por indisciplina e comportamento desde o I Trimestre; a C13 propõe levar esse núcleo para a E2/E3 e deixar ocorrências e processos disciplinares na E5. Exige pedido de alteração ao [[06 - Visao e Ambito]]. | [[C13 - Disciplina e Comportamento\|CAP-C13]] `Q-C13-01` | C13; DOF-06; E2/E3 | Comissão de Gestão | B | `respondida` | **Decidida na `DEC-013`** (2026-11-05): tipos de falta na E2 e comportamento na E3; resto da C13 na E5. Falta a homologação da Comissão de Gestão. |
 | Q-039 | **Expediente geral e correspondência:** a Secretaria Geral regista à mão os ofícios de entrada e saída (`Ofício N.º [seq]/IPCAG.SG/ano`). Entra no âmbito do SGE (nova capacidade C21), e em que entrega? | [[Sintese das Respostas da Fase B\|DESC-RESP]] R25 | Âmbito ([[06 - Visao e Ambito]]) | Comissão de Gestão | B | `aberta` | — |
 
 ### 3.1 Questões registadas noutras notas

@@ -62,14 +62,14 @@ tags:
 | **`EP-HOR`** | **Épico 09:** Horários, Distribuição de Serviço Docente e Livro de Sumários | C04 | `SUB_PED`, `COORD_CURSO`, `COORD_TURNO`, `PROF` | `US-HOR-01` a `US-HOR-11` (11 US) | `RN-03`, `RN-04`, `RN-12` | **E2** | Must (`US-HOR-08`, `-10`: Should) |
 | **`EP-COB`** | **Épico 10:** Cobrança de Dívidas, Acordos de Pagamento, Relatórios Financeiros e Conciliação Bancária | C10 | `SUB_ADM`, `OP_TES`, `CHEFE_SEC_GER`, `DIR_GERAL` | `US-COB-01` a `US-COB-15` (15 US) | `RN-08`, `RN-09`, `RN-13` | **E2** (`US-COB-05`, `-14`: E1); `US-COB-15` fora das E1–E5 (`DEC-005`) | Must / Should / Could; `US-COB-15`: Won't |
 | **`EP-COM`** | **Épico 11:** Comunicação com Encarregados e Alunos (Avisos, Convocatórias, SMS e Portal) | C12 | `SUB_PED`, `SUB_ADM`, `DIR_TURMA`, `COORD_TURNO`, `OP_PED`, Encarregado, Aluno | `US-COM-01` a `US-COM-08` (8 US) | `RN-03`, `RN-08`, `RN-14` | **E5** — 🟡 **proposta pendente `Q-037`**: central de avisos na E3 | Must / Should |
-| **`EP-DIS`** | **Épico 12:** Disciplina e Comportamento | C13 | `PROF`, `COORD_TURNO`, `DIR_TURMA`, `SUB_PED`, `DIR_GERAL` | `US-DIS-01` a `US-DIS-06` (6 US) | `RN-03`, `RN-15` | **E5** — 🟡 **proposta pendente `Q-038`**: núcleo (`US-DIS-01` na E2, `US-DIS-04` na E3) | Must / Should |
+| **`EP-DIS`** | **Épico 12:** Disciplina e Comportamento | C13 | `PROF`, `COORD_TURNO`, `DIR_TURMA`, `SUB_PED`, `DIR_GERAL` | `US-DIS-01` a `US-DIS-06` (6 US) | `RN-03`, `RN-15` | **E2/E3** núcleo (`US-DIS-01` na E2, `US-DIS-04` na E3 — `DEC-013`); resto na **E5** | Must / Should |
 | **`EP-CTA`** | **Épico 13:** Gestão de Contas e Acesso (Ciclo de Vida, MFA, PIN Local, Títulos dos Cargos) | C14 | `CHEFE_SEC_GER`, `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `ADMIN_TEC` | `US-CTA-01` a `US-CTA-15` (15 US) | `RN-04`, `RN-10`, `RN-16` | **E1** (`US-CTA-09`: E2; `US-CTA-14`: E5) | Must / Should |
 | **`EP-PNL`** | **Épico 14:** Painéis de Gestão da Direção, Alertas e Estatísticas Impressas | C15 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `COORD_CURSO`, `COORD_DISC`, `COORD_TURNO`, `DIR_TURMA` | `US-PNL-01` a `US-PNL-12` (12 US) | `RN-02`, `RN-03`, `RN-17` | **E3** (`US-PNL-08`: E2; `US-PNL-11`: E4) | Must / Should / Could |
 | **`EP-PAS`** | **Épico 15:** Encerramento do Ano Letivo e Passagem de Ano | C16 | `SUB_PED`, `DIR_GERAL`, `CHEFE_SEC_PED`, `OP_PED`, `SUB_ADM` | `US-PAS-01` a `US-PAS-08` (8 US) | `RN-02`, `RN-07`, `RN-10`, `RN-18` | **E4** | Must (`US-PAS-08`: Should) |
 
 > [!warning] 🟡 Propostas de entrega pendentes
 > - **`Q-037` — SMS antes da E5:** a central de avisos (`US-COM-01` a `US-COM-06`) pode entrar na **E3** sem abrir dados à internet; o portal (`US-COM-07`, `US-COM-08`) fica na E5 (`DEC-003`). **Pendente** da Comissão de Gestão.
-> - **`Q-038` — Núcleo da C13 na E2/E3:** tipos de falta (`US-DIS-01`) e comportamento trimestral (`US-DIS-04`) são precisos para o boletim real do I Trimestre. **Pendente**; exige pedido de alteração ao [[06 - Visao e Ambito|VIS-06]].
+> - **`Q-038` — Núcleo da C13 na E2/E3:** **decidido na `DEC-013`** (2026-11-05): tipos de falta (`US-DIS-01`) na E2 e comportamento trimestral (`US-DIS-04`) na E3; ocorrências, medidas e processos ficam na E5. O [[06 - Visao e Ambito|VIS-06]] foi atualizado.
 >
 > Enquanto estas questões estiverem abertas, a tabela segue a linha de base do VIS-06 (C12 e C13 na E5) e as histórias abrangidas mostram a entrega proposta entre parênteses.
 
@@ -1860,14 +1860,14 @@ tags:
 > A distinção entre faltas por indisciplina e por não comparência, o comportamento por trimestre e a tolerância de `10–15 min` no 1.º tempo vêm do boletim real e das entrevistas ([[Achados dos Documentos Reais - Lote 1|DESC-L1]] A8; [[Sintese das Respostas da Fase B|DESC-RESP]] R1–R2). O 1.º tempo da manhã às `07h30` é o da janela do turno do DOC-01. Os tipos de ocorrência, as medidas e a escala de comportamento são **propostas** à espera do regulamento interno (`DEC-009`, ponto de controlo **E3**).
 
 > [!warning] 🟡 Entrega por decidir — `Q-038`
-> Na linha de base do [[06 - Visao e Ambito|VIS-06]] a `C13` está na **E5**. Como o boletim real (`DOF-06`) já imprime as faltas por tipo e o comportamento no fim do I Trimestre, a [[C13 - Disciplina e Comportamento|CAP-C13]] propõe levar o **núcleo** para a **E2/E3**: tipos de falta (`US-DIS-01`, E2) e comportamento trimestral (`US-DIS-04`, E3). Ocorrências completas, medidas e processos ficam na E5. A proposta está **pendente** (`Q-038`, `Q-C13-01`) e exige um pedido de alteração ao âmbito.
+> **Decidido na `DEC-013` (2026-11-05):** o **núcleo** da C13 sai antes, porque o boletim real (`DOF-06`) já imprime as faltas por tipo e o comportamento no fim do I Trimestre: tipos de falta (`US-DIS-01`) na **E2** e comportamento trimestral (`US-DIS-04`) na **E3**. Ocorrências completas, medidas e processos ficam na **E5**.
 
 ---
 
 ### `US-DIS-01`: Marcar uma Falta por Indisciplina em Sala
 - **História:** *Como* **Professor (`PROF`)**, *quero* **marcar uma falta por indisciplina quando mando um aluno sair da sala, com uma ocorrência rápida ligada**, *para* **que o facto fique registado, seja acompanhado pelo Coordenador de Turno e saia no boletim como falta por indisciplina**.
 - **Rastreabilidade:** `RN-15.1`, `RN-15.3`, `RN-03` | `US-PED-02`, `US-HOR-06` | `MOD-DIS-01`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E2` — `Q-038`).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E2` (núcleo da C13 — `DEC-013`).
 - **Pré-condições:** Aula `Lecionada` do horário publicado (`US-HOR-06`); professor alocado à turma.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Falta com ocorrência rápida):**
@@ -1893,7 +1893,7 @@ tags:
 ### `US-DIS-02`: Completar a Ocorrência e Aplicar uma Medida Simples
 - **História:** *Como* **Coordenador de Turno (`COORD_TURNO`)**, *quero* **completar a ocorrência e aplicar uma medida simples do catálogo**, *para* **que o caso fique resolvido e registado sem passar pela Direção**.
 - **Rastreabilidade:** `RN-15.3`, `RN-15.4`, `RN-15.5` | `MOD-DIS-02`.
-- **Prioridade (proposta):** `Should` | **Entrega:** `E5`.
+- **Prioridade (proposta):** `Must` *(era `Should` — `DEC-013`, regra 1)* | **Entrega:** `E5`.
 - **Pré-condições:** Ocorrência `Registada` ou `Em Análise`; catálogo de medidas aprovado 🟡 (regulamento interno — `Q-C13-06`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Medida simples):**
@@ -1937,7 +1937,7 @@ tags:
 ### `US-DIS-04`: Propor e Confirmar o Comportamento do Trimestre
 - **História:** *Como* **Director de Turma (`DIR_TURMA`)**, *quero* **propor a avaliação de comportamento de cada aluno vendo as ocorrências e as faltas por indisciplina do trimestre**, *para* **que o conselho de notas decida com base em factos e o boletim saia como o modelo real**.
 - **Rastreabilidade:** `RN-15.7` | `US-PED-06`, `US-DOC-01` (`DOF-06`) | `MOD-DIS-03`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-038`; o boletim do I Trimestre já imprime o comportamento).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (núcleo da C13 — `DEC-013`; o boletim do I Trimestre já imprime o comportamento).
 - **Pré-condições:** Trimestre `Em Conselho de Notas`; escala 🟡 parametrizada (qualitativa ou numérica — `Q-C13-02`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Proposta com factos):**
@@ -1981,7 +1981,7 @@ tags:
 ### `US-DIS-06`: Consultar o Histórico Disciplinar com Restrições de Acesso
 - **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)**, *quero* **ver o histórico disciplinar completo de um aluno**, *para* **decidir casos graves com informação completa, sem que esses dados apareçam onde não devem**.
 - **Rastreabilidade:** `RN-15.8` | APD-11 | `MOD-DIS-04`.
-- **Prioridade (proposta):** `Should` | **Entrega:** `E5`.
+- **Prioridade (proposta):** `Must` *(era `Should` — `DEC-013`, regra 1)* | **Entrega:** `E5`.
 - **Pré-condições:** Ocorrências registadas.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Histórico para a Subdireção):**
@@ -2273,7 +2273,7 @@ tags:
 - **História:** *Como* **Encarregado de Educação**, *quero* **ativar a minha conta do portal na Secretaria Pedagógica**, *para* **consultar as notas, faltas e propinas dos meus educandos**.
 - **Estado:** a `DEC-003` decidiu o portal para a **E5**. A história fica como referência; o que o portal mostra, os SMS e os consentimentos da APD-11 estão detalhados em `US-COM-07` (`EP-COM`).
 - **Rastreabilidade:** [[C14 - Gestao de Contas e Acesso|CAP-C14]] §11 | `C12` | `DEC-003`.
-- **Prioridade (proposta):** `Should` | **Entrega:** `E5`.
+- **Prioridade (proposta):** `Must` *(era `Should` — `DEC-013`, regra 1)* | **Entrega:** `E5`.
 - **Critério de aceitação de referência (a detalhar com a `C12`):**
   - **Dado** um encarregado com 2 educandos ativos, **Quando** ativa a conta com o código entregue contra apresentação do BI, **Então** vê apenas os dados desses 2 educandos e nunca os de outros alunos.
   - **Exceção:** **Dado** um código de ativação já usado, **Quando** é introduzido de novo, **Então** o sistema recusa e indica que o encarregado deve voltar à Secretaria Pedagógica.
@@ -2765,19 +2765,26 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 | `EP-HOR` | — | 11 | — | — | — | — | 11 |
 | `EP-COB` | 2 | 12 | — | — | — | 1 | 15 |
 | `EP-COM` | — | — | — | — | 8 🟡 | — | 8 |
-| `EP-DIS` | — | — | — | — | 6 🟡 | — | 6 |
+| `EP-DIS` | — | 1 | 1 | — | 4 | — | 6 |
 | `EP-CTA` | 13 | 1 | — | — | 1 | — | 15 |
 | `EP-PNL` | — | 1 | 10 | 1 | — | — | 12 |
 | `EP-PAS` | — | — | — | 8 | — | — | 8 |
-| **Total** | **36** | **32** | **12** | **16** | **19** | **1** | **116** |
+| **Total** | **36** | **33** | **13** | **16** | **17** | **1** | **116** |
 
-- **MoSCoW proposto:** 89 `Must`, 23 `Should`, 3 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
-- 🟡 **Se as propostas pendentes forem aprovadas:** com a `Q-037`, `US-COM-01` a `US-COM-06` passam para a **E3** (E3 = 18, E5 = 13); com a `Q-038`, `US-DIS-01` passa para a **E2** e `US-DIS-04` para a **E3**.
+- **MoSCoW proposto:** 92 `Must`, 20 `Should`, 3 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
+- 🟡 **Se as propostas pendentes forem aprovadas:** com a `Q-037`, `US-COM-01` a `US-COM-06` passam para a **E3** (E3 = 18, E5 = 13); a `Q-038` foi decidida na `DEC-013` (`US-DIS-01` na **E2**, `US-DIS-04` na **E3**).
 - **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina).
 
 ---
 
 ## Alterações da v2.0
+
+### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-013 — Entregas e prioridades|DEC-013]] — entregas e prioridades (2026-11-05)
+
+- Núcleo da C13 antecipado: `US-DIS-01` na E2 e `US-DIS-04` na E3; `EP-DIS` atualizado.
+- Prioridade `Must` em `US-CTA-14`, `US-DIS-02` e `US-DIS-06` (regra 1: igual à do RF mais prioritário).
+- Distribuição por entrega e contagem MoSCoW recalculadas.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
 
