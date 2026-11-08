@@ -379,17 +379,20 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 > Se o concurso de 2027/2028 correr fora do SGE (`Q-017`), os admitidos entram por estes RF antes das matrículas (VIS-06 §5.1).
 
 ### C18 — Operação do sistema
-**Âmbito:** dentro (servidor local + réplica na nuvem — `DEC-006`) · **Entrega:** infraestrutura antes da E1; operação completa na E2 (VIS-06) · **Objetivos:** `O-08`, `O-10` · **Fontes:** [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] §5, [[08 - Requisitos Nao Funcionais|RNF-08]]
+**Âmbito:** dentro (servidor local + réplica na nuvem — `DEC-006`) · **Entrega:** infraestrutura antes da E1; operação completa na E2 (VIS-06) · **Objetivos:** `O-08`, `O-10` · **Fontes:** [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] §5, [[08 - Requisitos Nao Funcionais|RNF-08]] · **Aceitação:** metas do RNF-08 e procedimentos do OPS-09 ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-014 — Critérios de aceitação da operação (C18)|DEC-014]])
 
-| ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
+> [!info] Aceitação Técnica da Operação (DEC-014)
+> Conforme a `DEC-014`, os requisitos operacionais de C18 são atributos não funcionais de engenharia geridos pelo Administrador Técnico e N3, sem ecrãs de utilizador final da escola. São aceites pelas metas do [[08 - Requisitos Nao Funcionais|RNF-08]] e procedimentos do [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]], mapeados na coluna US abaixo, dispensando US no DOC-03. Lacuna `L-RF-02` fechada.
+
+| ID | Requisito | O | Prio. | Entrega | Origem | RN | US / Critério de Aceitação RNF | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RF-C18-01** | Fazer cópias de segurança diárias cifradas (regra 3-2-1: nuvem e disco externo) no fecho do turno da tarde e verificar o restauro. | O-08 | M | E1 | `R-30`; OPS-09 §5.1; `DEC-006` | RN-10 | — | — | — | todas | 🟡 PC-E1 · `Q-006`, `Q-016` (residência dos dados) |
-| **RF-C18-02** | Replicar o servidor local para a nuvem e resolver conflitos com uma autoridade central definida. | O-08 | M | E1 | `DEC-006`; OPS-09 §3.5 | RN-10.4 | — | — | — | `operacoes_sincronizacao`, `conflitos_sincronizacao` | 🟡 PC-E1 · `Q-015` |
-| **RF-C18-03** | Recuperar o serviço com perda máxima de 24 h de dados e em menos de 4 h, com o procedimento ensaiado antes de cada entrega. | O-08 | M | E2 | PLN-00 §5.3; OPS-09 §5.2; RNF-08 | — | — | — | — | — | definido |
-| **RF-C18-04** | Monitorizar o servidor, a réplica, as cópias e a sincronização e enviar alertas técnicos à administração técnica. | O-08 | S | E2 | OPS-09 §5.3 | RN-17.12 | — | MOD-SEG-01, MOD-ALR | — | `alertas_gestao` | definido |
-| **RF-C18-05** | Aplicar atualizações fora dos períodos críticos do calendário (matrículas, provas, conselhos), com possibilidade de reversão. | O-08 | S | E2 | OPS-09 §5.4, §6; DESC-RESP §3 | — | — | MOD-SEG-01 | — | — | definido |
-| **RF-C18-06** | Registar e acompanhar os pedidos de suporte dos utilizadores. | O-10 | C | E2 | OPS-09 §5.6 | — | — | — | — | — | 🟡 DoR-E2 · `Q-013` (quem dá suporte) |
-| **RF-C18-07** | Disponibilizar um ambiente de formação só com dados sintéticos ou anonimizados, para a formação por cargo (≤ 2 h por cargo). | O-10 | M | E1 | MIG-10 §9; OPS-09 §5.7; APD-11 `RNF-PRV-06`; PLN-00 §5.3 | — | — | — | — | — | definido |
+| **RF-C18-01** | Fazer cópias de segurança diárias cifradas (regra 3-2-1: nuvem e disco externo) no fecho do turno da tarde e verificar o restauro. | O-08 | M | E1 | `R-30`; OPS-09 §5.1; `DEC-006` | RN-10 | `RNF-BKP-01/05/07` (OPS-09 §5.1) | — | — | todas | 🟡 PC-E1 · `Q-006`, `Q-016` (residência dos dados) |
+| **RF-C18-02** | Replicar o servidor local para a nuvem e resolver conflitos com uma autoridade central definida. | O-08 | M | E1 | `DEC-006`; OPS-09 §3.5 | RN-10.4 | `RNF-BKP-01, RNF-OFF-08` (OPS-09 §3.5) | — | — | `operacoes_sincronizacao`, `conflitos_sincronizacao` | 🟡 PC-E1 · `Q-015` |
+| **RF-C18-03** | Recuperar o serviço com perda máxima de 24 h de dados e em menos de 4 h, com o procedimento ensaiado antes de cada entrega. | O-08 | M | E2 | PLN-00 §5.3; OPS-09 §5.2; RNF-08 | — | `RNF-BKP-02/03, RNF-DIS-05` (OPS-09 §5.2) | — | — | — | definido |
+| **RF-C18-04** | Monitorizar o servidor, a réplica, as cópias e a sincronização e enviar alertas técnicos à administração técnica. | O-08 | S | E2 | OPS-09 §5.3 | RN-17.12 | `RNF-DIS-01, RNF-AUD-04` (OPS-09 §5.3) | MOD-SEG-01, MOD-ALR | — | `alertas_gestao` | definido |
+| **RF-C18-05** | Aplicar atualizações fora dos períodos críticos do calendário (matrículas, provas, conselhos), com possibilidade de reversão. | O-08 | S | E2 | OPS-09 §5.4, §6; DESC-RESP §3 | — | `RNF-MAN-01/02/08` (OPS-09 §5.4) | MOD-SEG-01 | — | — | definido |
+| **RF-C18-06** | Registar e acompanhar os pedidos de suporte dos utilizadores. | O-10 | C | E2 | OPS-09 §5.6 | — | `RNF-USA-09` (OPS-09 §5.6) | — | — | — | 🟡 DoR-E2 · `Q-013` (quem dá suporte) |
+| **RF-C18-07** | Disponibilizar um ambiente de formação só com dados sintéticos ou anonimizados, para a formação por cargo (≤ 2 h por cargo). | O-10 | M | E1 | MIG-10 §9; OPS-09 §5.7; APD-11 `RNF-PRV-06`; PLN-00 §5.3 | — | `RNF-USA-01, RNF-PRV-06` (OPS-09 §5.7) | — | — | — | definido |
 
 ### C19 — Proteção de dados
 **Âmbito:** dentro · **Entrega:** transversal, desde a E1 (VIS-06) · **Objetivo:** `O-09` · **Fonte:** [[11 - Protecao de Dados (APD)|APD-11]] §7.1 (`RF-C19-nn` = `RF-P-APD-nn`; entrega sugerida pela APD-11; prioridade atribuída aqui) · **Lei:** Lei n.º 22/11
@@ -530,7 +533,7 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 
 ### 4.4 Cobertura (detalhe na [[Matriz de Rastreabilidade]])
 - **0** objetivos sem RF; **0** capacidades dentro do âmbito sem RF; **0** das 123 US sem RF.
-- **24 RF sem US:** C18 (7), C19 (9), e `RF-C01-07`, `RF-C03-15`, `RF-C09-11`, `RF-C10-10`, `RF-C10-24`, `RF-C10-25`, `RF-C13-02`, `RF-C15-01` *(os 16 RF de C17 foram cobertos por `US-MIG-01` a `US-MIG-07` — Issue #13)*.
+- **17 RF sem US:** C19 (9), e `RF-C01-07`, `RF-C03-15`, `RF-C09-11`, `RF-C10-10`, `RF-C10-24`, `RF-C10-25`, `RF-C13-02`, `RF-C15-01` *(os 16 RF de C17 foram cobertos por `US-MIG-01` a `US-MIG-07` — Issue #13; os 7 RF de C18 são aceites pelas metas do RNF-08 e procedimentos do OPS-09 conforme `DEC-014` — Issue #14)*.
 - **22 RF sem módulo** no DOC-04 (consola de migração e operação).
 - ~~**68 tabelas** citadas ainda não estão no DOC-05 (v1.2 em 2026-11-03); a C15 tem tabelas na nota de capacidade mas não no mapa INT-V2 §2.4.~~ **Fechado em 2026-11-05:** o DOC-05 `2.0-rc1` tem as 116 tabelas e a C15 está no Grupo 6; só `avaliacoes_desempenho` fica condicional (`Q-036`).
 
@@ -544,3 +547,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc1 | 2026-11-05 | Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]: `RF-P-APD`/`RNF-P-APD` → IDs finais (#1); coluna Tabelas atualizada e `consentimentos` (#2); §4.4 e fontes atualizadas (#10) |
 | 2.0-rc1 | 2026-11-05 | Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-013 — Entregas e prioridades\|DEC-013]]: regras de alinhamento (§0); `RF-C19-05`/`-10` na E1; `RF-C19-27` e `RF-C13-02` com duas entregas; núcleo da C13 na E2/E3; `RF-C05-03` sem `US-COM-08`; `RF-C19-02` liga a `US-PIN-09`; regra 🟡 da `DEC-002` aplicada a `RF-C10-08`, `-17`, `-20` e `RF-C19-11`; §4 recalculado |
 | 2.0-rc2 | 2026-11-08 | Cobertura de C17: preenchida a coluna US para `RF-C17-01` a `RF-C17-16` com o novo Épico 16 (`US-MIG-01` a `US-MIG-07`, DOC-03) — Issue #13. |
+| 2.0-rc2 | 2026-11-08 | Aceitação de C18: associados os 7 RF de C18 aos respetivos requisitos de qualidade RNF-08 e procedimentos OPS-09 conforme `DEC-014` (Issue #14). Lacuna `L-RF-02` fechada. |

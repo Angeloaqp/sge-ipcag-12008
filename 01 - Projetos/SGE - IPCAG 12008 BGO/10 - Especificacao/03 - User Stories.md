@@ -39,6 +39,7 @@ tags:
 > - **Documentos fiscais:** Fatura, Fatura-Recibo, Recibo e Nota de Crédito (DP n.º 71/25); a história descreve o documento, não quem o emite (`DEC-002` pendente).
 > - **Termos impressos:** "Período" = Turno; "Cadeira" = Disciplina.
 > - **Prioridade e entrega:** cada história tem uma prioridade **MoSCoW proposta** e a entrega **E1–E5** (VIS-06 §5.1; PLN-00 §6). A classificação final é feita na Fase E e fica no catálogo `07` (PLN-00 §3, fase E).
+> - **Operação do Sistema (C18):** os 7 requisitos da capacidade C18 (backups, replicação, recuperação, monitorização, atualizações, suporte, formação) são atributos de qualidade e infraestrutura aceites pelas metas do [[08 - Requisitos Nao Funcionais|RNF-08]] e procedimentos de [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] conforme a [[12 - Registo de Decisoes e Questoes em Aberto#DEC-014 — Critérios de aceitação da operação (C18)|DEC-014]] (lacuna `L-RF-02` fechada), não gerando US funcionais no DOC-03.
 
 ---
 

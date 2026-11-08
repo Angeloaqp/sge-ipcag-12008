@@ -5,9 +5,9 @@ aliases:
   - "Registo de Decisões SGE"
   - "REG-12"
 created: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-08
 status: rascunho
-version: "0.1"
+version: "0.2"
 doc_id: "REG-12"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -62,6 +62,7 @@ tags:
 | [[#DEC-011 — Pagamentos por RUPE no fecho de caixa\|DEC-011]] | VER-01 (#7); `Q-034` | RUPE no fecho de caixa | Canal próprio do caixa, sem documento fiscal do IPCAG, fora da receita e da conciliação bancária | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-012 — Alinhar permissões RBAC e RLS\|DEC-012]] | VER-01 (#5) | Permissões: RBAC vs RLS | O DOC-01 manda; `ADMIN_TEC` só com dados técnicos; 5 casos da Secretaria; preços para todos e bolsas só para a Tesouraria e a Direção | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-013 — Entregas e prioridades\|DEC-013]] | VER-01 (#9); `Q-038` | Entregas E1–E5 e prioridades | Saúde na E1; núcleo da C13 na E2/E3; C10 dividida em E1/E2; 3 regras de alinhamento RF ↔ US | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
+| [[#DEC-014 — Critérios de aceitação da operação (C18)\|DEC-014]] | Issue #14 (`L-RF-02`) | Aceitação de C18 por RNF vs US | (a) Aceitação pelas metas do RNF-08 e procedimentos do OPS-09; sem US funcionais no DOC-03; mapeamento RF ↔ RNF no DOC-07 | `decidida` | 2026-11-08 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -454,6 +455,37 @@ As entrevistas dizem duas coisas:
 - Cada entrega tem de funcionar sozinha na data do calendário escolar.
 - O primeiro boletim tem de sair completo, como o atual.
 - A proteção de dados aplica-se desde o primeiro dado recolhido.
+
+---
+
+### DEC-014 — Critérios de aceitação da operação (C18)
+
+- **Origem:** Issue #14 ([issue #14](https://github.com/Angeloaqp/sge-ipcag-12008/issues/14)); lacuna `L-RF-02` da [[Matriz de Rastreabilidade]] · **Estado:** `decidida` · **Data:** 2026-11-08 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Os 7 requisitos funcionais da capacidade C18 (Operação do sistema: backups diários cifrados, replicação e autoridade central, recuperação de desastre RTO/RPO, monitorização e alertas, gestão de atualizações fora de períodos críticos, suporte aos utilizadores e ambiente de formação isolado) não possuem histórias de utilizador (US) no DOC-03. A Matriz de Rastreabilidade registava a lacuna `L-RF-02` com a proposta de decidir se a C18 se aceita pelas metas do RNF-08 e procedimentos do OPS-09 ou por US.
+
+**Opções.**
+- **(a) Aceitação pelas metas do RNF-08 e procedimentos do OPS-09 (Recomendada).** As tarefas de operação e infraestrutura são atributos não funcionais de engenharia executados pelo Administrador Técnico e suporte N3, sem ecrãs de utilizador final nem regras de negócio escolar. Tratá-las como RNF mensuráveis (RPO ≤ 24h, RTO < 4h, regra 3-2-1, cronogramas de congelamento, SLAs de suporte) garante verificação técnica rigorosa por ensaios e medições sem poluir o catálogo de histórias funcionais (DOC-03).
+- **(b) Criação de um épico operacional (`EP-OPS`) no DOC-03.** Criar histórias artificiais de utilizador ("Como Administrador Técnico, quero que o script de backup corra às 19h30...") para cobrir formalmente a coluna US. Gera redundância com o RNF-08 e mistura histórias de negócio pedagógico/financeiro com tarefas de sysadmin/DevOps.
+
+**Decisão.** **(a) Aceitação pelas metas do RNF-08 e procedimentos do OPS-09.**
+1. Os 7 requisitos `RF-C18-01` a `RF-C18-07` são aceites exclusivamente através das metas mensuráveis do [[08 - Requisitos Nao Funcionais|RNF-08]] e dos procedimentos operacionais de [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]], dispensando a criação de User Stories funcionais artificiais no DOC-03.
+2. **Matriz de Rastreabilidade e Aceitação de C18:**
+   - **`RF-C18-01`** (Backups diários cifrados 3-2-1): aceite por `RNF-BKP-01`, `RNF-BKP-04`, `RNF-BKP-05`, `RNF-BKP-06`, `RNF-BKP-07` e `OPS-09` §5.1 (rotina diária às 19h30, rotação 3-2-1 e restauro de amostra mensal).
+   - **`RF-C18-02`** (Replicação na nuvem e autoridade central): aceite por `RNF-BKP-01`, `RNF-DIS-06`, `RNF-OFF-08` e `OPS-09` §3.5 (atraso ≤ 15 min, fila tolerante a falhas e resolução determinística com autoridade no servidor local).
+   - **`RF-C18-03`** (Recuperação RTO < 4h, RPO ≤ 24h geral / ≤ 15 min fiscal): aceite por `RNF-BKP-01`, `RNF-BKP-02`, `RNF-BKP-03`, `RNF-DIS-05`, `RNF-DIS-07` e `OPS-09` §5.2 (procedimento ensaiado de DR-05/DR-06 antes de E1 e E2).
+   - **`RF-C18-04`** (Monitorização e alertas técnicos): aceite por `RNF-DIS-01`, `RNF-DIS-03`, `RNF-AUD-04`, `RNF-SEG-04` e `OPS-09` §5.3 (`MOD-SEG-01` e painel de estado local).
+   - **`RF-C18-05`** (Atualizações e períodos de congelamento): aceite por `RNF-MAN-01`, `RNF-MAN-02`, `RNF-MAN-07`, `RNF-MAN-08` e `OPS-09` §5.4 (congelamento em épocas críticas, teste em staging e reversão em ≤ 30 min).
+   - **`RF-C18-06`** (Suporte N0–N3 e tempos de resposta): aceite por `RNF-USA-09` e `OPS-09` §5.6 (caderno de suporte N0–N3, tempos S1 a S4 e relatório mensal de pedidos).
+   - **`RF-C18-07`** (Ambiente de formação sintético/anonimizado, ≤ 2h por cargo): aceite por `RNF-USA-01`, `RNF-PRV-06`, `RNF-MAN-07` e `OPS-09` §5.7 / `MIG-10` §9.
+3. No [[07 - Catalogo de Requisitos Funcionais|RF-07]], a coluna `US` dos requisitos de C18 passa a referenciar explicitamente estes critérios RNF e a secção correspondente de OPS-09, acompanhada de nota de aceitação técnica.
+4. A lacuna `L-RF-02` da [[Matriz de Rastreabilidade]] é declarada **fechada**.
+
+**Impacto.**
+- **RF-07:** Coluna US preenchida com a ligação aos RNF correspondentes; contagem de RF sem cobertura de aceitação reduzida de 24 para 17.
+- **RNF-08:** Secção §9 adicionada com o detalhe dos métodos de verificação e aceitação de C18.
+- **DOC-03:** Mantido limpo de histórias de infraestrutura; nota explicativa em §0.
+- **Matriz:** `L-RF-02` fechada.
 
 ---
 

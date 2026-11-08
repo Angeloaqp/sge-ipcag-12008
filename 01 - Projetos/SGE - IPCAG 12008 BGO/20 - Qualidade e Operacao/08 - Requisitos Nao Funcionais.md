@@ -5,9 +5,9 @@ aliases:
   - "Requisitos Não Funcionais"
   - "RNF-08"
 created: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-08
 status: rascunho
-version: "0.1"
+version: "0.2"
 doc_id: "RNF-08"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -514,3 +514,19 @@ Por ordem de impacto no desenho e no custo:
 5. **MFA para Direção e Tesouraria sem internet (RNF-SEG-02):** depende de os titulares terem *smartphone* (Q08-04).
 6. **Tempos de balcão (RNF-DES-01, RNF-USA-02) e formação ≤ 2 h (RNF-USA-01):** precisam da linha de base em papel (M5) e de testes com protótipos.
 7. **Portal QR 24 h por dia e endereço permanente (RNF-DIS-06, RNF-AUD-08):** pressupõem um domínio próprio e alojamento fora do Panguila (`DEC-006`).
+
+---
+
+## 9. Rastreabilidade e Critérios de Aceitação da Capacidade C18 (Operação do Sistema — DEC-014)
+
+Conforme decidido na [[12 - Registo de Decisoes e Questoes em Aberto#DEC-014 — Critérios de aceitação da operação (C18)|DEC-014]] (2026-11-08) e registado na [[Matriz de Rastreabilidade]] (`L-RF-02` fechada), a aceitação dos requisitos operacionais da capacidade **C18** é realizada diretamente pelas metas mensuráveis de qualidade deste catálogo e pelos procedimentos técnicos de [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]], sem necessidade de criação de histórias de utilizador (US) funcionais no DOC-03.
+
+| Requisito Funcional | Designação e Âmbito Operacional | RNF Correspondentes | Procedimento em OPS-09 | Critério de Aceitação / Método de Verificação | Entrega / Ponto de Controlo |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **`RF-C18-01`** | Cópias de segurança diárias cifradas (regra 3-2-1: nuvem e disco externo) no fecho do turno e verificação de restauro | `RNF-BKP-01`, `RNF-BKP-04`, `RNF-BKP-05`, `RNF-BKP-06`, `RNF-BKP-07` | OPS-09 §5.1 | Execução diária automatizada às 19h30; cifra AES-256 com chaves em 2 locais físicos; rotação 3-2-1 confirmada mensalmente; ensaio de restauro de amostra mensal com relatório assinado pelo Administrador Técnico e visado pelo `SUB_ADM`. | **E1** (`Must`) |
+| **`RF-C18-02`** | Replicação do servidor local para a nuvem com autoridade central e resolução determinística de conflitos | `RNF-BKP-01`, `RNF-DIS-06`, `RNF-OFF-08` | OPS-09 §3.5, §5.3 (`DEC-006`) | Sincronização assíncrona contínua com atraso ≤ 15 min quando há conectividade; fila local persistente tolerante a cortes; resolução de conflitos determinística conforme matriz RNF-OFF-08 tendo o servidor local como autoridade principal. | **E1** (`Must`) |
+| **`RF-C18-03`** | Recuperação de desastre com RPO ≤ 24 h (geral) / ≤ 15 min (fiscal) e RTO < 4 h | `RNF-BKP-01`, `RNF-BKP-02`, `RNF-BKP-03`, `RNF-DIS-05`, `RNF-DIS-07` | OPS-09 §5.2 (cenários DR-05 / DR-06) | Simulação de desastre cronometrada em ambiente de ensaio antes do Go-Live de E1 e E2: reposição completa do balcão em RTO < 4 h e reconciliação documental sem saltos de numeração fiscal. | **E2** (`Must`) |
+| **`RF-C18-04`** | Monitorização do servidor, réplica, backups e rede com alertas técnicos à administração | `RNF-DIS-01`, `RNF-DIS-03`, `RNF-AUD-04`, `RNF-SEG-04` | OPS-09 §5.3 (`MOD-SEG-01` e painel local) | Alertas automáticos no painel local da Secretaria Geral (verde/amarelo/vermelho) e por email/fila em caso de corte de energia UPS, atraso de backup > 1h, degradação de disco ou tentativa anómala de autenticação. | **E2** (`Should`) |
+| **`RF-C18-05`** | Gestão de atualizações fora de períodos críticos do calendário com reversão em ≤ 30 min | `RNF-MAN-01`, `RNF-MAN-02`, `RNF-MAN-07`, `RNF-MAN-08` | OPS-09 §5.4 | Cumprimento do calendário de congelamento (proibição de deploys em matrículas, provas e conselhos); validação prévia obrigatória em staging com testes de regressão; rollback comprovado em ≤ 30 min em ensaio. | **E2** (`Should`) |
+| **`RF-C18-06`** | Registo e acompanhamento de pedidos de suporte aos utilizadores (N0–N3) | `RNF-USA-09` | OPS-09 §5.6 | Caderno de procedimentos e triagem estruturado em níveis N0 (guias de 1 pág), N1 (utilizadores-chave), N2 (administrador técnico) e N3 (remoto); formulário de registo e cumprimento de tempos de resposta S1 (≤ 30 min) a S4 (≤ 2 dias). | **E2** (`Could`) |
+| **`RF-C18-07`** | Ambiente de formação isolado com dados sintéticos ou anonimizados (≤ 2 h por cargo) | `RNF-USA-01`, `RNF-PRV-06`, `RNF-MAN-07` | OPS-09 §5.7; MIG-10 §9; PLN-00 §5.3 | Instância de treino funcionalmente idêntica à produção, contendo exclusivamente dados fictícios/mascarados; cumprimento da meta de formação prática em tempo ≤ 2 horas por perfil RBAC antes do Go-Live. | **E1** (`Must`) |
