@@ -340,6 +340,7 @@ flowchart LR
   - o "Motivo justificativo da não liquidação do imposto", com a norma legal (n.º 1, f), paráfrase).
 - **Faturação eletrónica:**
   - "Estão obrigados à facturação electrónica os contribuintes enquadrados no Regime Geral" (art. 16.º, n.º 1); os do Regime de Exclusão podem aderir (n.º 2).
+  - **Correção (2026-11-08, investigação do [ticket #19](https://github.com/Angeloaqp/sge-ipcag-12008/issues/19)):** o texto do art. 16.º, n.º 1 inclui o Regime Geral **e o Simplificado**. A fatura eletrónica é obrigatória para ambos a partir de **01/01/2027** (comunicado da AGT de 01/10/2026). O regime do IPCAG está por confirmar (`Q-LEG-19`).
   - "O contribuinte deve utilizar software de facturação validado ou disponibilizado pela Administração Geral Tributária" (art. 17.º), com transmissão em tempo real. Se a comunicação falhar mais de 60 dias, o sistema tem de bloquear a emissão (paráfrase).
 - **Contingência (art. 18.º, paráfrase):** quando a faturação eletrónica não está disponível emitem-se faturas em contingência, marcadas como pendentes de autorização e submetidas depois à AGT.
 - **SAF-T:**
