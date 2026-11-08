@@ -6,9 +6,9 @@ aliases:
   - "Migração de Dados SGE"
   - "Plano de Arranque SGE"
 created: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-08
 status: rascunho
-version: "0.1"
+version: "0.2"
 doc_id: "MIG-10"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -718,14 +718,19 @@ A conta técnica é desativada logo após o Termo de Aceitação da última onda
 ### 7.7 Proteção de dados durante a migração
 - **Minimização:** só os campos dos ficheiros modelo; nenhum dado que o SGE não use. Em concreto: **não se migram** motivos clínicos nem atestados de `DISP` (`PC-05`); dos **antigos alunos sem dívida** não se migram telefones nem moradas (`PC-08`: contactos eliminados 1 ano após a saída); de candidatos só entram os admitidos (`PC-02`).
 - **Onde ficam os ficheiros:** no servidor local da escola (`DEC-006`), em Angola (`RNF-PRV-07`), cifrados, com acesso só da equipa de migração. **Proibido** enviar por correio eletrónico pessoal, aplicações de mensagens, redes sociais ou serviços de nuvem não aprovados.
-- **Equipa de migração externa** = subcontratado (tratamento `TRT-30` da nota 11): contrato com as obrigações do art. 23.º antes de tocar em dados reais.
-- **Dados reais e ensaios (`RNF-PRV-06`):** a nota 11 proíbe dados reais em desenvolvimento, testes e formação, **incluindo nos ensaios de migração**. Proposta de compatibilização, a decidir com a nota 11 (`MIG-Q41`):
-  - o **desenvolvimento e o teste da consola de migração** usam só dados sintéticos ou anonimizados (cumpre a regra tal como está);
-  - a **área de preparação, o ensaio-piloto e os ensaios gerais** correm no **servidor de produção da escola**, numa base separada, com os mesmos controlos da produção (cifra, MFA, `audit_logs`, acesso nominal) e operados só por pessoas autorizadas. Fazem parte do próprio tratamento de migração (`TRT-30`) e não são um ambiente de teste;
-  - **sem esta compatibilização**, os ensaios só podem usar cópias anonimizadas: servem para medir tempos e testar regras, mas **não permitem ensaiar a reconciliação da dívida nem as amostras conferidas** com dados reais (risco `MIG-R13`).
-- **Ambiente de formação:** só dados fictícios (`RNF-PRV-06`; `RNF-PRV-06` da nota 08).
+- **Equipa de migração externa** = subcontratado (tratamento `TRT-30` da nota 11): contrato formal com as obrigações do art. 23.º da Lei n.º 22/11 antes de qualquer contacto com dados reais.
+- **Dados reais e ensaios (`RNF-PRV-06` / `MIG-Q41` — Decidido):** a proibição geral de dados reais mantém-se para desenvolvimento, testes de código e formação. **Exceção autorizada e regulada para a migração:** a área de preparação, o ensaio-piloto e os ensaios gerais correm no **servidor local da escola**, numa base separada, autorizando-se dados reais sob 5 salvaguardas estritas:
+  1. **Ambiente estritamente isolado** sem ligação ou sincronização externa;
+  2. **Acessos nominais e auditados** em `audit_logs`, com MFA;
+  3. **Dados de saúde excluídos ou mascarados** antes da entrada na área de preparação;
+  4. **Eliminação auditada da base de ensaio** imediatamente após o fecho da onda;
+  5. **Contrato de subcontratado (art. 23.º)** com os executantes e menção expressa no inventário de notificação à APD (`TRT-30`).
+- **Ambiente de formação:** exclusivamente dados fictícios (`RNF-PRV-06`; `RNF-PRV-06` da nota 08).
 - Compromisso de confidencialidade assinado por quem digita ou confere (alinhado com o termo de sigilo da `ALT-05-17`).
-- Destruição ou arquivo dos ficheiros intermédios e das imagens no fim do prazo a definir (`MIG-Q36`). Os **registos migrados** seguem os prazos da nota 11: registo académico permanente (`PC-01`), financeiro 10 anos (`PC-10`).
+- **Destruição de ficheiros intermédios e salvaguarda do arquivo em papel (`MIG-Q36` / `PC-28` — Decidido):**
+  - Os ficheiros digitais intermédios (folhas de cálculo de preparação, digitalizações temporárias e extratos de conferência) são guardados pelo prazo de **90 dias** após a aprovação das reconciliações da onda; findo o prazo, são sujeitos a **destruição segura com termo formal de destruição** registado na auditoria do sistema.
+  - **Salvaguarda absoluta dos originais em papel:** os documentos e livros em papel permanecem no arquivo físico da escola e **nunca são destruídos sem autorização expressa do órgão arquivístico competente**, em cumprimento imperativo do **art. 38.º da Lei n.º 14/17 (Lei Geral dos Arquivos)**.
+  - Os **registos migrados** para a base de produção seguem os prazos da nota 11: registo académico permanente (`PC-01`), financeiro 10 anos (`PC-10`).
 - Base legal, informação aos titulares e prazos de conservação: [[11 - Protecao de Dados (APD)]].
 
 ---
@@ -944,14 +949,14 @@ Estas questões devem entrar no [[Guiao de Entrevistas por Cargo]] da Fase B e s
 | `MIG-Q33` | Os encarregados podem contestar a dívida migrada? Com que prazo e quem decide? | `SUB_ADM`, `DIR_GERAL` | E1 |
 | `MIG-Q34` | Que equipamento e local existem para a formação (sala de informática, projetor, telemóveis dos professores)? | `CHEFE_SEC_GER`, `COORD_TURNO` | E1 |
 | `MIG-Q35` | Quem são os utilizadores-chave de cada sector e turno? | `DIR_GERAL` | E1 |
-| `MIG-Q36` | Quanto tempo se guardam os ficheiros de preparação e as imagens digitalizadas usadas na migração? (Os registos migrados seguem `PC-01` e `PC-10`; os ficheiros intermédios não têm prazo na nota 11.) | `DIR_GERAL` (+ nota 11) | E1 |
+| `MIG-Q36` | Quanto tempo se guardam os ficheiros de preparação e as imagens digitalizadas usadas na migração? | **Respondida (PC-28):** 90 dias com termo de destruição; originais físicos em papel nunca se destroem sem autorização do Arquivo Nacional (Lei n.º 14/17, art. 38.º). | Fechada |
 | `MIG-Q37` | O sistema ou arquivo antigo fica disponível para consulta depois do arranque? Durante quanto tempo, tendo em conta a conservação obrigatória de documentos fiscais? | `SUB_ADM` + verificação legal | E1 |
 | `MIG-Q38` | Faltas diárias e avaliações parcelares de anos anteriores são necessárias para algum fim? (proposta: não migrar) | `SUB_PED` | — |
 | `MIG-Q39` | Que prazo de resposta se garante a um antigo aluno que pede um documento e cujo histórico ainda não está migrado? | `CHEFE_SEC_PED` | E4 |
 | `MIG-Q40` | Se os números de processo legados não forem únicos, a escola prefere renumerar (e reetiquetar as pastas) ou manter o número legado com um prefixo? | `SUB_PED`, `DIR_GERAL` | E1 |
 | `MIG-Q42` | Que tipos de documento têm série anual própria? Cada série reinicia por ano civil ou por ano letivo? Onde fica registado o último número usado? A "ocupação do pai" da ficha de matrícula tem alguma finalidade? | `CHEFE_SEC_PED` | E1 |
 | `MIG-Q43` | Qual é o número oficial da instituição: **12008** (matrícula, Pauta Geral) ou **8009** (boletins, mini-pauta, declarações, justificações)? Um substituiu o outro? Qual deve aparecer nos documentos do SGE? (Achados A3; parâmetro da instituição, `DEC-001`) | Comissão de Gestão | E1 |
-| `MIG-Q41` | A área de preparação e os ensaios de migração com dados reais podem correr no servidor de produção da escola, com controlos de produção, como parte do tratamento `TRT-30`, sem violar a `RNF-PRV-06` (§7.7)? | Nota 11 (jurista / `DIR_GERAL`) | E1 |
+| `MIG-Q41` | A área de preparação e os ensaios de migração com dados reais podem correr no servidor de produção da escola, com controlos de produção, como parte do tratamento `TRT-30`, sem violar a `RNF-PRV-06` (§7.7)? | **Respondida (RNF-P-APD-08):** Sim, autorizados na área de preparação e ensaios gerais sob as 5 salvaguardas (ambiente isolado, sem saúde, auditado, destruição no fim, contrato art. 23.º e APD). | Fechada |
 
 ---
 
