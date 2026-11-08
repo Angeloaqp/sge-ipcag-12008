@@ -5,9 +5,9 @@ aliases:
   - "Catálogo de Requisitos Funcionais"
   - "RF-07"
 created: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-08
 status: rascunho
-version: "2.0-rc1"
+version: "2.0-rc2"
 doc_id: "RF-07"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -358,22 +358,22 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RF-C17-01** | Consola de migração de acesso restrito: carregar ficheiros modelo, validar e mostrar o relatório de ocorrências por linha. | O-06 | M | E1 | MIG-10 §4, §11 | RN-10 | — | MOD-MIG-01 | — | área de preparação (MIG-10 §3) | definido |
-| **RF-C17-02** | Área de preparação separada da produção; nada entra em produção sem lote aprovado. | O-06 | M | E1 | MIG-10 §6.4 | RN-10 | — | MOD-MIG-01 | — | área de preparação | definido |
-| **RF-C17-03** | Validar com as mesmas regras de domínio do SGE e com as regras de qualidade do MIG-10 §5. | O-06 | M | E1 | MIG-10 §5 | RN-01 a RN-10 | — | MOD-MIG-01 | — | tabelas de destino (MIG-10 §3.2) | definido |
-| **RF-C17-04** | Digitação assistida numa grelha igual ao documento em papel, com alunos e disciplinas pré-carregados e totais de controlo. | O-06 | M | E1 | MIG-10 §2.2 | — | — | MOD-MIG-01 | — | área de preparação | definido |
-| **RF-C17-05** | Dupla digitação cega com comparação automática e resolução das divergências por um terceiro. | O-06 | M | E1 | MIG-10 §2.2 | — | — | MOD-MIG-01 | — | área de preparação | definido |
-| **RF-C17-06** | Anexar ao lote a imagem da fonte. | O-06 | S | E1 | MIG-10 §7.1 | — | — | MOD-MIG-01 | — | `ficheiros_digitalizados` | definido |
-| **RF-C17-07** | Recarga idempotente por chave natural (repetir não duplica) e carga delta. | O-06 | M | E1 | MIG-10 §3.1 | RN-05 | — | MOD-MIG-01 | — | tabelas de destino | definido |
-| **RF-C17-08** | Detetar duplicados de alunos e encarregados e fundi-los de forma controlada, com auditoria. | O-06 | M | E1 | MIG-10 §5.2; CAP-C03 §1.3 | RN-05, RN-10 | — | MOD-MIG-01 | — | `alunos`, `encarregados_educacao`, `audit_logs` | definido |
-| **RF-C17-09** | Recalcular médias, deliberações e `MFC` e sinalizar as divergências face aos valores oficiais. | O-01 | M | E1 | MIG-10 §6; `DEC-009` | RN-01, RN-02, RN-06 | — | MOD-MIG-01 | — | `resultados_anuais_disciplina`, `historico_externo_transcricoes` | 🟡 PC-E2 · `Q-025` |
-| **RF-C17-10** | Relatórios de reconciliação exportáveis (contagens, totais de controlo, dívida, créditos, bolsas). | O-06 | M | E1 | MIG-10 §6.1, §6.2 | RN-09 | — | MOD-MIG-01 | — | tabelas de destino | definido |
-| **RF-C17-11** | Marcar a proveniência e auditar a carga, a aprovação e as correções. | O-06 | M | E1 | MIG-10 §7.1, §7.2 | RN-10 | — | MOD-MIG-01 | — | `audit_logs` | definido |
-| **RF-C17-12** | Marcar os documentos gerados em ensaio com "ENSAIO — SEM VALIDADE". | O-06 | S | E1 | MIG-10 §8.4 | RN-10 | — | MOD-MIG-01 | — | `documentos_oficiais_emitidos` | definido |
-| **RF-C17-13** | Ajustar um saldo migrado só com despacho do `SUB_ADM`. | O-03 | M | E1 | MIG-10 §7.4 | RN-09 | — | MOD-MIG-01 | — | `conta_corrente_propinas`, `ajustes_conta_corrente` | definido |
-| **RF-C17-14** | Obrigar à conferência do histórico migrado antes da primeira certificação de cada aluno. | O-06 | M | E2 | MIG-10 §7.6 | RN-10.5 | — | MOD-MIG-01 | — | `historico_externo_transcricoes` | definido |
-| **RF-C17-15** | Migrar a pedido um antigo aluno (lote individual) depois do arranque. | O-06 | S | E4 | MIG-10 §2.3 | RN-10 | — | MOD-MIG-01 | — | tabelas de destino | definido |
-| **RF-C17-16** | Fechar a consola depois do último Termo de Aceitação (fica o modo a pedido) e desativar a conta técnica. | O-09 | M | E4 | MIG-10 §6.4 | RN-16.21 | — | MOD-MIG-01 | — | `usuarios_sistema` | definido |
+| **RF-C17-01** | Consola de migração de acesso restrito: carregar ficheiros modelo, validar e mostrar o relatório de ocorrências por linha. | O-06 | M | E1 | MIG-10 §4, §11 | RN-10 | `US-MIG-01` | MOD-MIG-01 | — | área de preparação (MIG-10 §3) | definido |
+| **RF-C17-02** | Área de preparação separada da produção; nada entra em produção sem lote aprovado. | O-06 | M | E1 | MIG-10 §6.4 | RN-10 | `US-MIG-01` | MOD-MIG-01 | — | área de preparação | definido |
+| **RF-C17-03** | Validar com as mesmas regras de domínio do SGE e com as regras de qualidade do MIG-10 §5. | O-06 | M | E1 | MIG-10 §5 | RN-01 a RN-10 | `US-MIG-01` | MOD-MIG-01 | — | tabelas de destino (MIG-10 §3.2) | definido |
+| **RF-C17-04** | Digitação assistida numa grelha igual ao documento em papel, com alunos e disciplinas pré-carregados e totais de controlo. | O-06 | M | E1 | MIG-10 §2.2 | — | `US-MIG-02` | MOD-MIG-01 | — | área de preparação | definido |
+| **RF-C17-05** | Dupla digitação cega com comparação automática e resolução das divergências por um terceiro. | O-06 | M | E1 | MIG-10 §2.2 | — | `US-MIG-02` | MOD-MIG-01 | — | área de preparação | definido |
+| **RF-C17-06** | Anexar ao lote a imagem da fonte. | O-06 | S | E1 | MIG-10 §7.1 | — | `US-MIG-01`, `US-MIG-02` | MOD-MIG-01 | — | `ficheiros_digitalizados` | definido |
+| **RF-C17-07** | Recarga idempotente por chave natural (repetir não duplica) e carga delta. | O-06 | M | E1 | MIG-10 §3.1 | RN-05 | `US-MIG-03` | MOD-MIG-01 | — | tabelas de destino | definido |
+| **RF-C17-08** | Detetar duplicados de alunos e encarregados e fundi-los de forma controlada, com auditoria. | O-06 | M | E1 | MIG-10 §5.2; CAP-C03 §1.3 | RN-05, RN-10 | `US-MIG-03` | MOD-MIG-01 | — | `alunos`, `encarregados_educacao`, `audit_logs` | definido |
+| **RF-C17-09** | Recalcular médias, deliberações e `MFC` e sinalizar as divergências face aos valores oficiais. | O-01 | M | E1 | MIG-10 §6; `DEC-009` | RN-01, RN-02, RN-06 | `US-MIG-04` | MOD-MIG-01 | — | `resultados_anuais_disciplina`, `historico_externo_transcricoes` | 🟡 PC-E2 · `Q-025` |
+| **RF-C17-10** | Relatórios de reconciliação exportáveis (contagens, totais de controlo, dívida, créditos, bolsas). | O-06 | M | E1 | MIG-10 §6.1, §6.2 | RN-09 | `US-MIG-05` | MOD-MIG-01 | — | tabelas de destino | definido |
+| **RF-C17-11** | Marcar a proveniência e auditar a carga, a aprovação e as correções. | O-06 | M | E1 | MIG-10 §7.1, §7.2 | RN-10 | `US-MIG-05` | MOD-MIG-01 | — | `audit_logs` | definido |
+| **RF-C17-12** | Marcar os documentos gerados em ensaio com "ENSAIO — SEM VALIDADE". | O-06 | S | E1 | MIG-10 §8.4 | RN-10 | `US-MIG-05` | MOD-MIG-01 | — | `documentos_oficiais_emitidos` | definido |
+| **RF-C17-13** | Ajustar um saldo migrado só com despacho do `SUB_ADM`. | O-03 | M | E1 | MIG-10 §7.4 | RN-09 | `US-MIG-05` | MOD-MIG-01 | — | `conta_corrente_propinas`, `ajustes_conta_corrente` | definido |
+| **RF-C17-14** | Obrigar à conferência do histórico migrado antes da primeira certificação de cada aluno. | O-06 | M | E2 | MIG-10 §7.6 | RN-10.5 | `US-MIG-06` | MOD-MIG-01 | — | `historico_externo_transcricoes` | definido |
+| **RF-C17-15** | Migrar a pedido um antigo aluno (lote individual) depois do arranque. | O-06 | S | E4 | MIG-10 §2.3 | RN-10 | `US-MIG-07` | MOD-MIG-01 | — | tabelas de destino | definido |
+| **RF-C17-16** | Fechar a consola depois do último Termo de Aceitação (fica o modo a pedido) e desativar a conta técnica. | O-09 | M | E4 | MIG-10 §6.4 | RN-16.21 | `US-MIG-07` | MOD-MIG-01 | — | `usuarios_sistema` | definido |
 
 > [!note] C17 — admitidos de 2027/2028
 > Se o concurso de 2027/2028 correr fora do SGE (`Q-017`), os admitidos entram por estes RF antes das matrículas (VIS-06 §5.1).
@@ -529,8 +529,8 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | **Total 🟡** | **87** | |
 
 ### 4.4 Cobertura (detalhe na [[Matriz de Rastreabilidade]])
-- **0** objetivos sem RF; **0** capacidades dentro do âmbito sem RF; **0** das 116 US sem RF.
-- **40 RF sem US:** C17 (16), C18 (7), C19 (9), e `RF-C01-07`, `RF-C03-15`, `RF-C09-11`, `RF-C10-10`, `RF-C10-24`, `RF-C10-25`, `RF-C13-02`, `RF-C15-01`.
+- **0** objetivos sem RF; **0** capacidades dentro do âmbito sem RF; **0** das 123 US sem RF.
+- **24 RF sem US:** C18 (7), C19 (9), e `RF-C01-07`, `RF-C03-15`, `RF-C09-11`, `RF-C10-10`, `RF-C10-24`, `RF-C10-25`, `RF-C13-02`, `RF-C15-01` *(os 16 RF de C17 foram cobertos por `US-MIG-01` a `US-MIG-07` — Issue #13)*.
 - **22 RF sem módulo** no DOC-04 (consola de migração e operação).
 - ~~**68 tabelas** citadas ainda não estão no DOC-05 (v1.2 em 2026-11-03); a C15 tem tabelas na nota de capacidade mas não no mapa INT-V2 §2.4.~~ **Fechado em 2026-11-05:** o DOC-05 `2.0-rc1` tem as 116 tabelas e a C15 está no Grupo 6; só `avaliacoes_desempenho` fica condicional (`Q-036`).
 
@@ -543,3 +543,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc1 | 2026-11-03 | Criação na integração v2.0 (`DEC-009`, INT-V2 §4): 224 RF para C01–C19 a partir das notas de capacidade, da APD-11 §7.1 (`RF-C19-nn`), da MIG-10 §11 (`RF-C17-nn`), da OPS-09, do DESC-L1 (A1–A16), do DESC-RESP (R1–R31), da LEG-VER §5 (`COR-LEG`) e do REG-12; prioridade MoSCoW e entrega propostas para a Fase E; estado segundo os pontos de controlo da `DEC-009`; fora do âmbito e candidatos (`CAND-01` expediente geral — `Q-039`); resumo; [[Matriz de Rastreabilidade]]. |
 | 2.0-rc1 | 2026-11-05 | Correções da verificação [[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]: `RF-P-APD`/`RNF-P-APD` → IDs finais (#1); coluna Tabelas atualizada e `consentimentos` (#2); §4.4 e fontes atualizadas (#10) |
 | 2.0-rc1 | 2026-11-05 | Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-013 — Entregas e prioridades\|DEC-013]]: regras de alinhamento (§0); `RF-C19-05`/`-10` na E1; `RF-C19-27` e `RF-C13-02` com duas entregas; núcleo da C13 na E2/E3; `RF-C05-03` sem `US-COM-08`; `RF-C19-02` liga a `US-PIN-09`; regra 🟡 da `DEC-002` aplicada a `RF-C10-08`, `-17`, `-20` e `RF-C19-11`; §4 recalculado |
+| 2.0-rc2 | 2026-11-08 | Cobertura de C17: preenchida a coluna US para `RF-C17-01` a `RF-C17-16` com o novo Épico 16 (`US-MIG-01` a `US-MIG-07`, DOC-03) — Issue #13. |

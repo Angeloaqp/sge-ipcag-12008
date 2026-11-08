@@ -4,9 +4,9 @@ aliases:
   - "Matriz de Rastreabilidade"
   - "MTR-07"
 created: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-08
 status: rascunho
-version: "2.0-rc1"
+version: "2.0-rc2"
 doc_id: "MTR-07"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -316,17 +316,17 @@ Ligações tiradas da VIS-06 §3 (coluna "Capacidades"). A C20 não tem objetivo
 | :--- | :---: | :---: |
 | Objetivos (`O-01` a `O-13`) sem RF | **0** de 13 | ✅ |
 | Capacidades dentro do âmbito (C01–C19) sem RF | **0** de 19 | ✅ |
-| US sem RF | **0** de 116 | ✅ |
+| US sem RF | **0** de 123 | ✅ |
 | RF sem objetivo | **0** de 224 | ✅ |
-| RF sem US | **40** de 224 | ⚠️ ver §3.2 |
-| RF sem módulo no DOC-04 | **22** (C17 16, C18 5, `RF-C10-26` fora) | ⚠️ ver §3.3 |
+| RF sem US | **24** de 224 | ⚠️ ver §3.2 (C17 fechado por Épico 16) |
+| RF sem módulo no DOC-04 | **6** (C18 5, `RF-C10-26` fora; C17 coberto por `MOD-MIG-01`) | ⚠️ ver §3.3 |
 | Objetivos fracos (menos de 5 RF) | **1** — `O-10` (3 RF) | ⚠️ ver §3.4 |
 
-### 3.2 RF sem US (40)
+### 3.2 RF sem US (24)
 
 | Capacidade | RF | Leitura |
 | :---: | :--- | :--- |
-| C17 | `RF-C17-01` a `RF-C17-16` (16) | A MIG-10 propõe os RF, mas o DOC-03 não tem épico de migração. **Lacuna:** criar um épico (ex.: `EP-MIG`) ou aceitar que a migração se aceita pelos critérios do MIG-10 §6.4 e §8.6. |
+| ~~C17~~ | ~~`RF-C17-01` a `RF-C17-16` (16)~~ | **Fechado em 2026-11-08 (Issue #13):** criado Épico 16 (`EP-MIG`, `US-MIG-01` a `US-MIG-07`) no DOC-03 cobrindo integralmente os 16 RF e o módulo `MOD-MIG-01`. |
 | C18 | `RF-C18-01` a `RF-C18-07` (7) | Operação: sem épico no DOC-03. Os critérios estão no RNF-08 e no OPS-09. **Lacuna:** decidir se a C18 se aceita por RNF (proposta) ou por US. |
 | C19 | `RF-C19-01`, `-04`, `-08`, `-09`, `-12`, `-13`, `-20`, `-23`, `-33` (9) | Funções próprias da proteção de dados (avisos, maioridade, pedidos dos titulares, relatório de acesso, bloqueio, conservação, leitura de dados de saúde, incidentes). **Lacuna:** a APD-11 não tem épico; propõe-se um `EP-APD` no DOC-03 com o `MOD-GOV-09`. `RF-C19-33` é condicional (`Q-036`). |
 | C01 | `RF-C01-07` | Parâmetros institucionais (número 12008/8009, cabeçalho, rótulos): não há US que os configure. **Lacuna:** acrescentar um cenário à `US-GOV-01` ou uma US nova. |
@@ -337,7 +337,7 @@ Ligações tiradas da VIS-06 §3 (coluna "Capacidades"). A C20 não tem objetivo
 | C15 | `RF-C15-01` | Catálogo de indicadores (`MOD-GOV-08`): sem US. |
 
 ### 3.3 RF sem módulo no DOC-04
-- **C17 (16):** a consola de migração não tem `MOD-…` no DOC-04. Lacuna a fechar no DOC-04 (ou a aceitar como ferramenta técnica temporária, fechada pelo `RF-C17-16`).
+- ~~**C17 (16):** a consola de migração não tem `MOD-…` no DOC-04~~ — **Fechado em 2026-11-05 (`DEC-010`):** módulo `MOD-MIG-01` criado no DOC-04 §5.
 - **C18 (5):** `RF-C18-01`, `-02`, `-03`, `-06`, `-07` são operação e infraestrutura, sem ecrã próprio (o `MOD-SEG-01` cobre só a consola técnica).
 - `RF-C10-26` está fora da linha de base (`DEC-005`).
 
@@ -376,7 +376,7 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 
 | # | Lacuna | Onde se fecha | Bloqueia |
 | :---: | :--- | :--- | :--- |
-| L-RF-01 | Migração (C17) sem US *(o módulo `MOD-MIG-01` foi criado em 2026-11-05 — `DEC-010`)* | DOC-03 (épico novo) e DOC-04 | E1 (*Definition of Ready*) |
+| ~~L-RF-01~~ | ~~Migração (C17) sem US~~ — **fechada em 2026-11-08**: criado Épico 16 (`EP-MIG`, `US-MIG-01` a `US-MIG-07`) no DOC-03 cobrindo `RF-C17-01` a `RF-C17-16` e `MOD-MIG-01` (Issue #13). | DOC-03 (`EP-MIG`), DOC-07 | — |
 | L-RF-02 | Operação (C18) sem US | DOC-03 ou aceitação por RNF-08 | E1/E2 |
 | L-RF-03 | Funções próprias da APD (9 RF) sem US | DOC-03 (`EP-APD`) | E1/E2 |
 | L-RF-04 | Parâmetros institucionais sem US *(a tabela já existe: `parametros_instituicao` — fechado em 2026-11-05)* | DOC-03 (`US-GOV-01`) | E1 |
@@ -392,3 +392,4 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | Versão | Data | Alteração |
 | :---: | :---: | :--- |
 | 2.0-rc1 | 2026-11-03 | Criação a partir do [[07 - Catalogo de Requisitos Funcionais|RF-07]] `2.0-rc1`: objetivos → capacidades, cadeia por capacidade, verificação de cobertura (0 objetivos sem RF, 0 capacidades sem RF, 0 US sem RF, 40 RF sem US) e lacunas. |
+| 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-01`: criado Épico 16 (`EP-MIG`, `US-MIG-01` a `US-MIG-07`) no DOC-03 cobrindo todos os 16 RF de C17 e o `MOD-MIG-01` (Issue #13). RF sem US desce de 40 para 24; RF sem módulo desce de 22 para 6. |

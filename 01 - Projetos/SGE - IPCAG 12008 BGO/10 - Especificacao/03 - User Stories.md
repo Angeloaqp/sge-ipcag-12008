@@ -5,9 +5,9 @@ aliases:
   - "DOC-03"
   - "User Stories SGE"
 created: 2026-10-31
-updated: 2026-11-02
+updated: 2026-11-08
 status: ativo
-version: "2.0-rc1"
+version: "2.0-rc2"
 doc_id: "DOC-03"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 figma_board: "https://www.figma.com/board/PZgRkbRHrNR6UfehirGDPd"
@@ -47,7 +47,7 @@ tags:
 > [!tip] 🎨 Quadro de User Story Mapping no FigJam
 > O quadro mostra ainda os 7 épicos e as 32 histórias da v1.2: [Abrir Quadro DOC-03 no FigJam](https://www.figma.com/board/PZgRkbRHrNR6UfehirGDPd) ou [Ver Secção 03 no Ficheiro Geral](https://www.figma.com/board/OneLIwLlc2kuM1koaIeXG0). Os épicos 08 a 15 só existem nesta nota até à atualização dos quadros.
 
-**Total:** 15 épicos e 116 histórias de utilizador (32 da v1.2, corrigidas, e 84 novas das capacidades `C03`, `C04`, `C10`, `C12`, `C13`, `C14`, `C15` e `C16`).
+**Total:** 16 épicos e 123 histórias de utilizador (32 da v1.2, corrigidas, 84 novas das capacidades `C03`, `C04`, `C10`, `C12`, `C13`, `C14`, `C15` e `C16`, e 7 novas da capacidade `C17` — `DEC-010`, Issue #13).
 
 | Código do Épico | Nome do Épico / Domínio Funcional | Capacidade | Perfis RBAC Principais | Histórias de Utilizador (`US`) | Regras de Negócio Cobertas | Entrega | MoSCoW |
 | :---: | :--- | :---: | :--- | :---: | :---: | :---: | :---: |
@@ -66,6 +66,7 @@ tags:
 | **`EP-CTA`** | **Épico 13:** Gestão de Contas e Acesso (Ciclo de Vida, MFA, PIN Local, Títulos dos Cargos) | C14 | `CHEFE_SEC_GER`, `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `ADMIN_TEC` | `US-CTA-01` a `US-CTA-15` (15 US) | `RN-04`, `RN-10`, `RN-16` | **E1** (`US-CTA-09`: E2; `US-CTA-14`: E5) | Must / Should |
 | **`EP-PNL`** | **Épico 14:** Painéis de Gestão da Direção, Alertas e Estatísticas Impressas | C15 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `COORD_CURSO`, `COORD_DISC`, `COORD_TURNO`, `DIR_TURMA` | `US-PNL-01` a `US-PNL-12` (12 US) | `RN-02`, `RN-03`, `RN-17` | **E3** (`US-PNL-08`: E2; `US-PNL-11`: E4) | Must / Should / Could |
 | **`EP-PAS`** | **Épico 15:** Encerramento do Ano Letivo e Passagem de Ano | C16 | `SUB_PED`, `DIR_GERAL`, `CHEFE_SEC_PED`, `OP_PED`, `SUB_ADM` | `US-PAS-01` a `US-PAS-08` (8 US) | `RN-02`, `RN-07`, `RN-10`, `RN-18` | **E4** | Must (`US-PAS-08`: Should) |
+| **`EP-MIG`** | **Épico 16:** Migração de Dados, Cargas Históricas, Digitação Assistida e Reconciliação | C17 | `ADMIN_TEC`, Conta Técnica (`RN-16.21`), `OP_PED`, `OP_TES`, `CHEFE_SEC_PED`, `CHEFE_SEC_GER`, `SUB_PED`, `SUB_ADM`, `DIR_GERAL` | `US-MIG-01` a `US-MIG-07` (7 US) | `RN-01`, `RN-02`, `RN-05`, `RN-06`, `RN-09`, `RN-10`, `RN-16.21` | **E1** (`US-MIG-06`: E2; `US-MIG-07`: E4) | Must |
 
 > [!warning] 🟡 Propostas de entrega pendentes
 > - **`Q-037` — SMS antes da E5:** a central de avisos (`US-COM-01` a `US-COM-06`) pode entrar na **E3** sem abrir dados à internet; o portal (`US-COM-07`, `US-COM-08`) fica na E5 (`DEC-003`). **Pendente** da Comissão de Gestão.
@@ -2748,6 +2749,173 @@ tags:
 
 ---
 
+## ÉPICO 16 (`EP-MIG`): Migração de Dados, Cargas Históricas, Digitação Assistida e Reconciliação (C17)
+
+> Decidido na [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]] e operacionalizado na Issue #13.  
+> **Capacidade:** C17 ([[10 - Migracao de Dados e Implantacao|MIG-10]]).  
+> **Módulo:** `MOD-MIG-01` Consola de Migração de Dados (Workspace 05 — [[04 - Telas e Documentos|DOC-04]] §5).  
+> **Perfis RBAC:** Conta técnica de migração (`RN-16.21`), `ADMIN_TEC`, `OP_PED`, `OP_TES`, `CHEFE_SEC_PED`, `CHEFE_SEC_GER`, `SUB_PED`, `SUB_ADM`, `DIR_GERAL`.
+
+---
+
+### `US-MIG-01`: Carregar e Validar Ficheiros Modelo na Área de Preparação
+- **História:** *Como* **Conta Técnica de Migração (`RN-16.21`)** sob supervisão do **Administrador Técnico (`ADMIN_TEC`)**, *quero* **carregar os ficheiros modelo de dados históricos (`MIG-F01` a `MIG-F08`) para a área de preparação e executar a validação sintática e semântica com anexo obrigatório da imagem digitalizada da fonte**, *para* **identificar anomalias e incoerências linha a linha antes de qualquer inserção na base de dados de produção**.
+- **Rastreabilidade:** `RF-C17-01`, `RF-C17-02`, `RF-C17-03`, `RF-C17-06` | `RN-10`, `RN-16.21` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §4, §5, §6.4, §7.1 | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Autenticação com credencial nominal da conta `TECNICA_MIGRACAO`; formato de ficheiro compatível com os modelos normalizados; ficheiro digitalizado da fonte original em PDF/PNG anexado.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Carga e isolamento na área de preparação):**
+    - **Dado** um ficheiro `MIG-F01` (Alunos e Encarregados) preenchido e a imagem digitalizada do livro de matrícula anexada,
+    - **Quando** a conta técnica submete a carga na consola `MOD-MIG-01`,
+    - **Então** os registos são armazenados exclusivamente nas tabelas da área de preparação (`staging`), o estado do lote passa a `CARREGADO_EM_PREPARACAO`, nenhum registo é inserido nas tabelas de produção (`alunos`, `encarregados_educacao`) e o evento é registado em `audit_logs` com hash do ficheiro e utilizador.
+  - **Cenário 2 (Deteção de anomalias com ocorrências por linha):**
+    - **Dado** um ficheiro de notas com classificações fora da escala [0, 20], datas inválidas ou campos obrigatórios em falta,
+    - **Quando** a validação automática é executada contra as regras de domínio (`RN-01` a `RN-10`) e regras de qualidade do MIG-10 §5,
+    - **Então** o sistema gera entradas na tabela de ocorrências por linha (`ocorrencias_migracao`), identifica o número da linha, o campo faltoso e o código do erro, marca o lote como `VALIDADO_COM_ERROS` e impede o envio para aprovação até à correção ou justificação formal.
+  - **Cenário 3 (Bloqueio — Tentativa de carga sem anexo do documento fonte digitalizado):**
+    - **Dado** que a conta técnica tenta submeter um lote de histórico escolar sem anexar a digitalização correspondente da folha de termo ou pauta física,
+    - **Quando** aciona o comando de validação,
+    - **Então** o sistema rejeita o carregamento com `HTTP 422`: *"Carga bloqueada: é obrigatório anexar a imagem digitalizada da fonte documental (RF-C17-06)"*.
+  - **Cenário 4 (Bloqueio de autorização — Tentativa de aprovação direta pela conta técnica):**
+    - **Dado** que um lote se encontra na área de preparação com validação concluída,
+    - **Quando** o operador com conta `TECNICA_MIGRACAO` tenta acionar a transição para produção,
+    - **Então** a operação é bloqueada com `HTTP 403 Forbidden`: a conta técnica apenas carrega e valida; a aprovação exige perfil da Direção (`RN-16.21`).
+- **Pós-condições e Efeitos Colaterais:** Dados residentes em `staging`; registo de auditoria com metadados do ficheiro e imagem associada.
+
+---
+
+### `US-MIG-02`: Digitação Assistida em Grelha com Dupla Digitação Cega e Arbitragem
+- **História:** *Como* **Operador da Secretaria (`OP_PED` / `OP_TES`)** e **Chefe de Secretaria (`CHEFE_SEC_PED` / `CHEFE_SEC_GER`)**, *quero* **digitar dados de documentos históricos em grelha idêntica ao papel através de dupla digitação cega com comparação automática e arbitragem de divergências**, *para* **transcrever com fidelidade absoluta acervos em papel que não possuem folhas de cálculo originais**.
+- **Rastreabilidade:** `RF-C17-04`, `RF-C17-05`, `RF-C17-06` | `RN-10` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §2.2, §7.1 | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Lote de transcrição criado no `MOD-MIG-01` com folha de termo/pauta digitalizada anexada; estrutura curricular e turma pré-carregadas.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Dupla digitação cega coincidente):**
+    - **Dado** um termo de exame físico digitalizado,
+    - **Quando** o Operador A realiza a primeira digitação na grelha e o Operador B (sem visualização do que A digitou) realiza a segunda digitação dos mesmos dados,
+    - **Então** o sistema executa o batimento campo a campo dos dois lançamentos e, havendo 100% de coincidência e batimento com o total de controlo do papel (soma das notas e total de alunos), marca a grelha como `DIGITACAO_CONCILIADA_APTA` e disponibiliza para conferência de chefia.
+  - **Cenário 2 (Divergência e arbitragem qualificada por terceiro):**
+    - **Dado** que na disciplina de Matemática o Operador A digitou `14` e o Operador B digitou `11`,
+    - **Quando** o batimento automático corre ao submeter a segunda digitação,
+    - **Então** o sistema sinaliza a célula divergente a vermelho, bloqueia o lote e encaminha a linha para a fila de arbitragem do `CHEFE_SEC_PED`, que visualiza lado a lado as duas digitações e a imagem do termo original para fixar o valor correto (`14`) com registo nominal do árbitro.
+  - **Cenário 3 (Bloqueio — Segregação de funções na digitação):**
+    - **Dado** que o Operador A concluiu a primeira digitação de um termo ou pauta,
+    - **Quando** tenta abrir a segunda digitação cega do mesmo documento,
+    - **Então** o sistema impede o acesso com aviso: *"A segunda digitação cega exige um operador diferente para garantia de integridade (RF-C17-05)"*.
+- **Pós-condições e Efeitos Colaterais:** Lote consolidado na área de preparação com histórico das versões digitadas e log da arbitragem.
+
+---
+
+### `US-MIG-03`: Execução Idempotente, Cargas Delta e Deteção/Fusão Controlada de Duplicados
+- **História:** *Como* **Conta Técnica de Migração (`RN-16.21`)** e **Chefe de Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **executar recargas de ficheiros de forma idempotente por chave natural, suportar cargas delta e resolver duplicados através de fusão assistida e auditada**, *para* **evitar multiplicação de registos do mesmo aluno ou encarregado entre diferentes anos letivos migrados**.
+- **Rastreabilidade:** `RF-C17-07`, `RF-C17-08` | `RN-05`, `RN-10` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §3.1, §5.2; [[C03 - Processo Individual do Aluno|CAP-C03]] §1.3 | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Definição das chaves naturais únicas (N.º de Processo, N.º de BI, Nome Completo + Data de Nascimento + Filiação); lote carregado na área de preparação.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Idempotência em recarga de ficheiro integral ou delta):**
+    - **Dado** que um lote do ano letivo 2024/2025 já foi parcialmente ou totalmente carregado,
+    - **Quando** a conta técnica executa uma recarga do ficheiro atualizado contendo registos existentes e 5 novas linhas (carga delta),
+    - **Então** o sistema identifica as chaves já existentes sem criar registos duplicados, atualiza campos que tenham sofrido retificação controlada e insere unicamente as 5 novas linhas, mantendo a consistência referencial.
+  - **Cenário 2 (Deteção e sugestão de fusão de duplicados potenciais):**
+    - **Dado** um aluno carregado como `"António Manuel da Silva"` (Processo P-102, nascido a 12/03/2006) e outro no histórico de 2023 como `"António M. da Silva"` (Processo P-540, mesma filiação e data),
+    - **Quando** o motor de validação da migração executa a verificação de duplicados,
+    - **Então** assinala suspeita de duplicidade no relatório de ocorrências e abre a tela de fusão assistida para o `CHEFE_SEC_PED`, permitindo escolher o processo canónico, unificar os registos escolares e manter o número antigo como alias de busca histórica.
+  - **Cenário 3 (Bloqueio — Tentativa de fusão por utilizador sem privilégio):**
+    - **Dado** um caso de duplicados pendente na consola `MOD-MIG-01`,
+    - **Quando** um utilizador com perfil `OP_PED` ou conta técnica tenta executar a fusão,
+    - **Então** o sistema nega a operação com `HTTP 403`: fusão de identidades exige aprovação do Chefe de Secretaria Pedagógica com despacho fundamentado.
+- **Pós-condições e Efeitos Colaterais:** Mapeamento de duplicados registado em `audit_logs`; integridade de histórico e chave primária preservadas.
+
+---
+
+### `US-MIG-04`: Recálculo de Médias, Deliberações e Classificação Final (`MFC`) com Sinalização de Discrepâncias
+- **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)**, *quero* **executar o recálculo automatizado das médias trimestrais, anuais, da `MFC` e das deliberações de transição/conclusão segundo os algoritmos oficiais do SGE, confrontando com os livros em papel**, *para* **sinalizar e auditar discrepâncias aritméticas ou normativas herdadas do passado sem alterar silenciosamente o histórico jurídico**.
+- **Rastreabilidade:** `RF-C17-09` | `RN-01`, `RN-02`, `RN-06` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §6; `DEC-009` | 🟡 PC-E2 · `Q-025` | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Lote de notas e classificações carregado e conciliado na área de preparação; matriz curricular histórica do plano de estudos associada.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Coincidência integral de cálculo e deliberação):**
+    - **Dado** um conjunto de classificações de 10ª, 11ª e 12ª classes de uma turma histórica,
+    - **Quando** o motor do SGE recalcula as médias por disciplina, as médias anuais e a deliberação de transição segundo as regras vigentes na respetiva época,
+    - **Então** os resultados coincidem a 100% com o averbado no livro de termos em papel e os registos são marcados como `CALCULO_VERIFICADO_CONFORME`.
+  - **Cenário 2 (Discrepância detetada — Alerta e preservação do averbamento oficial):**
+    - **Dado** que no termo original em papel de 2021 consta *"Aprovado com 10 valores"* mas o recálculo aritmético exato das notas parcelares resulta em `9.4` (Não Transita / Recurso),
+    - **Quando** o motor de recálculo processa a ficha do aluno,
+    - **Então** o sistema marca a linha com alerta crítico `DISCREPANCIA_CALCULO_HISTORICO`, exibe o valor calculado e o valor averbado no papel, e exige que o `SUB_PED` despache se mantém o valor histórico formal (juridicamente soberano) com anotação explicativa obrigatória ou se instaura averiguação pedagógica.
+  - **Cenário 3 (Tratamento de regimes de transição e disciplinas extintas):**
+    - **Dado** um aluno proveniente de currículo técnico antigo com disciplina extinta ou sem equivalência direta,
+    - **Quando** o sistema recalcula a `MFC` (13ª Classe),
+    - **Então** aplica os pesos da matriz curricular histórica aprovada para o plano do aluno (`RN-06`), sem impor requisitos de disciplinas dos planos novos, e valida a fórmula `MFC = round_med(0.40 * MFD + 0.30 * Estagio + 0.30 * PAP)` ou a fórmula legal aplicável ao ano de conclusão.
+- **Pós-condições e Efeitos Colaterais:** `resultados_anuais_disciplina` e `historico_externo_transcricoes` preenchidos com os sinalizadores de conformidade; pendências de discrepância registadas para despacho pedagógico.
+
+---
+
+### `US-MIG-05`: Reconciliação Contábil/Académica, Emissão em Ensaio e Homologação de Lote para Produção
+- **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)**, **Subdirector Administrativo (`SUB_ADM`)** e **Director Geral (`DIR_GERAL`)**, *quero* **analisar relatórios de reconciliação global, emitir documentos de teste com marca indelével de ensaio e homologar os lotes mediante reautenticação**, *para* **garantir a entrada limpa e controlada dos dados em produção com responsabilização formal e ajuste auditado de saldos**.
+- **Rastreabilidade:** `RF-C17-10`, `RF-C17-11`, `RF-C17-12`, `RF-C17-13` | `RN-09`, `RN-10` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §6.1, §6.2, §7.1, §7.2, §7.4, §8.4 | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
+- **Pré-condições:** Lote totalmente validado e sem ocorrências bloqueantes na área de preparação; relatórios de reconciliação contábil e pedagógica emitidos.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Emissão e verificação documental em regime de ensaio):**
+    - **Dado** que a comissão de migração pretende testar a consistência antes da viragem definitiva para produção,
+    - **Quando** solicita a emissão de pautas ou certificados de teste a partir dos dados da área de preparação,
+    - **Então** o sistema gera os documentos com marca de água diagonal indelével *"ENSAIO — SEM VALIDADE"* em todas as páginas, e o QR Code direciona para aviso público de documento de ensaio não reconhecido.
+  - **Cenário 2 (Sucesso — Ajuste de saldo devedor histórico migrado mediante despacho):**
+    - **Dado** um aluno com saldo devedor de propinas migrado de 45.000 Kz contestado com apresentação de recibo bancário físico não contabilizado na folha antiga,
+    - **Quando** o `SUB_ADM` aciona a funcionalidade de ajuste de saldo migrado na consola `MOD-MIG-01` e anexa o despacho fundamentado,
+    - **Então** o saldo da conta corrente é retificado, registando-se a operação como `AJUSTE_MIGRACAO_SUB_ADM` e gravando em `audit_logs` os valores anterior, corrigido e número do despacho.
+  - **Cenário 3 (Sucesso — Aprovação do lote e migração para produção):**
+    - **Dado** que os relatórios de reconciliação de turmas, alunos e propinas foram validados pelo `SUB_PED` e `SUB_ADM`,
+    - **Quando** o `SUB_PED` (para dados pedagógicos) e o `SUB_ADM` (para dados financeiros) confirmam a homologação com reautenticação obrigatória (palavra-passe + MFA),
+    - **Então** os dados são migrados atomicamente para as tabelas de produção com o campo `origem_registo = 'MIGRADO'`, o lote passa ao estado `MIGRADO_PRODUCAO` e é gerado o Termo de Aceitação para assinatura digital do `DIR_GERAL`.
+  - **Cenário 4 (Bloqueio — Violação de reautenticação ou tentativa de aprovação por operador):**
+    - **Dado** um utilizador sem perfil de Subdireção ou que falhe a confirmação de reautenticação,
+    - **Quando** tenta aprovar um lote de migração,
+    - **Então** o sistema aborta a transação com `HTTP 401/403` e nenhum registo é inserido em produção.
+- **Pós-condições e Efeitos Colaterais:** Registos integrados em produção com rastreabilidade de migração (`origem_registo = MIGRADO`); emissão do Termo de Aceitação arquivado eletronicamente.
+
+---
+
+### `US-MIG-06`: Bloqueio e Conferência Obrigatória do Histórico Migrado Antes da Certificação
+- **História:** *Como* **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **bloquear a emissão do primeiro documento de certificação oficial de qualquer aluno com dados migrados até à conferência e validação presencial contra o acervo físico em papel**, *para* **impedir a circulação de certificados ou diplomas baseados em dados importados sem comprovação documental fidedigna**.
+- **Rastreabilidade:** `RF-C17-14` | `RN-10.5` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §7.6 | `US-DOC-02` | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
+- **Pré-condições:** Aluno concluinte ou solicitante de certificado com registos com proveniência `origem_registo = MIGRADO` e estado de histórico `MIGRADO_PENDENTE_CONFERENCIA`.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Bloqueio automático de emissão de certificado sem conferência física prévia):**
+    - **Dado** um aluno que concluiu o curso em ano migrado cujo histórico escolar no SGE se encontra no estado `MIGRADO_PENDENTE_CONFERENCIA`,
+    - **Quando** um operador da secretaria (`OP_PED`) tenta emitir o Certificado de Habilitações (`DOF-10A`) ou a Guia de Transferência (`DOF-09C`),
+    - **Então** o sistema bloqueia a emissão e emite a notificação impeditiva: *"Emissão bloqueada: o histórico migrado do aluno requer conferência prévia presencial do livro de termos/pautas pelo Chefe da Secretaria Pedagógica (RN-10.5 / RF-C17-14)"*.
+  - **Cenário 2 (Sucesso — Conferência física e desbloqueio do processo para certificação):**
+    - **Dado** que o `CHEFE_SEC_PED` localizou os termos e pautas físicas no arquivo em papel e conferiu nome, filiação, notas de 10ª a 13ª classe e deliberação final,
+    - **Quando** abre o ecrã de conferência do histórico migrado no `MOD-MIG-01`, introduz o livro, folha e termo do arquivo físico e aciona a homologação da conferência,
+    - **Então** o estado do histórico passa a `MIGRADO_CONFERIDO`, anexa-se o registo nominal de quem conferiu com carimbo temporal e a emissão do Certificado e pedido de Diploma fica imediatamente desbloqueada para a Secretaria.
+- **Pós-condições e Efeitos Colaterais:** Campo `historico_conferido = TRUE` com utilizador e data em `historico_externo_transcricoes` ou nos resultados anuais; desbloqueio das telas de certificação do aluno.
+
+---
+
+### `US-MIG-07`: Migração Individual a Pedido de Antigo Aluno e Desativação da Consola de Migração Massiva
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **encerrar formalmente a consola de migração massiva com desativação da conta técnica e disponibilizar o fluxo restrito de migração individual a pedido de antigos alunos**, *para* **blindar a integridade operacional pós-arranque mantendo a capacidade de atender alunos históricos sob demanda**.
+- **Rastreabilidade:** `RF-C17-15`, `RF-C17-16` | `RN-10`, `RN-16.21` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §2.3, §6.4 | `MOD-MIG-01`.
+- **Prioridade (proposta):** `Must` | **Entrega:** `E4`.
+- **Pré-condições:** Conclusão de todas as vagas de migração massiva; assinatura do Termo de Aceitação Final da migração pelo Director Geral.
+- **Critérios de Aceitação (BDD):**
+  - **Cenário 1 (Sucesso — Fecho da migração massiva e desativação da conta técnica):**
+    - **Dado** que o último lote de dados históricos massivos foi aprovado e o Termo de Aceitação Final foi assinado pelo `DIR_GERAL`,
+    - **Quando** o Administrador Técnico comanda o encerramento do processo de migração massiva,
+    - **Então** o sistema desativa a consola de importação em lote (`MOD-MIG-01` modo massivo), comuta a conta de migração (`tipo_conta = TECNICA_MIGRACAO`) para `estado_conta = DESATIVADA` com motivo `"Fim da Migração Massiva"` (`RN-16.21`), revoga todas as sessões ativas dessa conta e regista a ação em `audit_logs`.
+  - **Cenário 2 (Sucesso — Entrada de antigo aluno por migração individual a pedido):**
+    - **Dado** um antigo aluno que concluiu o curso antes da informatização e requer Certificado na Secretaria durante o ano 2028,
+    - **Quando** o `CHEFE_SEC_PED` abre o módulo restrito de "Migração Individual a Pedido", digita os dados do processo a partir da ficha do arquivo histórico, anexa a imagem da pauta e submete o pedido,
+    - **Então** o sistema cria um lote individual na área de preparação, executa as validações de integridade, exige a aprovação do `SUB_PED` e, após homologação, insere o histórico como `MIGRADO` e desbloqueia a emissão requerida.
+  - **Cenário 3 (Bloqueio — Tentativa de reutilizar conta técnica desativada):**
+    - **Dado** que a conta técnica de migração foi formalmente desativada após o encerramento da migração massiva,
+    - **Quando** qualquer operador tentar autenticar-se com as credenciais da referida conta,
+    - **Então** a autenticação é categoricamente rejeitada com aviso de conta extinta, impedindo qualquer acesso à consola de importação.
+- **Pós-condições e Efeitos Colaterais:** Consola massiva bloqueada permanentemente; conta técnica desativada; trilha de auditoria completa da transição do ciclo de vida da migração.
+
+---
+
 ## Distribuição das Histórias por Entrega (E1–E5)
 
 Contagem pela **primeira entrega** em que cada história tem de estar em produção (linha *Prioridade (proposta) | Entrega* de cada US). Uma história com duas entregas (ex.: `US-PED-06`: E3 trimestral / E4 anual) conta na primeira.
@@ -2769,15 +2937,23 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 | `EP-CTA` | 13 | 1 | — | — | 1 | — | 15 |
 | `EP-PNL` | — | 1 | 10 | 1 | — | — | 12 |
 | `EP-PAS` | — | — | — | 8 | — | — | 8 |
-| **Total** | **36** | **33** | **13** | **16** | **17** | **1** | **116** |
+| `EP-MIG` | 5 | 1 | — | 1 | — | — | 7 |
+| **Total** | **41** | **34** | **13** | **17** | **17** | **1** | **123** |
 
-- **MoSCoW proposto:** 92 `Must`, 20 `Should`, 3 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
+- **MoSCoW proposto:** 99 `Must`, 20 `Should`, 3 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
 - 🟡 **Se as propostas pendentes forem aprovadas:** com a `Q-037`, `US-COM-01` a `US-COM-06` passam para a **E3** (E3 = 18, E5 = 13); a `Q-038` foi decidida na `DEC-013` (`US-DIS-01` na **E2**, `US-DIS-04` na **E3**).
 - **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina).
 
 ---
 
 ## Alterações da v2.0
+
+### Épico 16 (EP-MIG) — Migração de Dados (2026-11-08 — Issue #13)
+
+- Criado o **Épico 16 (`EP-MIG`)** com as histórias `US-MIG-01` a `US-MIG-07`, cobrindo integralmente os 16 requisitos funcionais `RF-C17-01` a `RF-C17-16` da capacidade C17 e o módulo `MOD-MIG-01` (Workspace 05 — [[04 - Telas e Documentos|DOC-04]] §5).
+- Cobertura funcional detalhada: carga e validação em área de preparação com anexo de fonte digitalizada (`US-MIG-01`), digitação assistida em grelha com dupla digitação cega e arbitragem por chefia (`US-MIG-02`), recarga idempotente, suporte a cargas delta e fusão controlada de duplicados (`US-MIG-03`), recálculo de médias, deliberações e `MFC` com sinalização de discrepâncias históricas (`US-MIG-04`), reconciliação contábil/académica, emissão em regime de ensaio e homologação de lote (`US-MIG-05`), bloqueio e conferência física obrigatória do histórico migrado pré-certificação (`US-MIG-06`), migração individual a pedido de antigo aluno e desativação da consola massiva com encerramento da conta técnica (`US-MIG-07`).
+- Total do documento atualizado para **16 épicos** e **123 histórias de utilizador** (99 Must, 20 Should, 3 Could, 1 Won't). Distribuição: E1 = 41, E2 = 34, E3 = 13, E4 = 17, E5 = 17, Fora = 1.
+- Fecha a lacuna `L-RF-01` da Matriz de Rastreabilidade.
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-013 — Entregas e prioridades|DEC-013]] — entregas e prioridades (2026-11-05)
 
