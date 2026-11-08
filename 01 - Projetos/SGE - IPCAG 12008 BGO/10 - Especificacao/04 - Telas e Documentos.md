@@ -1223,7 +1223,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 - **Identificação civil:** nome, filiação, naturalidade, **nacionalidade** (🟡 atributo a criar — `Q-C03-20`; E1), data de nascimento, BI e `N.º de Processo`.
 - **Grelha curricular:** disciplinas por componente (**Sócio-Ambiental-Cultural**, Científica, Técnica, Tecnológica e Prática — `COR-LEG-23`) com a classificação anual de cada classe em algarismos e por extenso; transcrições externas sem lacunas (`RN-06`).
 - **Conclusão do curso (13ª):** Média do Plano Curricular, **Projecto Tecnológico**, **Estágio**, **PAP** e **`MFC`** (🟡 pesos — `Q-030`; E2).
-- **Registo na Plataforma Nacional de Certificação** até 30 dias após o fim do ano letivo (DP n.º 227/25, art. 13.º, n.º 2) — 🟡 âmbito e integração (`Q-020`; E1).
+- **Registo na Plataforma Nacional de Certificação** até **30 dias** após o fim do ano letivo (DP n.º 227/25, art. 13.º, n.º 2), com alerta do prazo. **Não há API publicada** (investigação #26): na E4 o SGE **exporta o histórico avaliativo** para registo manual e guarda o **número, o código e o QR devolvidos pela plataforma** e o **identificador único do aluno** (art. 8.º). Nos títulos, o QR é o da plataforma (art. 8.º, n.º 3); o QR próprio do SGE só se usa enquanto a plataforma não estiver aberta ao ensino técnico — [ticket #40](https://github.com/Angeloaqp/sge-ipcag-12008/issues/40).
 
 ### `DOF-10B` — Ficha de Dados para o Diploma (exportação ao Ministério da Educação)
 
@@ -1470,6 +1470,11 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 ---
 
 ## Alterações da v2.0
+
+### Plataforma Nacional de Certificação — [ticket #40](https://github.com/Angeloaqp/sge-ipcag-12008/issues/40) (2026-11-08)
+
+- `DOF-10A`: exportação do histórico na E4, campos externos (número, código, QR) e QR da plataforma nos títulos.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-011 — Pagamentos por RUPE no fecho de caixa|DEC-011]] — RUPE (2026-11-05)
 
