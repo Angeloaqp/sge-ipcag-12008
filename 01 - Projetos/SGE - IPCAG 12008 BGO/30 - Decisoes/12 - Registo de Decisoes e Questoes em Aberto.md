@@ -64,6 +64,7 @@ tags:
 | [[#DEC-013 — Entregas e prioridades\|DEC-013]] | VER-01 (#9); `Q-038` | Entregas E1–E5 e prioridades | Saúde na E1; núcleo da C13 na E2/E3; C10 dividida em E1/E2; 3 regras de alinhamento RF ↔ US | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-014 — Critérios de aceitação da operação (C18)\|DEC-014]] | Issue #14 (`L-RF-02`) | Aceitação de C18 por RNF vs US | (a) Aceitação pelas metas do RNF-08 e procedimentos do OPS-09; sem US funcionais no DOC-03; mapeamento RF ↔ RNF no DOC-07 | `decidida` | 2026-11-08 | Analista responsável do projeto | pendente |
 | [[#DEC-015 — Âmbito e faseamento da Central de Avisos (C12 na E3 e E5)\|DEC-015]] | Issue #18 (`L-RF-07`); `Q-037` | Faseamento da C12: central de avisos vs portal | (b) Central de avisos interna (`US-COM-01` a `06`) na E3; canal impresso garantido e SMS complementar com teto; portal (`US-COM-07`, `08`) na E5 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-016 — Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (Q-036, Q-039)\|DEC-016]] | Issue #23 (`L-RF-08`); `Q-036`, `Q-039` | Âmbito: avaliação de desempenho e expediente geral | (a) Avaliação de desempenho e expediente geral fora das entregas E1–E5 (adicionados a DEC-008 como itens 9 e 10); RF-C19-33 e US-APD-07 passam a Won't | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -287,7 +288,7 @@ flowchart LR
 
 **Recomendação: (a).** A C20 pode ser reavaliada depois da E5, como pedido de alteração.
 
-> [!success] Decisão (2026-11-02)
+> [!success] Decisão (2026-11-02, complementada a 2026-11-09 pela DEC-016)
 > **(a) Ficam fora do âmbito da versão inicial (entregas E1–E5):**
 > 1. Processamento salarial (a C11 fica reduzida a cadastro e ponto — `US-DOC-04`);
 > 2. C20 — biblioteca, inventário e património, gestão de laboratórios;
@@ -296,7 +297,9 @@ flowchart LR
 > 5. Contabilidade geral da escola (o SGE faz a Conta Corrente do aluno, a Tesouraria e o fecho de caixa);
 > 6. Geração automática de horários (DEC-004);
 > 7. Ensino a distância e conteúdos pedagógicos;
-> 8. Compras e stocks.
+> 8. Compras e stocks;
+> 9. **Avaliação de desempenho do pessoal** (`DEC-016`, `Q-036`): 10 indicadores GPE e homologação provincial fora do SGE nas entregas E1–E5; `RF-C19-33` e `US-APD-07` passam a `Won't` (fora da linha de base);
+> 10. **Expediente geral e correspondência** (`DEC-016`, `Q-039`): registo de ofícios de entrada e saída fora do SGE (C21 não criada); a Secretaria Geral mantém o livro manual de protocolo de ofícios (fecha `L-RF-08`).
 >
 > Qualquer destes processos só entra por pedido de alteração registado neste documento. A Q-010 (quem processa hoje os salários) e a Q-019 (controlo do património fora do SGE) ficam para a Fase B, para documentar a fronteira com os sistemas ou o papel que continuam a existir.
 
@@ -521,6 +524,28 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-016 — Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (Q-036, Q-039)
+
+- **Origem:** Issue #23 ([issue #23](https://github.com/Angeloaqp/sge-ipcag-12008/issues/23)); questões `Q-036` e `Q-039`; lacuna `L-RF-08` da [[Matriz de Rastreabilidade]] · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Duas questões estruturais de âmbito poderiam expandir significativamente o esforço de especificação e desenvolvimento sem ligação direta às necessidades críticas do primeiro ciclo letivo (2027/2028):
+1. **`Q-036` (Avaliação de desempenho do pessoal):** Os documentos reais ([[Achados dos Documentos Reais - Lote 1|DESC-L1]] A15) revelaram fichas com 10 indicadores, classificação quantitativa/qualitativa e circuito de homologação pelo Gabinete Provincial. A sua inclusão exigiria tabelas dedicadas (`avaliacoes_desempenho`, `ALT-05-24`), permissões de chefia e fluxos de confidencialidade/contraditório (`RF-C19-33`, `US-APD-07`), embora a capacidade C11 tenha sido desenhada para focar estritamente em cadastro e assiduidade docente (`DEC-008`).
+2. **`Q-039` (Expediente geral e correspondência):** A Secretaria Geral regista ofícios de entrada e saída manualmente num livro de protocolo (`Ofício N.º [seq]/IPCAG.SG/ano`). A inclusão no SGE criaria uma capacidade inteira nova (**C21**), com módulos e séries de numeração transversal, desviando o foco do núcleo de gestão escolar.
+
+**Decisão.** **Exclusão formal de ambas as funções da linha de base inicial (entregas E1–E5), integrando a lista de fora do âmbito da `DEC-008` (itens 9 e 10):**
+1. **Avaliação de desempenho (`Q-036`):** Mantém-se fora do SGE no ciclo 2027/2028. A C11 continua rigorosamente focada em cadastro de pessoal docente/administrativo (E1) e registo de ponto/assiduidade com mapa de efetividade exportado (E2). O requisito `RF-C19-33` passa de condicional para `Won't` (fora da linha de base), e a história `US-APD-07` passa a prioridade `Won't` (fora das E1–E5). A tabela `avaliacoes_desempenho` não é criada na base de dados de produção.
+2. **Expediente geral (`Q-039`):** A capacidade C21 não é criada no SGE para as entregas E1–E5. A Secretaria Geral continua a utilizar o livro físico de protocolo para correspondência geral e ofícios institucionais. Os modelos de documentos escolares oficiais (`DOF-01` a `DOF-26`) mantêm as suas séries próprias em `series_numeracao_documental`. A lacuna `L-RF-08` da [[Matriz de Rastreabilidade]] é declarada **fechada**.
+3. Ambas as funcionalidades podem ser reavaliadas após a E5 (julho–agosto de 2028), mediante pedido formal de alteração justificado pelo IPCAG.
+
+**Impacto.**
+- **VIS-06 §5:** Tabela §5.2 atualizada na linha C11; itens `F-13` e `F-14` acrescentados a §5.3; `Q-036` retirada de §5.4.
+- **DOC-07:** `RF-C19-33` passa para prioridade `W` e estado `fora da linha de base`; `CAND-01` e `CAND-02` anotados como excluídos para E1–E5; tabela MoSCoW e totais recalculados (0 condicionais; 2 fora da linha de base).
+- **DOC-03:** `US-APD-07` classificada como `Won't` (fora das E1–E5); totais MoSCoW atualizados para 104 Must, 21 Should, 3 Could, 2 Won't.
+- **REG-12 / IDX-12:** `Q-036` e `Q-039` marcadas como `respondida (DEC-016)`.
+- **Matriz:** `L-RF-08` fechada (0 lacunas abertas no projeto).
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -560,10 +585,10 @@ As entrevistas dizem duas coisas:
 | Q-033 | **Termos da escola:** os documentos usam "Período" (Manhã/Tarde) em vez de "Turno" e "Cadeira" como sinónimo de "Disciplina". Ficam como sinónimos aceites nos documentos impressos, mantendo um só termo no sistema? | DESC-L1 A9 | Glossário DOC-01; R-04 da VIS-06 | `SUB_PED`; equipa do projeto | C | `aberta` | — |
 | Q-034 | **Emolumentos e RUPE:** o formulário de pedido de declaração não tem campo de pagamento, e os pedidos do pessoal usam a RUPE (Referência Única de Pagamento ao Estado). Há taxa para as declarações dos alunos? Taxas e emolumentos dos alunos pagam-se por RUPE (ao Estado) ou à escola? | DESC-L1 A11 e A15; Q-LEG-14 | DEC-005; DEC-002; C10; C09 | Secretaria Pedagógica; Tesouraria | B | `respondida — a confirmar` | Emolumentos estatais por RUPE; emolumentos internos nas contas da escola — [[Sintese das Respostas da Fase B\|DESC-RESP]] R15. (2026-11-02). Tratamento no sistema decidido na `DEC-011` (2026-11-05); falta confirmar com a escola **que rubricas** são estatais (lista 63). |
 | Q-035 | **Cabeçalho e rodapé reais:** o cabeçalho diz "República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação" e não menciona o MED nem a Diocese de Caxito; o rodapé traz códigos como `IPCAG.SG-ACE` e `DEE-PEEP-001-ACE`. Qual é o modelo oficial a usar e o que significam os códigos? | DESC-L1 A14 | C09 (`DOF-01` a `DOF-12`); DOC-04 Parte 2 | Comissão de Gestão; Gabinete Provincial | B | `respondida — a confirmar` | Cabeçalho: República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação / IPCAG; códigos de rodapé IPCAG.SG-ACE e DEE-PEEP-001-ACE — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
-| Q-036 | **Avaliação de desempenho do pessoal** (10 indicadores, classificação quantitativa e qualitativa, homologação pelo Gabinete Provincial): entra na C11, ou fica fora do âmbito como o processamento salarial (DEC-008)? | DESC-L1 A15 | C11; DEC-008 | Comissão de Gestão; `CHEFE_SEC_GER` | B | `aberta` | — |
+| Q-036 | **Avaliação de desempenho do pessoal** (10 indicadores, classificação quantitativa e qualitativa, homologação pelo Gabinete Provincial): entra na C11, ou fica fora do âmbito como o processamento salarial (DEC-008)? | DESC-L1 A15 | C11; DEC-008 | Comissão de Gestão; `CHEFE_SEC_GER` | B | `respondida` | **Decidida na `DEC-016`** (2026-11-09): fica fora do âmbito das entregas E1–E5 (adicionada a DEC-008 item 9 / F-13); C11 focada em cadastro e assiduidade; `RF-C19-33` e `US-APD-07` passam a `Won't`. |
 | Q-037 | **SMS antes da E5?** A C12 propõe uma central de avisos (impresso + SMS) que não abre dados à internet; pode entrar na E3 com os avisos de faltas e propinas, deixando o portal na E5 (`DEC-003`)? Com que orçamento mensal? | [[C12 - Comunicacao com Encarregados e Alunos\|CAP-C12]] `Q-C12-01` | C12; C10; E3 | Comissão de Gestão; `SUB_ADM` | B | `respondida` | **Decidida na `DEC-015`** (2026-11-09): central de avisos interna (`US-COM-01` a `06`) na E3 com impresso garantido e SMS complementar com teto; portal (`US-COM-07`, `08`) na E5 (`DEC-003`). |
 | Q-038 | **Núcleo da C13 na E2/E3?** O boletim real (`DOF-06`) imprime faltas por indisciplina e comportamento desde o I Trimestre; a C13 propõe levar esse núcleo para a E2/E3 e deixar ocorrências e processos disciplinares na E5. Exige pedido de alteração ao [[06 - Visao e Ambito]]. | [[C13 - Disciplina e Comportamento\|CAP-C13]] `Q-C13-01` | C13; DOF-06; E2/E3 | Comissão de Gestão | B | `respondida` | **Decidida na `DEC-013`** (2026-11-05): tipos de falta na E2 e comportamento na E3; resto da C13 na E5. Falta a homologação da Comissão de Gestão. |
-| Q-039 | **Expediente geral e correspondência:** a Secretaria Geral regista à mão os ofícios de entrada e saída (`Ofício N.º [seq]/IPCAG.SG/ano`). Entra no âmbito do SGE (nova capacidade C21), e em que entrega? | [[Sintese das Respostas da Fase B\|DESC-RESP]] R25 | Âmbito ([[06 - Visao e Ambito]]) | Comissão de Gestão | B | `aberta` | — |
+| Q-039 | **Expediente geral e correspondência:** a Secretaria Geral regista à mão os ofícios de entrada e saída (`Ofício N.º [seq]/IPCAG.SG/ano`). Entra no âmbito do SGE (nova capacidade C21), e em que entrega? | [[Sintese das Respostas da Fase B\|DESC-RESP]] R25 | Âmbito ([[06 - Visao e Ambito]]) | Comissão de Gestão | B | `respondida` | **Decidida na `DEC-016`** (2026-11-09): fica fora do âmbito das entregas E1–E5 (adicionada a DEC-008 item 10 / F-14); Secretaria Geral mantém livro físico de protocolo de ofícios; lacuna `L-RF-08` fechada. |
 
 ### 3.1 Questões registadas noutras notas
 
@@ -630,3 +655,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc1 | 2026-11-05 | `DEC-010` (ajustes da migração aceites), `DEC-011` (pagamento RUPE no fecho de caixa), `DEC-012` (alinhamento RBAC/RLS) e `DEC-013` (entregas e prioridades E1–E5). |
 | 2.0-rc2 | 2026-11-08 | `DEC-014`: aceitação da operação (C18) pelas metas mensuráveis do RNF-08 e procedimentos do OPS-09 (Issue #14). |
 | 2.0-rc2 | 2026-11-09 | `DEC-015`: central de avisos interna (`US-COM-01` a `06`) entra na E3 com canal impresso garantido e SMS complementar com teto orçamental; portal web (`US-COM-07`, `08`) permanece na E5 (`DEC-003`). `Q-037` e `Q-C12-01` respondidas; lacuna `L-RF-07` fechada (Issue #18). |
+| 2.0-rc2 | 2026-11-09 | `DEC-016`: avaliação de desempenho do pessoal (`Q-036`) e expediente geral de correspondência (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 e integrados na `DEC-008` (itens 9 e 10); `RF-C19-33` e `US-APD-07` passam a `Won't` (fora da linha de base); lacuna `L-RF-08` fechada (Issue #23). |

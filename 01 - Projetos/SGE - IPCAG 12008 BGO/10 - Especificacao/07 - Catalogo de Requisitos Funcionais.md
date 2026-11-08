@@ -259,7 +259,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C11-04** | Exportar o mapa mensal de efetividade e faltas para os descontos (salários processados fora do SGE). | O-02 | S | E2 | `R-24`; `Q-010` (respondida — a confirmar) | — | US-DOC-04 | MOD-GER-RH | — | `assiduidade_funcionarios`, `aulas_registadas` | 🟡 DoR-E2 · `Q-010` |
 
 > [!note] C11 — avaliação de desempenho
-> Fica como candidato (§3.2): depende da `Q-036`. Se entrar, aplica-se o `RF-C19-33`.
+> Fora do âmbito das entregas E1–E5 (`DEC-016`, `DEC-008` item 9 / F-13; `Q-036`): o `RF-C19-33` passa a `W` (fora da linha de base).
 
 ### C12 — Comunicação com encarregados e alunos
 **Âmbito:** dentro · **Entrega:** portal na **E5** (`DEC-003`); central de avisos (impresso + SMS) **pendente da `Q-037`** — proposta da CAP-C12: E3 · **Objetivo:** `O-11` · **Fonte principal:** [[C12 - Comunicacao com Encarregados e Alunos|CAP-C12]] · **Regras:** `RN-14`
@@ -431,7 +431,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C19-30** | Imprimir na declaração de estudante só os campos do efeito escolhido, segundo a tabela "efeito → campos" aprovada pela Direção. | O-09 | M | E2 | APD-11; `A-11` | RN-10.5 | US-DOC-01 | MOD-PED-DOC | DOF-09 | `requerimentos_declaracao` | 🟡 DoR-E2 · `Q-APD-30` |
 | **RF-C19-31** | Registar no requerimento o requerente e a sua legitimidade e entregar a declaração só a quem a tem. | O-09 | M | E2 | APD-11 (arts. 22.º, 26.º); `A-11`; `ALT-05-25` | RN-10.6 | US-DOC-01 | MOD-PED-DOC | DOF-09 | `requerimentos_declaracao` | definido |
 | **RF-C19-32** | Recolher a ocupação ou local de trabalho do pai só se a Direção confirmar uma finalidade (campo facultativo, CON-08, nunca impresso); sem finalidade, o campo não existe. | O-09 | C | E1 | APD-11; `A-12`; `ALT-05-23` | RN-11.8 | US-PIN-09 | MOD-PED-MAT | — | `alunos` | 🟡 PC-E1 · `Q-APD-29` |
-| **RF-C19-33** | Se a avaliação de desempenho entrar no SGE: visível só ao avaliado, ao avaliador e a quem homologa, com concordância e observação do avaliado. | O-09 | C | a definir (`Q-036`) | APD-11; `A-15`; `ALT-05-24` | — | US-APD-07 | MOD-GER-RH | — | `avaliacoes_desempenho` *(tabela condicional, não criada no DOC-05 — `ALT-05-24`)* | 🟡 condicional · `Q-036` |
+| **RF-C19-33** | Se a avaliação de desempenho entrar no SGE: visível só ao avaliado, ao avaliador e a quem homologa, com concordância e observação do avaliado. | O-09 | W | fora da linha de base (`DEC-016`) | APD-11; `A-15`; `ALT-05-24` | — | US-APD-07 | MOD-GER-RH | — | `avaliacoes_desempenho` *(tabela condicional, não criada no DOC-05 — `ALT-05-24`)* | fora da linha de base |
 
 ### C20 — Recursos e património
 **Fora do âmbito** (`DEC-008`): sem RF. Ver §3.1.
@@ -458,13 +458,15 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | F-10 | Contas e portal para encarregados e alunos antes da E5 | C12, C14 | `DEC-003` | Balcão; portal na E5 (`RF-C12-08`, `RF-C12-09`, `RF-C14-15`) |
 | F-11 | Referências Multicaixa / gateway | C10 | `DEC-005` | Borderô manual e conciliação por extrato; `RF-C10-26` fica `W` |
 | F-12 | Alojamento só na nuvem ou só local | C18 | `DEC-006` | Servidor local + réplica na nuvem |
+| F-13 | Avaliação de desempenho anual do pessoal (10 indicadores) | C11 | `DEC-008`, `DEC-016` | Fora do SGE nas entregas E1–E5 (`RF-C19-33` passa a `W`; `Q-036`) |
+| F-14 | Expediente geral e correspondência (registo de ofícios de entrada e saída) | — (antiga C21) | `DEC-008`, `DEC-016` | A Secretaria Geral mantém o livro manual de protocolo de ofícios (`Q-039`; fecha `L-RF-08`) |
 
 ### 3.2 Candidatos (por decidir — sem RF até à decisão)
 
 | ID | Candidato | Origem | Decisão pendente | Se for aceite |
 | :---: | :--- | :--- | :--- | :--- |
-| **CAND-01** | **Expediente geral e correspondência:** registo de ofícios de entrada e saída, `Ofício N.º [seq]/IPCAG.SG/ano`, hoje feito à mão pela Secretaria Geral. Não está no mapa C01–C20. | `R-25` (G-06); INT-V2 §5 | **`Q-039`** (nova capacidade C21? em que entrega?) | Capacidade `C21` com RF `RF-C21-nn`, numeração na fonte única (`series_numeracao_documental`), cargo `CHEFE_SEC_GER` |
-| CAND-02 | Avaliação de desempenho anual do pessoal (10 indicadores, homologação pelo Gabinete Provincial) | `A-15` | `Q-036` | RF na C11 + `RF-C19-33` |
+| ~~CAND-01~~ | ~~Expediente geral e correspondência~~ | `R-25` (G-06); INT-V2 §5 | **Não aceite para E1–E5 (`DEC-016` / `DEC-008` item F-14)** | C21 não criada; mantém-se livro manual de protocolo (`Q-039`) |
+| ~~CAND-02~~ | ~~Avaliação de desempenho anual do pessoal~~ | `A-15` | **Não aceite para E1–E5 (`DEC-016` / `DEC-008` item F-13)** | `RF-C19-33` passa a `W` fora da linha de base (`Q-036`) |
 | CAND-03 | Edital do concurso de admissão | `Q-022` | `Q-022` | RF na C02 e novo DOF |
 | CAND-04 | Inscrição no concurso por portal | `Q-LEG-12` | `Q-LEG-12`; `DEC-003` | RF na C02 (E5) |
 | CAND-05 | Canal WhatsApp Business (nunca grupos de turma) | CAP-C12 | `Q-C12-02` | RF na C12 |
@@ -474,7 +476,7 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 
 ## 4. Resumo
 
-**224 RF** em 19 capacidades (C01–C19): 222 na linha de base, mais o `RF-C10-26` (fora da linha de base, `DEC-005`) e o `RF-C19-33` (condicional, `Q-036`); C20 fora; 1 candidato a capacidade nova (`CAND-01`, `Q-039`). Um RF com duas entregas (ex.: `RF-C14-14` "E1 / E4") conta na primeira.
+**224 RF** em 19 capacidades (C01–C19): 222 na linha de base, mais o `RF-C10-26` (fora da linha de base, `DEC-005`) e o `RF-C19-33` (fora da linha de base, `DEC-016`); C20 fora; sem criação de C21 (expediente geral fora da linha de base por `DEC-016`). Um RF com duas entregas (ex.: `RF-C14-14` "E1 / E4") conta na primeira.
 
 ### 4.1 Por capacidade
 
@@ -498,8 +500,8 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | C16 Passagem de ano | 11 | 8 | 3 | — | — | — | — | — | 11 | — | — |
 | C17 Migração | 16 | 13 | 3 | — | — | 13 | 1 | — | 2 | — | — |
 | C18 Operação | 7 | 4 | 2 | 1 | — | 3 | 4 | — | — | — | — |
-| C19 Proteção de dados | 33 | 28 | 3 | 2 | — | 16 | 11 | 1 | 2 | 2 | 1 a definir (`Q-036`) |
-| **Total** | **224** | **180** | **32** | **11** | **1** | **82** | **66** | **22** | **35** | **17** | **2** |
+| C19 Proteção de dados | 33 | 28 | 3 | 1 | 1 | 16 | 11 | 1 | 2 | 2 | 1 fora (`DEC-016`) |
+| **Total** | **224** | **180** | **32** | **10** | **2** | **82** | **66** | **22** | **35** | **17** | **2** |
 
 ### 4.2 Por entrega e prioridade
 
@@ -510,9 +512,8 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | **E3** — Fecho de trimestre | 18 | 4 | — | — | **22** |
 | **E4** — Fecho do ano | 28 | 6 | 1 | — | **35** |
 | **E5** — Próximo ciclo | 12 | 4 | 1 | — | **17** |
-| A definir (`Q-036`) | — | — | 1 | — | **1** |
-| Fora da linha de base (`DEC-005`) | — | — | — | 1 | **1** |
-| **Total** | **180** | **32** | **11** | **1** | **224** |
+| Fora da linha de base (`DEC-005`, `DEC-016`) | — | — | — | 2 | **2** |
+| **Total** | **180** | **32** | **10** | **2** | **224** |
 
 > [!warning] Peso da E1 e reforço da E3
 > A E1 concentra 82 RF (72 `Must`), porque junta a estrutura académica, a matrícula, a tesouraria, as contas, a migração e a base da proteção de dados. Com a `DEC-013` (Q-038) e a `DEC-015` (Q-037) decididas, a E3 absorveu o núcleo de comportamento (`RF-C13-02`, `-04`) e a central de avisos interna (`RF-C12-01` a `07`), totalizando 22 RF (18 `Must`, 4 `Should`).
@@ -526,15 +527,14 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | `🟡 PC-E2` | 17 | Recálculo de pautas — antes da E2 |
 | `🟡 PC-E3` | 9 | Regulamento interno — antes da E3 |
 | `🟡 DoR-E1` … `DoR-E5` | 38 (E1 9, E2 11, E3 2, E4 11, E5 5) | Questão respondida antes da entrega do RF |
-| `🟡 condicional` | 1 | `RF-C19-33` (`Q-036`) |
-| fora da linha de base | 1 | `RF-C10-26` (`DEC-005`) |
-| **Total 🟡** | **87** | |
+| fora da linha de base | 2 | `RF-C10-26` (`DEC-005`), `RF-C19-33` (`DEC-016`) |
+| **Total 🟡** | **86** | |
 
 ### 4.4 Cobertura (detalhe na [[Matriz de Rastreabilidade]])
 - **0** objetivos sem RF; **0** capacidades dentro do âmbito sem RF; **0** das 130 US sem RF.
 - **0 RF sem US:** 100% de cobertura funcional da linha de base alcançada. Todos os 224 requisitos funcionais têm correspondência direta em Histórias de Utilizador (`US`) ou aceitação por critérios de qualidade/operação (`DEC-014` para C18). Os restantes 7 requisitos (`RF-C03-15`, `RF-C09-11`, `RF-C10-10`, `RF-C10-24`, `RF-C10-25`, `RF-C13-02`, `RF-C15-01`) foram cobertos no DOC-03 (Issue #17).
 - **22 RF sem módulo** no DOC-04 (consola de migração e operação).
-- ~~**68 tabelas** citadas ainda não estão no DOC-05 (v1.2 em 2026-11-03); a C15 tem tabelas na nota de capacidade mas não no mapa INT-V2 §2.4.~~ **Fechado em 2026-11-05:** o DOC-05 `2.0-rc1` tem as 116 tabelas e a C15 está no Grupo 6; só `avaliacoes_desempenho` fica condicional (`Q-036`).
+- ~~**68 tabelas** citadas ainda não estão no DOC-05 (v1.2 em 2026-11-03); a C15 tem tabelas na nota de capacidade mas não no mapa INT-V2 §2.4.~~ **Fechado em 2026-11-05 (atualizado a 2026-11-09):** o DOC-05 `2.0-rc1` tem as 116 tabelas e a C15 está no Grupo 6; a tabela condicional `avaliacoes_desempenho` (`Q-036`) fica fora da linha de base (`DEC-016`).
 
 ---
 
@@ -551,3 +551,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc2 | 2026-11-08 | Cobertura de C01: preenchida a coluna US para `RF-C01-07` com a `US-GOV-01` (Cenário 6) e adicionada a ligação em `RF-C09-07` (Issue #16). Lacuna `L-RF-04` fechada. |
 | 2.0-rc2 | 2026-11-08 | Cobertura total de requisitos: preenchida a coluna US para os restantes 7 requisitos (`RF-C03-15` em `US-PIN-02`, `RF-C09-11` em `US-DOC-02`, `RF-C10-10` e `RF-C10-24` em `US-TES-03`, `RF-C10-25` em `US-TES-02`, `RF-C13-02` em `US-DIS-04`, `RF-C15-01` em `US-PNL-01`) — Issue #17. RF sem US desce para 0. Lacuna `L-RF-05` fechada. |
 | 2.0-rc2 | 2026-11-09 | Faseamento da C12 (`DEC-015`, Issue #18): atualizada a coluna Entrega de `RF-C12-01` a `RF-C12-07` de `pendente (Q-037)` para `E3`; totais recalculados (§4.1, §4.2: E3 sobe de 15 para 22 RF; pendentes descem de 7 para 0). Lacuna `L-RF-07` fechada. |
+| 2.0-rc2 | 2026-11-09 | Âmbito e requisitos condicionais (`DEC-016`, Issue #23): avaliação de desempenho (`Q-036`) e expediente geral (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 (`DEC-008` itens 9 e 10); `RF-C19-33` passa a `W` fora da linha de base; totais recalculados (0 requisitos condicionais pendentes; 2 fora da linha de base); lacuna `L-RF-08` fechada. |

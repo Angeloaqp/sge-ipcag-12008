@@ -383,7 +383,7 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | ~~L-RF-05~~ | ~~Catálogo de indicadores e parâmetros do regulamento sem US~~ — **fechada em 2026-11-08**: cobertos `RF-C13-02` em `US-DIS-04` e `RF-C15-01` em `US-PNL-01` (Issue #17). | DOC-03 (`EP-PNL`, `EP-DIS`), DOC-07 | — |
 | ~~L-RF-06~~ | ~~68 tabelas novas por integrar no DOC-05; divergência das tabelas da C15~~ — **fechada em 2026-11-05**: o DOC-05 tem as 116 tabelas ([[00.4 - Relatorio de Verificacao v2.0-rc1\|VER-01]]) | DOC-05 §6 | — |
 | ~~L-RF-07~~ | ~~Entregas pendentes: central de avisos (`Q-037`, 7 RF) e núcleo da C13 (`Q-038`, 3 RF)~~ — **fechada em 2026-11-09 (`DEC-015`, Issue #18):** central de avisos interna (`US-COM-01` a `06`, `RF-C12-01` a `07`) antecipada para a E3 com canal impresso garantido e SMS complementar sob teto; portal web na E5 (`DEC-003`). `VIS-06`, `DOC-03` e `DOC-07` atualizados. | REG-12; VIS-06 (pedido de alteração) | — |
-| L-RF-08 | Expediente geral fora do mapa C01–C20 (`Q-039`) | VIS-06; REG-12 | Âmbito |
+| ~~L-RF-08~~ | ~~Expediente geral fora do mapa C01–C20 (`Q-039`)~~ — **fechada em 2026-11-09 (`DEC-016`, Issue #23):** expediente geral e correspondência formalmente excluídos da linha de base das entregas E1–E5 (`DEC-008`, item F-14); a Secretaria Geral mantém o livro manual de protocolo de ofícios. | VIS-06; REG-12 | — |
 
 ---
 
@@ -398,3 +398,4 @@ O [[05 - Modelagem de Dados|DOC-05]] ainda está na v1.2 (44 tabelas) em 2026-11
 | 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-04`: coberto `RF-C01-07` na `US-GOV-01` (Cenário 6) com `parametros_instituicao` e herança em `modelos_documento` (Issue #16). RF sem US/aceitação desce de 8 para 7. |
 | 2.0-rc2 | 2026-11-08 | Fecho da lacuna `L-RF-05` e cobertura total: cobertos os restantes 7 RF (`RF-C03-15` em `US-PIN-02`, `RF-C09-11` em `US-DOC-02`, `RF-C10-10` e `-24` em `US-TES-03`, `RF-C10-25` em `US-TES-02`, `RF-C13-02` em `US-DIS-04`, `RF-C15-01` em `US-PNL-01`) — Issue #17. RF sem US desce de 7 para 0 (100% de cobertura funcional). |
 | 2.0-rc2 | 2026-11-09 | Fecho da lacuna `L-RF-07`: decidida a antecipação da central de avisos interna da C12 para a E3 com portal na E5 conforme `DEC-015` (Issue #18). |
+| 2.0-rc2 | 2026-11-09 | Fecho da lacuna `L-RF-08`: formalizada a exclusão de avaliação de desempenho (`Q-036`) e expediente geral (`Q-039`) das entregas E1–E5 conforme `DEC-016` (Issue #23). Todas as lacunas da matriz encontram-se fechadas (0 lacunas abertas). |

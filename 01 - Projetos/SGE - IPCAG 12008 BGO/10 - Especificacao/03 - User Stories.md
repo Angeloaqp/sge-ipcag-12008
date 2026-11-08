@@ -68,7 +68,7 @@ tags:
 | **`EP-PNL`** | **Épico 14:** Painéis de Gestão da Direção, Alertas e Estatísticas Impressas | C15 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `COORD_CURSO`, `COORD_DISC`, `COORD_TURNO`, `DIR_TURMA` | `US-PNL-01` a `US-PNL-12` (12 US) | `RN-02`, `RN-03`, `RN-17` | **E3** (`US-PNL-08`: E2; `US-PNL-11`: E4) | Must / Should / Could |
 | **`EP-PAS`** | **Épico 15:** Encerramento do Ano Letivo e Passagem de Ano | C16 | `SUB_PED`, `DIR_GERAL`, `CHEFE_SEC_PED`, `OP_PED`, `SUB_ADM` | `US-PAS-01` a `US-PAS-08` (8 US) | `RN-02`, `RN-07`, `RN-10`, `RN-18` | **E4** | Must (`US-PAS-08`: Should) |
 | **`EP-MIG`** | **Épico 16:** Migração de Dados, Cargas Históricas, Digitação Assistida e Reconciliação | C17 | `ADMIN_TEC`, Conta Técnica (`RN-16.21`), `OP_PED`, `OP_TES`, `CHEFE_SEC_PED`, `CHEFE_SEC_GER`, `SUB_PED`, `SUB_ADM`, `DIR_GERAL` | `US-MIG-01` a `US-MIG-07` (7 US) | `RN-01`, `RN-02`, `RN-05`, `RN-06`, `RN-09`, `RN-10`, `RN-16.21` | **E1** (`US-MIG-06`: E2; `US-MIG-07`: E4) | Must |
-| **`EP-APD`** | **Épico 17:** Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade | C19 | `DIR_GERAL`, Ponto de Contacto APD, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED` | `US-APD-01` a `US-APD-07` (7 US) | `RN-10`, `RN-11.12` | **E1** (`US-APD-03`/`-04`: E2; `US-APD-05`: E3; `US-APD-06`/`-07`: E4) | Must (`US-APD-05`: Should; `US-APD-07`: Could) |
+| **`EP-APD`** | **Épico 17:** Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade | C19 | `DIR_GERAL`, Ponto de Contacto APD, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED` | `US-APD-01` a `US-APD-07` (7 US) | `RN-10`, `RN-11.12` | **E1** (`US-APD-03`/`-04`: E2; `US-APD-05`: E3; `US-APD-06`: E4; `US-APD-07`: Fora — `DEC-016`) | Must (`US-APD-05`: Should; `US-APD-07`: Won't) |
 
 > [!note] Decisões de entrega integradas
 > - **`Q-037` — Central de avisos na E3:** **decidido na `DEC-015`** (2026-11-09): a central de avisos (`US-COM-01` a `US-COM-06`) entra na **E3** sem abrir dados à internet (canal impresso garantido e SMS complementar sob teto); o portal (`US-COM-07`, `US-COM-08`) fica na **E5** (`DEC-003`). O [[06 - Visao e Ambito|VIS-06]] foi atualizado.
@@ -3087,10 +3087,10 @@ tags:
 
 ---
 
-### `US-APD-07`: Confidencialidade e Garantias do Titular na Avaliação de Desempenho Docente (Condicional `Q-036`)
+### `US-APD-07`: Confidencialidade e Garantias do Titular na Avaliação de Desempenho Docente (Fora das E1–E5 `DEC-016`)
 - **História:** *Como* **Professor Avaliado (`PROF`)** e **Subdirector Pedagógico (`SUB_PED`)**, *quero* **aceder à ficha individual de avaliação de desempenho docente sob estrita confidencialidade, com garantia de vista prévia, registo de observações e manifestação formal de concordância ou discordância**, *para* **respeitar os princípios da lealdade e transparência no tratamento de dados laborais (art. 11.º da Lei n.º 22/11 e DP n.º 28/22)**.
-- **Rastreabilidade:** `RF-C19-33` | [[11 - Protecao de Dados (APD)|APD-11]] §7.1; DP n.º 28/22; Lei n.º 22/11 | 🟡 condicional · `Q-036` | `MOD-GER-RH`.
-- **Prioridade (proposta):** `Could` (condicional) | **Entrega:** `E4` (ou a definir conforme `Q-036`).
+- **Rastreabilidade:** `RF-C19-33` | [[11 - Protecao de Dados (APD)|APD-11]] §7.1; DP n.º 28/22; Lei n.º 22/11 | fora da linha de base (`DEC-016`, `Q-036`) | `MOD-GER-RH`.
+- **Prioridade (proposta):** `Won't` (fora da linha de base das entregas E1–E5 por `DEC-016`) | **Entrega:** `Fora das E1–E5 (`DEC-016`)`.
 - **Pré-condições:** Decisão formal favorável da Comissão de Gestão quanto à inclusão do módulo de avaliação de desempenho no SGE (`Q-036`); processo de avaliação do ano letivo aberto.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Restrição de visibilidade estrita da avaliação):**
@@ -3127,16 +3127,23 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 | `EP-PNL` | — | 1 | 10 | 1 | — | — | 12 |
 | `EP-PAS` | — | — | — | 8 | — | — | 8 |
 | `EP-MIG` | 5 | 1 | — | 1 | — | — | 7 |
-| `EP-APD` | 2 | 2 | 1 | 2 | — | — | 7 |
-| **Total** | **43** | **36** | **20** | **19** | **11** | **1** | **130** |
+| `EP-APD` | 2 | 2 | 1 | 1 | — | 1 | 7 |
+| **Total** | **43** | **36** | **20** | **18** | **11** | **2** | **130** |
 
-- **MoSCoW proposto:** 104 `Must`, 21 `Should`, 4 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
+- **MoSCoW proposto:** 104 `Must`, 21 `Should`, 3 `Could`, 2 `Won't` (`US-COB-15` por `DEC-005` e `US-APD-07` por `DEC-016`, fora da linha de base).
 - **Faseamento da Central de Avisos (`DEC-015`, 2026-11-09):** `US-COM-01` a `US-COM-06` integradas na **E3** (E3 sobe para 20 US, E5 desce para 11 US); `US-COM-07` e `-08` mantêm-se na **E5** (`DEC-003`).
 - **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina) e modelos de aviso (`EP-COM`).
 
 ---
 
 ## Alterações da v2.0
+
+### Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (2026-11-09 — Issue #23, DEC-016)
+
+- Formalizada a exclusão da avaliação de desempenho do pessoal (`Q-036`) e do expediente geral de correspondência (`Q-039`) das entregas E1–E5, conforme `DEC-016` e `DEC-008` (itens 9 e 10).
+- A história `US-APD-07` passa a prioridade `Won't` e entrega `Fora das E1–E5`, e o requisito `RF-C19-33` passa a `W` fora da linha de base.
+- Atualizada a distribuição de US: E4 passa de 19 para 18 US; Fora das E1–E5 passa de 1 para 2 US (`US-COB-15` e `US-APD-07`). Total MoSCoW: 104 Must, 21 Should, 3 Could, 2 Won't (130 US no total).
+- Fecha a lacuna `L-RF-08` da Matriz de Rastreabilidade.
 
 ### Faseamento da Central de Avisos (2026-11-09 — Issue #18, DEC-015)
 
