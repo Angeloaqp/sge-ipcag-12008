@@ -63,6 +63,7 @@ tags:
 | [[#DEC-012 — Alinhar permissões RBAC e RLS\|DEC-012]] | VER-01 (#5) | Permissões: RBAC vs RLS | O DOC-01 manda; `ADMIN_TEC` só com dados técnicos; 5 casos da Secretaria; preços para todos e bolsas só para a Tesouraria e a Direção | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-013 — Entregas e prioridades\|DEC-013]] | VER-01 (#9); `Q-038` | Entregas E1–E5 e prioridades | Saúde na E1; núcleo da C13 na E2/E3; C10 dividida em E1/E2; 3 regras de alinhamento RF ↔ US | `decidida` | 2026-11-05 | Analista responsável do projeto | pendente |
 | [[#DEC-014 — Critérios de aceitação da operação (C18)\|DEC-014]] | Issue #14 (`L-RF-02`) | Aceitação de C18 por RNF vs US | (a) Aceitação pelas metas do RNF-08 e procedimentos do OPS-09; sem US funcionais no DOC-03; mapeamento RF ↔ RNF no DOC-07 | `decidida` | 2026-11-08 | Analista responsável do projeto | pendente |
+| [[#DEC-015 — Âmbito e faseamento da Central de Avisos (C12 na E3 e E5)\|DEC-015]] | Issue #18 (`L-RF-07`); `Q-037` | Faseamento da C12: central de avisos vs portal | (b) Central de avisos interna (`US-COM-01` a `06`) na E3; canal impresso garantido e SMS complementar com teto; portal (`US-COM-07`, `08`) na E5 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -489,6 +490,37 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-015 — Âmbito e faseamento da Central de Avisos (C12 na E3 e E5)
+
+- **Origem:** Issue #18 ([issue #18](https://github.com/Angeloaqp/sge-ipcag-12008/issues/18)); questão `Q-037` (`Q-C12-01`); lacuna `L-RF-07` da [[Matriz de Rastreabilidade]] · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A capacidade C12 (Comunicação com Encarregados e Alunos) encontrava-se atribuída integralmente à entrega E5 na linha de base original do [[06 - Visao e Ambito|VIS-06]] em virtude da `DEC-003` (portal para encarregados e alunos só na E5, para não abrir dados de menores à internet antes de fechada a proteção de dados). Contudo, a escola necessita de comunicar formalmente com os encarregados muito antes da E5: avisos de acumulação de faltas a 50% e 80% do limite (`RN-03.5`), avisos de cobrança de propinas em atraso (`RN-13.5`) e convocatórias formais (`DOF-21`) já são necessários no fecho do I Trimestre (E3), em conjunto com a entrega dos primeiros boletins (`DOF-06`). A questão `Q-037` e a nota `CAP-C12` propuseram autonomizar a **central de avisos interna** (impresso e SMS, sem exposição de dados na internet nem contas de utilizador externo) para a **E3**, mantendo o portal web de encarregados e alunos na **E5**.
+
+**Opções.**
+- **(a) Manter toda a C12 na E5.** Adiar qualquer automatização de avisos e convocatórias até julho-agosto de 2028.
+  *Contra:* No primeiro ano letivo completo (2027/2028), a escola ficaria sem registo sistematizado de convocatórias nem avisos precoces de retenção por faltas no sistema, obrigando a Secretaria e os Directores de Turma a processos paralelos puramente manuais no momento em que os boletins do I Trimestre forem emitidos.
+- **(b) Antecipar a Central de Avisos interna para a E3 e manter o Portal na E5 (Recomendada).** As histórias `US-COM-01` a `US-COM-06` (cobrindo os 7 requisitos `RF-C12-01` a `RF-C12-07`) entram na E3. O canal impresso (`DOF-21` e `DOF-22`) está sempre garantido e não depende de operadoras de telecomunicações nem de internet. O canal SMS funciona de forma complementar sob teto orçamental parametrizável (`RN-14.6`), degradando automaticamente para lista impressa diária em caso de falha ou esgotamento de saldo. O portal web externo (`US-COM-07`, `US-COM-08` e `US-CTA-14`) mantém-se na E5 (`DEC-003`), sem criar contas nem expor dados de menores à internet antes do encerramento da conformidade APD.
+
+**Decisão.** **(b) Antecipar a Central de Avisos interna para a E3 e manter o Portal na E5.**
+1. **Âmbito da E3 (Fecho do I Trimestre):** entram em produção os 7 requisitos `RF-C12-01` a `RF-C12-07` através das histórias `US-COM-01` a `US-COM-06` (`EP-COM`):
+   - `US-COM-01`: Aprovação prévia de modelos de mensagem pelo `SUB_PED` e `SUB_ADM`, garantindo estrita conformidade com campos permitidos pela APD (sem valores de dívida, notas nem motivos disciplinares).
+   - `US-COM-02`: Geração de avisos automáticos de faltas (50% e 80%) e propinas vencidas, sem repetição de gatilho no mesmo ano.
+   - `US-COM-03`: Emissão de convocatórias numeradas (`DOF-21`, série anual `N.º ___/IPCAG/ano`) com controlo de comparência.
+   - `US-COM-04`: Verificação de contactos telefónicos e lista de contactos a atualizar (`RN-14.3`).
+   - `US-COM-05`: Painel de acompanhamento de envios, taxa de entrega e controlo de teto orçamental de SMS pelo `SUB_ADM` (`RN-14.6`).
+   - `US-COM-06`: Registo de consentimento e recusa de avisos não essenciais (`RN-14.9`).
+2. **Garantia de operação sem SMS:** O canal impresso (`DOF-21` e `DOF-22`) está disponível a custo zero desde a E3. A integração de SMS é ativada se houver contrato com fornecedor; na sua ausência, ou caso o teto orçamental mensal seja atingido, os avisos degradam sem perda para a lista impressa diária de turma para entrega pelo Director de Turma.
+3. **Âmbito mantido na E5:** Os requisitos `RF-C12-08` e `RF-C12-09` (`US-COM-07`, `US-COM-08` e `US-CTA-14` — ativação e acesso ao portal web por encarregados e alunos) permanecem estritamente na **E5**, em conformidade com a `DEC-003`.
+4. As questões `Q-037` e `Q-C12-01` são declaradas **respondidas** e a lacuna `L-RF-07` da Matriz de Rastreabilidade é declarada **fechada**.
+
+**Impacto.**
+- **VIS-06 §5:** E3 passa a incluir formalmente a Central de Avisos da C12; tabela de âmbito de capacidades atualizada.
+- **DOC-03:** `US-COM-01` a `US-COM-06` atualizadas para Entrega E3. Distribuição de histórias ajustada: E3 passa de 14 para 20 US; E5 passa de 17 para 11 US.
+- **DOC-07:** Coluna de entrega de `RF-C12-01` a `RF-C12-07` atualizada de `pendente (Q-037)` para `E3`. Totais de E3 atualizados de 15 para 22 RF.
+- **Matriz:** `L-RF-07` fechada.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -529,7 +561,7 @@ As entrevistas dizem duas coisas:
 | Q-034 | **Emolumentos e RUPE:** o formulário de pedido de declaração não tem campo de pagamento, e os pedidos do pessoal usam a RUPE (Referência Única de Pagamento ao Estado). Há taxa para as declarações dos alunos? Taxas e emolumentos dos alunos pagam-se por RUPE (ao Estado) ou à escola? | DESC-L1 A11 e A15; Q-LEG-14 | DEC-005; DEC-002; C10; C09 | Secretaria Pedagógica; Tesouraria | B | `respondida — a confirmar` | Emolumentos estatais por RUPE; emolumentos internos nas contas da escola — [[Sintese das Respostas da Fase B\|DESC-RESP]] R15. (2026-11-02). Tratamento no sistema decidido na `DEC-011` (2026-11-05); falta confirmar com a escola **que rubricas** são estatais (lista 63). |
 | Q-035 | **Cabeçalho e rodapé reais:** o cabeçalho diz "República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação" e não menciona o MED nem a Diocese de Caxito; o rodapé traz códigos como `IPCAG.SG-ACE` e `DEE-PEEP-001-ACE`. Qual é o modelo oficial a usar e o que significam os códigos? | DESC-L1 A14 | C09 (`DOF-01` a `DOF-12`); DOC-04 Parte 2 | Comissão de Gestão; Gabinete Provincial | B | `respondida — a confirmar` | Cabeçalho: República de Angola / Governo da Província do Bengo / Gabinete Provincial da Educação / IPCAG; códigos de rodapé IPCAG.SG-ACE e DEE-PEEP-001-ACE — [[Sintese das Respostas da Fase B\|DESC-RESP]]. (2026-11-02) |
 | Q-036 | **Avaliação de desempenho do pessoal** (10 indicadores, classificação quantitativa e qualitativa, homologação pelo Gabinete Provincial): entra na C11, ou fica fora do âmbito como o processamento salarial (DEC-008)? | DESC-L1 A15 | C11; DEC-008 | Comissão de Gestão; `CHEFE_SEC_GER` | B | `aberta` | — |
-| Q-037 | **SMS antes da E5?** A C12 propõe uma central de avisos (impresso + SMS) que não abre dados à internet; pode entrar na E3 com os avisos de faltas e propinas, deixando o portal na E5 (`DEC-003`)? Com que orçamento mensal? | [[C12 - Comunicacao com Encarregados e Alunos\|CAP-C12]] `Q-C12-01` | C12; C10; E3 | Comissão de Gestão; `SUB_ADM` | B | `aberta` | — |
+| Q-037 | **SMS antes da E5?** A C12 propõe uma central de avisos (impresso + SMS) que não abre dados à internet; pode entrar na E3 com os avisos de faltas e propinas, deixando o portal na E5 (`DEC-003`)? Com que orçamento mensal? | [[C12 - Comunicacao com Encarregados e Alunos\|CAP-C12]] `Q-C12-01` | C12; C10; E3 | Comissão de Gestão; `SUB_ADM` | B | `respondida` | **Decidida na `DEC-015`** (2026-11-09): central de avisos interna (`US-COM-01` a `06`) na E3 com impresso garantido e SMS complementar com teto; portal (`US-COM-07`, `08`) na E5 (`DEC-003`). |
 | Q-038 | **Núcleo da C13 na E2/E3?** O boletim real (`DOF-06`) imprime faltas por indisciplina e comportamento desde o I Trimestre; a C13 propõe levar esse núcleo para a E2/E3 e deixar ocorrências e processos disciplinares na E5. Exige pedido de alteração ao [[06 - Visao e Ambito]]. | [[C13 - Disciplina e Comportamento\|CAP-C13]] `Q-C13-01` | C13; DOF-06; E2/E3 | Comissão de Gestão | B | `respondida` | **Decidida na `DEC-013`** (2026-11-05): tipos de falta na E2 e comportamento na E3; resto da C13 na E5. Falta a homologação da Comissão de Gestão. |
 | Q-039 | **Expediente geral e correspondência:** a Secretaria Geral regista à mão os ofícios de entrada e saída (`Ofício N.º [seq]/IPCAG.SG/ano`). Entra no âmbito do SGE (nova capacidade C21), e em que entrega? | [[Sintese das Respostas da Fase B\|DESC-RESP]] R25 | Âmbito ([[06 - Visao e Ambito]]) | Comissão de Gestão | B | `aberta` | — |
 
@@ -595,3 +627,6 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 0.2 | 2026-11-02 | Respostas das entrevistas da Fase B ([[Sintese das Respostas da Fase B\|DESC-RESP]]): Q-005, Q-007, Q-008, Q-014, Q-020, Q-025, Q-027, Q-030 parciais; Q-010, Q-011, Q-012, Q-021, Q-026, Q-028, Q-029, Q-031, Q-032, Q-034, Q-035 respondidas, a confirmar na validação. |
 | 0.2 | 2026-11-02 | Especificação da C12 e da C13: novas questões Q-037 (SMS antes da E5) e Q-038 (núcleo da C13 na E2/E3). |
 | 0.3 | 2026-11-02 | `DEC-009`: avançar para a construção com regulamento interno, recálculo de pautas e homologação resolvidos durante o projeto, com regras parametrizáveis e pontos de controlo antes da E1, E2 e E3. |
+| 2.0-rc1 | 2026-11-05 | `DEC-010` (ajustes da migração aceites), `DEC-011` (pagamento RUPE no fecho de caixa), `DEC-012` (alinhamento RBAC/RLS) e `DEC-013` (entregas e prioridades E1–E5). |
+| 2.0-rc2 | 2026-11-08 | `DEC-014`: aceitação da operação (C18) pelas metas mensuráveis do RNF-08 e procedimentos do OPS-09 (Issue #14). |
+| 2.0-rc2 | 2026-11-09 | `DEC-015`: central de avisos interna (`US-COM-01` a `06`) entra na E3 com canal impresso garantido e SMS complementar com teto orçamental; portal web (`US-COM-07`, `08`) permanece na E5 (`DEC-003`). `Q-037` e `Q-C12-01` respondidas; lacuna `L-RF-07` fechada (Issue #18). |

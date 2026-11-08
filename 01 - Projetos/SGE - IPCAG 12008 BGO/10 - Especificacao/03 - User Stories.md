@@ -62,7 +62,7 @@ tags:
 | **`EP-PIN`** | **Épico 08:** Processo Individual do Aluno, Documentos, Encarregado e Cartão de Estudante | C03 | `OP_PED`, `CHEFE_SEC_PED`, `SUB_PED`, `DIR_TURMA` | `US-PIN-01` a `US-PIN-09` (9 US) | `RN-07`, `RN-08`, `RN-10`, `RN-11` | **E1** (`US-PIN-05`: E4) | Must (`US-PIN-08`: Should) |
 | **`EP-HOR`** | **Épico 09:** Horários, Distribuição de Serviço Docente e Livro de Sumários | C04 | `SUB_PED`, `COORD_CURSO`, `COORD_TURNO`, `PROF` | `US-HOR-01` a `US-HOR-11` (11 US) | `RN-03`, `RN-04`, `RN-12` | **E2** | Must (`US-HOR-08`, `-10`: Should) |
 | **`EP-COB`** | **Épico 10:** Cobrança de Dívidas, Acordos de Pagamento, Relatórios Financeiros e Conciliação Bancária | C10 | `SUB_ADM`, `OP_TES`, `CHEFE_SEC_GER`, `DIR_GERAL` | `US-COB-01` a `US-COB-15` (15 US) | `RN-08`, `RN-09`, `RN-13` | **E2** (`US-COB-05`, `-14`: E1); `US-COB-15` fora das E1–E5 (`DEC-005`) | Must / Should / Could; `US-COB-15`: Won't |
-| **`EP-COM`** | **Épico 11:** Comunicação com Encarregados e Alunos (Avisos, Convocatórias, SMS e Portal) | C12 | `SUB_PED`, `SUB_ADM`, `DIR_TURMA`, `COORD_TURNO`, `OP_PED`, Encarregado, Aluno | `US-COM-01` a `US-COM-08` (8 US) | `RN-03`, `RN-08`, `RN-14` | **E5** — 🟡 **proposta pendente `Q-037`**: central de avisos na E3 | Must / Should |
+| **`EP-COM`** | **Épico 11:** Comunicação com Encarregados e Alunos (Avisos, Convocatórias, SMS e Portal) | C12 | `SUB_PED`, `SUB_ADM`, `DIR_TURMA`, `COORD_TURNO`, `OP_PED`, Encarregado, Aluno | `US-COM-01` a `US-COM-08` (8 US) | `RN-03`, `RN-08`, `RN-14` | **E3** (`US-COM-01` a `06` — `DEC-015`); **E5** (`US-COM-07`, `-08` — `DEC-003`) | Must / Should |
 | **`EP-DIS`** | **Épico 12:** Disciplina e Comportamento | C13 | `PROF`, `COORD_TURNO`, `DIR_TURMA`, `SUB_PED`, `DIR_GERAL` | `US-DIS-01` a `US-DIS-06` (6 US) | `RN-03`, `RN-15` | **E2/E3** núcleo (`US-DIS-01` na E2, `US-DIS-04` na E3 — `DEC-013`); resto na **E5** | Must / Should |
 | **`EP-CTA`** | **Épico 13:** Gestão de Contas e Acesso (Ciclo de Vida, MFA, PIN Local, Títulos dos Cargos) | C14 | `CHEFE_SEC_GER`, `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `ADMIN_TEC` | `US-CTA-01` a `US-CTA-15` (15 US) | `RN-04`, `RN-10`, `RN-16` | **E1** (`US-CTA-09`: E2; `US-CTA-14`: E5) | Must / Should |
 | **`EP-PNL`** | **Épico 14:** Painéis de Gestão da Direção, Alertas e Estatísticas Impressas | C15 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `COORD_CURSO`, `COORD_DISC`, `COORD_TURNO`, `DIR_TURMA` | `US-PNL-01` a `US-PNL-12` (12 US) | `RN-02`, `RN-03`, `RN-17` | **E3** (`US-PNL-08`: E2; `US-PNL-11`: E4) | Must / Should / Could |
@@ -70,11 +70,9 @@ tags:
 | **`EP-MIG`** | **Épico 16:** Migração de Dados, Cargas Históricas, Digitação Assistida e Reconciliação | C17 | `ADMIN_TEC`, Conta Técnica (`RN-16.21`), `OP_PED`, `OP_TES`, `CHEFE_SEC_PED`, `CHEFE_SEC_GER`, `SUB_PED`, `SUB_ADM`, `DIR_GERAL` | `US-MIG-01` a `US-MIG-07` (7 US) | `RN-01`, `RN-02`, `RN-05`, `RN-06`, `RN-09`, `RN-10`, `RN-16.21` | **E1** (`US-MIG-06`: E2; `US-MIG-07`: E4) | Must |
 | **`EP-APD`** | **Épico 17:** Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade | C19 | `DIR_GERAL`, Ponto de Contacto APD, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED` | `US-APD-01` a `US-APD-07` (7 US) | `RN-10`, `RN-11.12` | **E1** (`US-APD-03`/`-04`: E2; `US-APD-05`: E3; `US-APD-06`/`-07`: E4) | Must (`US-APD-05`: Should; `US-APD-07`: Could) |
 
-> [!warning] 🟡 Propostas de entrega pendentes
-> - **`Q-037` — SMS antes da E5:** a central de avisos (`US-COM-01` a `US-COM-06`) pode entrar na **E3** sem abrir dados à internet; o portal (`US-COM-07`, `US-COM-08`) fica na E5 (`DEC-003`). **Pendente** da Comissão de Gestão.
+> [!note] Decisões de entrega integradas
+> - **`Q-037` — Central de avisos na E3:** **decidido na `DEC-015`** (2026-11-09): a central de avisos (`US-COM-01` a `US-COM-06`) entra na **E3** sem abrir dados à internet (canal impresso garantido e SMS complementar sob teto); o portal (`US-COM-07`, `US-COM-08`) fica na **E5** (`DEC-003`). O [[06 - Visao e Ambito|VIS-06]] foi atualizado.
 > - **`Q-038` — Núcleo da C13 na E2/E3:** **decidido na `DEC-013`** (2026-11-05): tipos de falta (`US-DIS-01`) na E2 e comportamento trimestral (`US-DIS-04`) na E3; ocorrências, medidas e processos ficam na E5. O [[06 - Visao e Ambito|VIS-06]] foi atualizado.
->
-> Enquanto estas questões estiverem abertas, a tabela segue a linha de base do VIS-06 (C12 e C13 na E5) e as histórias abrangidas mostram a entrega proposta entre parênteses.
 
 ---
 
@@ -1699,15 +1697,15 @@ tags:
 > [!note] Sobre os exemplos
 > O limite de `12` faltas injustificadas, os limiares de `50%` e `80%` (`Q-C12-05`), o teto de `1.000` SMS e a convocatória de `15/03` são ilustrativos e vêm da [[C12 - Comunicacao com Encarregados e Alunos|CAP-C12]]. Os limiares e os gatilhos pedidos pela escola (faltas, propina vencida, resultados, convocatórias) e a taxa de `20–30%` de telefones errados vêm das entrevistas ([[Sintese das Respostas da Fase B|DESC-RESP]] R26).
 
-> [!warning] 🟡 Entrega por decidir — `Q-037`
-> Na linha de base do [[06 - Visao e Ambito|VIS-06]] a `C12` está na **E5** (`DEC-003`). A `CAP-C12` propõe levar a **central de avisos** (impresso + SMS, sem abrir dados à internet: `US-COM-01` a `US-COM-06`) para a **E3**, deixando o portal (`US-COM-07`, `US-COM-08`) na E5. A proposta está **pendente** (`Q-037`, `Q-C12-01`): até à resposta da Comissão de Gestão, todas as US deste épico ficam na E5.
+> [!success] Faseamento da Central de Avisos — `DEC-015`
+> A `DEC-015` (2026-11-09, Issue #18) antecipou a **central de avisos interna** (impresso e SMS sob teto, sem abrir dados à internet: `US-COM-01` a `US-COM-06`) para a **E3** (Fecho do I Trimestre), deixando o portal web de encarregados e alunos (`US-COM-07`, `US-COM-08`) na **E5** (`DEC-003`). As questões `Q-037` e `Q-C12-01` estão respondidas.
 
 ---
 
 ### `US-COM-01`: Aprovar os Modelos de Mensagem dos Avisos
 - **História:** *Como* **Subdirector Pedagógico (`SUB_PED`)** (avisos pedagógicos) ou **Subdirector Administrativo (`SUB_ADM`)** (avisos financeiros), *quero* **aprovar os textos dos avisos e os campos substituíveis que cada um usa**, *para* **que nenhuma mensagem saia com dados que a APD não permite enviar**.
 - **Rastreabilidade:** `RN-14.4`, `RN-14.5`, `RN-14.1` | [[11 - Protecao de Dados (APD)|APD-11]] §7.4 | `MOD-COM-01`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-037`).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (`DEC-015`).
 - **Pré-condições:** Utilizador autenticado como `SUB_PED`, `SUB_ADM` ou `DIR_GERAL`; lista de campos permitidos carregada (primeiro nome do aluno, mês de referência, data/hora/local, limiar atingido).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Modelo de faltas aprovado):**
@@ -1729,7 +1727,7 @@ tags:
 ### `US-COM-02`: Gerar o Aviso Automático de Faltas ao Encarregado
 - **História:** *Como* **Encarregado de Educação**, *quero* **ser avisado quando o meu educando acumula faltas numa disciplina**, *para* **poder agir antes da retenção por faltas**.
 - **Rastreabilidade:** `RN-14.5`, `RN-14.1`, `RN-14.3`, `RN-03` | `RN-17.8` (alerta precoce) | `MOD-COM-02`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-037`).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (`DEC-015`).
 - **Pré-condições:** Gatilhos `FALTAS_50` e `FALTAS_80` ativos 🟡 (limiares parametrizáveis — `Q-C12-05`); modelos aprovados (`US-COM-01`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — 50% do limite):**
@@ -1755,7 +1753,7 @@ tags:
 ### `US-COM-03`: Emitir uma Convocatória Numerada ao Encarregado
 - **História:** *Como* **Director de Turma (`DIR_TURMA`)**, **Coordenador de Turno (`COORD_TURNO`)** ou **Direção**, *quero* **convocar um encarregado com uma convocatória numerada**, *para* **que compareça na escola e fique prova de que foi convocado**.
 - **Rastreabilidade:** `RN-14.7`, `RN-14.8` | `RN-15.5.3` (convocatória disciplinar) | `DOF-21` | `MOD-COM-02`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-037`).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (`DEC-015`).
 - **Pré-condições:** Série anual de convocatórias configurada em `series_numeracao_documental`; encarregado atual registado.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Convocatória numerada):**
@@ -1777,7 +1775,7 @@ tags:
 ### `US-COM-04`: Verificar e Atualizar os Contactos do Encarregado
 - **História:** *Como* **Operador da Secretaria Pedagógica (`OP_PED`)**, *quero* **confirmar na matrícula e na confirmação os telefones do encarregado e de quem é cada um**, *para* **que os avisos cheguem a quem deve (hoje `20–30%` dos telefones estão errados)**.
 - **Rastreabilidade:** `RN-14.3`, `RN-14.2` | `US-PIN-07` | `MOD-COM-03`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-037`).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (`DEC-015`).
 - **Pré-condições:** Matrícula ou confirmação em curso; até dois telefones do encarregado (campos reais do boletim — DESC-L1 A12).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Verificação com SMS ativo):**
@@ -1799,7 +1797,7 @@ tags:
 ### `US-COM-05`: Acompanhar as Entregas e o Custo dos Avisos
 - **História:** *Como* **Subdirector Administrativo (`SUB_ADM`)**, *quero* **ver quantos avisos foram enviados, entregues e falharam, e o custo do mês**, *para* **controlar o orçamento de SMS**.
 - **Rastreabilidade:** `RN-14.6`, `RN-14.8` | `MOD-COM-01`.
-- **Prioridade (proposta):** `Should` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-037`).
+- **Prioridade (proposta):** `Should` | **Entrega:** `E3` (`DEC-015`).
 - **Pré-condições:** Teto mensal de SMS definido pela Direção 🟡 (`Q-C12-01`, `Q-C12-06`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Alerta aos 80% do teto):**
@@ -1817,7 +1815,7 @@ tags:
 ### `US-COM-06`: Registar o Consentimento e a Recusa de Avisos
 - **História:** *Como* **Operador da Secretaria Pedagógica (`OP_PED`)**, *quero* **registar se o encarregado aceita avisos por SMS e se recusa os não essenciais**, *para* **respeitar a escolha dele sem deixar de avisar o que é obrigatório**.
 - **Rastreabilidade:** `RN-14.9` | APD-11 | `DOF-03` (consentimento na ficha) | `MOD-COM-03`.
-- **Prioridade (proposta):** `Must` | **Entrega:** `E5` (🟡 proposta `E3` — `Q-037`).
+- **Prioridade (proposta):** `Must` | **Entrega:** `E3` (`DEC-015`).
 - **Pré-condições:** Matrícula ou confirmação em curso.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Recusa dos não essenciais):**
@@ -3123,22 +3121,30 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 | `EP-PIN` | 8 | — | — | 1 | — | — | 9 |
 | `EP-HOR` | — | 11 | — | — | — | — | 11 |
 | `EP-COB` | 2 | 12 | — | — | — | 1 | 15 |
-| `EP-COM` | — | — | — | — | 8 🟡 | — | 8 |
+| `EP-COM` | — | — | 6 | — | 2 | — | 8 |
 | `EP-DIS` | — | 1 | 1 | — | 4 | — | 6 |
 | `EP-CTA` | 13 | 1 | — | — | 1 | — | 15 |
 | `EP-PNL` | — | 1 | 10 | 1 | — | — | 12 |
 | `EP-PAS` | — | — | — | 8 | — | — | 8 |
 | `EP-MIG` | 5 | 1 | — | 1 | — | — | 7 |
 | `EP-APD` | 2 | 2 | 1 | 2 | — | — | 7 |
-| **Total** | **43** | **36** | **14** | **19** | **17** | **1** | **130** |
+| **Total** | **43** | **36** | **20** | **19** | **11** | **1** | **130** |
 
 - **MoSCoW proposto:** 104 `Must`, 21 `Should`, 4 `Could`, 1 `Won't` (`US-COB-15`, fora da linha de base por `DEC-005`).
-- 🟡 **Se as propostas pendentes forem aprovadas:** com a `Q-037`, `US-COM-01` a `US-COM-06` passam para a **E3** (E3 = 18, E5 = 13); a `Q-038` foi decidida na `DEC-013` (`US-DIS-01` na **E2**, `US-DIS-04` na **E3**).
-- **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina).
+- **Faseamento da Central de Avisos (`DEC-015`, 2026-11-09):** `US-COM-01` a `US-COM-06` integradas na **E3** (E3 sobe para 20 US, E5 desce para 11 US); `US-COM-07` e `-08` mantêm-se na **E5** (`DEC-003`).
+- **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina) e modelos de aviso (`EP-COM`).
 
 ---
 
 ## Alterações da v2.0
+
+### Faseamento da Central de Avisos (2026-11-09 — Issue #18, DEC-015)
+
+- Antecipada a central de avisos interna da capacidade C12 (`US-COM-01` a `US-COM-06`) para a **E3** (Fecho do I Trimestre), cobrindo aprovação de modelos (`MOD-COM-01`), avisos de faltas e propinas (`MOD-COM-02`), convocatórias numeradas (`DOF-21`), contactos verificados (`MOD-COM-03`), monitorização de custos de SMS e consentimentos (`RN-14`).
+- O canal impresso (`DOF-21`, `DOF-22`) está garantido sem custos adicionais; o SMS opera como canal complementar com teto orçamental e degradação para lista impressa diária.
+- O portal web de encarregados e alunos (`US-COM-07` e `US-COM-08`) e a respetiva ativação de contas (`US-CTA-14`) permanecem na **E5** (`DEC-003`), sem expor dados de menores à internet antes de concluída a conformidade APD.
+- Atualizada a distribuição de US: E3 passa de 14 para 20 US; E5 passa de 17 para 11 US.
+- Fecha a questão `Q-037` (`Q-C12-01`) e a lacuna `L-RF-07` da Matriz de Rastreabilidade.
 
 ### Cobertura dos restantes requisitos sem US (2026-11-08 — Issue #17)
 

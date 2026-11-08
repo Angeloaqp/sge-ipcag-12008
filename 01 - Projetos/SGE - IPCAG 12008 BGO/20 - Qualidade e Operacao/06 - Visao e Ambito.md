@@ -181,9 +181,9 @@ flowchart LR
     INF["Infraestrutura instalada<br>servidor local + réplica na nuvem<br>(DEC-006)"] --> E1
     E1["E1 — Arrancar o ano<br>antes das matrículas de 2027/2028<br>C01 · C03 · C10 balcão · C11 · C14 · C17 · C18"] --> E2
     E2["E2 — I Trimestre<br>antes da 1.ª semana de aulas<br>C04 · C05 · C06 · C09 · C10 cobranca · C11 · C13 nucleo · C18"] --> E3
-    E3["E3 — Fecho de trimestre<br>antes do fim do I Trimestre<br>C07 · C09 · C13 comportamento · C15"] --> E4
+    E3["E3 — Fecho de trimestre<br>antes do fim do I Trimestre<br>C07 · C09 · C12 avisos · C13 comportamento · C15"] --> E4
     E4["E4 — Fecho do ano<br>maio–junho de 2028<br>C07 · C08 · C09 · C15 · C16"] --> E5
-    E5["E5 — Próximo ciclo<br>julho–agosto de 2028<br>C02 · C12 · C13"]
+    E5["E5 — Próximo ciclo<br>julho–agosto de 2028<br>C02 · C12 portal · C13"]
     C19["C19 Proteção de dados<br>transversal, desde a E1"] -.-> E1
 ```
 
@@ -191,7 +191,7 @@ flowchart LR
 | :---: | :--- | :--- | :--- |
 | **E1** | Início das matrículas de 2027/2028 | Antes de setembro de 2027 | Exige a `DEC-002` decidida (documento fiscal), a infraestrutura da `DEC-006` instalada e a migração (C17) reconciliada |
 | **E2** | Primeira semana de aulas | Setembro de 2027 | Exige o horário (C04, `DEC-004`) e o regulamento de avaliação do ESTP (Q-LEG-01) |
-| **E3** | Fim do I Trimestre | Fim do I Trimestre de 2027/2028 | — |
+| **E3** | Fim do I Trimestre | Fim do I Trimestre de 2027/2028 | Exige modelos de aviso aprovados (`DEC-015`) e escala de comportamento (C13, `DEC-013`) |
 | **E4** | Conselhos finais, exames e certificação | Maio–junho de 2028 | Exige o histórico 10ª–12ª migrado e a resposta às Q-020 e Q-021 (Plataforma Nacional de Certificação, Diploma) |
 | **E5** | Concurso de admissão de 2028/2029 | Julho–agosto de 2028 | A L8 (proteção de dados) fechada antes de abrir o portal (`DEC-003`) |
 
@@ -218,7 +218,7 @@ Legenda: **Dentro** · **Dentro (parcial)**: parte da capacidade fica fora · **
 | C09 | Emissão documental e certificação | **Dentro** | E2, E3 e E4 | E2: circuito real **requerimento → recibo de pedido → declaração** (DESC-L1 A11), declarações e guia de transferência (`DOF-09`); portal público de verificação por QR. E3: boletins (`DOF-06`). E4: certificados (`DOF-10`), registo de arquivo. Em todos: numeração anual por tipo de documento (DESC-L1 A13) e cabeçalho e rodapé oficiais | **Por decidir:** se o Diploma é emitido pelo Ministério e não pela escola (Q-021); registo na Plataforma Nacional de Certificação (Q-020); modelo oficial de cabeçalho (Q-035) | O-04, O-05, O-06 | Q-020, Q-021, Q-024, Q-027, Q-034, Q-035; `COR-LEG-18`, `COR-LEG-19` | Fluxo 08; RN-10 |
 | C10 | Tesouraria | **Dentro (parcial)** | E1 (balcão: propinas, bolsas, documentos fiscais, caixa) + E2 (dívidas, acordos, relatórios, conciliação) — `DEC-013` | Tabelas de propinas e emolumentos, bolsas e isenções (RN-07), **registo manual de borderôs**, Conta Corrente, semáforo financeiro, fecho de caixa, **conciliação bancária por extrato**, gestão de dívidas e avisos de cobrança, relatórios financeiros de gestão | **Fora:** referências Multicaixa / gateway nas E1–E5 (reavaliar depois da E5); contabilidade geral. **Por decidir:** emissão do documento fiscal — certificar o SGE ou integrar com software certificado; se alguns emolumentos se pagam por RUPE ao Estado (DESC-L1 A15) | O-03, O-04, O-05, O-08 | **DEC-002 (aguarda Direção)**, DEC-005, DEC-008; Q-001 a Q-004, Q-007, Q-034 | Fluxo 07; `EP-TES`; RN-08, RN-09 |
 | C11 | Recursos humanos | **Dentro (parcial)** | E1 e E2 | Cadastro de docentes e funcionários, incluindo o N.º de Agente (E1); ponto e assiduidade laboral (E2) | **Processamento salarial.** **Por decidir:** avaliação de desempenho anual do pessoal (DESC-L1 A15) | O-02 | DEC-008; Q-010, Q-036 | `US-DOC-04` |
-| C12 | Comunicação com encarregados e alunos | **Dentro** | E5 | **Portal** de consulta (notas, faltas, dívidas), avisos e convocatórias; SMS a decidir na especificação da C12 | Qualquer acesso de encarregados ou alunos antes da E5, além do portal público QR | O-11 | DEC-003; Q-008 | A especificar (Fase C) |
+| C12 | Comunicação com encarregados e alunos | **Dentro (parcial)** | E3 (central de avisos) e E5 (portal) — `DEC-015` | E3: **Central de avisos interna** (`US-COM-01` a `06`), avisos automáticos de faltas e propinas, convocatórias numeradas (`DOF-21`), listas de avisos impressos (`DOF-22`), SMS sob teto mensal e verificação de contactos (`RN-14`). E5: **Portal** web de consulta (`US-COM-07`, `08`) e ativação de contas (`US-CTA-14`) | Contas e portal para encarregados e alunos antes da E5 (`DEC-003`) | O-11 | DEC-003, DEC-015; Q-008, Q-037 | DOC-01 `RN-14`; `EP-COM` (`US-COM-01` a `08`) |
 | C13 | Disciplina e comportamento | **Dentro** | E2/E3 (núcleo: tipos de falta e comportamento) + E5 (resto) — `DEC-013` | Participações disciplinares, ocorrências, medidas e sanções do regulamento interno; avaliação do **comportamento** que já aparece no boletim (DESC-L1 A8) | — | O-12 | Q-032 | A especificar (Fase C); regulamento interno (PLN-00 §5.2) |
 | C14 | Gestão de contas e acesso | **Dentro** | E1 | Ciclo de vida das contas dos 12 papéis, autenticação, recuperação de palavra-passe, MFA, sessões, troca de cargo; **papel no sistema separado do título impresso** (ex.: Coordenadora Geral da Comissão de Gestão — DESC-L1 A4) | Contas de encarregados e alunos antes da E5; separação de contas por escola | O-09, O-10 | DEC-001, DEC-003; Q-028 | [[C14 - Gestao de Contas e Acesso\|CAP-C14]] |
 | C15 | Relatórios e indicadores | **Dentro (parcial)** | E3 e E4 | E3: painéis da Direção (aproveitamento, assiduidade, receitas, dívida) e estatísticas impressas nas pautas (positivas e negativas, transita, transita com deficiência, desistentes — DESC-L1 A10). E4: mapas estatísticos `DOF-12` | Indicadores de salários e de património | O-07 | DEC-008; Q-018, Q-LEG-15 | `US-DOC-05`; a especificar (Fase C) |
@@ -255,7 +255,7 @@ Ficam **fora das entregas E1–E5**. Cada um destes pontos só entra com um pedi
 | Registo na Plataforma Nacional de Certificação | Q-020 (Q-LEG-14) | C09; E4 |
 | Emissão do Diploma pela escola ou pelo Ministério | Q-021 | C09; E4 |
 | Inscrição no concurso de admissão por portal | Q-LEG-12 | C02; E5 |
-| SMS como canal da C12 | Especificação da C12; Q-008; Q-013 | C12; E5 |
+| SMS como canal da C12 | **DEC-015** (central de avisos na E3 com SMS sob teto mensal e degradação para impresso); contratação de fornecedor e custo: Q-008, Q-013 | C12; **E3** |
 | Avaliação de desempenho anual do pessoal na C11 | Q-036 | C11 |
 | Pagamento de emolumentos por RUPE ao Estado | Q-034 (Q-LEG-14) | C10; C09; DEC-005 |
 | Fórmulas da Prova Global e da Classificação Anual no motor de pautas | Q-025, Q-026 (prioridade n.º 1 do [[Plano de Validacao de Pautas\|VAL-01]]) | C06; C07; **E2** |
@@ -350,3 +350,5 @@ Cada pressuposto é tratado como verdadeiro até à Fase B. Se se revelar falso,
 | :---: | :---: | :--- |
 | 0.1 | 2026-11-02 | Criação (Fase A do PLN-00 — lacunas L1 e L4): problema, visão, 13 objetivos com métricas, partes interessadas, âmbito dentro/fora por capacidade C01–C20, entregas para o arranque em 2027/2028, restrições, pressupostos, critérios de sucesso e ligação a `DEC-001` a `DEC-008`. |
 | 0.1 | 2026-11-02 | Integração dos achados dos documentos reais ([[Achados dos Documentos Reais - Lote 1\|DESC-L1]]): número 12008/8009, Comissão de Gestão e títulos reais dos cargos, cursos e Área de Formação, Projecto Tecnológico, Prova Global e Classificação Anual, faltas e comportamento, circuito das declarações, RUPE, avaliação de desempenho; questões Q-025 a Q-036 do REG-12; pressuposto PR-10. |
+| 2.0-rc1 | 2026-11-05 | `DEC-013`: alinhamento de entregas E1–E5 (C10 dividida em E1/E2; C11 na E1/E2; núcleo da C13 na E2/E3; C19 transversal desde E1). |
+| 2.0-rc2 | 2026-11-09 | `DEC-015` (Issue #18): central de avisos interna da C12 (`US-COM-01` a `06`) entra na **E3** (Fecho do I Trimestre), com canal impresso garantido e SMS sob teto orçamental; portal web de encarregados e alunos (`US-COM-07`, `08`) permanece na **E5** (`DEC-003`). |

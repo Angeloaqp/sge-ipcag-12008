@@ -266,13 +266,13 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RF-C12-01** | Aprovar os modelos de mensagem e recusar os que usam campos fora da lista permitida (sem notas, valores em dívida, motivos disciplinares nem saúde); avisar quando o texto excede uma SMS. | O-11 | M | pendente (`Q-037`) | CAP-C12; APD-11 §7.4 | RN-14.4 | US-COM-01 | MOD-COM-01 | — | `modelos_mensagem` | definido |
-| **RF-C12-02** | Gerar avisos automáticos a partir dos gatilhos (faltas 50% e 80%, propina vencida, resultados publicados, convocatória, documento pronto), sem repetir o mesmo aviso. | O-11 | M | pendente (`Q-037`) | `R-26` (G-11, G-13); CAP-C12 | RN-14.5, RN-03.5 | US-COM-02 | MOD-COM-02 | — | `avisos`, `modelos_mensagem` | 🟡 DoR-E3 · `Q-C12-05` (limiares) |
-| **RF-C12-03** | Enviar cada aviso pelo canal disponível e, se falhar ou o telefone for inválido, passá-lo para a lista de impressos do Director de Turma, com recibo de entrega. | O-11 | M | pendente (`Q-037`) | CAP-C12 | RN-14.1, RN-14.8 | US-COM-02 | MOD-COM-02 | DOF-22 | `avisos` | definido |
-| **RF-C12-04** | Emitir convocatórias numeradas (o SMS não leva o motivo), registar a comparência e alertar a Direção depois de duas faltas seguidas. | O-11 | M | pendente (`Q-037`) | CAP-C12; `R-02` | RN-14.7, RN-10.6 | US-COM-03 | MOD-COM-02 | DOF-21 | `convocatorias`, `series_numeracao_documental` | definido |
-| **RF-C12-05** | Verificar os telefones dos encarregados (código de confirmação), marcar os inválidos e listar os contactos a atualizar por turma. | O-11 | M | pendente (`Q-037`) | CAP-C12; `R-26` (20–30% de telefones errados) | RN-14.3 | US-COM-04 | MOD-COM-03 | — | `contactos_encarregado` | definido |
-| **RF-C12-06** | Enviar SMS por fornecedor com teto mensal, alerta de consumo e relatório de envios, entregas, falhas e custos. | O-11 | S | pendente (`Q-037`) | CAP-C12; OPS-09 `INT-04` | RN-14.6 | US-COM-05 | MOD-COM-01 | — | `avisos` | 🟡 DoR-E3 · `Q-037`, `Q-C12-06` (orçamento) |
-| **RF-C12-07** | Registar o consentimento e a recusa de avisos não essenciais; as convocatórias e os avisos essenciais continuam a sair. | O-11 | M | pendente (`Q-037`) | CAP-C12; `RF-C19-02` | RN-14.9 | US-COM-06 | MOD-COM-03 | — | `consentimentos` (finalidade `CON-05`) | definido |
+| **RF-C12-01** | Aprovar os modelos de mensagem e recusar os que usam campos fora da lista permitida (sem notas, valores em dívida, motivos disciplinares nem saúde); avisar quando o texto excede uma SMS. | O-11 | M | E3 | `DEC-015`; CAP-C12; APD-11 §7.4 | RN-14.4 | US-COM-01 | MOD-COM-01 | — | `modelos_mensagem` | definido |
+| **RF-C12-02** | Gerar avisos automáticos a partir dos gatilhos (faltas 50% e 80%, propina vencida, resultados publicados, convocatória, documento pronto), sem repetir o mesmo aviso. | O-11 | M | E3 | `DEC-015`; `R-26` (G-11, G-13); CAP-C12 | RN-14.5, RN-03.5 | US-COM-02 | MOD-COM-02 | — | `avisos`, `modelos_mensagem` | 🟡 DoR-E3 · `Q-C12-05` (limiares) |
+| **RF-C12-03** | Enviar cada aviso pelo canal disponível e, se falhar ou o telefone for inválido, passá-lo para a lista de impressos do Director de Turma, com recibo de entrega. | O-11 | M | E3 | `DEC-015`; CAP-C12 | RN-14.1, RN-14.8 | US-COM-02 | MOD-COM-02 | DOF-22 | `avisos` | definido |
+| **RF-C12-04** | Emitir convocatórias numeradas (o SMS não leva o motivo), registar a comparência e alertar a Direção depois de duas faltas seguidas. | O-11 | M | E3 | `DEC-015`; CAP-C12; `R-02` | RN-14.7, RN-10.6 | US-COM-03 | MOD-COM-02 | DOF-21 | `convocatorias`, `series_numeracao_documental` | definido |
+| **RF-C12-05** | Verificar os telefones dos encarregados (código de confirmação), marcar os inválidos e listar os contactos a atualizar por turma. | O-11 | M | E3 | `DEC-015`; CAP-C12; `R-26` (20–30% de telefones errados) | RN-14.3 | US-COM-04 | MOD-COM-03 | — | `contactos_encarregado` | definido |
+| **RF-C12-06** | Enviar SMS por fornecedor com teto mensal, alerta de consumo e relatório de envios, entregas, falhas e custos. | O-11 | S | E3 | `DEC-015`; CAP-C12; OPS-09 `INT-04` | RN-14.6 | US-COM-05 | MOD-COM-01 | — | `avisos` | 🟡 DoR-E3 · `Q-C12-06` (orçamento) |
+| **RF-C12-07** | Registar o consentimento e a recusa de avisos não essenciais; as convocatórias e os avisos essenciais continuam a sair. | O-11 | M | E3 | `DEC-015`; CAP-C12; `RF-C19-02` | RN-14.9 | US-COM-06 | MOD-COM-03 | — | `consentimentos` (finalidade `CON-05`) | definido |
 | **RF-C12-08** | **Portal do encarregado:** ativação presencial; consulta de notas, faltas, pagamentos, horário e convocatórias dos seus educandos; descarga do boletim e do recibo com QR com a mesma regra do balcão. | O-11 | M | E5 | `DEC-003`; `R-27` (G-13); CAP-C12 | RN-14.10, RN-08 | US-COM-07, US-CTA-14 | MOD-COM-04 | DOF-06, DOF-11 | `avisos`, `consentimentos`, `usuarios_sistema` | 🟡 DoR-E5 · `Q-C12-03`, `Q-016` |
 | **RF-C12-09** | **Portal do aluno:** faltas (justificadas em todas as disciplinas afetadas), horário e avisos próprios quando for maior de idade. | O-11 | S | E5 | `DEC-003`; CAP-C12 | RN-14.10, RN-14.2 | US-COM-08 | MOD-COM-04 | — | `alunos` | 🟡 DoR-E5 · `Q-C12-04` |
 
@@ -491,7 +491,7 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | C09 Emissão documental | 12 | 11 | 1 | — | — | 2 | 5 | 1 | 4 | — | — |
 | C10 Tesouraria | 26 | 14 | 6 | 5 | 1 | 12 | 13 | — | — | — | 1 fora (`DEC-005`) |
 | C11 Recursos humanos | 4 | 3 | 1 | — | — | 1 | 3 | — | — | — | — |
-| C12 Comunicação | 9 | 7 | 2 | — | — | — | — | — | — | 2 | 7 pendentes (`Q-037`) |
+| C12 Comunicação | 9 | 7 | 2 | — | — | — | — | 7 | — | 2 | — |
 | C13 Disciplina | 8 | 6 | 2 | — | — | — | 1 | 2 | — | 5 | — |
 | C14 Contas e acesso | 16 | 13 | 3 | — | — | 14 | 1 | — | — | 1 | — |
 | C15 Relatórios e indicadores | 12 | 9 | 2 | 1 | — | — | 1 | 9 | 2 | — | — |
@@ -499,7 +499,7 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | C17 Migração | 16 | 13 | 3 | — | — | 13 | 1 | — | 2 | — | — |
 | C18 Operação | 7 | 4 | 2 | 1 | — | 3 | 4 | — | — | — | — |
 | C19 Proteção de dados | 33 | 28 | 3 | 2 | — | 16 | 11 | 1 | 2 | 2 | 1 a definir (`Q-036`) |
-| **Total** | **224** | **180** | **32** | **11** | **1** | **82** | **66** | **15** | **35** | **17** | **9** |
+| **Total** | **224** | **180** | **32** | **11** | **1** | **82** | **66** | **22** | **35** | **17** | **2** |
 
 ### 4.2 Por entrega e prioridade
 
@@ -507,16 +507,15 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **E1** — Arrancar o ano | 72 | 6 | 4 | — | **82** |
 | **E2** — I Trimestre | 50 | 12 | 4 | — | **66** |
-| **E3** — Fecho de trimestre | 12 | 3 | — | — | **15** |
+| **E3** — Fecho de trimestre | 18 | 4 | — | — | **22** |
 | **E4** — Fecho do ano | 28 | 6 | 1 | — | **35** |
 | **E5** — Próximo ciclo | 12 | 4 | 1 | — | **17** |
-| Pendente (`Q-037`: 7) | 6 | 1 | — | — | **7** |
 | A definir (`Q-036`) | — | — | 1 | — | **1** |
 | Fora da linha de base (`DEC-005`) | — | — | — | 1 | **1** |
 | **Total** | **180** | **32** | **11** | **1** | **224** |
 
-> [!warning] Peso da E1
-> A E1 concentra 82 RF (72 `Must`), porque junta a estrutura académica, a matrícula, a tesouraria, as contas, a migração e a base da proteção de dados. Se o prazo de 2027/2028 apertar, os candidatos a sair da E1 são os 10 `Should`/`Could` e, dentro dos `Must`, os que dependem da `DEC-002` (`RF-C10-06`, `RF-C10-07`). Se a `Q-037` e a `Q-038` forem aceites, a E3 ganha até 10 RF.
+> [!warning] Peso da E1 e reforço da E3
+> A E1 concentra 82 RF (72 `Must`), porque junta a estrutura académica, a matrícula, a tesouraria, as contas, a migração e a base da proteção de dados. Com a `DEC-013` (Q-038) e a `DEC-015` (Q-037) decididas, a E3 absorveu o núcleo de comportamento (`RF-C13-02`, `-04`) e a central de avisos interna (`RF-C12-01` a `07`), totalizando 22 RF (18 `Must`, 4 `Should`).
 
 ### 4.3 Por estado (`DEC-009`)
 
@@ -551,3 +550,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc2 | 2026-11-08 | Cobertura de C19: preenchida a coluna US para os 9 RF pendentes de C19 (`RF-C19-01`, `-04`, `-08`, `-09`, `-12`, `-13`, `-20`, `-23`, `-33`) com o novo Épico 17 (`US-APD-01` a `US-APD-07`, DOC-03) — Issue #15. Lacuna `L-RF-03` fechada. |
 | 2.0-rc2 | 2026-11-08 | Cobertura de C01: preenchida a coluna US para `RF-C01-07` com a `US-GOV-01` (Cenário 6) e adicionada a ligação em `RF-C09-07` (Issue #16). Lacuna `L-RF-04` fechada. |
 | 2.0-rc2 | 2026-11-08 | Cobertura total de requisitos: preenchida a coluna US para os restantes 7 requisitos (`RF-C03-15` em `US-PIN-02`, `RF-C09-11` em `US-DOC-02`, `RF-C10-10` e `RF-C10-24` em `US-TES-03`, `RF-C10-25` em `US-TES-02`, `RF-C13-02` em `US-DIS-04`, `RF-C15-01` em `US-PNL-01`) — Issue #17. RF sem US desce para 0. Lacuna `L-RF-05` fechada. |
+| 2.0-rc2 | 2026-11-09 | Faseamento da C12 (`DEC-015`, Issue #18): atualizada a coluna Entrega de `RF-C12-01` a `RF-C12-07` de `pendente (Q-037)` para `E3`; totais recalculados (§4.1, §4.2: E3 sobe de 15 para 22 RF; pendentes descem de 7 para 0). Lacuna `L-RF-07` fechada. |
