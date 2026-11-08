@@ -1248,16 +1248,17 @@ As regras abaixo constituem invariantes de domínio do **SGE — IPCAG N.º 1200
 
 #### RN-01.2: Admissão à 10ª Classe (DP n.º 167/23, art. 23.º, 49.º e 52.º; DE n.º 361/26)
 
-1. **Idade mínima:** **15 anos completados no ano da matrícula** (DP n.º 167/23, art. 23.º; DE n.º 361/26, art. 4.º). 🟡 **Idade máxima:** sem fonte legal (`COR-LEG-11`); o parâmetro `idade_maxima_ingresso_regular` fica **desligado por omissão** até à resposta à `Q-LEG-09`.
+1. **Idade mínima:** **15 anos completados no ano da matrícula** (DP n.º 167/23, art. 23.º; DE n.º 361/26, art. 4.º). **Idade máxima no ensino regular:** a Lei n.º 17/16 (art. 20.º, n.º 2–3, mantido pela Lei n.º 32/20) admite **até 2 anos de atraso**; acima disso, a frequência é **Ensino de Adultos** ([investigação #35](https://github.com/Angeloaqp/sge-ipcag-12008/issues/35)). O parâmetro `idade_maxima_ingresso_regular` fica com **17 anos no ano da matrícula** por omissão. O candidato acima desse limite **não é excluído**: é encaminhado para o regime de adultos. 🟡 Falta confirmar se a tolerância conta só no ingresso (`Q-LEG-09`).
 2. **Teste e anonimato:** teste único com secções de **Língua Portuguesa** e **Matemática** (DE n.º 361/26, art. 10.º), corrigido **sob regime de anonimato** (art. 15.º). O Código de Anonimato é a forma de implementação adotada.
 3. **Mínimo legal — `nota_minima_por_prova` = `10`:** só é selecionável o candidato com **pelo menos 10 valores em cada prova** (DP n.º 167/23, art. 52.º, n.º 1). Abaixo disso **não há admissão, mesmo que fiquem vagas por preencher**. A redução do limiar por despacho e o estado `Admitido (Por Despacho de Ajuste de Limiar)` foram **retirados** (`COR-LEG-08`); o parâmetro só se reabre com confirmação escrita do Gabinete Provincial (`Q-LEG-10`).
 4. **Ordenação (`MFA`):** os candidatos com o mínimo em cada prova são ordenados por ordem decrescente de
    $$MFA = \text{round\_med}\left(\frac{\text{Nota\_LP} + \text{Nota\_Mat}}{2}\right)$$
-   (art. 52.º, n.º 2: "média aritmética… se forem mais do que uma"). 🟡 Se as secções do teste único contam como provas separadas está indeterminado (`Q-LEG-10`).
-5. **Desempate na última vaga:** **menor idade** (DE n.º 361/26, art. 16.º, n.º 2, c)). Os critérios da v1.2 (maior nota em LP/nuclear → média da 9ª) só voltam se o Gabinete Provincial os validar (`COR-LEG-09`, `Q-LEG-11`). 🟡 Persistindo o empate, a regra é por confirmar (o DE n.º 136/24 previa nova prova).
+   (art. 52.º, n.º 2: "média aritmética… se forem mais do que uma"). 🟡 Se as secções do teste único contam como provas separadas está indeterminado (`Q-LEG-10`). A [investigação #35](https://github.com/Angeloaqp/sge-ipcag-12008/issues/35) aponta para o mínimo sobre a **nota do teste** (média das secções), mas com confiança baixa: mantém-se o mínimo por secção até à confirmação.
+5. **Desempate na última vaga:** **menor idade** (DE n.º 361/26, art. 16.º, n.º 2, c)) — é o **único critério com base legal** ([investigação #35](https://github.com/Angeloaqp/sge-ipcag-12008/issues/35)). Os critérios da v1.2 (maior nota em LP/nuclear → média da 9ª) só voltam se o Gabinete Provincial os validar (`COR-LEG-09`, `Q-LEG-11`). 🟡 Persistindo o empate, a regra é por confirmar (o DE n.º 136/24 previa nova prova).
 6. **Resultados oficiais:** `ADMITIDO` (cada prova $\ge 10$ e dentro das vagas); `NÃO ADMITIDO (Fora das Vagas)` (cada prova $\ge 10$, depois da última vaga da 1ª Opção); `NÃO ADMITIDO (Nota Inferior ao Mínimo)` (alguma prova $< 10$).
 7. **Listas e reclamações (`COR-LEG-12`):** lista de selecionados **72 h** após o teste (art. 17.º); reclamação **até 24 h** após a publicação, decidida em **24 h** (art. 18.º); lista definitiva **após homologação do Director** (art. 19.º).
-8. 🟡 **Repescagem na 2ª Opção — prática interna** (`COR-LEG-10`, `Q-LEG-12`; validar em E1): se sobrarem vagas num Curso/Turno após a 1ª chamada, a Direção (`SUB_PED` + `DIR_GERAL`) pode alocar os candidatos `NÃO ADMITIDO (Fora das Vagas)` que indicaram esse curso como **2ª Opção**, por ordem decrescente de `MFA`, gravando a operação em `audit_logs`. Nunca abrange candidatos com alguma prova abaixo de 10.
+8. 🟡 **Repescagem na 2ª Opção — prática interna, sem base legal** (nenhum diploma a prevê — [investigação #35](https://github.com/Angeloaqp/sge-ipcag-12008/issues/35); `COR-LEG-10`, `Q-LEG-12`; **desligada por omissão**; validar em E1): se sobrarem vagas num Curso/Turno após a 1ª chamada, a Direção (`SUB_PED` + `DIR_GERAL`) pode alocar os candidatos `NÃO ADMITIDO (Fora das Vagas)` que indicaram esse curso como **2ª Opção**, por ordem decrescente de `MFA`, gravando a operação em `audit_logs`. Nunca abrange candidatos com alguma prova abaixo de 10.
+9. **Candidatura:** em 2026/2027 a candidatura ao ensino técnico faz-se num **portal nacional do MED** (`acessoetp.ao`), com uma só instituição por candidato ([investigação #35](https://github.com/Angeloaqp/sge-ipcag-12008/issues/35)). A integração ou a importação dos candidatos ligam-se à `Q-017`.
 
 #### RN-01.3: Prova de 2.ª Chamada
 
@@ -1416,7 +1417,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
    - Se `Condição 1 = FALSE` ou `Condição 2 = FALSE`, a emissão/impressão fica **bloqueada ao nível de API (`HTTP 403 Forbidden - Pendência Financeira`)**, mostrando só o código da pendência. A Secretaria Pedagógica nunca vê valores (`RN-13.6`).
 4. **Pendência Documental — verificação distinta (`RN-08.1`):** antes do **Certificado** (`DOF-10`), o sistema verifica também os documentos do processo marcados `BLOQUEIA_CERTIFICACAO` (`RN-11.7`), com resposta distinta: `HTTP 422 — Pendência Documental` e a lista dos documentos em falta. As três verificações (financeira, documental, registo do título) são independentes.
 5. **Boletins retidos por dívida (`RN-08.2`):** 🟡 na prática da escola, o boletim (`DOF-06`) de um aluno com dívida fica **retido na reunião de entrega** (DESC-RESP R12). O sistema marca esses boletins como `RETIDO_POR_DIVIDA` na lista de entrega do `DIR_TURMA`, sem mostrar o motivo nem o valor; no portal (E5), a descarga do boletim segue o mesmo semáforo (`RN-14.10.4`, `Q-C12-03`). Validar em E1.
-6. **Confirmação de matrícula e dívida (`RN-08.3`):** a lei torna a confirmação **automática e da responsabilidade da escola** (DP n.º 167/23, art. 50.º, n.º 4 — `COR-LEG-15`). 🟡 Se o semáforo pode reter a confirmação é a `Q-LEG-05`; até lá, o **bloqueio por dívida** é parâmetro do Ano Letivo (ligado ou desligado — `RN-18.6.4`). Desligado, a dívida fica no ano de origem e o semáforo continua a bloquear os documentos.
+6. **Confirmação de matrícula e dívida (`RN-08.3`):** a lei torna a confirmação **automática e da responsabilidade da escola** (DP n.º 167/23, art. 50.º, n.º 4 — `COR-LEG-15`). **Nenhum diploma permite reter a confirmação por dívida**, e fazê-lo contraria a letra do art. 50.º, n.º 4 ([investigação #35](https://github.com/Angeloaqp/sge-ipcag-12008/issues/35); `Q-LEG-05`). O **bloqueio por dívida** continua a ser parâmetro do Ano Letivo (`RN-18.6.4`), mas fica **desligado por omissão**; ligá-lo exige despacho da Direção com fundamentação, registado em `audit_logs`. A dívida cobra-se pela C10 (`RN-13`). Desligado, a dívida fica no ano de origem e o semáforo continua a bloquear os documentos.
 
 ---
 
@@ -2262,7 +2263,7 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 1. As propostas ficam em `propostas_confirmacao_matricula`; **não** criam `matriculas_anuais`, **não** ocupam lotação e **não** entram no `DOF-12`.
 2. A conversão é a **Confirmação de Matrícula** pré-preenchida: a matrícula nasce `Pendente` e segue o §3.3, com o **número anual do Boletim de Confirmação** (`RN-11.14`).
 3. **Pré-preenchimento do boletim real (A12):** classe, turma, sala e curso do ano anterior, cadeiras em atraso (até duas) e classe pretendida vêm de `N`; o operador não os digita. O "problema de saúde" **nunca** é copiado: declara-se de novo, facultativo e com consentimento.
-4. **Modo de confirmação** (parâmetro do Ano Letivo; depende da `Q-LEG-05` / `COR-LEG-15`): **`BALCAO`** (prática atual) — o `OP_PED` converte a proposta `APTA_A_CONFIRMAR` ao balcão; **`AUTOMATICA`** (DP n.º 167/23, art. 50.º, n.º 4) — na passagem definitiva, o sistema converte todas as propostas aptas em matrículas `Pendente`, sem deslocação do encarregado (prática R5: "confirmação pré-gerada para os aprovados, pendente até entregarem documentos"). O **bloqueio por dívida** é parametrizável (ligado ou desligado); desligado, a dívida continua em `N` e o semáforo continua a bloquear os documentos (`RN-08.3`).
+4. **Modo de confirmação** (parâmetro do Ano Letivo; depende da `Q-LEG-05` / `COR-LEG-15`): **`BALCAO`** (prática atual) — o `OP_PED` converte a proposta `APTA_A_CONFIRMAR` ao balcão; **`AUTOMATICA`** (DP n.º 167/23, art. 50.º, n.º 4) — na passagem definitiva, o sistema converte todas as propostas aptas em matrículas `Pendente`, sem deslocação do encarregado (prática R5: "confirmação pré-gerada para os aprovados, pendente até entregarem documentos"). O **bloqueio por dívida** é parametrizável (ligado ou desligado) e fica **desligado por omissão** (`RN-08.3`); desligado, a dívida continua em `N` e o semáforo continua a bloquear os documentos (`RN-08.3`).
 5. **Prazo:** propostas (modo `BALCAO`) e matrículas `Pendente` (ambos os modos) têm prazo do Ano Letivo `N+1` (`Q-C16-01`); valor proposto **60 dias após o início do ano letivo** (art. 50.º, n.º 8). Expirado, a proposta passa a `NAO_CONFIRMADA` (ou a matrícula `Pendente` a `Anulada / Desistente`) e o aluno a `Interrompido`. A confirmação tardia continua possível, com vaga, por autorização do `CHEFE_SEC_PED`.
 
 #### RN-18.7 — Turmas do Ano Seguinte
@@ -2338,6 +2339,13 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Conclusões legais da admissão e da confirmação — [ticket #41](https://github.com/Angeloaqp/sge-ipcag-12008/issues/41) (2026-11-08)
+
+- `RN-01.2`: idade máxima regular de 17 anos por omissão (acima disso, Ensino de Adultos); a menor idade é o único desempate com base legal; a repescagem fica sem base legal e desligada por omissão; candidatura num portal nacional (item 9).
+- `RN-08.3` e `RN-18.6.4`: o bloqueio da confirmação por dívida fica **desligado por omissão**, porque não tem base legal.
+- Repetências: não há limite legal; só o regulamento interno o pode fixar.
+
 
 ### Correção da carga letiva — [ticket #39](https://github.com/Angeloaqp/sge-ipcag-12008/issues/39) (2026-11-08)
 
