@@ -1607,8 +1607,10 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 
 #### RN-12.4 — Carga Letiva Semanal e Limites
 1. $\text{Carga}(p, d) = \sum \text{tempos\_letivos\_semanais}$ das `turma_disciplinas` de que $p$ é titular vigente na data $d$.
-2. O **limite máximo** vem de `regras_carga_letiva` (por categoria ou vínculo — Estatal MED ou Comparticipado Diocese), **menos as reduções** por cargos acumulados (`RN-12.6`; o DP n.º 93/21, art. 12.º, n.º 6, prevê redução de 2 tempos ao Coordenador de Turma), salvo valor individual dos RH.
-3. **Enquanto a escola não fornecer os limites** (`Q-C04-04`), o sistema só mostra a carga e não bloqueia. Com limites: exceder **bloqueia** a homologação da alocação; a `SUB_PED` pode autorizar a exceção com despacho e justificação (`EXCECAO_CARGA_LETIVA`).
+2. O **limite máximo** vem de `regras_carga_letiva` (por categoria ou vínculo — Estatal MED ou Comparticipado Diocese), **menos a redução** do cargo acumulado (`RN-12.6`), salvo valor individual dos RH.
+   - **Valores por omissão para o Quadro Estatal** (DP n.º 160/18 — Estatuto da Carreira dos Agentes de Educação; investigação do [ticket #39](https://github.com/Angeloaqp/sge-ipcag-12008/issues/39)): **24 tempos letivos por semana** no II Ciclo do ESTP (art. 49.º, d)), **no máximo 5 horas letivas por dia**, e reduções por cargo (art. 51.º): `COORD_TURNO` **10**, `COORD_CURSO` e `COORD_DISC` **6**, `DIR_TURMA` **2**.
+   - 🟡 **Contratados da Diocese:** valores por confirmar (`Q-C04-04`; E1). Não se presume a Lei Geral do Trabalho.
+3. **Enquanto a escola não fornecer os limites dos contratados da Diocese** (`Q-C04-04`), o sistema só mostra a carga desses professores e não bloqueia. Com limites: exceder **bloqueia** a homologação da alocação; a `SUB_PED` pode autorizar a exceção com despacho e justificação (`EXCECAO_CARGA_LETIVA`).
 4. Carga abaixo da carga de referência gera só aviso para a `SUB_PED` e a `CHEFE_SEC_GER`.
 
 #### RN-12.5 — Habilitação para a Disciplina
@@ -1616,10 +1618,10 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 2. Alocar sem habilitação registada **não bloqueia**, mas exige justificação da `SUB_PED` no plano (`Q-C04-06`).
 
 #### RN-12.6 — Acumulações
-1. **Internas (derivadas):** o sistema identifica `DIR_TURMA`, `COORD_CURSO`, `COORD_DISC` e `COORD_TURNO` pelas atribuições de cargo (`RN-16.3`) e aplica as reduções parametrizadas.
+1. **Internas (derivadas):** o sistema identifica `DIR_TURMA`, `COORD_CURSO`, `COORD_DISC` e `COORD_TURNO` pelas atribuições de cargo (`RN-16.3`) e aplica **só a maior** das reduções desses cargos, **nunca a soma** (DP n.º 160/18, art. 51.º — [ticket #39](https://github.com/Angeloaqp/sge-ipcag-12008/issues/39)).
 2. **Externas (declaradas):** o professor que leciona noutra instituição declara entidade, carga e horário externos (`acumulacoes_docentes`), com autorização por despacho (autorizador — `Q-C04-05`). Mais de metade dos professores está neste caso (DESC-RESP R23).
 3. O horário externo autorizado gera **indisponibilidades** automáticas (`RN-12.7`).
-4. Se a carga externa conta para o limite global é a `Q-C04-05`; até lá, só é mostrada.
+4. Se a carga externa conta para o limite global é a `Q-C04-05`; até lá, só é mostrada. Para os agentes do Quadro Estatal, a acumulação está limitada a **8 horas por semana**, com autorização (DP n.º 160/18, art. 45.º).
 
 #### RN-12.7 — Indisponibilidades do Professor
 1. Cada indisponibilidade identifica `professor + dia + turno + tempo inicial + tempo final + motivo + vigência`.
@@ -2336,6 +2338,12 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Correção da carga letiva — [ticket #39](https://github.com/Angeloaqp/sge-ipcag-12008/issues/39) (2026-11-08)
+
+- `RN-12.4`: valores por omissão do DP n.º 160/18 para o Quadro Estatal (24 tempos no II Ciclo do ESTP, 5 h por dia, reduções por cargo). Os contratados da Diocese ficam 🟡.
+- `RN-12.6`: com vários cargos aplica-se **só a maior** redução, e não a soma; acumulação externa até 8 h por semana.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
 

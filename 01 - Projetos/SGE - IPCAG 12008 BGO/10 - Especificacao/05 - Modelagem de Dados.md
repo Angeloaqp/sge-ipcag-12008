@@ -536,7 +536,7 @@ Abaixo detalha-se o papel de cada tabela, as suas informações principais e com
 | 🆕 **`parametros_seguranca`** | Valores da política de segurança (C14). | • **Chave** *(comprimento mínimo, tentativas, tempos de sessão, prazo *offline*, validade de códigos…)*<br>• 🟡 **Valor**, **Limite mínimo/máximo aprovado** *(valores no DOC-08)*<br>• **Versão**; **Alterado por** + Data | **Regra:** o `ADMIN_TEC` só altera dentro dos limites aprovados pela Direção; cada alteração grava `PARAMETRO_SEGURANCA_ALTERADO`. |
 | **`alocacoes_docentes`** | Regista qual professor leciona qual `turma_disciplina` e em que período (**Substituição Docente — `RN-04`**); é também a **linha da Distribuição de Serviço Docente** (C04). | • **ID Único** *(Identificador)*<br>• **Mini-Pauta (`turma_disciplina`)** + **Professor** *(Ligações)*<br>• **Plano de Distribuição** *(Ligação)* *(v2.0)*<br>• **Estado da Alocação** (`PROPOSTA`/`VIGENTE`/`ENCERRADA`) *(v2.0)*<br>• **Data de Início** e **Data de Fim da Regência**<br>• **Titular Ativo?** *(`TRUE` só em `VIGENTE`)* *(v2.0)*<br>• **Motivo de Substituição / Despacho**; **Despacho e Justificação de Exceção** *(carga ou habilitação)* *(v2.0)* | **Regra Crítica (`RN-04`):** só `1` alocação `VIGENTE` com `Titular Ativo = Sim` por `turma_disciplina`; a substituição é validada contra os horários publicados (`RN-12.14.4`). |
 | 🆕 **`planos_distribuicao_servico`** | Cabeçalho anual da Distribuição de Serviço Docente (C04 — `RN-12.3`; `DOF-15`). | • **Ano Letivo**, **Estado** *(lista 27)*<br>• **Submetido por/em**; **Homologado por** (`SUB_PED`)/em; **Visto** (`DIR_GERAL`)/em | **Chave Única:** `(Ano Letivo)`. |
-| 🆕 **`regras_carga_letiva`** | Parâmetros de limite e de redução de carga letiva (C04 — `RN-12.4`). | • **Ano Letivo**; **Critério** (`CATEGORIA`/`VINCULO`/`CARGO_ACUMULADO`) + Valor<br>• **Efeito** (`LIMITE_MAXIMO`/`REDUCAO`); 🟡 **Tempos**; **Base legal ou despacho** | 🟡 Sem valores pré-carregados (`Q-C04-04`; E1). |
+| 🆕 **`regras_carga_letiva`** | Parâmetros de limite e de redução de carga letiva (C04 — `RN-12.4`). | • **Ano Letivo**; **Critério** (`CATEGORIA`/`VINCULO`/`CARGO_ACUMULADO`) + Valor<br>• **Efeito** (`LIMITE_MAXIMO`/`LIMITE_DIARIO`/`REDUCAO`); 🟡 **Tempos**; **Base legal ou despacho** | **Valores pré-carregados para o Quadro Estatal** (DP n.º 160/18): `LIMITE_MAXIMO` 24 tempos (II Ciclo do ESTP), `LIMITE_DIARIO` 5 h; `REDUCAO` `COORD_TURNO` 10, `COORD_CURSO`/`COORD_DISC` 6, `DIR_TURMA` 2. Com vários cargos aplica-se **só a maior** redução (`RN-12.6`). 🟡 Contratados da Diocese sem valores (`Q-C04-04`; E1). |
 | 🆕 **`habilitacoes_docentes`** | Disciplinas para que cada professor está habilitado (C04 — `RN-12.5`). | • **Professor**, **Disciplina**, **Comprovativo** *(ficheiro)*, **Registado por** | **Chave Única:** `(Professor + Disciplina)`. |
 | 🆕 **`acumulacoes_docentes`** | Acumulações externas declaradas e autorizadas (C04 — `RN-12.6`; mais de metade dos professores leciona noutra escola — DESC-RESP R23). | • **Professor**, **Ano Letivo**, **Entidade externa**, **Carga semanal externa**<br>• **Estado** *(lista 35)*; **Despacho**; **Autorizado por/em** | **Regra:** só `AUTORIZADA` gera indisponibilidades bloqueantes. |
 | 🆕 **`indisponibilidades_docentes`** | Períodos em que o professor não pode ter aulas (C04 — `RN-12.7`). | • **Professor**, **Dia da Semana**, **Turno**, **Tempo Inicial** e **Final**<br>• **Motivo**; **Acumulação de Origem** *(opcional)*; **Vigência** | Restrição bloqueante na validação do horário. |
@@ -871,6 +871,11 @@ Legenda: **L** lê · **E** escreve · **H** homologa · `—` sem acesso · *(E
 ---
 
 ## 7. Alterações da v2.0
+
+### Correção da carga letiva — [ticket #39](https://github.com/Angeloaqp/sge-ipcag-12008/issues/39) (2026-11-08)
+
+- `regras_carga_letiva`: efeito `LIMITE_DIARIO` e valores pré-carregados do DP n.º 160/18 para o Quadro Estatal.
+
 
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
 
