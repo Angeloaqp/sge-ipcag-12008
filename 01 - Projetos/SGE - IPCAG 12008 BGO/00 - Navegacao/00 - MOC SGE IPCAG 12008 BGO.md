@@ -161,6 +161,6 @@ As notas [[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribu
 > [!todo] Do estado atual à construção
 > - [x] **Fase 1 — Arrumar:** pastas por função, capacidades arquivadas, ficheiros vazios removidos, índices atualizados (2026-11-05).
 > - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; as 4 decisões foram tomadas: #6 migração (`DEC-010`), #7 RUPE (`DEC-011`), #5 permissões (`DEC-012`) e #9 entregas (`DEC-013`). **As 10 issues estão fechadas.**
-> - [ ] **Fase 3 — Fechar o que está em aberto:** todas as questões e lacunas num mapa no GitHub; questionários para a escola; decisões da equipa.
+> - [ ] **Fase 3 — Fechar o que está em aberto:** em curso desde 2026-11-08, no **[mapa do GitHub](https://github.com/Angeloaqp/sge-ipcag-12008/issues/11)**: triagem das 283 perguntas, histórias em falta para 40 requisitos, central de avisos (`Q-037`), faturação AGT (`Q-001` → `DEC-002`) e questionários para a escola.
 > - [ ] **Fase 4 — Congelar a v2.0:** versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
 > - [ ] **Fase 5 — Ponte para o código:** `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.
