@@ -107,6 +107,7 @@ flowchart LR
 | Código | Nota | Conteúdo |
 | :---: | :--- | :--- |
 | `REG-12` | [[12 - Registo de Decisoes e Questoes em Aberto]] | Decisões `DEC-001`–`DEC-013` e questões `Q-001`–`Q-039`. Na Fase 3 da ORG-00 recebe também as questões que ainda estão nas notas de capacidades e as lacunas da Matriz |
+| `IDX-12` | [[12.1 - Indice de Questoes em Aberto]] | Índice único das 283 perguntas em aberto, triadas a 2026-11-08 (parâmetro, legal, estrutural, respondida, técnica), cada uma com o seu ticket |
 
 ### 2.5 `40 - Descoberta e Validacao` — Prova vinda da escola
 

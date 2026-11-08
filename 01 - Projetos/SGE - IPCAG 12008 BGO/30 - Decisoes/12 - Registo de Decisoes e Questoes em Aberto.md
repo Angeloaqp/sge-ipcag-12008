@@ -504,7 +504,7 @@ As entrevistas dizem duas coisas:
 ### 3.1 Questões registadas noutras notas
 
 > [!tip] Fase 3 — mapa único das perguntas em aberto (2026-11-08)
-> As 283 perguntas espalhadas pelas notas (REG-12, `Q-LEG`, `Q-APD`, `Q08`, `Q09`, `MIG-Q` e `Q-Cxx`) vão ser triadas e seguidas no **[mapa do GitHub](https://github.com/Angeloaqp/sge-ipcag-12008/issues/11)**: já respondida, só parâmetro (`DEC-009`), muda a estrutura, ou legal. O índice que sair da triagem passa a viver aqui.
+> As 283 perguntas espalhadas pelas notas (REG-12, `Q-LEG`, `Q-APD`, `Q08`, `Q09`, `MIG-Q` e `Q-Cxx`) vão ser triadas e seguidas no **[mapa do GitHub](https://github.com/Angeloaqp/sge-ipcag-12008/issues/11)**: já respondida, só parâmetro (`DEC-009`), muda a estrutura, ou legal. **Triagem feita a 2026-11-08:** o estado de todas as perguntas está no [[12.1 - Indice de Questoes em Aberto|índice único (IDX-12)]]: 195 parâmetros, 43 legais, 23 estruturais, 20 já respondidas e 2 técnicas.
 
 Para manter uma só fonte por facto, as questões abaixo **continuam nas notas onde nasceram**; este registo só as indexa. Uma questão dessas que bloqueie uma `DEC-nnn` ou uma entrega deve ser copiada para a tabela acima com o próximo `Q-nnn`, citando o código de origem.
 
