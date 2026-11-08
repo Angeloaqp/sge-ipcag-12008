@@ -12,3 +12,6 @@ desktop.ini
 
 # Entrevistas em PDF (podem ter dados pessoais; o repositório é público)
 01 - Projetos/SGE - IPCAG 12008 BGO/40 - Descoberta e Validacao/*.pdf
+
+# Cópias de trabalho temporárias do Claude Code
+.claude/worktrees/
