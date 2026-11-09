@@ -73,6 +73,7 @@ tags:
 | [[#DEC-022 — Modelo de Horários: Sem Desdobramentos/Aulas Conjuntas e Regime de Horário da 13ª Classe (Q-C04-07, Q-C04-14)\|DEC-022]] | Issue #29; `Q-C04-07`, `Q-C04-14` | Horários: desdobramentos, turmas conjuntas e regime da 13ª Classe | (a) Sem desdobramentos nem aulas conjuntas em E1–E5 (`aulas_horario` 1:1 com turma-disciplina e sala); 13ª Classe em regime tutorial de Projecto Tecnológico sem sala fixa permanente nem bloqueio de 30–32h | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-023 — Modelo de Tesouraria: Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial (Q-C10-07, Q-C10-16)\|DEC-023]] | Issue #30; `Q-C10-07`, `Q-C10-16` | Tesouraria: contas bancárias por banco e prestações inteiras | (a) Catálogo bancos_angola complementado com contas_bancarias_escola (1:N); motor opera estritamente com prestações inteiras sem pagamentos parciais de quitação (talão insuficiente vira crédito do aluno) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-024 — Regime de Alunos da 12ª com Cadeiras em Atraso: Vínculo e Inscrição em Exames (Q-C16-06, Q-031)\|DEC-024]] | Issue #31; `Q-C16-06`, `Q-031` | Situação de aluno da 12ª com cadeiras em atraso | (a) Deliberação CONCLUIU_12_COM_CADEIRAS_PENDENTES e proposta CONDICIONADA_13A; vínculo sem turma para exames extraordinários; desbloqueia para 13ª após eliminação (RN-02.2, RN-18.5) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-025 — Verificação de Documentos Pré-SGE: Exclusão do Portal Público e Autenticação por Reemissão (MIG-Q20)\|DEC-025]] | Issue #32; `MIG-Q20` | Verificação de documentos emitidos antes do SGE | (a) Exclusão do portal público (US-DOC-03 restrito a códigos com hash/QR do SGE/Plataforma Nacional); verificação interna pela Secretaria Pedagógica; autenticação pública requer emissão de 2.ª via no SGE | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -757,6 +758,25 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-025 — Verificação de Documentos Pré-SGE: Exclusão do Portal Público e Autenticação por Reemissão (MIG-Q20)
+
+- **Origem:** Issue #32 ([issue #32](https://github.com/Angeloaqp/sge-ipcag-12008/issues/32)); questão `MIG-Q20`; [[10 - Migracao de Dados e Implantacao|MIG-10]] §7.5; [[10 - Especificacao/03 - User Stories|DOC-03]] `US-DOC-03`; [[11 - Protecao de Dados (APD)|APD-11]] §4, §10 · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A questão estrutural `MIG-Q20` (levantada em `MIG-10 §7.5`) questionava se o portal público de verificação de autenticidade documental (`US-DOC-03`) deveria validar documentos emitidos antes do arranque do SGE que não possuem QR Code nem hash criptográfico assinado. Considerou-se a possibilidade de consulta pública inserindo coordenadas de registo físico (`Livro/Folha/Termo` e `N.º de Processo`). Contudo, permitir consultas públicas sem segredo criptográfico introduz um vetor grave de enumeração e raspagem de dados pessoais de estudantes e antigos alunos na internet (violando o princípio de minimização, segurança e finalidade da Lei n.º 22/11 da APD). Além disso, os registos históricos migrados (`origem_registo = MIGRADO`) não possuem assinatura digital da instituição.
+
+**Decisão.** **Adoção estrita da opção (a) complementada por (c) de `MIG-10 §7.5`:**
+1. **Exclusão do Portal Público de Verificação (`US-DOC-03`):** O portal público de verificação limita-se rigorosamente a documentos emitidos digitalmente pelo SGE contendo código hash criptográfico / QR Code (`codigo_verificacao_hash`) ou QR Code da Plataforma Nacional de Certificação. Documentos físicos emitidos antes do SGE não são verificáveis no portal público; tentativas de consulta por livro/folha/termo ou processo na internet são vedadas.
+2. **Procedimento de Verificação de Documentos Antigos (Inspeção Interna):** A verificação de autenticidade de documentos físicos emitidos antes do SGE solicitada por entidades externas (universidades, empresas, Ministério) é realizada exclusivamente por via interna pela Secretaria Pedagógica (`CHEFE_SEC_PED` / `OP_PED`), mediante consulta do processo individual em arquivo físico e cotejo com o livro físico de termos (`MIG-F20`, `MIG-F21`, `livros_registo_fisico`), emitindo ofício ou declaração de autenticidade.
+3. **Autenticação Digital por Reemissão de 2.ª Via:** Qualquer estudante ou antigo aluno que necessite de um documento com validação pública digital e QR Code pode requerer na Secretaria a emissão de uma 2.ª via (`RF-C09-04`, `US-DOC-01`, `US-DOC-02`). O documento é gerado no SGE com base no histórico conferido (`AJ-05`), recebendo número de série documental novo, coordenadas históricas de arquivo e QR Code de verificação único, mediante cobrança do respetivo emolumento oficial da tabela de preços.
+4. A questão `MIG-Q20` é declarada **respondida (`DEC-025`)**.
+
+**Impacto.**
+- **DOC-03:** `US-DOC-03` pré-condição reforçada; apenas documentos gerados com hash criptográfico / QR Code são passíveis de consulta no portal público.
+- **MIG-10:** §7.5 item 3 atualizado com formalização da `DEC-025`.
+- **REG-12 / IDX-12:** `MIG-Q20` passa a `respondida (DEC-025)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -875,3 +895,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-022`: modelo de horários; exclusão de desdobramentos e aulas conjuntas no âmbito E1–E5 (`aulas_horario` unívoca 1:1; `RN-12.8`, `RN-12.9`); regime tutorial de Projecto Tecnológico na 13ª Classe sem sala permanente e isenta do limite semanal de 30–32h (`RN-12.2 §4`); Issue #29 fechada (`Q-C04-07`, `Q-C04-14`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-023`: modelo de tesouraria; criação de `contas_bancarias_escola` suportando múltiplas contas por banco (`RN-13.14.1`, DOC-05 §4); preservação estrita de quitação por prestações inteiras sem pagamentos parciais no caixa (`RN-09.3`, `RN-13.7.4`); Issue #30 fechada (`Q-C10-07`, `Q-C10-16`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-024`: regime de alunos da 12ª com cadeiras em atraso; deliberação `CONCLUIU_12_COM_CADEIRAS_PENDENTES` e proposta `CONDICIONADA_13A` (`RN-02.2`, `RN-18.5`); vínculo sem turma regular como candidato a exames extraordinários (`MOD-PAS-02`) mantendo situação `Ativo`; desbloqueia para confirmação na 13ª após eliminação; Issue #31 fechada (`Q-C16-06`, `Q-031`). |
+| 2.0-rc2 | 2026-11-09 | `DEC-025`: verificação de documentos pré-SGE; exclusão de consulta no portal público (`US-DOC-03`), preservando dados pessoais contra raspagem (Lei n.º 22/11); autenticação de documentos antigos por conferência presencial no arquivo e nos livros de termos físicos; validação pública digital obtida por reemissão de 2.ª via com QR no SGE; Issue #32 fechada (`MIG-Q20`). |

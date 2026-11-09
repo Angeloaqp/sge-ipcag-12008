@@ -830,7 +830,7 @@ tags:
 - **História:** *Como* **Entidade Externa (Inspector do MED, Universidade ou Empresa Empregadora)**, *quero* **ler o QR Code impresso em qualquer Declaração, Boletim, documento fiscal ou Certificado emitido pelo IPCAG N.º 12008 / BGO**, *para* **verificar instantaneamente se o documento e as notas apresentadas em papel são autênticos ou falsificados (`RN-10`)**.
 - **Rastreabilidade:** `RN-10` | `Fluxo 08` | DESC-RESP R19 | `COR-LEG-19`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
-- **Pré-condições:** Documento emitido pelo SGE contendo `codigo_verificacao_hash`.
+- **Pré-condições:** Documento emitido pelo SGE contendo `codigo_verificacao_hash` (ou emitido com QR Code da Plataforma Nacional de Certificação). Documentos físicos antigos emitidos antes do SGE sem código hash não são verificáveis no portal público (`DEC-025`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Documento Autêntico Confirmado):**
     - **Dado** um Certificado genuíno emitido pelo sistema,
