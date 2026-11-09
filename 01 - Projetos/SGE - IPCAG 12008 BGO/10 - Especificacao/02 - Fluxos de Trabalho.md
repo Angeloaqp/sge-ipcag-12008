@@ -99,7 +99,7 @@ Segundo as entrevistas da Fase B ([[Sintese das Respostas da Fase B|DESC-RESP]] 
 ### 1.2 Pré-condições e Gatilho de Início
 - **Pré-condições:** Ano Letivo `N+1` criado em `Planeado` (pode coexistir com o ano `N` em encerramento — `RN-18.1`); quadro de vagas da 10ª Classe definido por Curso e Período (Manhã/Tarde) em função das condições da escola (DE n.º 361/26, art. 7.º).
 - **Gatilho de Início:** abertura das inscrições para o teste de seleção da 10ª Classe (agosto, segundo a prática da escola).
-- 🟡 **Arranque do SGE:** com o arranque no início de 2027/2028 (`DEC-007`), o concurso desse ano pode correr fora do SGE e ser importado, porque a C02 só entra na E5 (`Q-017`).
+- **Arranque do SGE (`DEC-018`):** com o arranque no início de 2027/2028 (`DEC-007`), o concurso desse ano corre fora do SGE (portal nacional `acessoetp.ao` / listas oficiais) e os admitidos são importados na E1 via C17; a C02 entra em produção na E5 (`DEC-018`, fecha a `Q-017`).
 
 ### 1.3 Diagrama Visual em Raias (Swimlane Flowchart)
 
@@ -193,7 +193,7 @@ flowchart TD
   > 🟡 **Provisória** — prática interna sem base nos diplomas lidos; validar com a escola e a resposta à `Q-LEG-12` (`DEC-009`). Fonte: [[Verificacao das Referencias Legais|LEG-VER]] `COR-LEG-10`. Uma exceção ao limiar só volta a existir se a Direção Provincial a confirmar por escrito (`COR-LEG-08`).
 - **Exceção E1.7 — Idade Abaixo do Mínimo:** o candidato com menos de 15 anos completados no ano da matrícula é excluído do ensino regular (DP n.º 167/23, art. 23.º). A idade máxima só é verificada se o parâmetro opcional estiver ligado (`Q-LEG-09`) 🟡.
 - **Exceção E1.8 — Reclamação Fora do Prazo:** recusada pelo sistema (prazo de 24 h após a publicação), com registo da tentativa.
-- **Exceção E1.9 — Concurso Realizado Fora do SGE (`Q-017`):** os resultados homologados são importados (C17) com origem `IMPORTADO`; o Fluxo 02 converte os admitidos importados da mesma forma 🟡.
+- **Exceção E1.9 — Concurso Realizado Fora do SGE (`DEC-018`):** os resultados homologados são importados (C17) com origem `IMPORTADO`; o Fluxo 02 converte os admitidos importados da mesma forma.
 
 ### 1.6 Pós-condições e Registos Gerados
 - `Ano Letivo`, `Trimestres`, `Matrizes Curriculares` e tabela de emolumentos ativos e trancados.
@@ -1645,7 +1645,7 @@ flowchart TD
 | A05 | 01 | Repescagem pela 2ª opção marcada 🟡 como prática interna | Regra apresentada como legal | `COR-LEG-10` |
 | A06 | 01 | Idade mínima 15 anos; idade máxima opcional sem fonte | Faixa etária "segundo o DP n.º 167/23" | `COR-LEG-11` |
 | A07 | 01 | Lista de selecionados em 72 h, reclamação em 24 h, decisão em 24 h, lista definitiva homologada pelo Director (E1.5, E1.8) | Sem prazos nem reclamações | `COR-LEG-12` |
-| A08 | 01 | Taxa de inscrição com Fatura-Recibo; importação do concurso se correr fora do SGE (E1.9) | "Recibo Oficial" | `COR-LEG-02`; `Q-017` |
+| A08 | 01 | Taxa de inscrição com Fatura-Recibo; importação do concurso se correr fora do SGE (E1.9) | "Recibo Oficial" | `COR-LEG-02`; `DEC-018` (fecha `Q-017`) |
 | A09 | 02 | Confirmação a partir de **proposta pré-gerada**, modos `AUTOMATICA`/`BALCAO` 🟡 | Confirmação como ato anual ao balcão | `COR-LEG-15`; C16 `RN-18.6`; DESC-RESP R5 |
 | A10 | 02 | Anulação da matrícula incompleta **60 dias** após o início do ano (E2.8) 🟡 | — | `COR-LEG-15`; `RN-18.6.5` |
 | A11 | 02 | **Perda do direito à confirmação** por retenção por faltas; confirmação em 5 dias úteis após justificação (E2.7) 🟡 | — | `COR-LEG-14`; DESC-RESP R4 |

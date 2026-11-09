@@ -88,7 +88,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C01-07** | Guardar os **parâmetros institucionais** de uma só instalação: designação, número da instituição por tipo de documento (12008 / 8009), NIF, cabeçalho e rodapé (códigos `IPCAG.SG-ACE`, `DEE-PEEP-001-ACE`) e rótulos impressos ("Período" = Turno, "Cadeira" = Disciplina). | O-07 | M | E1 | `DEC-001`; `A-03`, `A-09`, `A-14`; `COR-LEG-05`; INT-V2 §3.5, §3.13 | RN-10.6, RN-10.7 | US-GOV-01 | MOD-GOV-01 | DOF-01 a DOF-26 (cabeçalho) | `parametros_instituicao`, `modelos_documento` | 🟡 PC-E1 · `Q-027`, `Q-033`, `Q-035` |
 
 ### C02 — Admissão à 10ª Classe
-**Âmbito:** dentro · **Entrega:** E5 (o concurso de 2027/2028 corre previsivelmente fora do SGE — `Q-017`) · **Objetivo:** `O-01` · **Decisões:** `DEC-007`
+**Âmbito:** dentro · **Entrega:** E5 (concurso de 2027/2028 corre fora do SGE com importação na E1 via C17 — `DEC-018`) · **Objetivo:** `O-01` · **Decisões:** `DEC-007`, `DEC-018`
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -108,7 +108,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RF-C03-01** | Converter o candidato admitido (ou o admitido importado — `Q-017`) em aluno com **N.º de Processo Individual** vitalício e matriculá-lo na 10ª Classe. | O-05 | M | E1 | v1.2 | RN-05 | US-MAT-01 | MOD-PED-MAT | DOF-03 | `alunos`, `matriculas_anuais` | definido |
+| **RF-C03-01** | Converter o candidato admitido (ou o admitido importado na E1 — `DEC-018`) em aluno com **N.º de Processo Individual** vitalício e matriculá-lo na 10ª Classe. | O-05 | M | E1 | v1.2 | RN-05 | US-MAT-01 | MOD-PED-MAT | DOF-03 | `alunos`, `matriculas_anuais` | definido |
 | **RF-C03-02** | Registar o Boletim de Matrícula e o de Confirmação com os **campos reais** e a **numeração anual** (`N.º nnn/AAAA-AAAA`), e imprimir o comprovativo destacável sem dados de saúde. | O-05 | M | E1 | `A-12`, `A-13`; APD-11 `ALT-04-17`; CAP-C03 | RN-11.8, RN-11.14, RN-10.6 | US-PIN-09, US-MAT-01, US-MAT-02 | MOD-PED-MAT | DOF-03 | `matriculas_anuais`, `series_numeracao_documental` | definido |
 | **RF-C03-03** | Gerar a confirmação de matrícula de cada aluno aprovado como **pré-gerada `Pendente`** até à entrega dos documentos e anulá-la automaticamente **60 dias** após o início do ano (prazo parametrizável). | O-05 | M | E1 | `R-05` (G-05); `COR-LEG-15`; INT-V2 §3.11 | RN-08.3, RN-18.6 | US-MAT-02 | MOD-PED-MAT | DOF-26 | `matriculas_anuais` | 🟡 DoR-E1 · `Q-LEG-05` |
 | **RF-C03-04** | Registar a transferência de entrada com a transcrição homologada do histórico externo e o documento digitalizado. | O-06 | M | E1 | v1.2 | RN-06.1, RN-11.5 | US-MAT-03 | MOD-PED-HIST | — | `historico_externo_transcricoes`, `ficheiros_digitalizados` | definido |
@@ -376,7 +376,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C17-16** | Fechar a consola depois do último Termo de Aceitação (fica o modo a pedido) e desativar a conta técnica. | O-09 | M | E4 | MIG-10 §6.4 | RN-16.21 | `US-MIG-07` | MOD-MIG-01 | — | `usuarios_sistema` | definido |
 
 > [!note] C17 — admitidos de 2027/2028
-> Se o concurso de 2027/2028 correr fora do SGE (`Q-017`), os admitidos entram por estes RF antes das matrículas (VIS-06 §5.1).
+> Com o concurso de 2027/2028 a correr fora do SGE (`DEC-018`), os admitidos entram por estes RF antes das matrículas (VIS-06 §5.1).
 
 ### C18 — Operação do sistema
 **Âmbito:** dentro (servidor local + réplica na nuvem — `DEC-006`) · **Entrega:** infraestrutura antes da E1; operação completa na E2 (VIS-06) · **Objetivos:** `O-08`, `O-10` · **Fontes:** [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] §5, [[08 - Requisitos Nao Funcionais|RNF-08]] · **Aceitação:** metas do RNF-08 e procedimentos do OPS-09 ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-014 — Critérios de aceitação da operação (C18)|DEC-014]])
@@ -552,3 +552,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc2 | 2026-11-08 | Cobertura total de requisitos: preenchida a coluna US para os restantes 7 requisitos (`RF-C03-15` em `US-PIN-02`, `RF-C09-11` em `US-DOC-02`, `RF-C10-10` e `RF-C10-24` em `US-TES-03`, `RF-C10-25` em `US-TES-02`, `RF-C13-02` em `US-DIS-04`, `RF-C15-01` em `US-PNL-01`) — Issue #17. RF sem US desce para 0. Lacuna `L-RF-05` fechada. |
 | 2.0-rc2 | 2026-11-09 | Faseamento da C12 (`DEC-015`, Issue #18): atualizada a coluna Entrega de `RF-C12-01` a `RF-C12-07` de `pendente (Q-037)` para `E3`; totais recalculados (§4.1, §4.2: E3 sobe de 15 para 22 RF; pendentes descem de 7 para 0). Lacuna `L-RF-07` fechada. |
 | 2.0-rc2 | 2026-11-09 | Âmbito e requisitos condicionais (`DEC-016`, Issue #23): avaliação de desempenho (`Q-036`) e expediente geral (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 (`DEC-008` itens 9 e 10); `RF-C19-33` passa a `W` fora da linha de base; totais recalculados (0 requisitos condicionais pendentes; 2 fora da linha de base); lacuna `L-RF-08` fechada. |
+| 2.0-rc2 | 2026-11-09 | Concurso de admissão 2027/2028 (`DEC-018`, Issue #25): confirmado fora do SGE com importação dos admitidos na E1 via C17; C02 na E5 para 2028/2029; `RF-C03-01` e notas de C02/C17 atualizados; `Q-017` resolvida. |

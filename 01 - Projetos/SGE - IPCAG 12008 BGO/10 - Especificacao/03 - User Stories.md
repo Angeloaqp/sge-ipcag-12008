@@ -53,7 +53,7 @@ tags:
 | Código do Épico | Nome do Épico / Domínio Funcional | Capacidade | Perfis RBAC Principais | Histórias de Utilizador (`US`) | Regras de Negócio Cobertas | Entrega | MoSCoW |
 | :---: | :--- | :---: | :--- | :---: | :---: | :---: | :---: |
 | **`EP-GOV`** | **Épico 01:** Governação, Configuração do Ano Letivo, Áreas de Formação, Matrizes Curriculares e Auditoria de Exceção | C01 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM` | `US-GOV-01` a `US-GOV-04` (4 US) | `RN-01`, `RN-02`, `RN-03`, `RN-06`, `RN-10`, `RN-18` | **E1** (`US-GOV-04`: E3) | Must |
-| **`EP-ADM`** | **Épico 02:** Concurso de Admissão à 10ª Classe e Gestão de Anonimato (DE n.º 361/26) | C02 | `OP_PED`, `CHEFE_SEC_PED`, `OP_TES`, `SUB_PED`, `DIR_GERAL` | `US-ADM-01` a `US-ADM-04` (4 US) | `RN-01`, `RN-08`, `RN-09`, `RN-10` | **E5** (o concurso de 2027/2028 corre previsivelmente fora do SGE — `Q-017`) | Must |
+| **`EP-ADM`** | **Épico 02:** Concurso de Admissão à 10ª Classe e Gestão de Anonimato (DE n.º 361/26) | C02 | `OP_PED`, `CHEFE_SEC_PED`, `OP_TES`, `SUB_PED`, `DIR_GERAL` | `US-ADM-01` a `US-ADM-04` (4 US) | `RN-01`, `RN-08`, `RN-09`, `RN-10` | **E5** (concurso 2027/2028 corre fora do SGE com importação na E1 via C17 — `DEC-018`) | Must |
 | **`EP-MAT`** | **Épico 03:** Matrículas, Confirmação Automática, Chamada Congelada e Transcrição de Histórico Externo | C03 | `OP_PED`, `CHEFE_SEC_PED`, `SUB_PED`, `OP_TES` | `US-MAT-01` a `US-MAT-04` (4 US) | `RN-02`, `RN-05`, `RN-06`, `RN-07`, `RN-08`, `RN-11`, `RN-18` | **E1** | Must |
 | **`EP-PED`** | **Épico 04:** Gestão Pedagógica Trimestral, Mini-Pauta *Offline-First*, Faltas por Tipo, 2.ª Chamada, `DISP`, Substituição Docente e Conselho de Notas (`CF`/`PG`/`CA`) | C05, C06, C07 | `COORD_DISC`, `PROF`, `DIR_TURMA`, `SUB_PED`, `DIR_GERAL` | `US-PED-01` a `US-PED-06` (6 US) | `RN-01`, `RN-02`, `RN-03`, `RN-04`, `RN-05`, `RN-10`, `RN-12`, `RN-15` | **E2** (`US-PED-06`: E3 trimestral / E4 anual) | Must |
 | **`EP-DEF-13`** | **Épico 05:** Cadeiras em Atraso (Exame Extraordinário) e Regime da 13ª Classe (Projecto Tecnológico, Estágio, PAP e `MFC`) | C07, C08 | `OP_PED`, `CHEFE_SEC_PED`, `COORD_CURSO`, `PROF`, `SUB_PED`, `DIR_GERAL` | `US-DEF-01` a `US-13C-02` (4 US) | `RN-01`, `RN-02`, `RN-06`, `RN-08`, `RN-10`, `RN-13` | **E4** | Must |
@@ -283,7 +283,7 @@ tags:
 - **História:** *Como* **Operador da Secretaria Pedagógica (`OP_PED`)**, *quero* **converter um candidato `Admitido` num registo vitalício de `Aluno` com atribuição automática do `N.º de Processo Individual` único e do número anual do Boletim de Matrícula**, *para* **efetivar a sua matrícula na 10ª classe sem redigitação de dados**.
 - **Rastreabilidade:** `RN-05`, `RN-07`, `RN-08`, `RN-11.2`, `RN-11.14` | `Fluxo 02` | `US-PIN-02`, `US-PIN-09` | `COR-LEG-15`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
-- **Pré-condições:** Candidato com estado `Admitido` no Ano Letivo corrente (ou importado pela migração, se o concurso de 2027/2028 correr fora do SGE — `Q-017`).
+- **Pré-condições:** Candidato com estado `Admitido` no Ano Letivo corrente (ou importado pela migração na E1 via C17 — `DEC-018`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Conversão, N.º de Processo Vitalício e Boletim Numerado):**
     - **Dado** que o candidato `Admitido` comparece para matrícula e entrega os documentos, registados e conferidos no processo individual (`US-PIN-02`),

@@ -6,9 +6,9 @@ aliases:
   - "Migração de Dados SGE"
   - "Plano de Arranque SGE"
 created: 2026-11-02
-updated: 2026-11-08
-status: rascunho
-version: "0.2"
+updated: 2026-11-09
+status: ativo
+version: "2.0-rc2"
 doc_id: "MIG-10"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -76,7 +76,7 @@ O plano (§3, princípio 1) só admite arranque no **início de um ano letivo** 
 > - **Data de corte:** depois do fecho de 2026/2027 (pautas gerais, exames de recurso e deliberações homologados) e antes das matrículas de 2027/2028.
 > - **Coorte da 13ª em 2027/2028** (`MIG-D13`): alunos que concluem a 12ª em 2026/2027; o histórico necessário cobre **pelo menos os anos letivos 2024/2025 a 2026/2027**, mais anos anteriores para repetentes e transferidos de entrada.
 > - **Começar já:** as pautas de **2026/2027 estão a ser produzidas agora**, em papel. Pedir à Secretaria que as passe para o ficheiro modelo `MIG-F08` à medida que cada pauta é homologada reduz a digitação do verão de 2027, quando a Secretaria está no pico do fecho do ano (proposta, `MIG-Q26`).
-> - **Primeiro concurso de admissão** (2027/2028) corre fora do SGE: os admitidos entram pelo `MIG-F13` (`MIG-D06`; `Q-017`).
+> - **Primeiro concurso de admissão** (2027/2028) corre fora do SGE: os admitidos entram pelo `MIG-F13` (`MIG-D06`; `DEC-018`, resolve a `Q-017`).
 > - Um **Não avançar** em 2027 (§8.6) leva a uma nova `DEC`: adiar para 2028/2029 (Cenário A) ou arrancar no início de um trimestre (Cenário B, mais dados a migrar).
 
 ### 0.4 Visão geral do processo
@@ -193,7 +193,7 @@ Todas as fontes abaixo são **hipóteses** a confirmar na Fase B.
 | `MIG-D32`, `MIG-D33` Livros | Livros físicos de registo | `MIG-Q18`, `MIG-Q19`, `MIG-Q21` | Não há alternativa: verificação presencial obrigatória |
 | `MIG-D07` Pessoal | Processos da Secretaria Geral; mapa de efetividade; folhas de cálculo | `MIG-Q24` | Recolha direta com ficha |
 | `MIG-D03`, `MIG-D04` Matrizes | **Recebidos 4 planos curriculares oficiais** (Contabilidade e Gestão, Gestão de Recursos Humanos, Gestão Empresarial, Estatística e Planeamento — área "Administração e Serviços"; Achados A5); faltam versões anteriores e a confirmação de que são todos os cursos | `MIG-Q07` | Pedir cópia à Direção Provincial da Educação do Bengo |
-| `MIG-D06` Admitidos (A) | Pauta de admissão impressa ou folha de cálculo do concurso de 2027/2028 | `Q-017`, `Q-005` | — |
+| `MIG-D06` Admitidos (A) | Pauta de admissão impressa ou folha de cálculo do concurso de 2027/2028 | `DEC-018` (`Q-017`), `Q-005` | — |
 | Qualquer | Eventual plataforma da Direção Provincial ou do MED | `MIG-Q25` | — |
 
 ### 2.2 Estratégia por tipo de fonte
@@ -908,7 +908,7 @@ Estas questões devem entrar no [[Guiao de Entrevistas por Cargo]] da Fase B e s
 | `MIG-Q14` | `Q-001` | O procedimento para anular um recibo antigo depende do regime fiscal da `Q-001` |
 | `MIG-Q15` | `Q-004` | A `Q-004` trata o formato da numeração; a `MIG-Q15` o início da sequência no arranque |
 | `MIG-Q30` | `DEC-007`, `Q-005` | Respondida em parte pela `DEC-007` (início de 2027/2028); faltam as datas (`Q-005`) |
-| `MIG-D06` (admitidos) | `Q-017` | A `Q-017` pergunta se o concurso de 2027/2028 corre fora do SGE; esta nota já prevê a importação (`MIG-F13`) |
+| `MIG-D06` (admitidos) | `DEC-018` (`Q-017`) | Decidido na `DEC-018` que o concurso de 2027/2028 corre fora do SGE e os admitidos entram na E1 via importação (`MIG-F13`) |
 | Volume (§1.3) | `Q-014` | Os números reais da `Q-014` alimentam a fórmula do §1.3 |
 | `MIG-Q34` | `Q-006` | A `Q-006` cobre a infraestrutura geral; a `MIG-Q34` só o espaço de formação |
 
@@ -994,7 +994,7 @@ Cada dado necessário às entregas E1–E4, com fonte (ou questão), destino e m
 | `MIG-D03` Matrizes em vigor | E1 | Documentos oficiais do MED (`MIG-Q07`) | `F01` → `matrizes_curriculares`, `matriz_disciplinas` | Conferência com o documento oficial; homologação `SUB_PED` |
 | `MIG-D04` Matrizes históricas e correspondência | E1/E2 | Idem (`MIG-Q07`) | `F01` → idem (versões antigas) | Todas as disciplinas do `F08` com correspondência (bloqueante) |
 | `MIG-D05` Preços e bancos | E1 | Tabela em vigor (`MIG-Q09`) | `F16` → `tabelas_precos_emolumentos`, `bancos_angola` | Aprovação `SUB_ADM` |
-| `MIG-D06` Admitidos (A) | E1 | Pauta do concurso de 2027/2028 feito fora do SGE (`Q-017`) | `F13` → `quadros_vagas_admissao`, `candidaturas_10a`, `codigos_anonimato` | `MFA` recalculada; contagem = pauta |
+| `MIG-D06` Admitidos (A) | E1 | Pauta do concurso de 2027/2028 feito fora do SGE (`DEC-018`, fecha `Q-017`) | `F13` → `quadros_vagas_admissao`, `candidaturas_10a`, `codigos_anonimato` | `MFA` recalculada; contagem = pauta |
 | `MIG-D07` Funcionários e professores | E1/E2 | Secretaria Geral (`MIG-Q24`) | `F03` → `funcionarios_docentes` | Lista assinada pelo `CHEFE_SEC_GER` |
 | `MIG-D08` Encarregados | E1 | Fichas / folhas de cálculo (`MIG-Q01`) | `F04` → `encarregados_educacao` | Duplicados revistos; atualização no balcão |
 | `MIG-D09` Alunos ativos | E1 | Livro de matrículas / folhas de cálculo / sistema (`MIG-Q01`, `Q02`, `Q03`) | `F05` → `alunos` | Contagens = lista oficial; amostra 10% (§6.3) |

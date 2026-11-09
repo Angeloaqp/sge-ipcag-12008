@@ -66,6 +66,7 @@ tags:
 | [[#DEC-015 — Âmbito e faseamento da Central de Avisos (C12 na E3 e E5)\|DEC-015]] | Issue #18 (`L-RF-07`); `Q-037` | Faseamento da C12: central de avisos vs portal | (b) Central de avisos interna (`US-COM-01` a `06`) na E3; canal impresso garantido e SMS complementar com teto; portal (`US-COM-07`, `08`) na E5 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-016 — Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (Q-036, Q-039)\|DEC-016]] | Issue #23 (`L-RF-08`); `Q-036`, `Q-039` | Âmbito: avaliação de desempenho e expediente geral | (a) Avaliação de desempenho e expediente geral fora das entregas E1–E5 (adicionados a DEC-008 como itens 9 e 10); RF-C19-33 e US-APD-07 passam a Won't | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-017 — Governação, Operação e Sustentabilidade Financeira do SGE (Q-013)\|DEC-017]] | Issue #24; `Q-013` | Governação, operação e sustentabilidade financeira | (a) IPCAG é o dono do sistema e financia custos locais, nuvem e SMS (sob teto) via receitas de propinas; operação local por ADMIN_TEC (N1/N2) e suporte N3 externo sob SLA; resiliência offline garantida | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-018 — Concurso de Admissão de 2027/2028 Fora do SGE e Importação dos Admitidos na E1 (Q-017)\|DEC-018]] | Issue #25; `Q-017` | Concurso de admissão 2027/2028: fora vs no SGE | (a) Concurso de admissão 2027/2028 corre fora do SGE (portal nacional `acessoetp.ao` / listas oficiais homologadas); admitidos importados na E1 via C17 (`MIG-D06`); capacidade C02 entra na E5 para 2028/2029 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -573,6 +574,27 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-018 — Concurso de Admissão de 2027/2028 Fora do SGE e Importação dos Admitidos na E1 (Q-017)
+
+- **Origem:** Issue #25 ([issue #25](https://github.com/Angeloaqp/sge-ipcag-12008/issues/25)); questão `Q-017` (e `Q-LEG-12`); [[06 - Visao e Ambito|VIS-06]] §5.1, §5.2; [[10 - Migracao de Dados e Implantacao|MIG-10]] §2.1, §3.3 (`MIG-D06`), §7.1 (`MIG-F13`); conclusão da investigação legal #35 (`acessoetp.ao`) · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A questão estrutural `Q-017` questionava se, arrancando o SGE na entrega E1 no início do Ano Letivo 2027/2028 (`DEC-007`), o concurso de admissão à 10ª classe desse primeiro ano letivo deveria ser gerido diretamente pelo SGE ou fora dele, com importação dos admitidos. A investigação #35 confirmou adicionalmente que o concurso de acesso ao ensino técnico se processa a nível nacional através do portal do MED (`acessoetp.ao`), com seriação centralizada/provincial e regras específicas de candidatura única por instituição.
+
+**Decisão.** **Confirmação do modelo de admissão 2027/2028 e faseamento da C02:**
+1. **Concurso de 2027/2028 Fora do SGE:** O processo de candidatura, prestação de provas e seriação para ingresso na 10ª classe no ano letivo 2027/2028 corre integralmente fora do SGE (via portal nacional do MED `acessoetp.ao` e/ou listas em papel/folha de cálculo homologadas pela Direção e Gabinete Provincial).
+2. **Importação na E1 via Capacidade C17:** Os candidatos formalmente admitidos à 10ª classe para 2027/2028 são carregados no SGE na entrega **E1** através do motor de migração e preparação de dados (`MIG-D06` / `MIG-F13`, `US-MIG-01`), gerando os registos base de candidatos admitidos com código de proveniência `IMPORTADO`.
+3. **Conversão Imediata em Aluno na Matrícula:** A matrícula da 10ª classe na E1 é processada pela Secretaria Pedagógica através da `US-MAT-01` (`RF-C03-01`), atribuindo o N.º de Processo Individual vitalício e abrindo o processo escolar a partir do registo de admitido importado.
+4. **Entrada em Produção da C02 na E5:** A capacidade C02 (Gestão de Candidaturas e Admissão, `US-ADM-01` a `US-ADM-04`) entra em produção na entrega **E5** (Ciclo Letivo Seguinte), cobrindo o concurso de admissão para o ano letivo 2028/2029 (incluindo eventual importação parametrizada de ficheiros de resultados do portal nacional `acessoetp.ao`).
+5. A questão `Q-017` é declarada **respondida**, estabilizando a linha de base das entregas E1 e E5 no `VIS-06 §5`.
+
+**Impacto.**
+- **VIS-06:** §5.1, §5.2 e tabela de capacidades confirmam formalmente a C02 na E5 e a importação de admitidos na E1 via C17 sob a `DEC-018`.
+- **MIG-10:** §2.1, §3.3 (`MIG-D06`), §7.1 (`MIG-F13`) e §9.1 confirmam a fonte `MIG-D06` como requisito formal da E1.
+- **DOC-02 / DOC-03 / DOC-07:** Exceção E1.9 do Fluxo 02, `EP-ADM`, `US-MAT-01` e `RF-C03-01` têm a sua dependência `Q-017` convertida em `DEC-018`.
+- **REG-12 / IDX-12:** `Q-017` passa a `respondida (DEC-018)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -593,7 +615,7 @@ As entrevistas dizem duas coisas:
 | Q-014 | Quais são os números reais: alunos por classe, curso e turno; turmas; professores; funcionários; pagamentos por dia em época de matrícula? | PLN-00 §5.2 e §5.3 | Metas da VIS-06; RNF (`08`) | Secretaria Pedagógica; Tesouraria | B | `parcial` | Mais de 1.120 alunos, 40–45 por turma, mais de 250 mini-pautas por trimestre, 4–7 turmas por professor — [[Sintese das Respostas da Fase B\|DESC-RESP]] §5. (2026-11-02) |
 | Q-015 | Com servidor local e réplica na nuvem, qual dos dois é a "autoridade central" sobre o estado do trimestre (DOC-05 §1.2, RN-10)? Como se resolvem conflitos entre um balcão *offline* e a nuvem? | DEC-006 | DEC-006; C18 | Equipa técnica | C | `aberta` | — |
 | Q-016 | O tratamento destes dados (menores, alojamento na nuvem, eventualmente fora de Angola) exige notificação ou autorização prévia da APD? Onde podem ficar alojados os dados? | DEC-003; DEC-006; L8 | DEC-006; C19 | APD; jurista | B/C | `aberta` | **Parcial** ([[11 - Protecao de Dados (APD)\|APD-11]] §10): alojar fora de Angola é transferência internacional (notificação ou autorização prévia da APD, arts. 33.º–34.º); proposta `RNF-P-APD-06` de alojar em Angola. Pendente: Q-APD-19 e Q-APD-27. |
-| Q-017 | Se o arranque for no início de 2027/2028, o concurso de admissão à 10ª Classe e as matrículas desse ano correm fora do SGE e os resultados são importados (C17)? A C02 só está prevista para a E5. | DEC-007; PLN-00 §6 | C02; C17; E1 | `SUB_PED`; `CHEFE_SEC_PED` | C | `aberta` | — |
+| Q-017 | Se o arranque for no início de 2027/2028, o concurso de admissão à 10ª Classe e as matrículas desse ano correm fora do SGE e os resultados são importados (C17)? A C02 só está prevista para a E5. | DEC-007; PLN-00 §6 | C02; C17; E1 | `SUB_PED`; `CHEFE_SEC_PED` | C | `respondida` | **Decidida na `DEC-018`** (2026-11-09): o concurso de admissão de 2027/2028 corre fora do SGE (portal nacional `acessoetp.ao` / listas homologadas); os admitidos são importados na E1 via C17 (`MIG-D06` / `MIG-F13`); a capacidade C02 entra em produção na E5 para o ano 2028/2029. |
 | Q-018 | Qual é a designação oficial do órgão provincial que recebe os mapas estatísticos? O `DOF-12` refere "Gabinete Provincial da Educação do Bengo" e o PLN-00 refere "Direção Provincial da Educação do Bengo". | Leitura DOC-04 / PLN-00 | C15; L3 | `CHEFE_SEC_PED` | B | `aberta` | **Parcial** (LEG-VER, Q-LEG-15): o DP n.º 93/21 usa "Gabinete Provincial da Educação". Falta confirmar a designação atual no Bengo. |
 | Q-019 | Com a C20 fora do âmbito (DEC-008), como continua a escola a controlar o património (a nota [[Governacao Escolar Ensino Tecnico MED]] atribui-o ao `SUB_ADM`)? | DEC-008 | Fronteira da C20 | `SUB_ADM` | B | `aberta` | **Parcial** (LEG-VER §3.10): o DP n.º 93/21, art. 18.º, a) atribui o património ao Subdirector Administrativo. Falta saber com que ferramenta é gerido hoje. |
 | Q-020 | O registo dos títulos escolares na **Plataforma Nacional de Certificação**, com QR Code dessa plataforma (DP n.º 227/25, segundo a LEG-VER), entra no âmbito da C09? Em que entrega, e por integração automática ou registo manual? A plataforma já está a funcionar (Q-LEG-14)? | LEG-VER §0.1 (8) e `COR-LEG-19` | C09; C18; E4 | Direção Provincial da Educação do Bengo; `CHEFE_SEC_PED` | B/C | `parcial` | A escola refere livros com campos para o código e QR da Plataforma Nacional de Certificação — [[Sintese das Respostas da Fase B\|DESC-RESP]] R17. Decidir o âmbito. (2026-11-02) |
@@ -684,3 +706,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-015`: central de avisos interna (`US-COM-01` a `06`) entra na E3 com canal impresso garantido e SMS complementar com teto orçamental; portal web (`US-COM-07`, `08`) permanece na E5 (`DEC-003`). `Q-037` e `Q-C12-01` respondidas; lacuna `L-RF-07` fechada (Issue #18). |
 | 2.0-rc2 | 2026-11-09 | `DEC-016`: avaliação de desempenho do pessoal (`Q-036`) e expediente geral de correspondência (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 e integrados na `DEC-008` (itens 9 e 10); `RF-C19-33` e `US-APD-07` passam a `Won't` (fora da linha de base); lacuna `L-RF-08` fechada (Issue #23). |
 | 2.0-rc2 | 2026-11-09 | `DEC-017`: modelo de governação, operação (N1/N2/N3) e sustentabilidade financeira do SGE formalizado; `Q-013` respondida (Issue #24). |
+| 2.0-rc2 | 2026-11-09 | `DEC-018`: concurso de admissão de 2027/2028 confirmado fora do SGE com importação dos admitidos na E1 via C17 (`MIG-D06`); C02 na E5 para 2028/2029; `Q-017` respondida (Issue #25). |
