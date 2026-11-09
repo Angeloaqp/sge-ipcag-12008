@@ -351,7 +351,7 @@ Todos os módulos, tabelas de base de dados, classes de código, APIs, relatóri
 | Indicador "Matriculados" | `MT` (na estatística) | Rodapé da Mini-Pauta (A10) | Nunca `MT` no sistema (`RN-17.14`). |
 | Ano Letivo | "Ano Lectivo" | Grafia pré-acordo nos impressos (A9) | Rótulo do modelo. |
 | Papel `DIR_TURMA` | **Director de Turma** / **Coordenador de Turma** | Boletins (A4); "Coordenador de Turma" é o nome no DP n.º 93/21, art. 5.º (`COR-LEG-22`) | Títulos configuráveis (`RN-16.20`). |
-| Papéis `DIR_GERAL`, `SUB_PED` | **Coordenadora Geral da Comissão de Gestão**, **Coordenador para a Área Pedagógica** | Declarações, boletins, pautas (A4) | Hipótese de mapeamento (`Q-028`, `Q-C14-14`). |
+| Papéis `DIR_GERAL`, `SUB_PED` | **Coordenadora Geral da Comissão de Gestão**, **Coordenador para a Área Pedagógica** | Declarações, boletins, pautas (A4) | Confirmado na `DEC-021`, a homologar (`Q-028`, `Q-C14-14`). |
 | Nota de Crédito (`NC`) | — | — | "Nota de Estorno" deixa de ser usada (`COR-LEG-03`). |
 | Acordo de Pagamento | "Plano de pagamento" | Entrevistas (R11) | — |
 
