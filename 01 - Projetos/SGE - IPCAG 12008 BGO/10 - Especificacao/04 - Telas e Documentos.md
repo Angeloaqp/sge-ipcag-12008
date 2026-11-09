@@ -325,8 +325,7 @@ flowchart TD
 ---
 
 ### `MOD-GOV-09`: Proteção de Dados (`ALT-04-01`) — APD-11
-- **Perfis:** `DIR_GERAL` e o **ponto de contacto de proteção de dados**, que não é um dos 12 papéis.
-  > 🟡 **Provisória** — quem é o ponto de contacto e com que papel no sistema; validar em **E1** (`DEC-009`). Bloqueado por `Q-APD-04`, `Q-APD-01`. Fonte: APD-11 §8.2.
+- **Perfis:** `DIR_GERAL` (responsável pelo tratamento) e `CHEFE_SEC_GER` (operador delegado da Secretaria Geral como ponto de contacto operacional dos titulares, conforme `DEC-019`, sem criação de novo papel RBAC).
 - **Funções:**
   1. **Pedidos dos titulares** (acesso, retificação, eliminação, oposição): registo, legitimidade do requerente, prazo de **60 dias úteis** com alerta aos 40 (RF-C19-08).
   2. **Relatório de acesso** do titular em PDF (RF-C19-09).

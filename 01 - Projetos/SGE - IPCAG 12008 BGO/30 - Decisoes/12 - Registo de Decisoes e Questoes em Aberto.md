@@ -67,6 +67,7 @@ tags:
 | [[#DEC-016 — Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (Q-036, Q-039)\|DEC-016]] | Issue #23 (`L-RF-08`); `Q-036`, `Q-039` | Âmbito: avaliação de desempenho e expediente geral | (a) Avaliação de desempenho e expediente geral fora das entregas E1–E5 (adicionados a DEC-008 como itens 9 e 10); RF-C19-33 e US-APD-07 passam a Won't | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-017 — Governação, Operação e Sustentabilidade Financeira do SGE (Q-013)\|DEC-017]] | Issue #24; `Q-013` | Governação, operação e sustentabilidade financeira | (a) IPCAG é o dono do sistema e financia custos locais, nuvem e SMS (sob teto) via receitas de propinas; operação local por ADMIN_TEC (N1/N2) e suporte N3 externo sob SLA; resiliência offline garantida | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-018 — Concurso de Admissão de 2027/2028 Fora do SGE e Importação dos Admitidos na E1 (Q-017)\|DEC-018]] | Issue #25; `Q-017` | Concurso de admissão 2027/2028: fora vs no SGE | (a) Concurso de admissão 2027/2028 corre fora do SGE (portal nacional `acessoetp.ao` / listas oficiais homologadas); admitidos importados na E1 via C17 (`MIG-D06`); capacidade C02 entra na E5 para 2028/2029 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-019 — Governação de Papéis: Ponto de Contacto APD e Separação entre Funções Pedagógicas e Financeiras (Q-APD-04, Q-C15-04)\|DEC-019]] | Issue #27; `Q-APD-04`, `Q-C15-04` | Governação de papéis: ponto de contacto APD e visibilidade financeira do DT | (a) Ponto de contacto APD tutelado pelo DIR_GERAL com operação pelo CHEFE_SEC_GER (sem 13º papel RBAC); DT e Professores sem acesso a dívidas nem semáforo financeiro (RN-17.3, DEC-012 confirmadas) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -595,6 +596,32 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-019 — Governação de Papéis: Ponto de Contacto APD e Separação entre Funções Pedagógicas e Financeiras (Q-APD-04, Q-C15-04)
+
+- **Origem:** Issue #27 ([issue #27](https://github.com/Angeloaqp/sge-ipcag-12008/issues/27)); questões `Q-APD-04` e `Q-C15-04`; [[01 - Dominio e Regras|DOC-01]] §2 (`RN-16.20`, `RN-17.3`); [[04 - Telas e Documentos|DOC-04]] `MOD-GOV-09`; [[11 - Protecao de Dados (APD)|APD-11]] §8.2 (`ALT-04-01`); [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]] `DEC-012` · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A questão estrutural `Q-APD-04` interrogava sobre a criação de um papel RBAC próprio para o ponto de contacto de proteção de dados perante os titulares e a APD, bem como a atribuição da gestão de contas. A questão `Q-C15-04` perguntava se o Director de Turma deveria ter acesso à situação e pendências financeiras dos seus alunos, o que colidiria com a segregação de funções definida na `RN-17.3` e na `DEC-012`.
+
+**Decisão.** **Definição formal das responsabilidades de proteção de dados e confirmação da segregação pedagógico-financeira:**
+1. **Ponto de Contacto de Proteção de Dados (`Q-APD-04`):**
+   - **Não se cria um 13.º papel RBAC:** O modelo de 12 papéis institucionais (`DOC-01 §2`) mais o perfil técnico `ADMIN_TEC` (`DEC-012`) é mantido sem alterações.
+   - **Titularidade e Tutela Institucional:** O Responsável pelo Tratamento perante a APD é a escola (IPCAG N.º 12008 / BGO), representada legalmente pelo Diretor Geral (`DIR_GERAL`).
+   - **Operação e Triagem:** A gestão operacional dos pedidos dos titulares (acesso, retificação, oposição) no módulo de Proteção de Dados (`MOD-GOV-09` / `EP-APD`) é atribuída ao **`DIR_GERAL`** e delegada ao **`CHEFE_SEC_GER`** (`Secretaria Geral`).
+   - **Contactos nos Avisos:** Nos avisos de privacidade (`AV-01` a `AV-06`) e minutas, o ponto de contacto oficial é o endereço institucional da escola (`secretaria@ipcag.ao` / contacto telefónico oficial da Secretaria).
+   - **Gestão Técnica de Contas:** Permanece atribuída ao perfil **`ADMIN_TEC`** (gestão de credenciais, sessões, MFA e dispositivos, sem acesso a dados pedagógicos ou financeiros, sob supervisão da Direção, conforme `DEC-012` e `DEC-017`).
+2. **Separação Estrita entre Pedagógico e Financeiro (`Q-C15-04`):**
+   - **Confirmação integral da `RN-17.3` e `DEC-012`:** O Diretor de Turma (`DIR_TURMA`) e os Professores (`PROF`) **NÃO têm visibilidade sobre dívidas, pagamentos, saldos ou o semáforo financeiro dos alunos**.
+   - As avaliações académicas, assiduidade e notas são puramente pedagógicas e não podem ser condicionadas nem enviesadas pelo estado das propinas na sala de aula.
+   - O controlo financeiro, cobrança e contacto com os encarregados em situação de mora competem em exclusivo à **Tesouraria (`OP_TES` / `SUB_ADM`)** e à Direção, sendo os avisos tramitados de forma reservada através da **Central de Avisos (`C12` / `EP-COM`)**.
+3. As questões estruturais `Q-APD-04` e `Q-C15-04` são declaradas **respondidas (`DEC-019`)**.
+
+**Impacto.**
+- **DOC-01 / DOC-04:** `RN-17.3`, `RN-16.20` e `MOD-GOV-09` mantêm a estrutura estável; `MOD-GOV-09` acessível a `DIR_GERAL` e `CHEFE_SEC_GER`.
+- **APD-11:** §8.2 e aviso institucional atualizados com os dados da Secretaria Geral sob `DEC-019`.
+- **REG-12 / IDX-12:** `Q-APD-04` e `Q-C15-04` passam a `respondida (DEC-019)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -707,3 +734,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-016`: avaliação de desempenho do pessoal (`Q-036`) e expediente geral de correspondência (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 e integrados na `DEC-008` (itens 9 e 10); `RF-C19-33` e `US-APD-07` passam a `Won't` (fora da linha de base); lacuna `L-RF-08` fechada (Issue #23). |
 | 2.0-rc2 | 2026-11-09 | `DEC-017`: modelo de governação, operação (N1/N2/N3) e sustentabilidade financeira do SGE formalizado; `Q-013` respondida (Issue #24). |
 | 2.0-rc2 | 2026-11-09 | `DEC-018`: concurso de admissão de 2027/2028 confirmado fora do SGE com importação dos admitidos na E1 via C17 (`MIG-D06`); C02 na E5 para 2028/2029; `Q-017` respondida (Issue #25). |
+| 2.0-rc2 | 2026-11-09 | `DEC-019`: governação de papéis; ponto de contacto APD tutelado pelo `DIR_GERAL` com operação pelo `CHEFE_SEC_GER` em `MOD-GOV-09` (sem 13º papel RBAC; `Q-APD-04`); confirmação estrita de que DT e Professores não acedem a dívidas nem situação financeira dos alunos (`RN-17.3`, `Q-C15-04`); Issue #27 fechada. |
