@@ -5,8 +5,8 @@ aliases:
   - "ARQ-13"
 created: 2026-11-09
 updated: 2026-11-10
-status: proposta
-version: "0.2"
+status: ativo
+version: "1.0"
 doc_id: "ARQ-13"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -136,7 +136,7 @@ Cada contexto expõe **uma interface pequena** (comandos e consultas) e esconde 
 
 ## 5. Registos de decisão técnica (ADR)
 
-Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite exige um ADR novo.
+Os 14 ADR estão **aceites** (T01, T02 e T04 pela `DEC-027` a 2026-11-09; os restantes pelo analista a 2026-11-10). Mudar um ADR aceite exige um ADR novo.
 
 ### ADR-T01 — TypeScript em todo o sistema *(aceite: `DEC-027`)*
 - **Decisão:** Node.js 22 LTS no servidor e React 18 na PWA, ambos em TypeScript estrito.
@@ -147,7 +147,7 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
 - **Decisão:** repositório GitHub privado `sge-ipcag-12008-sistema`, com pnpm workspaces. A especificação é referida pela etiqueta `v2.0` deste vault.
 - **Porquê:** um sistema com dinheiro e dados pessoais não deve ter o código público. A especificação continua aberta à consulta.
 
-### ADR-T03 — PostgreSQL 16 com RLS e migrações em SQL *(proposta)*
+### ADR-T03 — PostgreSQL 16 com RLS e migrações em SQL *(aceite 2026-11-10)*
 - **Decisão:** as migrações SQL escritas à mão são a fonte do esquema. O acesso faz-se com **Kysely** (query builder tipado), sem ORM pesado.
 - **Porquê:**
   - as travas do DOC-05 §4 exigem SQL explícito: triggers de imutabilidade fiscal, `audit_logs` só de acrescentar e RLS por papel;
@@ -163,7 +163,7 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
 - **Sem bibliotecas de sincronização de terceiros.**
 - **Caixa de correio na nuvem (`DEC-028`):** fora da escola, as operações vão cifradas para uma caixa na nuvem que só as guarda. O servidor da escola vai buscá-las, aplica-as e devolve o resultado pela mesma caixa. O formato das operações é o mesmo dentro e fora da escola. Os tablets de sala (`PARTILHADO_SALA`) usam a mesma fila e apagam os dados no fim da aula. Detalhe em [[13.1 - Topologia e Canais de Acesso|ARQ-13.1]] §2.2.
 
-### ADR-T05 — PWA com IndexedDB cifrado e PIN local *(proposta)*
+### ADR-T05 — PWA com IndexedDB cifrado e PIN local *(aceite 2026-11-10)*
 - **Decisão:**
   - React + Vite + `vite-plugin-pwa` (service worker com cache dos ecrãs do professor);
   - Dexie sobre IndexedDB;
@@ -173,7 +173,7 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
   - não precisa de loja de aplicações.
 - **A validar no protótipo P1 (§6).**
 
-### ADR-T06 — Autenticação própria *(proposta)*
+### ADR-T06 — Autenticação própria *(aceite 2026-11-10)*
 - **Decisão:**
   - palavras-passe com Argon2id;
   - TOTP para MFA, validado no servidor local, sem serviço externo;
@@ -181,22 +181,22 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
   - reautenticação antes das ações críticas (`RN-16.11` a `RN-16.14`).
 - **Porquê:** a entrada tem de funcionar sem internet (MOD-SEG-02), o que exclui fornecedores de identidade na nuvem.
 
-### ADR-T07 — PDF a partir de HTML, gerado no servidor *(proposta)*
+### ADR-T07 — PDF a partir de HTML, gerado no servidor *(aceite 2026-11-10)*
 - **Decisão:** os modelos dos `DOF` são HTML/CSS em A4, convertidos em PDF por **Playwright (Chromium)** no `worker`, com um pool aquecido para cumprir os 3 s. O QR leva o código HMAC-SHA256 (`RN-10.3`).
 - **Porquê:** o mesmo HTML serve para pré-visualizar e para imprimir. Os cabeçalhos e rodapés vêm de `modelos_documento`.
 - **A validar no protótipo P2.**
 
-### ADR-T08 — Adaptador fiscal como porta *(proposta; segue a `DEC-002`)*
+### ADR-T08 — Adaptador fiscal como porta *(aceite 2026-11-10; segue a `DEC-002`)*
 - **Decisão:** a interface `EmissorFiscal` tem as operações `emitir(FT|FR|RC)`, `anular(NC|RE)` e `estado()`. Há duas implementações:
   - `EmissorFalso`, para desenvolvimento e testes;
   - a do software certificado, quando a escola o escolher (`Q-002`, DSC-06).
 - O `worker` consome a `fila_emissao_fiscal` com repetição e alerta.
 - **Porquê:** a E1 pode ser construída e testada antes de se saber o fornecedor.
 
-### ADR-T09 — Avisos e SMS por adaptador *(proposta; E3, `DEC-015`)*
+### ADR-T09 — Avisos e SMS por adaptador *(aceite 2026-11-10; E3, `DEC-015`)*
 - **Decisão:** a interface `CanalSms` tem uma implementação falsa e a do fornecedor que for contratado. A janela 07h–20h, os tetos e as tentativas ficam no `worker` (`RN-14`).
 
-### ADR-T10 — Implantação com Docker Compose num servidor Ubuntu LTS *(proposta)*
+### ADR-T10 — Implantação com Docker Compose num servidor Ubuntu LTS *(aceite 2026-11-10)*
 - **Decisão:**
   - **Serviços:** `api`, `worker`, `web` (estáticos) e `postgres`, num servidor da escola com discos em espelho e UPS.
   - **Réplica:** replicação física contínua do PostgreSQL para a nuvem.
@@ -206,7 +206,7 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
 - **Três redes separadas (`DEC-028`):** administrativa (cabo), pedagógica (Wi-Fi) e quiosque (isolada, só chega ao endereço de consulta do aluno).
 - **A confirmar:** o fornecedor e o país da nuvem (`DEC-006`, notificação à APD — investigação #36).
 
-### ADR-T11 — Testes primeiro *(proposta)*
+### ADR-T11 — Testes primeiro *(aceite 2026-11-10)*
 - **Decisão:**
   - **Domínio:** desenvolvimento orientado por testes (skill `tdd`), com Vitest, nas regras do `dominio`. Cada teste cita a `RN`. Os exemplos numéricos do DOC-03 entram como casos de teste.
   - **API e base de dados:** testes de integração com PostgreSQL real em contentor (Testcontainers), incluindo RLS por papel.
@@ -214,19 +214,19 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
   - **Sincronização:** um teste de contrato e um teste de 7 dias simulados.
 - **Regra para os agentes:** nenhum código entra sem teste. O analista revê cada pull request (skill `code-review`).
 
-### ADR-T12 — Registos técnicos e monitorização *(proposta)*
+### ADR-T12 — Registos técnicos e monitorização *(aceite 2026-11-10)*
 - **Decisão:**
   - logs estruturados (pino), sem dados pessoais e com rotação no prazo `PC-27`;
   - verificação de saúde e alertas para o `ADMIN_TEC`;
   - `audit_logs` só para ações de negócio (DOC-05 §4.9).
 
-### ADR-T13 — Parâmetros como dados *(proposta; `DEC-009`)*
+### ADR-T13 — Parâmetros como dados *(aceite 2026-11-10; `DEC-009`)*
 - **Decisão:**
   - **Onde vivem:** fórmulas, pesos, limiares, prazos, textos e títulos estão nas tabelas `parametros_*` e `modelos_documento`. São versionados por ano letivo e lidos pelo `dominio` como argumentos.
   - **Fórmulas:** são expressões de um conjunto fechado de operações (média, média ponderada, `round_med`), escolhidas por configuração. Nunca é código livre.
 - **Porquê:** quando a escola responder aos questionários, muda-se a configuração e não o código.
 
-### ADR-T14 — Língua e formatos *(proposta)*
+### ADR-T14 — Língua e formatos *(aceite 2026-11-10)*
 - **Decisão:**
   - **Interface:** em português europeu/angolano.
   - **Formatos:** datas `DD/MM/AAAA`, moeda `AOA` com separador de milhares, horas em `Africa/Luanda`.
@@ -246,7 +246,7 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
 
 ## 7. Próximos passos
 
-1. **Aceitar ou ajustar** os ADR em `proposta` (T03, T05 a T14).
+1. ~~Aceitar ou ajustar os ADR em `proposta`~~ — **feito a 2026-11-10** (todos aceites).
 2. **Criar o repositório privado** e o esqueleto do monorepo (`ADR-T02`).
 3. **Fazer os protótipos P1 a P3.**
 4. **Escrever a especificação de construção da E1** (skill `to-spec`) e dividi-la em tickets (skill `to-tickets`). Começar pelos fundamentos:
@@ -259,5 +259,6 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
 
 | Versão | Data | Alteração |
 | :---: | :---: | :--- |
+| 1.0 | 2026-11-10 | Todos os ADR aceites pelo analista (T03, T05–T14); documento passa a `ativo` |
 | 0.2 | 2026-11-10 | `DEC-028`: caixa de correio na nuvem (`ADR-T04`), servidor de reserva e 3 redes (`ADR-T10`), ligação à ARQ-13.1 |
 | 0.1 | 2026-11-09 | Primeira versão (Fase 5 da [[00.3 - Proposta de Organizacao Documental\|ORG-00]]), a partir da v2.0 e da `DEC-027` |

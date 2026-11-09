@@ -131,7 +131,7 @@ flowchart LR
 
 | Código | Nota | Conteúdo | Estado |
 | :---: | :--- | :--- | :---: |
-| `ARQ-13` | [[13 - Arquitetura Tecnica]] | Tecnologia (TypeScript, PostgreSQL + RLS, PWA offline), estrutura do código, ADR `T01`–`T14`, riscos e protótipos | `proposta` |
+| `ARQ-13` | [[13 - Arquitetura Tecnica]] | Tecnologia (TypeScript, PostgreSQL + RLS, PWA offline), estrutura do código, ADR `T01`–`T14` (todos aceites), riscos e protótipos | `ativo` |
 | `ARQ-13.1` | [[13.1 - Topologia e Canais de Acesso]] | Servidor principal e de reserva, 3 redes, cópia online, caixa de correio na nuvem, quiosque do aluno, tablets de sala (`DEC-028`) | `ativo` |
 
 A seguir: os planos de construção por entrega, a começar pela E1.

@@ -817,7 +817,7 @@ As entrevistas dizem duas coisas:
 3. **Repositório:** novo e **privado**, separado deste vault. Liga à especificação pela etiqueta `v2.0`.
 4. **Offline:** fila própria de operações com chave de idempotência e o servidor como autoridade, como no DOC-05 §1.2. Sem bibliotecas de sincronização de terceiros.
 
-**Impacto.** O detalhe técnico, com os ADR `T01` a `T14`, os riscos e os protótipos, está no [[13 - Arquitetura Tecnica|ARQ-13]].
+**Impacto.** O detalhe técnico, com os ADR `T01` a `T14`, os riscos e os protótipos, está no [[13 - Arquitetura Tecnica|ARQ-13]]. **Atualização 2026-11-10:** o analista aceitou todos os ADR (`T01`–`T14`).
 
 ---
 
