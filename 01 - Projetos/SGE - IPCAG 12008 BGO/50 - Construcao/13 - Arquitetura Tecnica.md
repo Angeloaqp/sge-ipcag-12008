@@ -6,7 +6,7 @@ aliases:
 created: 2026-11-09
 updated: 2026-11-10
 status: ativo
-version: "1.0"
+version: "1.1"
 doc_id: "ARQ-13"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -247,7 +247,7 @@ Os 14 ADR estão **aceites** (T01, T02 e T04 pela `DEC-027` a 2026-11-09; os res
 ## 7. Próximos passos
 
 1. ~~Aceitar ou ajustar os ADR em `proposta`~~ — **feito a 2026-11-10** (todos aceites).
-2. **Criar o repositório privado** e o esqueleto do monorepo (`ADR-T02`).
+2. ~~Criar o repositório privado e o esqueleto do monorepo~~ — **feito a 2026-11-10**: [`Angeloaqp/sge-ipcag-12008-sistema`](https://github.com/Angeloaqp/sge-ipcag-12008-sistema) (privado). Pasta local `Desktop/sge-ipcag-12008-sistema`. Tem 5 pacotes, 10 testes a passar e CI no GitHub Actions. Usa Node 24 LTS, a versão instalada; o `ADR-T01` dizia 22.
 3. **Fazer os protótipos P1 a P3.**
 4. **Escrever a especificação de construção da E1** (skill `to-spec`) e dividi-la em tickets (skill `to-tickets`). Começar pelos fundamentos:
    - estrutura académica (C01);
@@ -259,6 +259,7 @@ Os 14 ADR estão **aceites** (T01, T02 e T04 pela `DEC-027` a 2026-11-09; os res
 
 | Versão | Data | Alteração |
 | :---: | :---: | :--- |
+| 1.1 | 2026-11-10 | Repositório privado e esqueleto criados (§7 passo 2) |
 | 1.0 | 2026-11-10 | Todos os ADR aceites pelo analista (T03, T05–T14); documento passa a `ativo` |
 | 0.2 | 2026-11-10 | `DEC-028`: caixa de correio na nuvem (`ADR-T04`), servidor de reserva e 3 redes (`ADR-T10`), ligação à ARQ-13.1 |
 | 0.1 | 2026-11-09 | Primeira versão (Fase 5 da [[00.3 - Proposta de Organizacao Documental\|ORG-00]]), a partir da v2.0 e da `DEC-027` |
