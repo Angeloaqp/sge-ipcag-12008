@@ -32,9 +32,9 @@ tags:
 ### Documentos Core da Especificação (`v2.0-rc1`, pasta `10 - Especificacao`)
 1. **[[01 - Dominio e Regras|DOC-01 — Domínio (DDD), Glossário, RBAC, Máquinas de Estado e Regras RN-01 a RN-18]]**
 2. **[[02 - Fluxos de Trabalho|DOC-02 — 16 Fluxos de Trabalho Ponta a Ponta (Swimlanes e Exceções)]]**
-3. **[[03 - User Stories|DOC-03 — 15 Épicos e 116 User Stories com Critérios BDD]]**
+3. **[[03 - User Stories|DOC-03 — 17 Épicos e 130 User Stories com Critérios BDD]]**
 4. **[[04 - Telas e Documentos|DOC-04 — Arquitetura da Informação (5 Workspaces) e 26 Documentos Oficiais (MED/AGT/GEPE)]]**
-5. **[[05 - Modelagem de Dados|DOC-05 — 119 Tabelas em 7 Grupos, Offline-First e RLS]]**
+5. **[[05 - Modelagem de Dados|DOC-05 — 120 Tabelas em 7 Grupos, Offline-First e RLS]]**
 6. **[[07 - Catalogo de Requisitos Funcionais|RF-07 — 224 Requisitos Funcionais por Capacidade e Entrega]]**
 
 > [!todo] Fase atual: organizar, verificar e congelar a especificação v2.0

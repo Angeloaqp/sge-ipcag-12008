@@ -43,7 +43,7 @@ tags:
 > > 🟡 **Provisória** — parâmetro configurável; validar em [ponto de controlo] (`DEC-009`). Fonte: [nota].
 >
 > Pontos de controlo: homologação → **E1**; recálculo de pautas → **E2**; regulamento interno → **E3**. Cada valor 🟡 vive numa **tabela de parâmetros** (§1.4), nunca numa constante do código. Uma divergência no ponto de controlo muda **parâmetros**, não a estrutura.
-> **Total de tabelas: 119** (44 da v1.2 + 75 novas), em **7 grupos** (§6).
+> **Total de tabelas: 120** (44 da v1.2 + 76 novas), em **7 grupos** (§6).
 
 ---
 
@@ -242,7 +242,7 @@ Todos os valores que a escola ainda tem de validar são **dados**, com versão, 
 > [!tip] 🎨 Diagrama ERD e Políticas RLS no Figma
 > O quadro do FigJam ainda mostra as 44 tabelas da v1.2: [Abrir Quadro DOC-05 no FigJam](https://www.figma.com/board/lGrzPwEBaxgExyewDXnEAt) ou [Ver Secção 05 no Ficheiro Geral](https://www.figma.com/board/OneLIwLlc2kuM1koaIeXG0). Será atualizado depois do congelamento da v2.0 (INT-V2 §5).
 
-Com **119 tabelas**, um único diagrama deixa de ser legível. O §2.1 mostra como os 7 grupos dependem uns dos outros; os §2.2 a §2.8 mostram as ligações dentro de cada grupo. Uma tabela de outro grupo aparece no diagrama quando é o ponto de ligação (por exemplo, `MATRICULAS_ANUAIS` nos Grupos 4 e 5). Cada tabela aparece pelo menos uma vez com todas as suas ligações principais.
+Com **120 tabelas**, um único diagrama deixa de ser legível. O §2.1 mostra como os 7 grupos dependem uns dos outros; os §2.2 a §2.8 mostram as ligações dentro de cada grupo. Uma tabela de outro grupo aparece no diagrama quando é o ponto de ligação (por exemplo, `MATRICULAS_ANUAIS` nos Grupos 4 e 5). Cada tabela aparece pelo menos uma vez com todas as suas ligações principais.
 
 ### 2.1 Mapa dos 7 Grupos
 
@@ -252,7 +252,7 @@ flowchart LR
     G2["Grupo 2<br>Utilizadores, Cargos e RH<br>18 tabelas"]
     G3["Grupo 3<br>Alunos, Matriculas e Processo<br>15 tabelas"]
     G4["Grupo 4<br>Vida Pedagogica e Disciplina<br>19 tabelas"]
-    G5["Grupo 5<br>Tesouraria e Cobranca<br>21 tabelas"]
+    G5["Grupo 5<br>Tesouraria e Cobranca<br>22 tabelas"]
     G6["Grupo 6<br>Documentos, Auditoria, APD, Sincronizacao e Migracao<br>24 tabelas"]
     G7["Grupo 7<br>Comunicacao<br>4 tabelas"]
 
@@ -419,7 +419,9 @@ erDiagram
     ENCARREGADOS_EDUCACAO ||--o{ AVISOS_COBRANCA : recebe
     AVISOS_COBRANCA |o--o| AVISOS : entregue_via
     CONTA_CORRENTE_PROPINAS ||--o{ AJUSTES_CONTA_CORRENTE : perdao_de_multa
-    BANCOS_ANGOLA ||--o{ EXTRATOS_BANCARIOS : extrato_da_conta
+    BANCOS_ANGOLA ||--o{ CONTAS_BANCARIAS_ESCOLA : conta_da_escola
+    CONTAS_BANCARIAS_ESCOLA ||--o{ EXTRATOS_BANCARIOS : extrato_da_conta
+    BANCOS_ANGOLA ||--o{ EXTRATOS_BANCARIOS : extrato_do_banco
     EXTRATOS_BANCARIOS ||--|{ LINHAS_EXTRATO_BANCARIO : contem
     LINHAS_EXTRATO_BANCARIO ||--o{ CORRESPONDENCIAS_CONCILIACAO : concilia
     BORDEROS_BANCARIOS ||--o{ CORRESPONDENCIAS_CONCILIACAO : confirmado_por
@@ -604,7 +606,7 @@ Abaixo detalha-se o papel de cada tabela, as suas informações principais e com
 
 ---
 
-### 3.5 Grupo 5 — Tesouraria, Documentos Fiscais (DP n.º 71/25), Cobrança e Conciliação (21 tabelas)
+### 3.5 Grupo 5 — Tesouraria, Documentos Fiscais (DP n.º 71/25), Cobrança e Conciliação (22 tabelas)
 
 > [!info] Base fiscal (`COR-LEG-01` a `06`)
 > **DP n.º 71/25, de 20 de Março** (Regime Jurídico das Facturas, que revogou o DP n.º 292/18), **DE n.º 683/25** e **Código do IVA, art. 12.º, n.º 1, l)**. Os documentos podem vir do **software de faturação certificado externo** (`DEC-002` pendente): as tabelas abaixo descrevem **o documento e as invariantes**, não quem o emite. Os nomes físicos `recibos_oficiais` e `notas_estorno` **mantêm-se** para não partir referências do DOC-03/DOC-04; o conteúdo passa a ser, respetivamente, **Fatura / Fatura-Recibo / Recibo** e **Nota de Crédito**.
@@ -860,18 +862,23 @@ Legenda: **L** lê · **E** escreve · **H** homologa · `—` sem acesso · *(E
 | **2 — Utilizadores, Cargos e RH** | 5 | 13 | **18** | `cargos_institucionais`, `atribuicoes_cargo`, `sessoes_utilizador`, `dispositivos_autorizados`, `fatores_autenticacao`, `codigos_acesso_presencial`, `eventos_autenticacao`, `parametros_seguranca` (C14); `planos_distribuicao_servico`, `regras_carga_letiva`, `habilitacoes_docentes`, `acumulacoes_docentes`, `indisponibilidades_docentes` (C04) |
 | **3 — Alunos, Matrículas e Processo** | 6 | 9 | **15** | `tipos_documento_processo`, `requisitos_documentais`, `documentos_processo_aluno`, `vinculos_encarregado_aluno`, `pedidos_alteracao_dados` (C03); `execucoes_passagem_ano`, `propostas_confirmacao_matricula` (C16); `documentos_saude`, `informacao_saude_matricula` (APD-11) |
 | **4 — Vida Pedagógica e Disciplina** | 9 | 10 | **19** | `aulas_registadas` (C04); `tipos_ocorrencia`, `medidas_disciplinares_catalogo`, `ocorrencias_disciplinares`, `medidas_aplicadas`, `processos_disciplinares`, `comportamento_trimestral`, `atrasos_alunos` (C13); `justificacoes_faltas` (`RN-03.4`, A8), `provas_unificadas` (`RN-01.4`) |
-| **5 — Tesouraria e Cobrança** | 10 | 11 | **21** | `parametros_cobranca`, `acordos_pagamento`, `parcelas_acordo`, `parcelas_acordo_prestacoes`, `avisos_cobranca`, `ajustes_conta_corrente`, `extratos_bancarios`, `linhas_extrato_bancario`, `correspondencias_conciliacao`, `periodos_conciliacao` (C10); `propostas_renovacao_beneficio` (C16) |
+| **5 — Tesouraria e Cobrança** | 10 | 12 | **22** | `parametros_cobranca`, `acordos_pagamento`, `parcelas_acordo`, `parcelas_acordo_prestacoes`, `avisos_cobranca`, `ajustes_conta_corrente`, `extratos_bancarios`, `linhas_extrato_bancario`, `correspondencias_conciliacao`, `periodos_conciliacao` (C10); `propostas_renovacao_beneficio` (C16); `contas_bancarias_escola` (`DEC-023`) |
 | **6 — Documentos, Auditoria, APD, Sincronização e Migração** | 4 | 20 | **24** | `ficheiros_digitalizados`, `cartoes_estudante`, `series_numeracao_documental` (C03); `indicadores_catalogo`, `instantaneos_indicadores`, `alertas_gestao` (C15); `modelos_documento` (INT-V2 §3.4–3.5); `avisos_privacidade`, `avisos_entregues`, `consentimentos`, `pedidos_titulares`, `politicas_conservacao`, `execucoes_conservacao`, `comunicacoes_destinatarios`, `incidentes_seguranca`, `consultas_portal_verificacao`, `requerimentos_declaracao` (APD-11); `lotes_migracao`, `ocorrencias_migracao`, `livros_registo_fisico` (MIG-10 `AJ-02` a `AJ-04`; `DEC-010`) |
 | **7 — Comunicação** *(novo)* | 0 | 4 | **4** | `modelos_mensagem`, `avisos`, `convocatorias`, `contactos_encarregado` (C12) |
-| **Total** | **44** | **75** | **119** | |
+| **Total** | **44** | **76** | **120** | |
 
-**Origem das 75 tabelas novas:** 3 da MIG-10 (`AJ-02` a `AJ-04`, `DEC-010`, 2026-11-05); 54 das notas de capacidades (C03 8, C04 10, C10 10, C12 4 de 5, C13 7, C14 8, C15 3, C16 4), 12 da APD-11 §8 e 6 de armazenamento pedido pelo Mapa de Integração e pelo DOC-01/DOC-04 (`areas_formacao`, `parametros_instituicao`, `parametros_avaliacao`, `modelos_documento`, `justificacoes_faltas`, `provas_unificadas`).
+**Origem das 76 tabelas novas:** 1 da `DEC-023` (`contas_bancarias_escola`, 2026-11-09); 3 da MIG-10 (`AJ-02` a `AJ-04`, `DEC-010`, 2026-11-05); 54 das notas de capacidades (C03 8, C04 10, C10 10, C12 4 de 5, C13 7, C14 8, C15 3, C16 4), 12 da APD-11 §8 e 6 de armazenamento pedido pelo Mapa de Integração e pelo DOC-01/DOC-04 (`areas_formacao`, `parametros_instituicao`, `parametros_avaliacao`, `modelos_documento`, `justificacoes_faltas`, `provas_unificadas`).
 
 **Propostas que não contam:** `consentimentos_comunicacao` (C12) — fundida em `consentimentos`; `avaliacoes_desempenho` e `pedidos_declaracao_servico` (`ALT-05-24`) — condicionadas à `Q-036`/`DEC-008`; `faltas_alunos` (renomeação sugerida pela C04) — não adotada, o nome `sumarios_e_faltas_alunos` mantém-se.
 
 ---
 
 ## 7. Alterações da v2.0
+
+### Contagem depois da `DEC-023` (2026-11-09)
+
+- `contas_bancarias_escola` passa a contar no Grupo 5 (22 tabelas) e no total (**120**), e entra no ERD do grupo.
+
 
 ### Plataforma Nacional de Certificação — [ticket #40](https://github.com/Angeloaqp/sge-ipcag-12008/issues/40) (2026-11-08)
 
