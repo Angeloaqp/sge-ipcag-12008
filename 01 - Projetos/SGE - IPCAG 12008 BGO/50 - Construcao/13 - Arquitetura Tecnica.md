@@ -4,9 +4,9 @@ aliases:
   - "Arquitetura Tecnica"
   - "ARQ-13"
 created: 2026-11-09
-updated: 2026-11-09
+updated: 2026-11-10
 status: proposta
-version: "0.1"
+version: "0.2"
 doc_id: "ARQ-13"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -25,7 +25,7 @@ tags:
 >
 > As **regras de domínio** (cálculo de médias, transições, semáforo, validações) vivem num pacote único, **sem dependências**, que corre igual no telemóvel e no servidor.
 >
-> - **Base:** especificação congelada [`v2.0`](https://github.com/Angeloaqp/sge-ipcag-12008/releases/tag/v2.0). As escolhas de fundo são a `DEC-027` do [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Os pormenores estão nos registos técnicos `ADR-T01` a `ADR-T14` (§5).
+> - **Base:** especificação congelada [`v2.0`](https://github.com/Angeloaqp/sge-ipcag-12008/releases/tag/v2.0). As escolhas de fundo são a `DEC-027` do [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Os pormenores estão nos registos técnicos `ADR-T01` a `ADR-T14` (§5). A topologia da escola e os canais de acesso (quiosque do aluno, tablets de sala, caixa de correio na nuvem) estão na [[13.1 - Topologia e Canais de Acesso|ARQ-13.1]] (`DEC-028`).
 > - **Quem constrói:** o analista responsável dirige e revê; agentes de IA escrevem o código, sempre com testes (`ADR-T11`).
 > - **Onde:** um repositório **novo e privado**, separado deste vault. Lê a especificação daqui, pela etiqueta `v2.0`.
 
@@ -161,6 +161,7 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
   - um reenvio com a mesma chave é ignorado;
   - uma pauta fechada rejeita a operação e gera conflito para o `SUB_PED`.
 - **Sem bibliotecas de sincronização de terceiros.**
+- **Caixa de correio na nuvem (`DEC-028`):** fora da escola, as operações vão cifradas para uma caixa na nuvem que só as guarda. O servidor da escola vai buscá-las, aplica-as e devolve o resultado pela mesma caixa. O formato das operações é o mesmo dentro e fora da escola. Os tablets de sala (`PARTILHADO_SALA`) usam a mesma fila e apagam os dados no fim da aula. Detalhe em [[13.1 - Topologia e Canais de Acesso|ARQ-13.1]] §2.2.
 
 ### ADR-T05 — PWA com IndexedDB cifrado e PIN local *(proposta)*
 - **Decisão:**
@@ -201,6 +202,8 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
   - **Réplica:** replicação física contínua do PostgreSQL para a nuvem.
   - **Backups:** **pgBackRest** com arquivo de WAL (RPO ≤ 15 min para dados fiscais) e backup diário cifrado (RNF-BKP).
   - **Atualizações:** só fora dos períodos de congelamento (OPS-09 §5.6).
+- **Servidor de reserva pronto (`DEC-028`):** um segundo servidor na escola recebe a replicação contínua e é promovido em minutos se o principal falhar.
+- **Três redes separadas (`DEC-028`):** administrativa (cabo), pedagógica (Wi-Fi) e quiosque (isolada, só chega ao endereço de consulta do aluno).
 - **A confirmar:** o fornecedor e o país da nuvem (`DEC-006`, notificação à APD — investigação #36).
 
 ### ADR-T11 — Testes primeiro *(proposta)*
@@ -256,4 +259,5 @@ Estado de cada ADR: `proposta` até o analista a aceitar. Mudar um ADR aceite ex
 
 | Versão | Data | Alteração |
 | :---: | :---: | :--- |
+| 0.2 | 2026-11-10 | `DEC-028`: caixa de correio na nuvem (`ADR-T04`), servidor de reserva e 3 redes (`ADR-T10`), ligação à ARQ-13.1 |
 | 0.1 | 2026-11-09 | Primeira versão (Fase 5 da [[00.3 - Proposta de Organizacao Documental\|ORG-00]]), a partir da v2.0 e da `DEC-027` |

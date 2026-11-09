@@ -77,6 +77,7 @@ baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 | [[#DEC-025 — Verificação de Documentos Pré-SGE: Exclusão do Portal Público e Autenticação por Reemissão (MIG-Q20)\|DEC-025]] | Issue #32; `MIG-Q20` | Verificação de documentos emitidos antes do SGE | (a) Exclusão do portal público (US-DOC-03 restrito a códigos com hash/QR do SGE/Plataforma Nacional); verificação interna pela Secretaria Pedagógica; autenticação pública requer emissão de 2.ª via no SGE | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-026 — Enquadramento e Parametrização do Regime de IVA do IPCAG (Q-LEG-19, Q09-02)\|DEC-026]] | Issue #22; `Q-LEG-19`, `Q09-02` | Regime de IVA e obrigações fiscais do IPCAG | (a) SGE configurável multi-regime em parametros_instituicao (GERAL, SIMPLIFICADO, EXCLUSAO) com isenção material do ensino (CIVA art. 12.º n.º 1 l); NIF, regime concreto e contabilista remetidos como HITL para o questionário DSC-06-SUB-ADM em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-027 — Arquitetura técnica de base\|DEC-027]] | Fase 5 (ORG-00) | Arquitetura técnica de base | TypeScript em todo o sistema; construção pelo analista com agentes de IA e testes; repositório novo e privado; sincronização offline por fila própria (DOC-05 §1.2) | `decidida` | 2026-11-09 | Analista responsável do projeto | não exige (decisão técnica) |
+| [[#DEC-028 — Topologia da escola e canais de acesso (pedido de alteração à v2.0)\|DEC-028]] | Ideia do analista (2026-11-10); ARQ-13.1 | Topologia e canais de acesso | Quiosque do aluno na E3; telemóvel + tablet de sala; caixa de correio na nuvem para sincronizar fora da escola; servidor de reserva pronto; três redes separadas | `decidida` | 2026-11-10 | Analista responsável do projeto | pendente (altera `DEC-003`) |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -817,6 +818,34 @@ As entrevistas dizem duas coisas:
 4. **Offline:** fila própria de operações com chave de idempotência e o servidor como autoridade, como no DOC-05 §1.2. Sem bibliotecas de sincronização de terceiros.
 
 **Impacto.** O detalhe técnico, com os ADR `T01` a `T14`, os riscos e os protótipos, está no [[13 - Arquitetura Tecnica|ARQ-13]].
+
+---
+
+### DEC-028 — Topologia da escola e canais de acesso (pedido de alteração à v2.0)
+
+- **Origem:** ideia do analista (2026-11-10), analisada em [[13.1 - Topologia e Canais de Acesso|ARQ-13.1]] · **Estado:** `decidida` · **Data:** 2026-11-10 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente, porque altera o âmbito (`DEC-003`) e o orçamento (`DEC-017`)
+- **Natureza:** é o **primeiro pedido de alteração à v2.0 congelada**. Será integrado numa versão `2.1` da especificação.
+
+**Contexto.** O analista descreveu a organização pretendida:
+- um computador principal com o sistema e a rede usada por todas as áreas;
+- um PC para os alunos consultarem as notas e um PC para os professores;
+- uma base de dados online sempre atualizada;
+- tablets e telefones para lançar faltas online ou localmente.
+
+A análise (ARQ-13.1 §1) mostrou que a ideia coincide com a v2.0 no essencial. Também mostrou que a base online tem de ser um **espelho** do servidor da escola, e não a base principal, para os balcões continuarem a funcionar sem internet (`RN-10`, RNF-DIS-02).
+
+**Decisão.**
+1. **Quiosque do aluno na E3:** consulta local, com o cartão QR e um PIN, só das notas homologadas, das faltas, do horário e dos avisos do próprio aluno, numa rede isolada. O portal online continua na E5. **Altera a `DEC-003`**, que só dava acesso aos alunos na E5.
+2. **Telemóvel do professor e tablet de sala:** o tablet é um dispositivo da escola (`PARTILHADO_SALA`). O professor entra com o seu PIN, e o tablet apaga os dados locais no fim da aula. Os PCs da sala dos professores usam sessão pessoal curta e não guardam dados offline.
+3. **Caixa de correio na nuvem:** os telemóveis e os tablets sincronizam também fora da escola, deixando as operações cifradas numa caixa que **não decide nada**. O servidor da escola vai buscá-las e continua a ser a única autoridade.
+4. **Servidor de reserva pronto:** cópia contínua para um segundo computador na escola, que assume em minutos (RNF-BKP-02/03).
+5. **Três redes separadas:** administrativa (cabo), pedagógica (Wi-Fi) e quiosque (isolada).
+
+**Impacto (a integrar na v2.1).**
+- **Regras e dados:** `RN-16.13` (tipo de sessão do posto partilhado), `RN-16.15` e DOC-05 `dispositivos_autorizados` (tipo `PARTILHADO_SALA`).
+- **Âmbito e documentos:** DOC-04 (novo módulo do quiosque), C12/C14 §11 (contas de aluno a partir da E3), APD-11 (aviso de privacidade do quiosque; caixa de correio fora da escola).
+- **Infraestrutura:** OPS-09 §4 (servidor de reserva e 3 redes) e ARQ-13 (`ADR-T04`, `ADR-T10`).
+- **Entregas:** VIS-06 §5 (quiosque na E3).
 
 ---
 
