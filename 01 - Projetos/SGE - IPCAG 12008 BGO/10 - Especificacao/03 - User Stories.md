@@ -1924,7 +1924,7 @@ tags:
     - **Quando** o `COORD_TURNO` aplica a medida "retenção do cartão de estudante",
     - **Então** a ocorrência passa a `Medida Aplicada`, a medida fica com data, decisor e fundamento, e o `DIR_TURMA` é notificado no sistema.
   - **Cenário 2 (Bloqueio — Suspensão sem processo):**
-    - **Dado** uma ocorrência `MUITO_GRAVE`,
+    - **Dado** uma ocorrência `MUITO_GRAVE` (🟡 valor ilustrativo da escala de gravidade do regulamento interno — lista 46, `Q-C13-04`),
     - **Quando** o `COORD_TURNO` tenta aplicar "suspensão",
     - **Então** o sistema recusa: a suspensão só é aplicada pela Direção num processo disciplinar (`RN-15.5`, `US-DIS-03`).
   - **Cenário 3 (Exceção — Ocorrência no aluno errado):**
@@ -1939,7 +1939,7 @@ tags:
 - **História:** *Como* **Direção (`DIR_GERAL`, com instrução pelo `SUB_PED`)**, *quero* **instaurar, instruir e decidir um processo disciplinar**, *para* **que uma suspensão respeite o direito de defesa do aluno e do encarregado**.
 - **Rastreabilidade:** `RN-15.6`, `RN-15.5` | `US-COM-03` | `DOF-24` | `MOD-DIS-04`.
 - **Prioridade (proposta):** `Should` | **Entrega:** `E5`.
-- **Pré-condições:** Ocorrência `MUITO_GRAVE` ou que pode levar a suspensão; prazos dos passos 🟡 parametrizados pelo regulamento interno (`Q-C13-06`).
+- **Pré-condições:** Ocorrência `MUITO_GRAVE` (🟡 valor ilustrativo — lista 46, `Q-C13-04`) ou que pode levar a suspensão; prazos dos passos 🟡 parametrizados pelo regulamento interno (`Q-C13-06`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Decisão e notificação):**
     - **Dado** um processo `Instaurado` com instrutor nomeado, audição do aluno e do encarregado registada e relatório anexado,
@@ -3139,6 +3139,10 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 ---
 
 ## Alterações da v2.0
+
+### Correções da verificação VER-02 — #46/#47 (2026-11-09)
+
+- **`US-DIS-02` Cenário 2 e `US-DIS-03` (pré-condições):** o valor `MUITO_GRAVE` fica marcado 🟡 como valor ilustrativo da escala de gravidade do regulamento interno (lista 46, `Q-C13-04`), como no `US-DIS-04` (#47).
 
 ### Correções da verificação VER-02 — #45 (2026-11-09)
 

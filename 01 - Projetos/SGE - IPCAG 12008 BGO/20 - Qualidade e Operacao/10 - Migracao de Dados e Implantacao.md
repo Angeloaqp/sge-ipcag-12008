@@ -301,7 +301,7 @@ O `N.º de Processo Individual` é **vitalício** e **nunca muda** (`RN-05`). Co
 
 ### 3.3 Ajustes propostos ao DOC-05
 > [!success] Decidido em 2026-11-05 — [[12 - Registo de Decisoes e Questoes em Aberto#DEC-010 — Integrar os ajustes da migração no modelo de dados|DEC-010]]
-> Todos os ajustes foram aceites e estão integrados no [[05 - Modelagem de Dados|DOC-05]]: 3 tabelas novas no Grupo 6 (119 no total) e a §4.10 (registos migrados). Os BI ficam opcionais com pendência, a conta técnica é própria (`RN-16.21`) e a consola é o `MOD-MIG-01` (DOC-04, E1). A tabela abaixo fica como histórico.
+> Todos os ajustes foram aceites e estão integrados no [[05 - Modelagem de Dados|DOC-05]]: 3 tabelas novas no Grupo 6 (o DOC-05 tem hoje 121 tabelas) e a §4.10 (registos migrados). Os BI ficam opcionais com pendência, a conta técnica é própria (`RN-16.21`) e a consola é o `MOD-MIG-01` (DOC-04, E1). A tabela abaixo fica como histórico.
 
 O DOC-05 v1.2 não prevê dados migrados. Os ajustes seguintes são **propostas** para a próxima versão do DOC-05 (esta nota não altera o DOC-05):
 
@@ -692,12 +692,12 @@ A conta técnica é desativada logo após o Termo de Aceitação da última onda
 1. **O SGE não recria recibos antigos** em `recibos_oficiais`. Esta tabela só contém documentos fiscais emitidos pelo SGE (`RN-09`); criar recibos "retroativos" quebraria a sequência e simularia uma emissão que não aconteceu.
 2. **Migra-se o efeito, não o documento**: prestações liquidadas antes do corte entram como `PAGA`, com `origem_registo = MIGRADO` e a referência ao recibo antigo, sem `itens_recibo` (`AJ-09`); prestações em dívida entram como `EM_ATRASO_COM_MULTA` ou `A_VENCER`.
 3. **Os documentos fiscais antigos ficam no seu arquivo ou sistema de origem**, que tem de continuar consultável. O prazo de conservação obrigatório não está confirmado (`MIG-Q37`, verificação legal).
-4. **Recibo antigo a anular depois do arranque** (ex.: talão falso descoberto mais tarde): a `notas_estorno` exige um recibo do SGE e não serve. Proposta: (a) a correção fiscal faz-se no regime ou sistema que emitiu o recibo — **procedimento a confirmar com o contabilista e na decisão `DEC-002`** (`MIG-Q14`); (b) no SGE, a dívida é reaberta por `AJUSTE_SALDO_MIGRADO` com despacho do `SUB_ADM`, e o borderô migrado passa a `INVALIDADO_POR_FRAUDE`.
+4. **Recibo antigo a anular depois do arranque** (ex.: talão falso descoberto mais tarde): a `notas_estorno` exige um recibo do SGE e não serve. Proposta: (a) a correção fiscal faz-se no regime ou sistema que emitiu o recibo — **procedimento a confirmar com o contabilista** (o emissor fiscal é o software certificado — `DEC-002` (b); `MIG-Q14`); (b) no SGE, a dívida é reaberta por `AJUSTE_SALDO_MIGRADO` com despacho do `SUB_ADM`, e o borderô migrado passa a `INVALIDADO_POR_FRAUDE`.
 5. **Numeração dos recibos**: a sequência do SGE começa no arranque. Se é permitido começar uma nova sequência, sobretudo a meio de um ano (Cenário B), e se a sequência é por ano civil ou letivo, são questões em aberto (`MIG-Q15`, `DEC-002`).
 6. **Fecho de caixa**: nenhuma sessão de caixa é migrada. A primeira sessão do SGE abre no dia do arranque; os totais anteriores ficam nos mapas antigos.
 7. **Borderôs antigos** (`MIG-D29`): entram em `borderos_bancarios` com `origem_registo = MIGRADO` e o saldo utilizado inicial (`AJ-10`). Desde o primeiro dia, o `UNIQUE(banco + n.º de operação)` impede que um talão já aceite antes do SGE seja apresentado de novo — é o principal ganho anti-fraude da migração.
 8. **Emolumentos pagos e não consumidos** (`MIG-D30`): não há como criar um `item_recibo` sem recibo. Proposta: **esvaziar a fila antes do corte** (emitir no processo antigo os documentos já pagos) e tratar o resto por isenção formal com despacho do `DIR_GERAL` ou `SUB_ADM`, citando o recibo antigo (`MIG-Q17`).
-9. Se `DEC-002` escolher integrar com software de faturação já certificado, os pontos 4 e 5 passam a depender desse software; o SGE regista apenas o saldo.
+9. Com a `DEC-002` decidida na opção (b) (integração com software de faturação certificado via adaptador fiscal), os pontos 4 e 5 dependem desse software: a anulação e a numeração fiscal são do emissor certificado, e o SGE regista apenas o saldo. 🟡 O software em uso e o procedimento concreto ficam por recolher (`Q-002`, `MIG-Q14`; questionário `DSC-06-SUB-ADM`).
 
 ### 7.5 `RN-10`: Livro/Folha/Termo, documentos já emitidos e QR
 1. **Ponto de passagem por livro**: a partir de uma data, cada livro físico passa a ser preenchido a partir do SGE. O último termo usado é verificado presencialmente e fotografado (`MIG-F20`); o SGE só atribui coordenadas **depois** desse ponto.
@@ -933,7 +933,7 @@ Estas questões devem entrar no [[Guiao de Entrevistas por Cargo]] da Fase B e s
 | `MIG-Q17` | Há documentos pagos e ainda não emitidos ou levantados? Quantos e onde estão registados? | `CHEFE_SEC_PED`, `CHEFE_SEC_GER` | E1 |
 | `MIG-Q18` | Que livros de registo físico existem (termos de exame, certificados/diplomas, atas de PAP, outros)? Quantos termos por folha? Qual o último número usado em cada um? Como se abre um livro novo? | `CHEFE_SEC_PED` | E4 |
 | `MIG-Q19` | Existe registo dos certificados e diplomas já emitidos? Desde quando? | `CHEFE_SEC_PED` | E4 |
-| `MIG-Q20` | O portal público deve verificar documentos antigos sem QR (opções do §7.5)? | `DIR_GERAL` (+ nota 11) | E4 |
+| `MIG-Q20` | O portal público deve verificar documentos antigos sem QR (opções do §7.5)? **Respondida (`DEC-025`):** não; verificação interna pela Secretaria Pedagógica e 2.ª via com QR no SGE. | `DIR_GERAL` (+ nota 11) | E4 |
 | `MIG-Q21` | Como se emite hoje a 2.ª via de um certificado antigo? Recebe nova coordenada no livro? Que emolumento se cobra? | `CHEFE_SEC_PED` | E4 |
 | `MIG-Q22` | Quantos alunos têm BI, só cédula ou nenhum documento? A escola aceita registar o aluno com pendência? Pode fornecer amostras para validar o formato dos números? | `CHEFE_SEC_PED` | E1 |
 | `MIG-Q23` | Os nomes devem ser guardados e impressos em maiúsculas ou com iniciais maiúsculas? | `CHEFE_SEC_PED` | — |

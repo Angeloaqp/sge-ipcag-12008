@@ -5,9 +5,9 @@ aliases:
   - "Protecao de Dados SGE"
   - "APD-11"
 created: 2026-11-02
-updated: 2026-11-08
+updated: 2026-11-09
 status: rascunho
-version: "0.3"
+version: "0.4"
 doc_id: "APD-11"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -346,7 +346,7 @@ Se `HOS` (ou `NUV`) ficar fora de Angola, a seta para a nuvem é uma **transfer�
 
 | ID | Tratamento e finalidade | Tabelas / documentos | Dados e titulares | Base legal | Quem acede (RBAC) | Destinatários externos | APD |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :---: |
-| **TRT-02** | Contas e autenticação: controlo de acesso por cargo | `usuarios_sistema` | Nome de utilizador ou email institucional, *hash* da palavra-passe, cargo, estado — **funcionários** | CTR; SEG | Gestão de contas **não definida** (C14) — `Q-APD-04` | — | N |
+| **TRT-02** | Contas e autenticação: controlo de acesso por cargo | `usuarios_sistema` | Nome de utilizador ou email institucional, *hash* da palavra-passe, cargo, estado — **funcionários** | CTR; SEG | Gestão técnica de contas pelo `ADMIN_TEC` (C14; `DEC-019`, `DEC-012`) | — | N |
 | **TRT-03** | Cadastro de pessoal: gestão da relação de trabalho | `funcionarios_docentes`; `MOD-GER-RH` | N.º de agente, nome, **BI**, telefone, categoria, vínculo (Estado MED vs. Diocese) — **funcionários** | CTR; OL (legislação laboral — por identificar) | `SUB_ADM`, `CHEFE_SEC_GER` (escrita); `DIR_GERAL`; `SUB_PED` e `CHEFE_SEC_PED` (docentes); `COORD_*` (âmbito); `PROF` (o próprio) — linha 24 | 🔶 MED (professores do quadro) e Diocese (comparticipados) — `Q-APD-12` | N |
 | **TRT-04** | Distribuição de serviço docente, dosificação e júris | `alocacoes_docentes`, `dosificacoes_trimestrais`; papéis de tutor, orientador e júri em `processos_13_classe` | Identificação do professor, períodos de regência, motivo de substituição — **funcionários** | CTR | DOC-01 linhas 3, 9 e 16 | — | N |
 | **TRT-05** | Assiduidade do pessoal (ponto) | `assiduidade_funcionarios` | Data, turno, horas, estado (falta justificada/injustificada) — **funcionários**. A tabela **não guarda motivos clínicos** e assim deve continuar | CTR | `CHEFE_SEC_GER`; `COORD_TURNO` (o seu turno); `SUB_ADM`; `DIR_GERAL`; `PROF` (o próprio) | 🔶 MED/Diocese (efetividade) — `Q-APD-12` | N |
@@ -475,7 +475,8 @@ O núcleo do SGE (inscrição, matrícula, avaliação, certificação, tesourar
 ### 4.4 Modelo de cláusula informativa (base para AV-02)
 
 > [!example] Cláusula para a Ficha de Matrícula (`DOF-03`) — rascunho a validar por jurista
-> **Proteção de dados pessoais (Lei n.º 22/11, de 17 de Junho).** O responsável pelo tratamento é **[entidade responsável — `Q-APD-01`]**, com sede no Bairro Modular do Panguila, Município do Dande, Bengo, contacto **[email/telefone do ponto de contacto — `Q-APD-04`]**.
+> **Proteção de dados pessoais (Lei n.º 22/11, de 17 de Junho).** O responsável pelo tratamento é **[entidade responsável — campo de `parametros_instituicao` (`DEC-020`); valor 🟡 `Q-APD-01`, questionário `DSC-08-DIR-GERAL`]**, com sede no Bairro Modular do Panguila, Município do Dande, Bengo, contacto **[email/telefone institucional da Secretaria Geral — 🟡 a confirmar: `Q-APD-04`, questionário `DSC-07-SEC-GER`]**.
+> *(Ponto de contacto: operado pelo `CHEFE_SEC_GER` sob a tutela do `DIR_GERAL` — `DEC-019`.)*
 > Os dados desta ficha servem para gerir a matrícula, a vida escolar, a avaliação, a certificação e os pagamentos do aluno. São **obrigatórios** os campos assinalados; sem eles a matrícula não pode ser efetuada.
 > São comunicados ao **Ministério da Educação e aos seus serviços de estatística** (em mapas agregados), à **Administração Geral Tributária** (documentos fiscais), às **empresas de estágio** (na 13ª Classe), a **outras escolas** em caso de transferência e, através do código de verificação impresso, a quem o aluno apresentar um documento oficial.
 > O registo académico (matrículas, notas, pautas, certificados) é conservado **permanentemente**; os documentos financeiros durante **[prazo — PC-10]**; os restantes dados nos prazos indicados em **[local do aviso completo]**.
@@ -737,7 +738,7 @@ Proposta a validar com a especificação da C12 (`DEC-003`). As mensagens podem 
 
 | ID | Onde | Alteração proposta | Requisito |
 | :---: | :--- | :--- | :--- |
-| ALT-04-01 | **Novo módulo `MOD-GOV-09` — Proteção de Dados** (Workspace 01; era `MOD-GOV-06`, renumerado no DOC-04 por conflito com a C14) | Pedidos dos titulares, consentimentos, políticas e lotes de conservação, incidentes, registo de comunicações e relatório de acesso. Perfis: `DIR_GERAL` e `CHEFE_SEC_GER` (operador delegado da Secretaria Geral conforme `DEC-019`, sem criar 13.º papel RBAC; fecha `Q-APD-04`). | RF-P-APD-08…13, 22, 23 |
+| ALT-04-01 | **Novo módulo `MOD-GOV-09` — Proteção de Dados** (Workspace 01; era `MOD-GOV-06`, renumerado no DOC-04 por conflito com a C14) | Pedidos dos titulares, consentimentos, políticas e lotes de conservação, incidentes, registo de comunicações e relatório de acesso. Perfis: `DIR_GERAL` (tutela, responsável perante a APD) e `CHEFE_SEC_GER` (operação dos pedidos como ponto de contacto delegado da Secretaria Geral, conforme `DEC-019`, sem criar 13.º papel RBAC; fecha `Q-APD-04`). 🟡 Email e telefone do ponto de contacto a confirmar (`Q-APD-04`; questionário `DSC-07-SEC-GER`). | RF-P-APD-08…13, 22, 23 |
 | ALT-04-02 | `MOD-PED-ADM` e `DOF-01` | Aviso AV-01; identificação do representante legal do candidato. | RF-P-APD-01, 03 |
 | ALT-04-03 | `DOF-02` | Duas versões: pública minimizada e integral de arquivo. | RF-P-APD-15 |
 | ALT-04-04 | `MOD-PED-MAT` e `DOF-03` | Aviso AV-02 (cláusula do §4.4) e caixas de consentimento separadas; atestado médico só como "entregue sim/não"; assinatura do **representante legal**. | RF-P-APD-01, 02, 07 |
@@ -775,10 +776,10 @@ Proposta a validar com a especificação da C12 (`DEC-003`). As mensagens podem 
 
 | ID | Questão | Bloqueia | Fase |
 | :---: | :--- | :--- | :---: |
-| **Q-APD-01** | Quem é a **pessoa coletiva responsável** pelo tratamento (o IPCAG tem personalidade jurídica própria ou é a Diocese de Caxito)? Quem assina a notificação à APD? Os documentos reais são assinados por uma **Comissão de Gestão** e usam os n.ºs **12008 e 8009** (DESC-L1 A3, A4). | Notificação; AV-nn | A/B |
-| **Q-APD-02** | O IPCAG é tratado como **sector privado/cooperativo** ou **sector público** (escola comparticipada)? No sector público, os ficheiros exigem diploma legal (art. 40.º). Os cabeçalhos reais mostram "Governo da Província do Bengo / Gabinete Provincial da Educação" e não a Diocese, e o pessoal tem n.º de agente (DESC-L1 A14, A15). | Bases legais | B |
+| **Q-APD-01** | Quem é a **pessoa coletiva responsável** pelo tratamento (o IPCAG tem personalidade jurídica própria ou é a Diocese de Caxito)? Quem assina a notificação à APD? Os documentos reais são assinados por uma **Comissão de Gestão** e usam os n.ºs **12008 e 8009** (DESC-L1 A3, A4). | Notificação; AV-nn | A/B — **Estrutura resolvida na `DEC-020`** (campos em `parametros_instituicao`); valor 🟡 a recolher (`DSC-08-DIR-GERAL`). |
+| **Q-APD-02** | O IPCAG é tratado como **sector privado/cooperativo** ou **sector público** (escola comparticipada)? No sector público, os ficheiros exigem diploma legal (art. 40.º). Os cabeçalhos reais mostram "Governo da Província do Bengo / Gabinete Provincial da Educação" e não a Diocese, e o pessoal tem n.º de agente (DESC-L1 A14, A15). | Bases legais | B — **Respondida na `DEC-020`** (SGE desacoplado do título jurídico; tipo de entidade e ato constitutivo em `parametros_instituicao`); facto 🟡 a confirmar com a cópia do alvará/acordo (`DSC-08-DIR-GERAL`). |
 | **Q-APD-03** | O IPCAG **já notificou a APD** algum tratamento (alunos, pessoal, videovigilância)? Tem algum registo ou número de processo na APD? | Plano de conformidade | B |
-| **Q-APD-04** | Quem será o **ponto de contacto de proteção de dados** (não é um dos 12 cargos)? Quem gere as contas de utilizador (C14)? | `MOD-GOV-09`; TRT-02 | A | **Respondida na `DEC-019`** (tutela `DIR_GERAL`, operação delegada ao `CHEFE_SEC_GER` em `MOD-GOV-09` sem novo papel RBAC; gestão técnica de contas pelo `ADMIN_TEC`). |
+| **Q-APD-04** | Quem será o **ponto de contacto de proteção de dados** (não é um dos 12 cargos)? Quem gere as contas de utilizador (C14)? | `MOD-GOV-09`; TRT-02 | A — **Respondida na `DEC-019`** (tutela `DIR_GERAL`, operação delegada ao `CHEFE_SEC_GER` em `MOD-GOV-09` sem novo papel RBAC; gestão técnica de contas pelo `ADMIN_TEC`). 🟡 Email e telefone a confirmar (`DSC-07-SEC-GER`). |
 | **Q-APD-05** | Para que serve o **atestado médico** pedido na matrícula (a lista de documentos real ainda não foi recebida — DESC-L1 §6)? É exigido por norma do MED? Que regra do regulamento interno se aplica às faltas por doença sem atestado? | TRT-11; CON-01/02 | B |
 | **Q-APD-06** | Para que se usam hoje as **fotografias** dos alunos (processo, cartão, sítio, redes sociais, festas)? | TRT-12; CON-03 | B |
 | **Q-APD-07** | As **pautas de admissão** e as **pautas gerais** são afixadas em público ou publicadas na internet? Com que colunas? Há norma do MED (ex.: DE n.º 361/26) que obrigue à publicação? | TRT-08, TRT-17; PC-03 | B |
@@ -817,6 +818,9 @@ Proposta a validar com a especificação da C12 (`DEC-003`). As mensagens podem 
 ---
 
 ## 10. Impacto na DEC-006 (Alojamento)
+
+> [!note] Enquadramento institucional da notificação (`DEC-020`, 2026-11-09)
+> A notificação à APD é instruída sem depender do título jurídico exato do IPCAG: o **tipo de entidade / enquadramento** (escola pública de gestão confiada à Igreja — DP n.º 302/19 — ou escola privada em parceria — DP n.º 37/23) e o **ato constitutivo** (alvará ou acordo, n.º e data) são campos de `parametros_instituicao` (DOC-05; `RF-C01-07`). Prevê-se a representação pela Diocese de Caxito e pelo IPCAG (arts. 27.º e 28.º da Lei n.º 22/11). 🟡 Os valores reais e a cópia do documento constitutivo são recolhidos no questionário `DSC-08-DIR-GERAL` (PC-E1, `DEC-009`); `Q-APD-01` e `Q-APD-02` ficam resolvidas no plano estrutural.
 
 ```mermaid
 flowchart TD
@@ -867,3 +871,4 @@ flowchart TD
 | 0.1 | 2026-11-02 | Criação: investigação da Lei n.º 22/11 e diplomas conexos; inventário TRT-01 a TRT-31 cobrindo as 44 tabelas do DOC-05; consentimentos e avisos; prazos PC-01 a PC-29; direitos; RF-P-APD-01 a 28 e RNF-P-APD-01 a 14; campos do portal QR e conteúdo de SMS; correspondência com as notas 08, 09, 10 e C14; alterações ALT-05 e ALT-04; questões Q-APD-01 a 27; impacto na DEC-006. |
 | 0.2 | 2026-11-02 | Integração dos documentos reais ([[Achados dos Documentos Reais - Lote 1\|DESC-L1]]): TRT-10, 11, 16, 17 e 24 atualizados; novos TRT-32 a TRT-35 (§3.9); CON-07 e CON-08; AV-11 e AV-12; PC-04 e PC-30 a PC-32; RF-P-APD-29 a 33; ALT-05-21 a 26 e ALT-04-17 a 21; Q-APD-28 a 33; Q-APD-01, 02 e 05 revistas. |
 | 0.3 | 2026-11-08 | Aplicação das conclusões da investigação jurídica (ticket #37 / issue #42): dados de saúde com consentimento escrito + autorização APD e acesso por médico (art. 26.º n.º 7); maioridade aos 18 anos (rejeição da proposta de 16 anos); fraude qualifica o documento e não o encarregado (art. 15.º); decisão de não guardar comprovativos de bolsas após vigência (PC-11); prazos de conservação confirmados em fontes primárias (Lei 14/17 para PC-01 permanente e salvaguarda do papel em PC-28; LGT Lei 12/23 para PC-12 e PC-13; DP 28/22 para PC-32); compatibilização de ensaios de migração com dados reais sob 5 salvaguardas (RNF-P-APD-08, MIG-Q41); fecho das questões Q-APD-15, 16, 17, 20, 21, 22, 23 e 26. |
+| 0.4 | 2026-11-09 | Correções da verificação VER-02 (#46): §4.4 e `ALT-04-01` — ponto de contacto operado pelo `CHEFE_SEC_GER` sob a tutela do `DIR_GERAL` (`DEC-019`), email e telefone 🟡 a confirmar (`Q-APD-04`, `DSC-07-SEC-GER`); TRT-02 com gestão técnica de contas pelo `ADMIN_TEC`; §9.1 `Q-APD-01` e `Q-APD-02` resolvidas no plano estrutural (`DEC-020`, valores 🟡 `DSC-08-DIR-GERAL`); §10 com nota de enquadramento institucional da notificação (`DEC-020`). |

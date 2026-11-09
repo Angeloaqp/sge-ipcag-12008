@@ -501,7 +501,7 @@ flowchart TD
    - **0 reprovações:** `Transita`; na 12ª, `Apto para 13ª Classe` se não houver cadeiras em atraso por eliminar;
    - **10ª e 11ª com até 2 disciplinas entre `7` e `9`:** verifica-se o veto — **reprovou ao mesmo tempo Língua Portuguesa e uma disciplina nuclear?** Se sim, `Não Transita`; se não, **`Transita com Deficiência`** e as disciplinas entram em `cadeiras_em_atraso`. O veto só se aplica na 10ª e 11ª, porque a Língua Portuguesa não existe na 12ª (A7);
    - **nota abaixo de `7`, mais de 2 negativas ou qualquer negativa na 12ª:** `Não Transita` — o aluno repete a classe inteira;
-   - **12ª aprovada com cadeiras da 10ª/11ª por eliminar:** categoria em falta na lista de deliberações; proposta `CONCLUIU_12_COM_CADEIRAS_PENDENTES` 🟡 (`Q-C16-06`, `Q-031`).
+   - **12ª aprovada com cadeiras da 10ª/11ª por eliminar:** deliberação `CONCLUIU_12_COM_CADEIRAS_PENDENTES` e proposta `CONDICIONADA_13A` — decidida na `DEC-024` (`Q-C16-06` e `Q-031` respondidas); conta como **Não transita** na estatística da Pauta Geral (`RN-02.3`).
    > 🟡 **Provisória** — número máximo de deficiências (2 no boletim real; 3 no termo de comparação), composição do veto e conjunto das disciplinas nucleares são parâmetros; validar em **E2** e com a resposta às `Q-LEG-01` a `03` e `Q-031` (`COR-LEG-13`) (`DEC-009`).
 6. **Homologação (`SUB_PED` + `DIR_GERAL`):** exige reautenticação (`RN-16.14`); a pauta passa a **`Fechado / Homologado`**. O bloco de assinatura imprime os **títulos configurados** (hoje, o "visto" da Coordenadora Geral na Pauta Geral; o Coordenador para a Área Pedagógica **não** assina as pautas gerais finais — DESC-RESP §2) 🟡 E1 (`Q-028`).
 7. **Estatística e Resultados (`RN-17.14`):** o sistema calcula o rodapé da Mini-Pauta (`IND-28`: Matriculados, `AV`, `AP`, `RP`, `NV`, por género) e os quadros da Pauta Geral (`IND-29`: positivas e negativas por disciplina; **Transitam, Transitam com Deficiência, Desistentes, Não Transitam**, por género), que alimentam o `DOF-05` e o **Mapa Estatístico (`DOF-12`)**. Sai o aviso `RESULTADOS_TRIMESTRE` aos encarregados, **sem notas** (Fluxo 13).
@@ -586,7 +586,7 @@ flowchart TD
 
 ### 5.5 Caminhos de Exceção, Erros e Travas de Segurança (*Edge Cases & Rollbacks*)
 - **Exceção E5.1 — Reprovação no Exame Extraordinário:** a disciplina volta a `Transitado com Deficiência`; nova inscrição numa época seguinte.
-- **Exceção E5.2 — 12ª Concluída com Cadeira em Atraso (`RN-02`, `RN-18.5`):** mesmo aprovando todas as disciplinas da 12ª, o aluno fica com a deliberação provisória `CONCLUIU_12_COM_CADEIRAS_PENDENTES` 🟡 (`Q-C16-06`) e a proposta `CONDICIONADA_13A`: sem certificado da 12ª e sem matrícula na 13ª até eliminar a deficiência.
+- **Exceção E5.2 — 12ª Concluída com Cadeira em Atraso (`RN-02`, `RN-18.5`):** mesmo aprovando todas as disciplinas da 12ª, o aluno fica com a deliberação `CONCLUIU_12_COM_CADEIRAS_PENDENTES` (`DEC-024`) e a proposta `CONDICIONADA_13A`: sem certificado da 12ª e sem matrícula na 13ª até eliminar a deficiência; no ano `N+1` inscreve-se sem turma para exames extraordinários (`MOD-PAS-02`).
 - **Exceção E5.3 — Disciplina de Origem Já Fora da Matriz em Vigor (`RN-18.9.4`):** o exame continua a referir a matriz de origem; júri e equivalência dependem da `Q-C16-10` 🟡.
 - **Exceção E5.4 — Época Marcada Depois do Início de `N+1`:** fica registada em `N+1` e não impede o encerramento de `N` (`RN-18.1.5`).
 
@@ -946,7 +946,7 @@ flowchart TD
    | :--- | :--- | :--- |
    | Transita | Classe seguinte (12ª sem cadeiras: 13ª) | `TRANSICAO` |
    | Transita com deficiência | Classe seguinte com as cadeiras em atraso | `TRANSICAO_COM_DEFICIENCIA` |
-   | 12ª aprovada com cadeiras da 10ª/11ª por eliminar 🟡 | 13ª, bloqueada até eliminar as cadeiras | `CONDICIONADA_13A` |
+   | 12ª aprovada com cadeiras da 10ª/11ª por eliminar (`DEC-024`) | Inscrição sem turma para exames extraordinários; 13ª desbloqueada depois de eliminar as cadeiras | `CONDICIONADA_13A` |
    | Não transita | Mesma classe | `REPETENCIA` |
    | Desistente / Transferido / 13ª concluída | Sem proposta | — |
    | 13ª reprovada em PAP ou estágio por concluir | 13ª, nova época | `NOVA_EPOCA_13A` |
@@ -957,7 +957,7 @@ flowchart TD
 7. **Confirmações (`OP_PED`, `OP_TES`):** cada encarregado recebe o **`DOF-26`** (Aviso de Confirmação de Matrícula: destino, cadeiras em atraso, situação financeira sem valores de terceiros, bolsa, documentos em falta, prazo e modo — nunca dados de saúde). No modo `AUTOMATICA`, as propostas aptas já foram convertidas na homologação; no modo `BALCAO`, convertem-se no Fluxo 02. Paga a taxa e a prestação de setembro, a matrícula fica `Ativa` e o aluno entra na ordem alfabética da turma nova.
 8. **Saídas do Ciclo (`CHEFE_SEC_PED` — `RN-18.14`):** concluintes, transferidos e desistentes ficam com a situação académica final; os processos passam ao arquivo histórico, continuam consultáveis e continuam a emitir documentos.
 
-> 🟡 **Provisória** — modo de confirmação (`BALCAO`/`AUTOMATICA`), bloqueio por dívida, prazo de 60 dias, perda do direito por faltas e categoria da 12ª com cadeiras pendentes são parâmetros; validar com as respostas às `Q-LEG-04`, `Q-LEG-05`, `Q-C16-01`, `Q-C16-06` e `Q-031` e em **E1** (homologação) (`DEC-009`). Fonte: [[C16 - Passagem de Ano Letivo|C16]]; `COR-LEG-14/15`.
+> 🟡 **Provisória** — modo de confirmação (`BALCAO`/`AUTOMATICA`), bloqueio por dívida, prazo de 60 dias, perda do direito por faltas são parâmetros (a categoria da 12ª com cadeiras pendentes foi decidida na `DEC-024`); validar com as respostas às `Q-LEG-04`, `Q-LEG-05` e `Q-C16-01` e em **E1** (homologação) (`DEC-009`). Fonte: [[C16 - Passagem de Ano Letivo|C16]]; `COR-LEG-14/15`.
 
 ### 9.5 Caminhos de Exceção, Erros e Travas de Segurança (*Edge Cases & Rollbacks*)
 - **Exceção E9.1 — Bloqueantes por Cumprir:** o painel lista cada pendência com ligação ao módulo que a resolve; a homologação é rejeitada (`HTTP 422`). Origem: E-C16.1.
@@ -1143,7 +1143,7 @@ flowchart TD
 1. **Entrada em Atraso (Sistema — `RN-13.1`, `RN-13.2`, `RN-13.3`):** no dia seguinte à data limite, a prestação passa a `Em Atraso (com Multa)`, a multa é calculada pela regra parametrizada e o semáforo fica vermelho. A antiguidade conta-se por prestação, em escalões (`1–30`, `31–60`, `61–90`, `> 90` dias).
    > 🟡 **Provisória** — a regra real da multa (tipo, valor, base, tolerância, teto) é **desconhecida**; nenhum valor por omissão é assumido. Validar com a resposta à `Q-C10-01` e em **E1** (`DEC-009`). Fonte: [[C10 - Cobranca, Relatorios Financeiros e Conciliacao|C10]] `RN-13.3`.
 2. **Avisos Escalonados (`CHEFE_SEC_GER` — `RN-13.5`):** nível 1 (**Lembrete**, 5 dias), nível 2 (**Aviso**, 30 dias, com referência ao bloqueio de documentos e convite a acordo) e nível 3 (**Convocatória** à Subdireção Administrativa, 60 dias, assinada pelo `SUB_ADM`). O aviso impresso é o **`DOF-17`**; a entrega e o canal seguem a central de avisos (Fluxo 13), sem valores no SMS (`RN-14.4`). Nunca há listas públicas de devedores.
-   > 🟡 **Provisória** — dias de cada nível e canais (envelope pelo aluno, SMS) são parâmetros; validar com as respostas às `Q-C10-05` e `Q-037` (`DEC-009`).
+   > 🟡 **Provisória** — dias de cada nível e canais (envelope pelo aluno, SMS) são parâmetros; validar com a resposta à `Q-C10-05` (`DEC-009`); o canal SMS foi decidido na `DEC-015` (E3).
 3. **Pagamento:** o encarregado paga na Tesouraria (Fluxo 07); as prestações passam a `Paga` e o semáforo volta a verde. Um aviso por entregar é anulado.
 4. **Acordo de Pagamento (`OP_TES`/`CHEFE_SEC_GER` → `SUB_ADM` — `RN-13.7`, `RN-13.8`):** o acordo é feito com o **encarregado**, pode juntar prestações vencidas de vários educandos e agrupa **prestações inteiras** em parcelas com novas datas. Na homologação (com reautenticação), as prestações passam a **`Em Acordo de Pagamento`**, a multa fica congelada (pode haver **perdão** com despacho — `RN-13.4`) e o acordo indica se **liberta o semáforo**. O **`DOF-18`** é assinado pelo encarregado e pelo homologador, e a versão digitalizada é anexada antes de o acordo ficar ativo. Acima dos limites parametrizados, homologa o `DIR_GERAL` (`Q-C10-02`) 🟡.
 5. **Cumprimento:** cada parcela liquida-se com um pagamento normal; com todas pagas, o acordo passa a **`Cumprido`**.
@@ -1272,7 +1272,7 @@ flowchart LR
 
 ## Fluxo 13: Avisos e Convocatórias aos Encarregados
 
-> Capacidade [[C12 - Comunicacao com Encarregados e Alunos|C12]] · Regras `RN-14.1` a `RN-14.10` · Documentos `DOF-21` (Convocatória numerada) e `DOF-22` (Aviso impresso com recibo de entrega) · US `US-COM-01` a `08` · Decisão `DEC-003` (portal só na E5)
+> Capacidade [[C12 - Comunicacao com Encarregados e Alunos|C12]] · Regras `RN-14.1` a `RN-14.10` · Documentos `DOF-21` (Convocatória numerada) e `DOF-22` (Aviso impresso com recibo de entrega) · US `US-COM-01` a `08` · Decisões `DEC-015` (central de avisos na E3) e `DEC-003` (portal só na E5)
 
 ### 13.1 Atores Envolvidos (RBAC) e Contextos (DDD)
 - **Atores RBAC:** `DIR_TURMA`, `COORD_TURNO`, `SUB_PED`, `DIR_GERAL`, `SUB_ADM` (modelos e orçamento de SMS), `CHEFE_SEC_GER` (avisos de cobrança), `OP_PED` (contactos e entregas ao balcão), `ENCARREGADO`, `ALUNO` (portal, E5).
@@ -1323,7 +1323,8 @@ flowchart TD
 5. **Entrega e Prova (`RN-14.8`):** cada aviso fica com canal, telefone, data/hora e confirmação de entrega (ou a quem foi entregue em mão). Este registo é a **prova de que a escola avisou** (importante na retenção por faltas).
 6. **Comparência:** a comparência ou falta à convocatória é registada; duas faltas seguidas geram alerta à Direção.
 7. **Portal (E5 — `RN-14.10`):** ativação presencial com código de uso único; o encarregado vê os seus educandos (notas homologadas, faltas e limite, pagamentos sem pormenor de bolsas, horário, avisos). Descargas sujeitas ao semáforo do `RN-08`.
-   > 🟡 **Provisória** — adoção do SMS antes da E5, fornecedor e orçamento mensal; limiares (50%, 80%); aluno maior de 18 como destinatário: parâmetros; validar com as respostas às `Q-C12-01`, `Q-037`, `Q-013` e `Q-C12-04` e em **E1** (`DEC-009`). Fonte: [[C12 - Comunicacao com Encarregados e Alunos|C12]].
+   > A adoção do SMS antes da E5 foi decidida na `DEC-015` (E3); custos assumidos pela escola (`DEC-017`).
+   > 🟡 **Provisória** — fornecedor e teto/orçamento mensal de SMS; limiares (50%, 80%); aluno maior de 18 como destinatário: parâmetros; validar com a resposta à `Q-C12-04` e em **E1** (`DEC-009`). Fonte: [[C12 - Comunicacao com Encarregados e Alunos|C12]].
 
 ### 13.5 Caminhos de Exceção, Erros e Travas de Segurança (*Edge Cases & Rollbacks*)
 - **Exceção E13.1 — Sem Internet:** os avisos ficam em fila no servidor local; os que expiram passam a impresso se ainda fizerem sentido.
@@ -1616,6 +1617,11 @@ flowchart TD
 
 ## Alterações da v2.0
 
+### Correções da verificação VER-02 — #46/#47 (2026-11-09)
+
+- **`DEC-015`:** Fluxo 13 — cabeçalho com a `DEC-015`; nota provisória do 13.4 sem "adoção do SMS antes da E5" (decidida na `DEC-015` (E3)), fica 🟡 o fornecedor e o teto/orçamento; Fluxo 11 e quadro das questões abertas sem a `Q-037`.
+- **`DEC-024`:** Fluxo 04 (deliberação) e exceção E5.2 — `CONCLUIU_12_COM_CADEIRAS_PENDENTES` sem 🟡 `Q-C16-06`; tabela de destinos do Fluxo 09 e nota provisória sem a categoria da 12ª; linha "12ª aprovada com cadeiras pendentes" retirada do quadro das questões abertas.
+
 ### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
 
 - Nota fiscal inicial e Fluxo 07: emissor = software certificado pela AGT através do adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente).
@@ -1699,7 +1705,6 @@ Os fluxos C03 (processo individual) e C15 (indicadores) não ganharam fluxo pró
 | :--- | :---: | :--- | :---: |
 | Fórmulas `M1`–`M3`, `CF`, `CA`, recurso, pesos | 03, 04 | `Q-025`, `Q-LEG-21` | E2 |
 | Máximo de deficiências, veto LP + nuclear, prazo de eliminação, limite de faltas | 03, 04, 05 | `Q-LEG-01` a `03`, `Q-031` | E2 |
-| 12ª aprovada com cadeiras pendentes | 04, 05, 09 | `Q-C16-06`, `Q-031` | E2 |
 | `MFC`, nota mínima da PAP, dupla contagem do estágio, júri externo | 06 | `Q-030`, `Q-LEG-06`, `Q-LEG-07` | E2 |
 | Comportamento, faltas por indisciplina, atrasos, 2.ª chamada sem justificação, catálogo disciplinar | 03, 04, 14 | `Q-C13-02` a `06`, `Q-032`, `Q-038` | E3 |
 | Títulos dos cargos, signatários, aprovações de contas, `SUB_ADM` | Todos | `Q-028`, `Q-C14-14` | E1 |
@@ -1710,7 +1715,7 @@ Os fluxos C03 (processo individual) e C15 (indicadores) não ganharam fluxo pró
 | Boletim retido por dívida | 04 | Direção; APD-11 | E1 |
 | Grelha horária (32 h semanais), limites de carga | 10 | `Q-012`, `Q-C04-18`, `Q-C04-04/05` | — |
 | Multa, níveis de aviso, tolerâncias de acordo e conciliação | 11, 12 | `Q-C10-01/02/05/08/09/15` | E1 |
-| SMS, orçamento, limiares de aviso | 13 | `Q-C12-01`, `Q-037`, `Q-013` | E1 |
+| Teto e orçamento de SMS, limiares de aviso (SMS decidido na `DEC-015`) | 13 | `Q-C12-04`, `RN-14.6` | E1 |
 | Valores de segurança (palavra-passe, sessões, prazo *offline*) | 16 | `Q-C14-03`, `Q-C14-11`; RNF-08 | E1 |
 
 ### Histórico

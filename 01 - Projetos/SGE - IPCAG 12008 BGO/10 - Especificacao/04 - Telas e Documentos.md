@@ -285,7 +285,8 @@ flowchart TD
 ### `MOD-GOV-06`: Gestão de Contas, Cargos, Títulos e Escopos (`US-CTA-01`, `-03`, `-05`, `-06`, `-13`, `-15`) — C14
 - **Perfis RBAC Autorizados:** `CHEFE_SEC_GER` *(pedir contas, registar saídas, propor títulos)*; `SUB_PED` / `SUB_ADM` / `DIR_GERAL` *(aprovar atribuições conforme `RN-16.2`, suspender, desativar, rever acessos)*; `DIR_GERAL` *(homologar títulos e o seu papel)*.
 - **Sub-ecrã "Títulos dos Cargos" (`RN-16.20`):** lista de títulos com o **papel no sistema** ligado (um dos 12 papéis ou `ADMIN_TEC`), o texto impresso (masculino/feminino, se a escola o usar), vigência e n.º de atribuições ativas. Mapeamento inicial:
-  > 🟡 **Provisória** — parâmetro configurável; validar em **E1** (`DEC-009`). Bloqueado por `Q-028`, `Q-C14-14`. Fonte: DESC-L1 A4; C14 `RN-16.20.4`.
+  > Mapeamento confirmado na `DEC-021` (a homologar; `Q-028`, `Q-C14-14` respondidas).
+  > 🟡 **Provisória** — textos finais dos títulos e vacatura do `SUB_ADM` a confirmar; validar em **E1** (`DEC-009`; questionário `DSC-08-DIR-GERAL`). Fonte: DESC-L1 A4; C14 `RN-16.20.4`.
 
   | Título impresso nos documentos reais | Papel no sistema |
   | :--- | :--- |
@@ -379,7 +380,8 @@ flowchart TD
 ### `MOD-COM-01`: Central de Avisos (`US-COM-01`, `US-COM-05`) — C12
 - **Perfis:** `DIR_GERAL`, `SUB_PED`, `SUB_ADM` (aprovação de modelos e limiares do seu âmbito); leitura de custos `SUB_ADM`.
 - **Entradas:** modelos de mensagem (só campos permitidos pela APD-11 §7.4 — `RN-14.4`), gatilhos ativos e limiares (faltas 50%/80%, propina vencida, notas publicadas, convocatória, documento pronto — DESC-RESP R26), janelas de envio, tetos mensais de custo.
-  > 🟡 **Provisória** — canal SMS antes da E5 e orçamento mensal; validar em **E1** (`DEC-009`). Bloqueado por `Q-037`, `DEC-003`. Fonte: C12.
+  > Canal SMS antes da E5 decidido na `DEC-015` (E3); portal na E5 (`DEC-003`).
+  > 🟡 **Provisória** — teto e orçamento mensal de SMS; validar em **E1** (`DEC-009`). Fonte: C12.
 - **Regras:** `RN-14.1` a `RN-14.9`; sem texto livre; recusa dos avisos não essenciais respeitada (`RN-14.9`).
 - **Saídas:** relatório de envios, entregas e custos; fila de avisos por imprimir (`DOF-22`).
 
@@ -650,7 +652,8 @@ flowchart TD
      - `0` disciplinas reprovadas → **Transita** (ou **Apto para a 13ª Classe** na 12ª sem cadeiras em atraso);
      - na 10ª ou 11ª, até **2** disciplinas com 7–9, sem reprovar ao mesmo tempo Língua Portuguesa e uma nuclear → **Transita com Deficiência** (cria `cadeiras_em_atraso`); com esse veto → **Não Transita**;
      - restantes casos → **Não Transita** (repete a classe inteira — DESC-RESP §1); retenção por faltas → **Não Transita (Faltas)**.
-     > 🟡 **Provisória** — número máximo de deficiências, composição do veto, regra da 12ª com cadeiras pendentes; validar em **E2** (`DEC-009`). Bloqueado por `Q-LEG-06`, `Q-031`, `Q-C16-06`. Fonte: `COR-LEG-13`; DESC-RESP §1.
+     > A regra da 12ª com cadeiras pendentes foi decidida na `DEC-024` (`CONCLUIU_12_COM_CADEIRAS_PENDENTES`, proposta `CONDICIONADA_13A`).
+     > 🟡 **Provisória** — número máximo de deficiências e composição do veto; validar em **E2** (`DEC-009`). Bloqueado por `Q-LEG-06`. Fonte: `COR-LEG-13`; DESC-RESP §1.
   4. O comportamento **não entra** no cálculo de `CF`/`CA` nem na transição, salvo regra do regulamento (`RN-15.7.5`; 🟡 `Q-C13-02`, E3).
 - **Ações Disparo e Dados de Saída (Outputs):**
   - **Outputs:** **`DOF-05`** (Pauta de Aproveitamento Geral) com os quadros estatísticos do `IND-29`; liberação do **`DOF-06`** (Boletim); aviso `RESULTADOS` pela Central de Avisos.
@@ -819,8 +822,7 @@ flowchart TD
 - **Regras:**
   1. Aviso **AV-07** ao funcionário; o ponto **não guarda motivos clínicos** (`ALT-04-14`).
   2. Os salários ficam fora do SGE (`DEC-008`); o mapa mensal de efetividade é exportado para os descontos (DESC-RESP R24).
-  3. **Avaliação de desempenho e declarações de serviço** (10 indicadores, homologação do Gabinete Provincial; n.º de agente e RUPE): só se a C11 for alargada — com aviso AV-12, visibilidade restrita ao avaliado, avaliador e homologador, e registo do envio ao Gabinete Provincial (`ALT-04-21`; RF-C19-33).
-     > 🟡 **Provisória** — entrada no âmbito; validar em **E1** (`DEC-009`). Bloqueado por `Q-036`, `Q-APD-31`. Fonte: DESC-L1 A15.
+  3. **Avaliação de desempenho e declarações de serviço** (10 indicadores, homologação do Gabinete Provincial; n.º de agente e RUPE): **fora da linha de base (`DEC-016`)** — não entram nas entregas E1–E5 (`DEC-008`, item 9; `RF-C19-33` e `US-APD-07` passam a `Won't`). Se forem reavaliadas depois da E5, exigem aviso AV-12, visibilidade restrita ao avaliado, avaliador e homologador, e registo do envio ao Gabinete Provincial (`ALT-04-21`). Fonte: DESC-L1 A15.
 - **Outputs:** Mapa Mensal de Efetividade e Assiduidade do Pessoal (relatório interno).
 
 ---
@@ -956,13 +958,13 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 1. **Endereço, marca e código do modelo** vêm dos documentos reais (DESC-L1 A14). 🟡 **Provisória** — significado dos códigos (`IPCAG.SG-ACE`, `DEE-PEEP-001-ACE`) e uso da marca do Governo; validar em **E1** (`DEC-009`). Bloqueado por `Q-035`, `Q-LEG-21`. Fonte: DESC-L1 A14.
 2. **Código de verificação e QR (`RN-10.3`):** código alfanumérico não adivinhável (RNF-SEG-09), calculado com `HMAC-SHA256` sobre os dados críticos e gravado em `documentos_oficiais_emitidos`; o QR aponta para o `MOD-PUB-QR`. Nos títulos escolares, 🟡 QR da Plataforma Nacional de Certificação (`Q-020`, `Q-LEG-14`).
 3. **Registo em livro (`RN-10.2`):** só nos documentos que o exigem (`DOF-07`, `DOF-08B`, `DOF-10A`); a lei pede "livro de registo e/ou base de dados" com número sequencial; **folha e termo** 🟡 (`COR-LEG-19`, `Q-LEG-14`).
-4. **Linha de proteção de dados (`ALT-04-11`; AV-06):** 🟡 o responsável pelo tratamento e o contacto estão por definir (`Q-APD-01`, `Q-APD-04`; E1).
+4. **Linha de proteção de dados (`ALT-04-11`; AV-06):** o responsável pelo tratamento é o IPCAG, representado pelo `DIR_GERAL`, e o ponto de contacto é operado pelo `CHEFE_SEC_GER` sob a sua tutela (`DEC-019`); a identificação da entidade sai de `parametros_instituicao` (`DEC-020`). 🟡 Email e telefone do ponto de contacto a confirmar (`Q-APD-04`; questionário `DSC-07-SEC-GER`; E1).
 5. Documentos fiscais: o rodapé acrescenta as menções obrigatórias do DP n.º 71/25 (ver `DOF-11`).
 
 ### P2.3 Blocos de Assinatura (títulos configuráveis — `RN-16.20`)
 
 1. Cada `DOF` declara os seus assinantes por **papel no sistema** (`DIR_GERAL`, `SUB_PED`, …). O PDF imprime o **título configurado** (`cargos_institucionais`) e o **nome** de quem tinha a atribuição ativa na data da assinatura, congelados no documento emitido (`RN-16.20.6`).
-2. Títulos observados nos documentos reais (mapeamento inicial do `MOD-GOV-06`): `DIR_GERAL` → *Coordenadora Geral da Comissão de Gestão*; `SUB_PED` → *Coordenador para a Área Pedagógica*; `CHEFE_SEC_PED` → *Chefe da Secretaria Pedagógica*; `DIR_TURMA` → *Director de Turma* / *Coordenador de Turma*; `SUB_ADM` → sem equivalente visto. 🟡 **Provisória** — validar em **E1** (`DEC-009`). Bloqueado por `Q-028`, `Q-C14-14`. Fonte: DESC-L1 A4.
+2. Títulos observados nos documentos reais (mapeamento inicial do `MOD-GOV-06`): `DIR_GERAL` → *Coordenadora Geral da Comissão de Gestão*; `SUB_PED` → *Coordenador para a Área Pedagógica*; `CHEFE_SEC_PED` → *Chefe da Secretaria Pedagógica*; `DIR_TURMA` → *Director de Turma* / *Coordenador de Turma*; `SUB_ADM` → sem equivalente visto (na vacatura, exercido pelo `DIR_GERAL` — `DEC-021`). Mapeamento confirmado na `DEC-021`, a homologar. 🟡 **Provisória** — textos finais e vacatura do `SUB_ADM` a confirmar em **E1** (`DEC-009`; `DSC-08-DIR-GERAL`). Fonte: DESC-L1 A4.
 3. Limite observado: o Coordenador para a Área Pedagógica substitui a Coordenadora Geral no expediente pedagógico corrente, mas **não** assina certificados, pautas gerais finais nem despachos financeiros em substituição (DESC-RESP §2). O sistema impede que um substituto assine esses documentos.
 4. Elementos físicos (carimbo a óleo, selo branco) são indicados no modelo como espaço reservado.
 
@@ -1103,7 +1105,8 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
   2. **Bloco por disciplina** (agrupado por componente, com marca nas nucleares): **`FALT`** | **`CF`** | **`PG`** | **`CA`** (pauta final); na pauta trimestral, a média do trimestre e as faltas. Faltas por tipo (não comparência / indisciplina) somadas em separado (`RN-15.1.5`).
   3. **Colunas finais:** `Observação` e `Resultado` (modelo real); total de faltas; n.º de disciplinas com negativa; cadeiras em atraso contraídas.
 - **Resultado (situação final):** as quatro categorias do modelo real — **Transita**, **Transita com Deficiência**, **Não Transita**, **Desistente** — mais **Transferido** numa linha própria, para que a soma feche com o n.º de linhas. Internamente o sistema mantém a distinção retido por notas / por veto LP + nuclear / por faltas, exigida pelo `DOF-12`; **Apto para a 13ª Classe** imprime-se como "Transita" na 12ª.
-  > 🟡 **Provisória** — categorias, regra da 12ª com cadeiras em atraso e significado das linhas destacadas a cor no modelo real; validar em **E2** (`DEC-009`). Bloqueado por `Q-031`, `Q-C16-06`, `Q-C15-12`. Fonte: DESC-L1 A10; C16.
+  > A 12ª com cadeiras em atraso conta como **Não transita** (`DEC-024`).
+  > 🟡 **Provisória** — categorias e significado das linhas destacadas a cor no modelo real; validar em **E2** (`DEC-009`). Bloqueado por `Q-C15-12`. Fonte: DESC-L1 A10; C16.
 - **Pauta pós-recurso:** nova versão com a nota do exame de recurso e o resultado final — 🟡 fórmula por confirmar (`Q-025`; E2).
 - **Quadros estatísticos (`IND-29` — `RN-17.14`), por género `M` / `F` / `MF`:**
   - por disciplina: **n.º e % de positivas** e **de negativas** (`Retido por Faltas` conta como negativa — 🟡 `Q-C15-12`);
@@ -1470,6 +1473,14 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 ## Alterações da v2.0
 
+### Correções da verificação VER-02 — #46/#47 (2026-11-09)
+
+- **`DEC-015`:** `MOD-COM-01` — canal SMS decidido na `DEC-015` (E3); fica 🟡 só o teto e orçamento mensal (deixa de dizer "Bloqueado por `Q-037`"); quadro dos pontos provisórios (Parte D, E1) sem `Q-036` e `Q-037`.
+- **`DEC-016`:** `MOD-GER-RH` regra 3 — avaliação de desempenho e declarações de serviço fora da linha de base (`DEC-016`), sem 🟡 `Q-036`.
+- **`DEC-019`/`DEC-020`:** linha de proteção de dados dos documentos (`ALT-04-11`) — responsável IPCAG/`DIR_GERAL`, ponto de contacto operado pelo `CHEFE_SEC_GER` (`DEC-019`), identificação em `parametros_instituicao` (`DEC-020`); 🟡 email e telefone (`Q-APD-04`, `DSC-07-SEC-GER`).
+- **`DEC-021`:** `MOD-GOV-06` e títulos observados — mapeamento confirmado na `DEC-021`, a homologar; 🟡 só os textos finais e a vacatura do `SUB_ADM`.
+- **`DEC-024`:** `MOD-DOC-CON` e Pauta Geral — regra da 12ª com cadeiras pendentes decidida; quadro E2 sem `Q-031` e `Q-C16-06`.
+
 ### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
 
 - Base fiscal, regras do `MOD-TES-CXA` e regras comuns do `DOF-11`: emissor = software certificado pela AGT através do adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente); deixa de dizer "pendente".
@@ -1581,8 +1592,8 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Ponto de controlo | O que fica provisório neste DOC | Questões que bloqueiam |
 | :--- | :--- | :--- |
-| **E1 — homologação** | Cabeçalho, rodapé e número da instituição por documento; títulos dos cargos e assinantes; séries de numeração; idade máxima; média da 9ª e repescagem na admissão; nota final do teste; confirmação balcão/automática e bloqueio por dívida; encarregado no boletim; ocupação do pai; efeitos da declaração; emolumentos e RUPE; folha/termo e Plataforma Nacional; Diploma e nacionalidade; modelo fiscal (`DEC-002` §3) e software certificado (`Q-002`), NIF, isenção, bolsa a 100%, anulação do recibo; multa e avisos de cobrança; retenção de boletins por dívida; Central de Avisos (SMS antes da E5); descargas no portal; ponto de contacto APD; DSD, horário e mapa de passagem como documentos oficiais; modelo do GEPE; janelas do período; avaliação de desempenho | `Q-003`, `Q-004`, `Q-018`, `Q-020`, `Q-021`, `Q-022`, `Q-023`, `Q-027`, `Q-028`, `Q-034`, `Q-035`, `Q-036`, `Q-037`, `Q-C03-01`, `Q-C03-08`, `Q-C03-14`, `Q-C03-17`, `Q-C03-18`, `Q-C03-20`, `Q-C04-03`, `Q-C04-16`, `Q-C04-18`, `Q-C10-01`, `Q-C10-02`, `Q-C10-05`, `Q-C10-13`, `Q-C12-03`, `Q-C14-14`, `Q-C16-01`, `Q-C16-05`, `Q-C16-15`, `Q-LEG-04`, `Q-LEG-05`, `Q-LEG-09`–`12`, `Q-LEG-14`–`19`, `Q-APD-01`, `Q-APD-04`, `Q-APD-12`, `Q-APD-16`–`18`, `Q-APD-29`, `Q-APD-30`, `DEC-002` |
-| **E2 — recálculo de pautas** | Modelo de avaliação (`M3`, `CF`, `CA`, `PG`, recurso, arredondamento); rótulos `MTP`/`MAC`; coluna `M3/CF`; prova de 2.ª chamada; disciplinas nucleares; deficiências e regra da 12ª; categorias da Pauta Geral e linhas a cor; estatísticas `MT`/`NV`; Projecto Tecnológico, PAP e pesos da `MFC` | `Q-025`, `Q-026`, `Q-030`, `Q-031`, `Q-C15-12`, `Q-C16-06`, `Q-LEG-03`, `Q-LEG-06`, `Q-LEG-07`, `Q-LEG-21`–`23` |
+| **E1 — homologação** | Cabeçalho, rodapé e número da instituição por documento; títulos dos cargos e assinantes; séries de numeração; idade máxima; média da 9ª e repescagem na admissão; nota final do teste; confirmação balcão/automática e bloqueio por dívida; encarregado no boletim; ocupação do pai; efeitos da declaração; emolumentos e RUPE; folha/termo e Plataforma Nacional; Diploma e nacionalidade; modelo fiscal (`DEC-002` §3) e software certificado (`Q-002`), NIF, isenção, bolsa a 100%, anulação do recibo; multa e avisos de cobrança; retenção de boletins por dívida; teto mensal de SMS da Central de Avisos (canal decidido na `DEC-015`); descargas no portal; ponto de contacto APD; DSD, horário e mapa de passagem como documentos oficiais; modelo do GEPE; janelas do período | `Q-003`, `Q-004`, `Q-018`, `Q-020`, `Q-021`, `Q-022`, `Q-023`, `Q-027`, `Q-028`, `Q-034`, `Q-035`, `Q-C03-01`, `Q-C03-08`, `Q-C03-14`, `Q-C03-17`, `Q-C03-18`, `Q-C03-20`, `Q-C04-03`, `Q-C04-16`, `Q-C04-18`, `Q-C10-01`, `Q-C10-02`, `Q-C10-05`, `Q-C10-13`, `Q-C12-03`, `Q-C14-14`, `Q-C16-01`, `Q-C16-05`, `Q-C16-15`, `Q-LEG-04`, `Q-LEG-05`, `Q-LEG-09`–`12`, `Q-LEG-14`–`19`, `Q-APD-01`, `Q-APD-04`, `Q-APD-12`, `Q-APD-16`–`18`, `Q-APD-29`, `Q-APD-30`, `DEC-002` |
+| **E2 — recálculo de pautas** | Modelo de avaliação (`M3`, `CF`, `CA`, `PG`, recurso, arredondamento); rótulos `MTP`/`MAC`; coluna `M3/CF`; prova de 2.ª chamada; disciplinas nucleares; deficiências; categorias da Pauta Geral e linhas a cor; estatísticas `MT`/`NV`; Projecto Tecnológico, PAP e pesos da `MFC` | `Q-025`, `Q-026`, `Q-030`, `Q-C15-12`, `Q-LEG-03`, `Q-LEG-06`, `Q-LEG-07`, `Q-LEG-21`–`23` |
 | **E3 — regulamento interno** | Regra de faltas; circuito de justificação; faltas por indisciplina e comportamento; catálogo disciplinar, processo e recurso | `Q-032`, `Q-C13-02`, `Q-C13-03`, `Q-C13-06`, `Q-LEG-04`, `Q-APD-32` |
 
 ---

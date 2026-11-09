@@ -99,7 +99,7 @@ flowchart LR
     end
 
     subgraph SecGer ["5. Contexto da Secretaria Geral & RH"]
-        EXP["Expediente Geral & Arquivo (âmbito por decidir — Q-039)"]
+        EXP["Expediente Geral & Arquivo (fora de E1–E5 — DEC-016)"]
         RH["Cadastro, Assiduidade & Carga Docente"]
         CTA["Contas, Cargos & Acesso (C14)"]
     end
@@ -367,7 +367,7 @@ O SGE do IPCAG N.º 12008 / BGO implementa **Controlo de Acesso Baseado em Papé
 > - O decreto prevê também um **Coordenador para a Inserção na Vida Activa (GIVA)** (art. 5.º, n.º 1, h)), que a escola tem ou acumula no Coordenador de Curso (DESC-RESP §2). 🟡 Nesta versão não é um papel próprio: as suas funções nos estágios ficam no `COORD_CURSO` até decisão (`Q-LEG-13`).
 
 > [!important] Papéis no sistema e títulos impressos (A4, `RN-16.20`)
-> Os **12 códigos abaixo são papéis no sistema** (permissões, RLS, MFA, reautenticação, incompatibilidades) e **nunca aparecem impressos**. O **título do cargo** que sai nos ecrãs e nos blocos de assinatura dos `DOF-xx` é **configurável** (`cargos_institucionais`) e ligado a exatamente um papel; vários títulos podem ligar-se ao mesmo papel. Mudar um título não muda permissões. Mapeamento inicial 🟡 a confirmar com a Comissão de Gestão (validar em **E1** — `Q-028`, `Q-C14-14`):
+> Os **12 códigos abaixo são papéis no sistema** (permissões, RLS, MFA, reautenticação, incompatibilidades) e **nunca aparecem impressos**. O **título do cargo** que sai nos ecrãs e nos blocos de assinatura dos `DOF-xx` é **configurável** (`cargos_institucionais`) e ligado a exatamente um papel; vários títulos podem ligar-se ao mesmo papel. Mudar um título não muda permissões. Mapeamento confirmado na `DEC-021`, a homologar; 🟡 textos finais e vacatura do `SUB_ADM` a confirmar com a Comissão de Gestão (validar em **E1** — questionário `DSC-08-DIR-GERAL`):
 >
 > | Título impresso nos documentos reais (A4) | Papel no sistema |
 > | :--- | :--- |
@@ -1309,7 +1309,7 @@ O aluno da 12ª que aprova todas as disciplinas curriculares da 12ª mas ainda t
 
 #### RN-02.3: Categorias Impressas na Pauta Geral
 
-A Pauta Geral real agrupa as situações finais em **quatro categorias** (A10): **Transita** (`TRANSITA_APROVADO`, `APTO_PARA_13_CLASSE`), **Transita com deficiência** (`TRANSITA_COM_DEFICIENCIA`), **Não transita** (`NAO_TRANSITA_RETIDO_NOTAS`, `NAO_TRANSITA_VETO_LP_NUCLEAR`, `NAO_TRANSITA_RETIDO_FALTAS`) e **Desistente** (`ANULADO_DESISTENTE`). 🟡 A categoria impressa de `CONCLUIU_12_COM_CADEIRAS_PENDENTES` e dos transferidos não aparece na estatística real (`Q-C16-18`). A soma das categorias é igual ao número de linhas da pauta (`RN-17.14.4`).
+A Pauta Geral real agrupa as situações finais em **quatro categorias** (A10): **Transita** (`TRANSITA_APROVADO`, `APTO_PARA_13_CLASSE`), **Transita com deficiência** (`TRANSITA_COM_DEFICIENCIA`), **Não transita** (`NAO_TRANSITA_RETIDO_NOTAS`, `NAO_TRANSITA_VETO_LP_NUCLEAR`, `NAO_TRANSITA_RETIDO_FALTAS` e `CONCLUIU_12_COM_CADEIRAS_PENDENTES` — contado como retenção/não transição para o ciclo seguinte, `DEC-024` §1) e **Desistente** (`ANULADO_DESISTENTE`). 🟡 A categoria impressa dos transferidos não aparece na estatística real (`Q-C16-18`). A soma das categorias é igual ao número de linhas da pauta (`RN-17.14.4`).
 
 ---
 
@@ -1847,12 +1847,12 @@ Parâmetros opcionais que avisam sem impedir a publicação: (1) máximo de temp
 
 ### RN-14: Comunicação com Encarregados e Alunos (C12)
 
-> 🟡 **Provisória** — parâmetro configurável; validar em E1 (`DEC-009`). Fonte: [[C12 - Comunicacao com Encarregados e Alunos]] (`RN-P-C12-01` a `10` → `RN-14.1` a `RN-14.10`). Questões: `Q-C12-01` a `Q-C12-04`, `Q-013`, `Q-037` (SMS antes da E5). Portal só na E5 (`DEC-003`). Prática: SMS/WhatsApp pedidos; 20–30% dos telefones estão errados (DESC-RESP R26).
+> 🟡 **Provisória** — parâmetro configurável; validar em E1 (`DEC-009`). Fonte: [[C12 - Comunicacao com Encarregados e Alunos]] (`RN-P-C12-01` a `10` → `RN-14.1` a `RN-14.10`). Questões: `Q-C12-02` a `Q-C12-04`; `Q-C12-01` e `Q-037` (SMS antes da E5) decididas na `DEC-015` (E3) e `Q-013` na `DEC-017`. Portal só na E5 (`DEC-003`). Prática: SMS/WhatsApp pedidos; 20–30% dos telefones estão errados (DESC-RESP R26).
 
 #### RN-14.1 — Canais e Degradação
 1. Canais: `IMPRESSO`, `SMS`, `PORTAL`. O `EMAIL` só serve para funcionários.
 2. **O impresso está sempre disponível** (carta ou bilhete, em reunião, pelo aluno — só avisos não sensíveis — ou ao balcão).
-3. O SMS só existe se a Direção o aprovar e houver contrato com um fornecedor (`Q-C12-01`, `Q-013`); sem SMS, os gatilhos geram avisos impressos numa lista diária para o Director de Turma ou a Secretaria.
+3. O SMS complementar foi decidido na `DEC-015` (E3), sob teto mensal 🟡 e só com contrato com um fornecedor (custos da escola — `DEC-017`); sem SMS, os gatilhos geram avisos impressos numa lista diária para o Director de Turma ou a Secretaria.
 4. O portal só a partir da E5.
 5. Um SMS falhado (telefone inválido, sem rede durante a validade) passa automaticamente para a lista de impressos.
 
@@ -2340,6 +2340,13 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Correções da verificação VER-02 — #46/#47 (2026-11-09)
+
+- **`DEC-015`:** nota provisória da `RN-14` e `RN-14` item 3 — o SMS complementar foi decidido na `DEC-015` (E3), sob teto 🟡; `Q-C12-01` e `Q-037` deixam de constar como abertas.
+- **`DEC-016`:** diagrama de contextos — "Expediente Geral & Arquivo" passa a "fora de E1–E5 — DEC-016" (deixa de dizer "âmbito por decidir — Q-039").
+- **`DEC-021`:** nota do mapeamento dos 12 papéis (§2) — mapeamento confirmado na `DEC-021`, a homologar; 🟡 só os textos finais e a vacatura do `SUB_ADM` (`DSC-08-DIR-GERAL`).
+- **`DEC-024`:** `RN-02.3` — `CONCLUIU_12_COM_CADEIRAS_PENDENTES` conta como **Não transita** na estatística da Pauta Geral (`DEC-024` §1); fica 🟡 só a categoria dos transferidos (`Q-C16-18`).
 
 ### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
 

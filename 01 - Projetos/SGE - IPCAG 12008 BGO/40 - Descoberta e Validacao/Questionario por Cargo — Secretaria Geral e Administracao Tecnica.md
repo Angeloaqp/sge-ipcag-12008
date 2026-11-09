@@ -56,6 +56,10 @@ _Por que importa: Dimensiona a volumetria de utilizadores do SGE (`C14`) e a ade
 _Por que importa: Define o fluxo de recuperação de credenciais de acesso (via email ou presencial perante o `ADMIN_TEC`/`CHEFE_SEC_GER`, conforme `RN-16.10`)._
 > 
 
+### [HITL / DEC-019 / Q-APD-04] Qual é o email e o telefone institucionais da Secretaria Geral a indicar como ponto de contacto de proteção de dados nos avisos de privacidade?
+_Por que importa: Conforme a `DEC-019`, o ponto de contacto é operado pelo `CHEFE_SEC_GER` sob a tutela do `DIR_GERAL` (`MOD-GOV-09`); o contacto é impresso nos avisos `AV-01` a `AV-06` e na cláusula do `DOF-03` (APD-11 §4.4)._
+> 
+
 ---
 
 ## 2. Postos de Trabalho, Horários de Balcão e Segurança de Acesso

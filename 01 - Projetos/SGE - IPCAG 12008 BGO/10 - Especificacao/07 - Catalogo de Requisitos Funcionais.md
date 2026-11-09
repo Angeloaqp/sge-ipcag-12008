@@ -50,7 +50,7 @@ tags:
 | **Requisito** | O que o sistema faz, escrito para ser verificável (um teste de aceitação consegue dizer "cumpre / não cumpre"). |
 | **O** | Objetivo da [[06 - Visao e Ambito|VIS-06]] §3 (`O-01` a `O-13`). |
 | **Prio.** | MoSCoW: `M` *Must*, `S` *Should*, `C` *Could*, `W` *Won't* (fora desta linha de base). |
-| **Entrega** | `E1` a `E5` (PLN-00 §6; VIS-06 §5.1). "pendente (`Q-037`)" / "pendente (`Q-038`)" quando a entrega depende dessas questões. |
+| **Entrega** | `E1` a `E5` (PLN-00 §6; VIS-06 §5.1). (As entregas antes marcadas "pendente (`Q-037`)" / "pendente (`Q-038`)" foram fixadas na `DEC-015` e na `DEC-013`.) |
 | **Origem** | Lei (`COR-LEG-nn`), documento real (`A-nn` = achado An do DESC-L1), entrevista (`R-nn` = requisito Rn do DESC-RESP §4; `G-nn` = entrevista), decisão (`DEC-nnn`), nota de capacidade (`CAP-Cxx`), outras notas (`MIG-10`, `OPS-09`, `APD-11`, `INT-nn`). "v1.2" = já estava na especificação v1.2. |
 | **RN** | Regras do DOC-01 com a numeração final do mapa (`RN-01` a `RN-18`; sub-regras `RN-xx.y`). |
 | **US** | User stories do DOC-03 (as 32 da v1.2 e as dos épicos novos `EP-PIN`, `EP-HOR`, `EP-COB`, `EP-COM`, `EP-DIS`, `EP-CTA`, `EP-PNL`, `EP-PAS`). "—" = sem US (lacuna, ver [[Matriz de Rastreabilidade]] §3). |
@@ -85,7 +85,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C01-04** | Guardar o **modelo de avaliação** de cada matriz como parâmetros: componentes `MTP`/`PP`/`PT`/`PG`, fórmulas de `M1`–`M3`, `CF` e `CA`, recurso, limiares de aprovação e de deficiência, e os rótulos alternativos de impressão (`MAC`/`NPP`/`NPT`); qualquer alteração fica versionada e auditada. | O-01 | M | E1 | `A-01`, `A-02`; DESC-RESP §1; `COR-LEG-13`, `-26`, `-27`; `DEC-009`; INT-V2 §3.3 | RN-01, RN-02 | US-GOV-02 | MOD-GOV-02 | — | `matrizes_curriculares`, `parametros_avaliacao` | 🟡 PC-E2 · `Q-025`, `Q-026` |
 | **RF-C01-05** | Registar as 12 salas e laboratórios com tipo e lotação. | O-02 | M | E1 | v1.2 | — | US-GOV-03 | MOD-GOV-03 | — | `salas_fisicas` | definido |
 | **RF-C01-06** | Abrir turmas por classe, curso e turno (impresso como "Período"), com sala fixa, lotação parametrizável (40–45 na prática) e Director de Turma nomeado. | O-02 | M | E1 | v1.2; `A-09`, `A-16`; `R-06`, `R-22` | RN-05 | US-GOV-03 | MOD-GOV-03 | — | `turmas`, `turma_disciplinas` | definido |
-| **RF-C01-07** | Guardar os **parâmetros institucionais** de uma só instalação: designação, número da instituição por tipo de documento (12008 / 8009), NIF, cabeçalho e rodapé (códigos `IPCAG.SG-ACE`, `DEE-PEEP-001-ACE`) e rótulos impressos ("Período" = Turno, "Cadeira" = Disciplina). | O-07 | M | E1 | `DEC-001`; `A-03`, `A-09`, `A-14`; `COR-LEG-05`; INT-V2 §3.5, §3.13 | RN-10.6, RN-10.7 | US-GOV-01 | MOD-GOV-01 | DOF-01 a DOF-26 (cabeçalho) | `parametros_instituicao`, `modelos_documento` | 🟡 PC-E1 · `Q-027`, `Q-033`, `Q-035` |
+| **RF-C01-07** | Guardar os **parâmetros institucionais** de uma só instalação: designação, número da instituição por tipo de documento (12008 / 8009), NIF, cabeçalho e rodapé (códigos `IPCAG.SG-ACE`, `DEE-PEEP-001-ACE`), rótulos impressos ("Período" = Turno, "Cadeira" = Disciplina) e, sem depender do título jurídico, o **tipo de entidade / enquadramento** e o **ato constitutivo** (alvará / acordo, n.º, data) 🟡 (`DEC-020`). | O-07 | M | E1 | `DEC-001`; `DEC-020`; `A-03`, `A-09`, `A-14`; `COR-LEG-05`; INT-V2 §3.5, §3.13 | RN-10.6, RN-10.7 | US-GOV-01 | MOD-GOV-01 | DOF-01 a DOF-26 (cabeçalho) | `parametros_instituicao`, `modelos_documento` | 🟡 PC-E1 · `Q-027`, `Q-033`, `Q-035`; enquadramento e ato constitutivo `DSC-08-DIR-GERAL` |
 
 ### C02 — Admissão à 10ª Classe
 **Âmbito:** dentro · **Entrega:** E5 (concurso de 2027/2028 corre fora do SGE com importação na E1 via C17 — `DEC-018`) · **Objetivo:** `O-01` · **Decisões:** `DEC-007`, `DEC-018`
@@ -262,7 +262,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 > Fora do âmbito das entregas E1–E5 (`DEC-016`, `DEC-008` item 9 / F-13; `Q-036`): o `RF-C19-33` passa a `W` (fora da linha de base).
 
 ### C12 — Comunicação com encarregados e alunos
-**Âmbito:** dentro · **Entrega:** portal na **E5** (`DEC-003`); central de avisos (impresso + SMS) **pendente da `Q-037`** — proposta da CAP-C12: E3 · **Objetivo:** `O-11` · **Fonte principal:** [[C12 - Comunicacao com Encarregados e Alunos|CAP-C12]] · **Regras:** `RN-14`
+**Âmbito:** dentro · **Entrega:** central de avisos (impresso + SMS) na **E3** — decidida na `DEC-015` (E3); portal na **E5** (`DEC-003`) · 🟡 só o teto/orçamento mensal de SMS fica por fixar (`Q-C12-06`, `RN-14.6`) · **Objetivo:** `O-11` · **Fonte principal:** [[C12 - Comunicacao com Encarregados e Alunos|CAP-C12]] · **Regras:** `RN-14`
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -344,7 +344,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C16-01** | Pôr o ano letivo em encerramento e acompanhar a lista de verificação (pautas finais, recursos, exames, dossiê de encerramento de cada turma). | O-13 | M | E4 | CAP-C16 | RN-18.2, RN-18.3, RN-10.8 | US-PAS-01 | MOD-PAS-01 | — | `encerramentos_ano_letivo` | definido |
 | **RF-C16-02** | Gerar em massa a proposta de destino de cada aluno conforme a deliberação final, numa execução repetível e homologada. | O-13 | M | E4 | CAP-C16 | RN-18.5, RN-18.16 | US-PAS-02 | MOD-PAS-02 | DOF-25 | `execucoes_passagem_ano`, `propostas_confirmacao_matricula` | 🟡 PC-E2 · depende das regras de transição |
 | **RF-C16-03** | Retirar a confirmação automática a quem reprovou por faltas injustificadas, deixando o reingresso por despacho. | O-13 | M | E4 | `COR-LEG-14`; `R-04` (G-02) | RN-18.5, RN-03.6 | US-PAS-02 | MOD-PAS-02 | — | `propostas_confirmacao_matricula` | definido |
-| **RF-C16-04** | Transportar as cadeiras em atraso para o ano seguinte. | O-13 | M | E4 | CAP-C16; DESC-RESP §1 | RN-18.9 | US-PAS-02 | MOD-PAS-02 | — | `cadeiras_em_atraso`, `propostas_confirmacao_matricula` | 🟡 DoR-E4 · `Q-C16-06` |
+| **RF-C16-04** | Transportar as cadeiras em atraso para o ano seguinte. | O-13 | M | E4 | CAP-C16; DESC-RESP §1 | RN-18.9 | US-PAS-02 | MOD-PAS-02 | — | `cadeiras_em_atraso`, `propostas_confirmacao_matricula` | definido (`DEC-024`) |
 | **RF-C16-05** | Planear e criar as turmas do ano seguinte; o N.º de Ordem não transita. | O-13 | M | E4 | CAP-C16 | RN-18.7, RN-18.8, RN-05.2 | US-PAS-03 | MOD-PAS-03 | — | `turmas`, `matriculas_anuais` | definido |
 | **RF-C16-06** | Propor a renovação de bolsas e benefícios (nunca automática) para decisão. | O-13 | S | E4 | CAP-C16 | RN-07.3, RN-18.11 | US-PAS-04 | MOD-PAS-04 | — | `propostas_renovacao_beneficio`, `beneficios_bolsas_matricula` | definido |
 | **RF-C16-07** | Homologar o encerramento, imprimir o mapa de passagem e pôr o ano encerrado só de leitura, com dois anos a coexistir na transição. | O-13 | M | E4 | CAP-C16 | RN-18.1, RN-18.4, RN-18.12 | US-PAS-05 | MOD-PAS-01 | DOF-25 | `encerramentos_ano_letivo`, `anos_letivos` | definido |
@@ -386,13 +386,13 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US / Critério de Aceitação RNF | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RF-C18-01** | Fazer cópias de segurança diárias cifradas (regra 3-2-1: nuvem e disco externo) no fecho do turno da tarde e verificar o restauro. | O-08 | M | E1 | `R-30`; OPS-09 §5.1; `DEC-006` | RN-10 | `RNF-BKP-01/05/07` (OPS-09 §5.1) | — | — | todas | 🟡 PC-E1 · `Q-006`, `Q-016` (residência dos dados) |
-| **RF-C18-02** | Replicar o servidor local para a nuvem e resolver conflitos com uma autoridade central definida. | O-08 | M | E1 | `DEC-006`; OPS-09 §3.5 | RN-10.4 | `RNF-BKP-01, RNF-OFF-08` (OPS-09 §3.5) | — | — | `operacoes_sincronizacao`, `conflitos_sincronizacao` | 🟡 PC-E1 · `Q-015` |
-| **RF-C18-03** | Recuperar o serviço com perda máxima de 24 h de dados e em menos de 4 h, com o procedimento ensaiado antes de cada entrega. | O-08 | M | E2 | PLN-00 §5.3; OPS-09 §5.2; RNF-08 | — | `RNF-BKP-02/03, RNF-DIS-05` (OPS-09 §5.2) | — | — | — | definido |
-| **RF-C18-04** | Monitorizar o servidor, a réplica, as cópias e a sincronização e enviar alertas técnicos à administração técnica. | O-08 | S | E2 | OPS-09 §5.3 | RN-17.12 | `RNF-DIS-01, RNF-AUD-04` (OPS-09 §5.3) | MOD-SEG-01, MOD-ALR | — | `alertas_gestao` | definido |
-| **RF-C18-05** | Aplicar atualizações fora dos períodos críticos do calendário (matrículas, provas, conselhos), com possibilidade de reversão. | O-08 | S | E2 | OPS-09 §5.4, §6; DESC-RESP §3 | — | `RNF-MAN-01/02/08` (OPS-09 §5.4) | MOD-SEG-01 | — | — | definido |
+| **RF-C18-01** | Fazer cópias de segurança diárias cifradas (regra 3-2-1: nuvem e disco externo) no fecho do turno da tarde e verificar o restauro. | O-08 | M | E1 | `R-30`; OPS-09 §5.1; `DEC-006` | RN-10 | `RNF-BKP-01/04/05/06/07` (OPS-09 §5.1) | — | — | todas | 🟡 PC-E1 · `Q-006`, `Q-016` (residência dos dados) |
+| **RF-C18-02** | Replicar o servidor local para a nuvem e resolver conflitos com uma autoridade central definida. | O-08 | M | E1 | `DEC-006`; OPS-09 §3.5 | RN-10.4 | `RNF-BKP-01, RNF-DIS-06, RNF-OFF-08` (OPS-09 §3.5) | — | — | `operacoes_sincronizacao`, `conflitos_sincronizacao` | 🟡 PC-E1 · `Q-015` |
+| **RF-C18-03** | Recuperar o serviço com perda máxima de 24 h de dados e em menos de 4 h, com o procedimento ensaiado antes de cada entrega. | O-08 | M | E2 | PLN-00 §5.3; OPS-09 §5.2; RNF-08 | — | `RNF-BKP-01/02/03, RNF-DIS-05/07` (OPS-09 §5.2) | — | — | — | definido |
+| **RF-C18-04** | Monitorizar o servidor, a réplica, as cópias e a sincronização e enviar alertas técnicos à administração técnica. | O-08 | S | E2 | OPS-09 §5.3 | RN-17.12 | `RNF-DIS-01/03, RNF-AUD-04, RNF-SEG-04` (OPS-09 §5.3) | MOD-SEG-01, MOD-ALR | — | `alertas_gestao` | definido |
+| **RF-C18-05** | Aplicar atualizações fora dos períodos críticos do calendário (matrículas, provas, conselhos), com possibilidade de reversão. | O-08 | S | E2 | OPS-09 §5.4, §6; DESC-RESP §3 | — | `RNF-MAN-01/02/07/08` (OPS-09 §5.4) | MOD-SEG-01 | — | — | definido |
 | **RF-C18-06** | Registar e acompanhar os pedidos de suporte dos utilizadores. | O-10 | C | E2 | OPS-09 §5.6 | — | `RNF-USA-09` (OPS-09 §5.6) | — | — | — | 🟡 DoR-E2 · `Q-013` (quem dá suporte) |
-| **RF-C18-07** | Disponibilizar um ambiente de formação só com dados sintéticos ou anonimizados, para a formação por cargo (≤ 2 h por cargo). | O-10 | M | E1 | MIG-10 §9; OPS-09 §5.7; APD-11 `RNF-PRV-06`; PLN-00 §5.3 | — | `RNF-USA-01, RNF-PRV-06` (OPS-09 §5.7) | — | — | — | definido |
+| **RF-C18-07** | Disponibilizar um ambiente de formação só com dados sintéticos ou anonimizados, para a formação por cargo (≤ 2 h por cargo). | O-10 | M | E1 | MIG-10 §9; OPS-09 §5.7; APD-11 `RNF-PRV-06`; PLN-00 §5.3 | — | `RNF-USA-01, RNF-PRV-06, RNF-MAN-07` (OPS-09 §5.7; MIG-10 §9) | — | — | — | definido |
 
 ### C19 — Proteção de dados
 **Âmbito:** dentro · **Entrega:** transversal, desde a E1 (VIS-06) · **Objetivo:** `O-09` · **Fonte:** [[11 - Protecao de Dados (APD)|APD-11]] §7.1 (`RF-C19-nn` = `RF-P-APD-nn`; entrega sugerida pela APD-11; prioridade atribuída aqui) · **Lei:** Lei n.º 22/11
@@ -522,13 +522,13 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 
 | Estado | RF | Ponto de controlo |
 | :--- | :---: | :--- |
-| `definido` | 136 | — |
-| `🟡 PC-E1` | 22 | Homologação das decisões (incluindo a `DEC-002`, decidida (b)) e escolha do software certificado — antes da E1 |
+| `definido` | 134 | — |
+| `🟡 PC-E1` | 26 | Homologação das decisões (incluindo a `DEC-002`, decidida (b)) e escolha do software certificado — antes da E1 |
 | `🟡 PC-E2` | 17 | Recálculo de pautas — antes da E2 |
 | `🟡 PC-E3` | 9 | Regulamento interno — antes da E3 |
-| `🟡 DoR-E1` … `DoR-E5` | 38 (E1 9, E2 11, E3 2, E4 11, E5 5) | Questão respondida antes da entrega do RF |
+| `🟡 DoR-E1` … `DoR-E5` | 36 (E1 8, E2 11, E3 2, E4 10, E5 5) | Questão respondida antes da entrega do RF |
 | fora da linha de base | 2 | `RF-C10-26` (`DEC-005`), `RF-C19-33` (`DEC-016`) |
-| **Total 🟡** | **86** | |
+| **Total 🟡** | **88** | |
 
 ### 4.4 Cobertura (detalhe na [[Matriz de Rastreabilidade]])
 - **0** objetivos sem RF; **0** capacidades dentro do âmbito sem RF; **0** das 130 US sem RF.
@@ -555,3 +555,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc2 | 2026-11-09 | Concurso de admissão 2027/2028 (`DEC-018`, Issue #25): confirmado fora do SGE com importação dos admitidos na E1 via C17; C02 na E5 para 2028/2029; `RF-C03-01` e notas de C02/C17 atualizados; `Q-017` resolvida. |
 | 2.0-rc2 | 2026-11-09 | **Aplicação da DEC-002 — VER-02 #43 (2026-11-09):** `DEC-002` decidida (b), homologação pendente (§1.3, C10); `RF-C10-10` redefinido como contingência via adaptador (balcão não bloqueia; recibo escolar provisório e fila de emissão; regularização automática), prioridade `C` → `M`, tabelas `recibos_oficiais` e `fila_emissao_fiscal`; marcas 🟡 PC-E1 de `RF-C10-06`, `-07`, `-08`, `-17`, `-20` e `RF-C19-11` passam a esperar a homologação e a escolha do software certificado; §4.1 e §4.2 recalculados (M 180 → 181, C 10 → 9; E1 72 → 73 `Must`). |
 | 2.0-rc2 | 2026-11-09 | **Correções da verificação VER-02 — #45 (2026-11-09):** `RF-C17-13` com o tipo `AJUSTE_SALDO_MIGRADO` em `ajustes_conta_corrente`; `RF-C17-14` passa a citar MIG-10 §7.6 e DOC-05 §4.10 (item 3) em vez de `RN-10.5`, com tabelas `alunos` (`historico_conferido_para_certificacao`) e `audit_logs`; `RF-C19-12` com `alunos.estado_conservacao = BLOQUEADO` (lista 103). |
+| 2.0-rc2 | 2026-11-09 | **Correções da verificação VER-02 — #46/#47 (2026-11-09):** C12 (§3) com Entrega "central de avisos decidida na `DEC-015` (E3), portal na E5" e 🟡 só o teto/orçamento de SMS (`Q-C12-06`); legenda da coluna Entrega sem "pendente (`Q-037`/`Q-038`)"; `RF-C01-07` com tipo de entidade / enquadramento e ato constitutivo 🟡 (`DEC-020`, `DSC-08-DIR-GERAL`); colunas `US` de `RF-C18-01` a `RF-C18-07` com as mesmas listas de RNF da `DEC-014` (REG-12). Totais, entregas e prioridades sem alteração. |

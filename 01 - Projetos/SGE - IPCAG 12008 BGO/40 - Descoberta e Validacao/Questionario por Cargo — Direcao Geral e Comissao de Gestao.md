@@ -44,8 +44,8 @@ A especificação v2.0 do SGE está estruturalmente concluída. O sistema compor
 _Por que importa: O sistema foi concebido para suportar ambos os números de forma parametrizável (`parametros_instituicao.numero_escola_secundario`). O preenchimento define o cabeçalho impresso oficial em diplomas, certificados, pautas e cartões de estudante._
 > 
 
-### [HITL / DEC-020 / DEC-021] A Direção pode disponibilizar cópia simples do Alvará de Criação / Funcionamento e do Acordo de Gestão Compartilhada (Diocese de Caxito e Estado Angolano)?
-_Por que importa: Necessário para anexar ao processo de notificação prévia obrigatória à Agência de Proteção de Dados (APD) e preencher os dados de pessoa coletiva responsável (`Q-APD-01`)._
+### [HITL / DEC-020 / DEC-021 / Q-APD-02 / Q-LEG-13] A Direção pode disponibilizar cópia simples do Alvará de Criação / Funcionamento e do Acordo de Gestão Compartilhada (Diocese de Caxito e Estado Angolano)? Indique também o tipo de enquadramento da escola (ex.: escola pública de gestão confiada à Igreja ou escola privada em parceria) e o n.º e a data do ato constitutivo.
+_Por que importa: Necessário para anexar ao processo de notificação prévia obrigatória à Agência de Proteção de Dados (APD) e preencher os dados de pessoa coletiva responsável (`Q-APD-01`) e os campos **Tipo de Entidade / Enquadramento** e **Ato Constitutivo** de `parametros_instituicao` (`DEC-020`)._
 > 
 
 ### [Q-009] Existe intenção da Diocese de Caxito em alargar futuramente o uso deste modelo de sistema a outras instituições de ensino sob a sua tutela?

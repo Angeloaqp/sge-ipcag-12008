@@ -43,7 +43,7 @@ As **195 questões de parametrização e levantamento de campo** triadas em `IDX
 | [[Questionario Institucional — Direcao Provincial da Educacao e INADE\|DSC-10-DPE-INADE]] | Questionário de Articulação Institucional | Gabinete Provincial da Educação do Bengo e INADE / MED | Entidades Tutelares Externas | 4 | PC-E4 |
 | **Total Global** | **7 Cadernos de Validação** | **Toda a Estrutura da Escola e Tutela** | **Todos os Papéis Operacionais** | **199** | **E1–E5** |
 
-*(Nota: O total de 199 inclui as 195 perguntas de `IDX-12 §4` mais os 4 pontos de articulação institucional externa do Ticket #26 / Ticket #40).*
+*(Nota: O total de 199 inclui as 195 perguntas de `IDX-12 §4` mais os 4 pontos de articulação institucional externa do Ticket #26 / Ticket #40; os blocos de recolha documental marcados `[HITL / DEC-nnn]` (ex.: alvará/acordo em `DSC-08`, contabilista e certidão fiscal em `DSC-06`, contacto APD em `DSC-07`) não entram nesta contagem.)*
 
 ---
 

@@ -44,6 +44,10 @@ A tesouraria escolar é o coração da sustentabilidade do IPCAG. A especificaç
 _Por que importa: Conforme a `DEC-026`, o sistema suporta qualquer regime em `parametros_instituicao`. Confirma a menção obrigatória nos documentos fiscais e o modelo declarativo perante a AGT._
 > 
 
+### [HITL / DEC-026] Quem é o contabilista responsável pela escola (nome e n.º de cédula profissional)? A escola pode disponibilizar cópia simples da certidão de registo fiscal da AGT (NIF e regime de IVA)?
+_Por que importa: Conforme a `DEC-026`, o NIF, o regime de IVA em vigor e o contabilista responsável são dados a recolher no PC-E1 (`DEC-009`) para configurar `parametros_instituicao` e o adaptador fiscal (`DEC-002`)._
+> 
+
 ### [Q-002 / Q09-03] A escola já utiliza atualmente algum software de faturação certificado pela AGT? Se sim, qual é o nome do programa, versão da licença e dispõe de módulo de integração (API ou ficheiros SAF-T)?
 _Por que importa: Conforme a `DEC-002`, o SGE integrará com este software através de adaptador fiscal._
 > 
