@@ -25,7 +25,7 @@ tags:
 >
 > As **regras de domínio** (cálculo de médias, transições, semáforo, validações) vivem num pacote único, **sem dependências**, que corre igual no telemóvel e no servidor.
 >
-> - **Base:** especificação congelada [`v2.0`](https://github.com/Angeloaqp/sge-ipcag-12008/releases/tag/v2.0). As escolhas de fundo são a `DEC-027` do [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Os pormenores estão nos registos técnicos `ADR-T01` a `ADR-T14` (§5). A topologia da escola e os canais de acesso (quiosque do aluno, tablets de sala, caixa de correio na nuvem) estão na [[13.1 - Topologia e Canais de Acesso|ARQ-13.1]] (`DEC-028`).
+> - **Base:** especificação congelada [`v2.0`](https://github.com/Angeloaqp/sge-ipcag-12008/releases/tag/v2.0). As escolhas de fundo são a `DEC-027` do [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Os pormenores estão nos registos técnicos `ADR-T01` a `ADR-T14` (§5). A lista completa das tecnologias, camada a camada, está no [[13.2 - Catalogo de Tecnologias|ARQ-13.2]]. A topologia da escola e os canais de acesso (quiosque do aluno, tablets de sala, caixa de correio na nuvem) estão na [[13.1 - Topologia e Canais de Acesso|ARQ-13.1]] (`DEC-028`).
 > - **Quem constrói:** o analista responsável dirige e revê; agentes de IA escrevem o código, sempre com testes (`ADR-T11`).
 > - **Onde:** um repositório **novo e privado**, separado deste vault. Lê a especificação daqui, pela etiqueta `v2.0`.
 

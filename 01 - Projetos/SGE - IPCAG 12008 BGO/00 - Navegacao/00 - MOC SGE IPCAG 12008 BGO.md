@@ -133,6 +133,7 @@ flowchart LR
 | :---: | :--- | :--- | :---: |
 | `ARQ-13` | [[13 - Arquitetura Tecnica]] | Tecnologia (TypeScript, PostgreSQL + RLS, PWA offline), estrutura do código, ADR `T01`–`T14` (todos aceites), riscos e protótipos | `ativo` |
 | `ARQ-13.1` | [[13.1 - Topologia e Canais de Acesso]] | Servidor principal e de reserva, 3 redes, cópia online, caixa de correio na nuvem, quiosque do aluno, tablets de sala (`DEC-028`) | `ativo` |
+| `ARQ-13.2` | [[13.2 - Catalogo de Tecnologias]] | Lista completa das tecnologias por camada (dispositivos → nuvem), com o porquê de cada uma e o estado (decidido / proposto) | `proposta` |
 
 **Código:** repositório privado [`Angeloaqp/sge-ipcag-12008-sistema`](https://github.com/Angeloaqp/sge-ipcag-12008-sistema), com o esqueleto criado a 2026-11-10.
 
