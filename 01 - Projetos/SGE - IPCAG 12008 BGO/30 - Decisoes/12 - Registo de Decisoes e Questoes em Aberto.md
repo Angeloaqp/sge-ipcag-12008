@@ -68,6 +68,7 @@ tags:
 | [[#DEC-017 — Governação, Operação e Sustentabilidade Financeira do SGE (Q-013)\|DEC-017]] | Issue #24; `Q-013` | Governação, operação e sustentabilidade financeira | (a) IPCAG é o dono do sistema e financia custos locais, nuvem e SMS (sob teto) via receitas de propinas; operação local por ADMIN_TEC (N1/N2) e suporte N3 externo sob SLA; resiliência offline garantida | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-018 — Concurso de Admissão de 2027/2028 Fora do SGE e Importação dos Admitidos na E1 (Q-017)\|DEC-018]] | Issue #25; `Q-017` | Concurso de admissão 2027/2028: fora vs no SGE | (a) Concurso de admissão 2027/2028 corre fora do SGE (portal nacional `acessoetp.ao` / listas oficiais homologadas); admitidos importados na E1 via C17 (`MIG-D06`); capacidade C02 entra na E5 para 2028/2029 | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-019 — Governação de Papéis: Ponto de Contacto APD e Separação entre Funções Pedagógicas e Financeiras (Q-APD-04, Q-C15-04)\|DEC-019]] | Issue #27; `Q-APD-04`, `Q-C15-04` | Governação de papéis: ponto de contacto APD e visibilidade financeira do DT | (a) Ponto de contacto APD tutelado pelo DIR_GERAL com operação pelo CHEFE_SEC_GER (sem 13º papel RBAC); DT e Professores sem acesso a dívidas nem semáforo financeiro (RN-17.3, DEC-012 confirmadas) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-020 — Título Jurídico e Enquadramento Institucional do IPCAG (Issue #38, Q-APD-01, Q-APD-02, Q-LEG-13)\|DEC-020]] | Issue #38; `Q-APD-01`, `Q-APD-02`, `Q-LEG-13` | Título jurídico e enquadramento institucional | (a) SGE desacoplado via parametros_instituicao suportando tanto acordo de gestão (DP 302/19) como parceria privada (DP 37/23); pedido de cópia do alvará/acordo remetido como HITL para questionário DSC-02 em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -622,6 +623,25 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-020 — Título Jurídico e Enquadramento Institucional do IPCAG (Issue #38, Q-APD-01, Q-APD-02, Q-LEG-13)
+
+- **Origem:** Issue #38 ([issue #38](https://github.com/Angeloaqp/sge-ipcag-12008/issues/38)); investigação legal #36 ([issue #36](https://github.com/Angeloaqp/sge-ipcag-12008/issues/36)); questões `Q-APD-01`, `Q-APD-02`, `Q-LEG-13`; [[11 - Protecao de Dados (APD)|APD-11]] §10; [[01 - Dominio e Regras|DOC-01]] §1.1 (`RN-10.6`, `RN-10.7`); [[07 - Catalogo de Requisitos Funcionais|RF-07]] `RF-C01-07` · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A investigação sobre o enquadramento na APD (#36) identificou que o estatuto legal exato do IPCAG oscila entre escola privada comparticipada da Diocese (Decreto Presidencial n.º 37/23) e escola pública de gestão eclesial (Acordo-Quadro Angola–Santa Sé, Decreto Presidencial n.º 302/19, art. 18.º, n.º 3). Era necessário clarificar se esta definição bloqueava a modelagem técnica e como é tratada no sistema.
+
+**Decisão.** **Desacoplamento por parametrização e remessa probatória para controlo documental:**
+1. **Desacoplamento Técnico Total:** A arquitetura do SGE é agnóstica quanto ao título jurídico específico da instituição. Os campos de enquadramento, número de alvará/decreto, tipo de entidade e cabeçalhos oficiais estão isolados em `parametros_instituicao` (`RF-C01-07`, `MOD-GOV-01`), suportando indistintamente a titularidade privada comparticipada ou de gestão pública confiada à Igreja.
+2. **Dossiê APD:** A notificação perante a APD (`APD-11 §10`) é instruída prevendo a representação pela Diocese de Caxito e pelo IPCAG (arts. 27.º e 28.º da Lei n.º 22/11).
+3. **Artefacto HITL:** A recolha da cópia física do documento constitutivo (alvará ou acordo de gestão) é classificada como tarefa humana a solicitar à Direção no questionário de governação (`DSC-02` / Issue #20) no ponto de controlo **PC-E1**, não bloqueando a linha de base funcional v2.0 conforme a regra da `DEC-009`.
+4. As questões `Q-APD-01`, `Q-APD-02` e `Q-LEG-13` ficam resolvidas no plano estrutural da especificação.
+
+**Impacto.**
+- **RF-07 / DOC-01 / DOC-05:** `parametros_instituicao` e `RF-C01-07` confirmados como mecanismo de desacoplamento.
+- **APD-11:** §10 alinhado com a flexibilidade institucional da notificação.
+- **IDX-12:** `Q-APD-02` e `Q-LEG-13` registadas como resolvidas no plano arquitetural sob a `DEC-020`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -735,3 +755,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-017`: modelo de governação, operação (N1/N2/N3) e sustentabilidade financeira do SGE formalizado; `Q-013` respondida (Issue #24). |
 | 2.0-rc2 | 2026-11-09 | `DEC-018`: concurso de admissão de 2027/2028 confirmado fora do SGE com importação dos admitidos na E1 via C17 (`MIG-D06`); C02 na E5 para 2028/2029; `Q-017` respondida (Issue #25). |
 | 2.0-rc2 | 2026-11-09 | `DEC-019`: governação de papéis; ponto de contacto APD tutelado pelo `DIR_GERAL` com operação pelo `CHEFE_SEC_GER` em `MOD-GOV-09` (sem 13º papel RBAC; `Q-APD-04`); confirmação estrita de que DT e Professores não acedem a dívidas nem situação financeira dos alunos (`RN-17.3`, `Q-C15-04`); Issue #27 fechada. |
+| 2.0-rc2 | 2026-11-09 | `DEC-020`: título jurídico e enquadramento institucional do IPCAG desacoplados por parametrização em `parametros_instituicao` (`RF-C01-07`); documento probatório remetido como HITL para o questionário `DSC-02` em PC-E1 (`DEC-009`); Issue #38 fechada (`Q-APD-01`, `Q-APD-02`, `Q-LEG-13`). |
