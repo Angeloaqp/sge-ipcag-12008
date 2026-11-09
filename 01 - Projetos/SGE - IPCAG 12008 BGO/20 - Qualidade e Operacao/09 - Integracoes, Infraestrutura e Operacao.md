@@ -6,8 +6,8 @@ aliases:
   - "OPS-09"
 created: 2026-11-02
 updated: 2026-11-09
-status: ativo
-version: "2.0-rc2"
+status: congelado
+version: "2.0"
 doc_id: "OPS-09"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -18,6 +18,7 @@ tags:
   - operacao
   - backup
   - continuidade
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Documento 09: Integrações, Infraestrutura e Operação — Ambiente Alvo e Continuidade do SGE

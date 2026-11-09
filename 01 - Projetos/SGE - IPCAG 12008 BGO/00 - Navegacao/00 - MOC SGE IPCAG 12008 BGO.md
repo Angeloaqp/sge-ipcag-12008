@@ -5,9 +5,9 @@ aliases:
   - "MOC SGE"
   - "SGE - IPCAG 12008 BGO"
 created: 2026-10-31
-updated: 2026-11-05
+updated: 2026-11-09
 status: ativo
-version: "2.0-rc1"
+version: "2.0"
 doc_id: "MOC-00"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 figma_board: "https://www.figma.com/board/OneLIwLlc2kuM1koaIeXG0"
@@ -30,6 +30,12 @@ tags:
 > - **Recursos Oficiais:** [[Quadro Legal MED AGT e APD Angola]] | [[Quadros de Arquitetura no Figma]]
 
 ---
+
+> [!success] Linha de base **v2.0** — congelada a 2026-11-09
+> A especificação (DOC-01 a DOC-05, RF-07, VIS-06, RNF-08, OPS-09, MIG-10, APD-11 e Matriz) está **congelada na v2.0** (etiqueta git `v2.0`): 224 requisitos funcionais, 130 histórias de utilizador, 121 tabelas e 26 decisões.
+> - **Homologação pela Comissão de Gestão:** pendente — [[ATA-HOM-01 - Homologacao das Decisoes da Especificacao v2.0|ATA-HOM-01]]. As alterações que a Direção pedir entram por **pedido de alteração** no [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]].
+> - **Parâmetros 🟡** a confirmar pela escola: questionários em `40 - Descoberta e Validacao/` e [[12.1 - Indice de Questoes em Aberto|IDX-12]]. Não bloqueiam a construção (`DEC-009`).
+> - **Próximo passo:** Fase 5 da [[00.3 - Proposta de Organizacao Documental|ORG-00]] — arquitetura técnica e planos por entrega.
 
 ## 1. Ficha Institucional do Projeto
 
@@ -164,5 +170,5 @@ As notas [[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribu
 > - [x] **Fase 1 — Arrumar:** pastas por função, capacidades arquivadas, ficheiros vazios removidos, índices atualizados (2026-11-05).
 > - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; as 4 decisões foram tomadas: #6 migração (`DEC-010`), #7 RUPE (`DEC-011`), #5 permissões (`DEC-012`) e #9 entregas (`DEC-013`). **As 10 issues estão fechadas.**
 > - [ ] **Fase 3 — Fechar o que está em aberto:** em curso desde 2026-11-08, no **[mapa do GitHub](https://github.com/Angeloaqp/sge-ipcag-12008/issues/11)**: triagem das 283 perguntas, histórias em falta para 40 requisitos, central de avisos (`Q-037`), faturação AGT (`Q-001` → `DEC-002`) e questionários para a escola.
-> - [ ] **Fase 4 — Congelar a v2.0:** versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
+> - [x] **Fase 4 — Congelar a v2.0:** feita a 2026-11-09 (etiqueta `v2.0`; homologação pendente na ATA-HOM-01). versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
 > - [ ] **Fase 5 — Ponte para o código:** `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.

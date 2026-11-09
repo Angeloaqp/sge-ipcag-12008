@@ -6,8 +6,8 @@ aliases:
   - "RF-07"
 created: 2026-11-02
 updated: 2026-11-09
-status: rascunho
-version: "2.0-rc2"
+status: congelado
+version: "2.0"
 doc_id: "RF-07"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -16,6 +16,7 @@ tags:
   - requisitos
   - catalogo
   - rastreabilidade
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Catálogo de Requisitos Funcionais — SGE IPCAG N.º 12008 / BGO

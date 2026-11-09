@@ -5,9 +5,9 @@ aliases:
   - "DOC-01"
   - "Domínio e Regras SGE"
 created: 2026-10-31
-updated: 2026-11-02
-status: ativo
-version: "2.0-rc1"
+updated: 2026-11-09
+status: congelado
+version: "2.0"
 doc_id: "DOC-01"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 figma_board: "https://www.figma.com/board/l8fbIkk7SlJXCc3poCnExT"
@@ -19,6 +19,7 @@ tags:
   - regras-negocio
   - med-angola
   - agt
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 # Documento 01: Engenharia de Domínio (DDD), Estrutura Orgânica (RBAC), Máquinas de Estado e Regras de Negócio Invioláveis
 
@@ -2340,6 +2341,11 @@ Na repetência por `NAO_TRANSITA_RETIDO_FALTAS`, a proposta nasce `Bloqueada` co
 ---
 
 ## 5. Alterações da v2.0
+
+### Linha de base v2.0 (2026-11-09)
+
+- Documento congelado na **v2.0**, com a homologação da Direção pendente ([[ATA-HOM-01 - Homologacao das Decisoes da Especificacao v2.0|ATA-HOM-01]]). A partir daqui, as alterações entram por pedido de alteração registado no [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Etiqueta git `v2.0`.
+
 
 ### Correções da verificação VER-02 — #46/#47 (2026-11-09)
 

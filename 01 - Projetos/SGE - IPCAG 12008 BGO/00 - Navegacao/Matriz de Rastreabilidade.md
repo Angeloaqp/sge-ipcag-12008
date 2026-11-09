@@ -4,9 +4,9 @@ aliases:
   - "Matriz de Rastreabilidade"
   - "MTR-07"
 created: 2026-11-02
-updated: 2026-11-08
-status: rascunho
-version: "2.0-rc2"
+updated: 2026-11-09
+status: congelado
+version: "2.0"
 doc_id: "MTR-07"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -14,6 +14,7 @@ tags:
   - ipcag-12008
   - requisitos
   - rastreabilidade
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Matriz de Rastreabilidade — SGE IPCAG N.º 12008 / BGO

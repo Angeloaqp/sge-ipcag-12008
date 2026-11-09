@@ -6,7 +6,7 @@ filters:
     - '!file.inFolder(".agents")'
 formulas:
   tamanho_kb: (file.size / 1024).round(1) + " KB"
-  estado_formatado: if(status == "concluido", "✅ Concluído", if(status == "ativo", "🟢 Ativo", if(status == "proposta", "💡 Proposta", "📝 Rascunho")))
+  estado_formatado: if(status == "concluido", "✅ Concluído", if(status == "ativo", "🟢 Ativo", if(status == "proposta", "💡 Proposta", if(status == "congelado", "🔒 Congelado v2.0", "📝 Rascunho"))))
 properties:
   file.name:
     displayName: Nota

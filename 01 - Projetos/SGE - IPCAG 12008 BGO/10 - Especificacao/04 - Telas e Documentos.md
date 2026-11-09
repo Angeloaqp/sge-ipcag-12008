@@ -5,9 +5,9 @@ aliases:
   - "DOC-04"
   - "Telas e Documentos SGE"
 created: 2026-10-31
-updated: 2026-11-02
-status: ativo
-version: "2.0-rc1"
+updated: 2026-11-09
+status: congelado
+version: "2.0"
 doc_id: "DOC-04"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 figma_board: "https://www.figma.com/board/ceE1mzcDmB2bT9RUAZxOcN"
@@ -19,6 +19,7 @@ tags:
   - pautas-med
   - faturacao-agt
   - especificacao-v2
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 # Documento 04: Arquitetura da Informação dos Módulos Funcionais (Sem UI) e Especificação Estrutural dos Documentos Oficiais
 
@@ -1472,6 +1473,11 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 ---
 
 ## Alterações da v2.0
+
+### Linha de base v2.0 (2026-11-09)
+
+- Documento congelado na **v2.0**, com a homologação da Direção pendente ([[ATA-HOM-01 - Homologacao das Decisoes da Especificacao v2.0|ATA-HOM-01]]). A partir daqui, as alterações entram por pedido de alteração registado no [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Etiqueta git `v2.0`.
+
 
 ### Correções da verificação VER-02 — #46/#47 (2026-11-09)
 

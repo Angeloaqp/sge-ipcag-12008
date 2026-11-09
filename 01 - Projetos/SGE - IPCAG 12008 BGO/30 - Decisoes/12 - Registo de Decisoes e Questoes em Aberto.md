@@ -6,8 +6,8 @@ aliases:
   - "REG-12"
 created: 2026-11-02
 updated: 2026-11-09
-status: rascunho
-version: "2.0-rc2"
+status: ativo
+version: "2.0"
 doc_id: "REG-12"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -16,6 +16,7 @@ tags:
   - requisitos
   - decisoes
   - questoes-em-aberto
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Registo de Decisões e Questões em Aberto — SGE IPCAG N.º 12008 / BGO

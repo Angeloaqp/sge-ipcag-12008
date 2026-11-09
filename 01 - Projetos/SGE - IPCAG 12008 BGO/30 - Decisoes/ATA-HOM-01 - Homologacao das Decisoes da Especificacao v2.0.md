@@ -161,7 +161,7 @@ Com esta homologação, a especificação do SGE passa à **versão 2.0** e fica
 > [!todo] Ao receber a ata assinada
 > 1. Digitalizar a secção 7 assinada e guardá-la **fora do repositório**, porque tem assinaturas e nomes. O repositório é público.
 > 2. Na coluna "Homologação da Direção" do REG-12 §1, escrever `homologada (data, ATA-HOM-01)` para cada decisão; nas decisões com alteração, abrir um pedido de alteração.
-> 3. Passar todos os documentos da especificação de `2.0-rc1` para `2.0` e criar a etiqueta `v2.0` no git.
+> 3. ~~Passar todos os documentos para `2.0` e criar a etiqueta `v2.0`~~ — **feito a 2026-11-09** (congelamento antes da homologação, por decisão do analista). Se a Direção pedir alterações, cada uma entra por pedido de alteração no REG-12, numa versão `2.1`.
 
 ## 9. Histórico
 

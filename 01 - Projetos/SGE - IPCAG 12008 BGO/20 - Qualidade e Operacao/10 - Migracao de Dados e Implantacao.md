@@ -7,8 +7,8 @@ aliases:
   - "Plano de Arranque SGE"
 created: 2026-11-02
 updated: 2026-11-09
-status: ativo
-version: "2.0-rc2"
+status: congelado
+version: "2.0"
 doc_id: "MIG-10"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -18,6 +18,7 @@ tags:
   - implantacao
   - formacao
   - requisitos
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Migração de Dados e Implantação — SGE IPCAG N.º 12008 / BGO

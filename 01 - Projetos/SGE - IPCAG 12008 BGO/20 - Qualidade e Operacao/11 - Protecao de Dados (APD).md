@@ -6,8 +6,8 @@ aliases:
   - "APD-11"
 created: 2026-11-02
 updated: 2026-11-09
-status: rascunho
-version: "0.4"
+status: congelado
+version: "2.0"
 doc_id: "APD-11"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -17,6 +17,7 @@ tags:
   - protecao-de-dados
   - apd
   - lei-22-11
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Proteção de Dados Pessoais (APD) — SGE IPCAG N.º 12008 / BGO

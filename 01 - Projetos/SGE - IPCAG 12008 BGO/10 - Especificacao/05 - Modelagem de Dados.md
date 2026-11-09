@@ -6,8 +6,8 @@ aliases:
   - "Modelagem de Dados SGE"
 created: 2026-10-31
 updated: 2026-11-09
-status: ativo
-version: "2.0-rc1"
+status: congelado
+version: "2.0"
 doc_id: "DOC-05"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 figma_board: "https://www.figma.com/board/lGrzPwEBaxgExyewDXnEAt"
@@ -19,6 +19,7 @@ tags:
   - postgresql
   - offline-first
   - rls
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 # Documento 05: Modelagem Conceptual e Organização Lógica da Base de Dados (ERD, Dicionário de Entidades, Integridade e Isolamento de Acesso)
 
@@ -883,6 +884,11 @@ Legenda: **L** lê · **E** escreve · **H** homologa · `—` sem acesso · *(E
 ---
 
 ## 7. Alterações da v2.0
+
+### Linha de base v2.0 (2026-11-09)
+
+- Documento congelado na **v2.0**, com a homologação da Direção pendente ([[ATA-HOM-01 - Homologacao das Decisoes da Especificacao v2.0|ATA-HOM-01]]). A partir daqui, as alterações entram por pedido de alteração registado no [[12 - Registo de Decisoes e Questoes em Aberto|REG-12]]. Etiqueta git `v2.0`.
+
 
 ### Correções da verificação VER-02 — #46/#47 (2026-11-09)
 

@@ -5,9 +5,9 @@ aliases:
   - "Requisitos Não Funcionais"
   - "RNF-08"
 created: 2026-11-02
-updated: 2026-11-08
-status: rascunho
-version: "0.2"
+updated: 2026-11-09
+status: congelado
+version: "2.0"
 doc_id: "RNF-08"
 project: "[[00 - MOC SGE IPCAG 12008 BGO|SGE - IPCAG 12008 BGO]]"
 tags:
@@ -18,6 +18,7 @@ tags:
   - qualidade
   - offline-first
   - seguranca
+baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 ---
 
 # Documento 08: Requisitos Não Funcionais — Metas Mensuráveis de Qualidade do SGE
