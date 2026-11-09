@@ -70,6 +70,7 @@ tags:
 | [[#DEC-019 — Governação de Papéis: Ponto de Contacto APD e Separação entre Funções Pedagógicas e Financeiras (Q-APD-04, Q-C15-04)\|DEC-019]] | Issue #27; `Q-APD-04`, `Q-C15-04` | Governação de papéis: ponto de contacto APD e visibilidade financeira do DT | (a) Ponto de contacto APD tutelado pelo DIR_GERAL com operação pelo CHEFE_SEC_GER (sem 13º papel RBAC); DT e Professores sem acesso a dívidas nem semáforo financeiro (RN-17.3, DEC-012 confirmadas) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-020 — Título Jurídico e Enquadramento Institucional do IPCAG (Issue #38, Q-APD-01, Q-APD-02, Q-LEG-13)\|DEC-020]] | Issue #38; `Q-APD-01`, `Q-APD-02`, `Q-LEG-13` | Título jurídico e enquadramento institucional | (a) SGE desacoplado via parametros_instituicao suportando tanto acordo de gestão (DP 302/19) como parceria privada (DP 37/23); pedido de cópia do alvará/acordo remetido como HITL para questionário DSC-02 em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-021 — Estrutura de Direção, Comissão de Gestão e Homologações Individuais vs Colegiais (Q-028, Q-C14-14)\|DEC-021]] | Issue #28; `Q-028`, `Q-C14-14` | Estrutura de direção: Comissão de Gestão e homologações | (a) Títulos reais mapeados em cargos_institucionais (RN-16.20); DIR_GERAL acumula SUB_ADM na vacatura transitória; homologações no SGE individuais com reautenticação e fundamentação de atas colegiais | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-022 — Modelo de Horários: Sem Desdobramentos/Aulas Conjuntas e Regime de Horário da 13ª Classe (Q-C04-07, Q-C04-14)\|DEC-022]] | Issue #29; `Q-C04-07`, `Q-C04-14` | Horários: desdobramentos, turmas conjuntas e regime da 13ª Classe | (a) Sem desdobramentos nem aulas conjuntas em E1–E5 (`aulas_horario` 1:1 com turma-disciplina e sala); 13ª Classe em regime tutorial de Projecto Tecnológico sem sala fixa permanente nem bloqueio de 30–32h | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -672,6 +673,32 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-022 — Modelo de Horários: Sem Desdobramentos/Aulas Conjuntas e Regime de Horário da 13ª Classe (Q-C04-07, Q-C04-14)
+
+- **Origem:** Issue #29 ([issue #29](https://github.com/Angeloaqp/sge-ipcag-12008/issues/29)); questões `Q-C04-07` e `Q-C04-14`; [[01 - Dominio e Regras|DOC-01]] §1.3 (`RN-12.2 §4`, `RN-12.8 §1`, `RN-12.9 §1` e `§5`); [[Achados dos Documentos Reais - Lote 1|DESC-L1]] A5, A6; [[Sintese das Respostas da Fase B|DESC-RESP]] R20–R22 · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Duas questões estruturais condicionavam o motor de horários (C04) e a alocação de espaços físicos no IPCAG:
+1. **`Q-C04-07` (Desdobramentos e Aulas Conjuntas):** Saber se existem turmas desdobradas (ex.: metade da turma em laboratório com outro professor em simultâneo) ou aulas conjuntas (ex.: Educação Física agrupando duas turmas). A existência de desdobramentos exigiria que `aulas_horario` suportasse relações N:M com turmas e professores, além de flexibilizar os invariantes de choque bloqueante (`RN-12.9.1` e `RN-12.9.5`).
+2. **`Q-C04-14` (Regime da 13ª Classe e Projecto Tecnológico):** A matriz da 13ª Classe (28 h/semana) compreende 20 h de Estágio Curricular Supervisionado e 8 h de Projecto Tecnológico. Era necessário esclarecer se a 13ª Classe ocupa salas físicas e horário fixo na C04, o que colidiria com a capacidade física do IPCAG (12 salas para turmas da 10ª à 12ª em dois turnos).
+
+**Decisão.** **Simplificação do motor de horários para relações unívocas e regime tutorial para a 13ª Classe:**
+1. **Sem Desdobramentos nem Aulas Conjuntas nas Entregas E1–E5 (`Q-C04-07`):**
+   - No modelo de dados e regras de negócio da linha de base v2.0, cada registo de aula no horário (`aulas_horario`) associa-se de forma unívoca e estrita a exatamente **1** `turma_disciplina_id` e **1** `sala_fisica_id`.
+   - Não se implementam turmas desdobradas (múltiplos docentes simultâneos na mesma turma) nem aulas conjuntas (múltiplas turmas na mesma aula/sala).
+   - O invariante de choques bloqueantes mantém-se absoluto: uma turma tem no máximo 1 aula em `(dia, tempo)` (`RN-12.9.1`), um professor tem no máximo 1 aula em `(dia, turno, tempo)` (`RN-12.9.2`) e uma sala física tem no máximo 1 aula em `(dia, turno, tempo)` (`RN-12.9.3`, `RN-12.9.5`).
+2. **Regime de Horário e Espaços da 13ª Classe (`Q-C04-14`):**
+   - **12ª Classe:** A disciplina de Projecto Tecnológico (2 h semanais) funciona em regime letivo regular em sala de aula, integrando o horário semanal publicado da turma na C04 (`RN-12.8`).
+   - **13ª Classe:** As 20 h de Estágio Curricular Supervisionado são cumpridas integralmente fora da escola (em empresas parceiras e instituições acolhedoras). As 8 h curriculares de Projecto Tecnológico funcionam em **regime tutorial de orientação periódica por grupos de trabalho/estágio**, e não como aulas expositivas fixas de 8 tempos contínuos em sala de aula regular.
+   - Consequentemente, as turmas da 13ª Classe **não têm sala física própria permanente** reservada nos turnos regulares nem grelha horária semanal completa de 30–32 tempos, ficando **isentas do bloqueio de capacidade semanal da `RN-12.2 §4`**.
+   - As sessões presenciais de orientação e acompanhamento tutorial da 13ª Classe são agendadas em laboratórios ou salas disponíveis sem reserva em exclusividade, permitindo que as 12 salas físicas do edifício do IPCAG atendam plenamente às turmas da 10ª à 12ª classes nos turnos da Manhã e da Tarde.
+3. As questões estruturais `Q-C04-07` e `Q-C04-14` são declaradas **respondidas (`DEC-022`)**.
+
+**Impacto.**
+- **DOC-01:** `RN-12.2 §4`, `RN-12.8 §1`, `RN-12.9 §1` e `RN-12.9 §5` atualizados com referência à `DEC-022`.
+- **REG-12 / IDX-12:** `Q-C04-07` e `Q-C04-14` passam a `respondida (DEC-022)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -787,3 +814,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-019`: governação de papéis; ponto de contacto APD tutelado pelo `DIR_GERAL` com operação pelo `CHEFE_SEC_GER` em `MOD-GOV-09` (sem 13º papel RBAC; `Q-APD-04`); confirmação estrita de que DT e Professores não acedem a dívidas nem situação financeira dos alunos (`RN-17.3`, `Q-C15-04`); Issue #27 fechada. |
 | 2.0-rc2 | 2026-11-09 | `DEC-020`: título jurídico e enquadramento institucional do IPCAG desacoplados por parametrização em `parametros_instituicao` (`RF-C01-07`); documento probatório remetido como HITL para o questionário `DSC-02` em PC-E1 (`DEC-009`); Issue #38 fechada (`Q-APD-01`, `Q-APD-02`, `Q-LEG-13`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-021`: estrutura de direção e Comissão de Gestão; confirmação do mapeamento de cargos (`RN-16.20`), assunção de `SUB_ADM` pelo `DIR_GERAL` na vacatura transitória; homologações no SGE operadas individualmente com reautenticação e fundamentação documental de deliberações colegiais; Issue #28 fechada (`Q-028`, `Q-C14-14`). |
+| 2.0-rc2 | 2026-11-09 | `DEC-022`: modelo de horários; exclusão de desdobramentos e aulas conjuntas no âmbito E1–E5 (`aulas_horario` unívoca 1:1; `RN-12.8`, `RN-12.9`); regime tutorial de Projecto Tecnológico na 13ª Classe sem sala permanente e isenta do limite semanal de 30–32h (`RN-12.2 §4`); Issue #29 fechada (`Q-C04-07`, `Q-C04-14`). |

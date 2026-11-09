@@ -1597,7 +1597,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 1. Para cada turma da 10ª à 12ª (e da 13ª, se o Projecto Tecnológico tiver horário): $\sum \text{tempos\_letivos\_semanais}_{\text{matriz}} \le N_{\text{dias letivos}} \times N_{\text{tempos do turno}}$.
 2. Se exceder, o sistema avisa a `SUB_PED` na homologação da matriz ou da grelha e **bloqueia a publicação** de qualquer horário dessa turma.
 3. **Caso real:** com 5 dias × 6 tempos = 30 lugares, todas as turmas da 10ª–12ª dos quatro cursos (32 h) ficariam impossíveis; é a primeira verificação a correr com a grelha real (`Q-C04-18`).
-4. Na 13ª (28 h), as 20 h de Estágio são fora da escola; só as horas presenciais de Projecto Tecnológico contam (`Q-C04-14`).
+4. Na 13ª Classe (28 h), as 20 h de Estágio Curricular Supervisionado são cumpridas fora da escola em entidades acolhedoras; as 8 h de Projecto Tecnológico funcionam em regime tutorial de orientação periódica por grupos de trabalho sem sala fixa permanente nem grelha semanal fixa no turno, ficando a 13ª Classe isenta do bloqueio de capacidade semanal de 30–32 tempos ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-022 — Modelo de Horários Sem Desdobramentos Aulas Conjuntas e Regime de Horário da 13ª Classe Q-C04-07 Q-C04-14|DEC-022]], que resolveu a `Q-C04-14`).
 
 #### RN-12.3 — Distribuição de Serviço Docente Homologada
 1. Plano por Ano Letivo (`planos_distribuicao_servico`) que agrupa as alocações propostas em `alocacoes_docentes`.
@@ -1629,7 +1629,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 2. Uma aula numa indisponibilidade do titular é **choque bloqueante**, que só a `SUB_PED` pode autorizar com justificação.
 
 #### RN-12.8 — Composição e Completude do Horário da Turma
-1. Uma versão é composta por **aulas do horário** (`aulas_horario`): `dia + tempo inicial + n.º de tempos consecutivos + turma_disciplina + espaço`.
+1. Uma versão é composta por **aulas do horário** (`aulas_horario`): `dia + tempo inicial + n.º de tempos consecutivos + turma_disciplina + espaço`. Em conformidade com a [[12 - Registo de Decisoes e Questoes em Aberto#DEC-022 — Modelo de Horários Sem Desdobramentos Aulas Conjuntas e Regime de Horário da 13ª Classe Q-C04-07 Q-C04-14|DEC-022]], cada aula associa-se estritamente a 1 turma-disciplina e 1 sala física; não existem desdobramentos de turma nem aulas conjuntas de turmas nas entregas E1–E5.
 2. **Espaço por omissão:** a sala própria da turma; disciplinas com `tipo_espaco_requerido` (ex.: laboratório) exigem esse tipo.
 3. **Completude:** por `turma_disciplina`, a soma dos tempos é **exatamente igual** aos `tempos_letivos_semanais` da matriz; faltar ou sobrar impede a publicação.
 4. A completude não depende do professor: uma disciplina "Sem Docente Atribuído" pode estar completa.
@@ -1637,11 +1637,11 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
 
 #### RN-12.9 — Deteção de Choques (Bloqueantes)
 Para cada dia `d`, turno `t` e tempo `k`, na vigência da versão:
-1. **Turma:** no máximo **1** aula em `(d, k)`; o desdobramento depende da `Q-C04-07`.
+1. **Turma:** no máximo **1** aula em `(d, k)`; não há desdobramentos no âmbito E1–E5 ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-022 — Modelo de Horários Sem Desdobramentos Aulas Conjuntas e Regime de Horário da 13ª Classe Q-C04-07 Q-C04-14|DEC-022]], `Q-C04-07`).
 2. **Professor:** no máximo **1** aula em `(d, t, k)` (titular vigente ou substituto designado), considerando todas as turmas, as reposições dessa data e as indisponibilidades. Manhã e Tarde não se sobrepõem.
 3. **Espaço:** no máximo **1** aula em `(d, t, k)`.
 4. A validação corre **a cada gravação** (só a aula alterada) e **na submissão** (todas as turmas do turno), listando cada par em conflito.
-5. **Não há publicação com choques bloqueantes.** Aulas conjuntas de duas turmas dependem da `Q-C04-07`.
+5. **Não há publicação com choques bloqueantes.** Não existem aulas conjuntas de múltiplas turmas no âmbito E1–E5 ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-022 — Modelo de Horários Sem Desdobramentos Aulas Conjuntas e Regime de Horário da 13ª Classe Q-C04-07 Q-C04-14|DEC-022]], `Q-C04-07`).
 6. O professor da aula é sempre **derivado** da alocação vigente, nunca copiado; uma nova alocação é revalidada contra os horários publicados (`RN-12.14.4`).
 
 #### RN-12.10 — Avisos Pedagógicos (Não Bloqueantes)
