@@ -78,6 +78,7 @@ flowchart LR
 | `INT-V2` | [[00.2 - Mapa de Integracao v2.0]] | Numeração final (RN-11..18, DOF-13..26, épicos) e convenções da v2.0 | `ativo` |
 | `ORG-00` | [[00.3 - Proposta de Organizacao Documental]] | Onde vive cada informação e as 5 fases até à construção | `ativo` |
 | `VER-01` | [[00.4 - Relatorio de Verificacao v2.0-rc1]] | Verificação de consistência da v2.0-rc1: 10 grupos de problemas e issues #1–#10 | `ativo` |
+| `VER-02` | [[00.5 - Relatorio de Verificacao v2.0-rc2]] | Verificação antes do congelamento: 42 achados em 5 grupos (issues #43–#47) | `ativo` |
 | `MTR-07` | [[Matriz de Rastreabilidade]] | Objetivo → Capacidade → RF → RN → US → Módulo/DOF → Tabela | `rascunho` |
 | — | [[Painel Documentacao SGE.base]] · [[Arquitetura SGE IPCAG 12008 BGO.canvas]] | Vista dinâmica e mapa visual | — |
 
