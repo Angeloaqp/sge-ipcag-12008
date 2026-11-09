@@ -127,9 +127,13 @@ flowchart LR
 > [!warning] Privacidade
 > Os PDFs das entrevistas e as fotos dos documentos da escola **não vão para o GitHub** (repositório público, ver `.gitignore`).
 
-### 2.6 `50 - Construcao` — A criar
+### 2.6 `50 - Construcao` — Construção (Fase 5)
 
-Vai receber o `13 - Arquitetura Tecnica` e os planos por entrega (E1–E5) na Fase 5 da [[00.3 - Proposta de Organizacao Documental|ORG-00]].
+| Código | Nota | Conteúdo | Estado |
+| :---: | :--- | :--- | :---: |
+| `ARQ-13` | [[13 - Arquitetura Tecnica]] | Tecnologia (TypeScript, PostgreSQL + RLS, PWA offline), estrutura do código, ADR `T01`–`T14`, riscos e protótipos | `proposta` |
+
+A seguir: os planos de construção por entrega, a começar pela E1.
 
 ### 2.7 Fontes integradas (arquivo)
 
@@ -171,4 +175,4 @@ As notas [[C03 - Processo Individual do Aluno|C03]], [[C04 - Horarios e Distribu
 > - [x] **Fase 2 — Verificar:** feita a 2026-11-05 — [[00.4 - Relatorio de Verificacao v2.0-rc1|VER-01]] com 10 grupos de problemas, cada um uma issue no GitHub (#1 a #10). As 6 mecânicas (#1, #2, #3, #4, #8, #10) estão corrigidas; as 4 decisões foram tomadas: #6 migração (`DEC-010`), #7 RUPE (`DEC-011`), #5 permissões (`DEC-012`) e #9 entregas (`DEC-013`). **As 10 issues estão fechadas.**
 > - [ ] **Fase 3 — Fechar o que está em aberto:** em curso desde 2026-11-08, no **[mapa do GitHub](https://github.com/Angeloaqp/sge-ipcag-12008/issues/11)**: triagem das 283 perguntas, histórias em falta para 40 requisitos, central de avisos (`Q-037`), faturação AGT (`Q-001` → `DEC-002`) e questionários para a escola.
 > - [x] **Fase 4 — Congelar a v2.0:** feita a 2026-11-09 (etiqueta `v2.0`; homologação pendente na ATA-HOM-01). versões a `2.0`, ata de homologação com a Direção, etiqueta `v2.0` no git.
-> - [ ] **Fase 5 — Ponte para o código:** `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.
+> - [ ] **Fase 5 — Ponte para o código** *(em curso desde 2026-11-09: [[13 - Arquitetura Tecnica|ARQ-13]] e `DEC-027`)*: `13 - Arquitetura Tecnica`, depois especificação e tickets por entrega, a começar pela E1.

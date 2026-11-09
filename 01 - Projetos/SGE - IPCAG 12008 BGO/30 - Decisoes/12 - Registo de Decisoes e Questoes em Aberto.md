@@ -76,6 +76,7 @@ baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 | [[#DEC-024 — Regime de Alunos da 12ª com Cadeiras em Atraso: Vínculo e Inscrição em Exames (Q-C16-06, Q-031)\|DEC-024]] | Issue #31; `Q-C16-06`, `Q-031` | Situação de aluno da 12ª com cadeiras em atraso | (a) Deliberação CONCLUIU_12_COM_CADEIRAS_PENDENTES e proposta CONDICIONADA_13A; vínculo sem turma para exames extraordinários; desbloqueia para 13ª após eliminação (RN-02.2, RN-18.5) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-025 — Verificação de Documentos Pré-SGE: Exclusão do Portal Público e Autenticação por Reemissão (MIG-Q20)\|DEC-025]] | Issue #32; `MIG-Q20` | Verificação de documentos emitidos antes do SGE | (a) Exclusão do portal público (US-DOC-03 restrito a códigos com hash/QR do SGE/Plataforma Nacional); verificação interna pela Secretaria Pedagógica; autenticação pública requer emissão de 2.ª via no SGE | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-026 — Enquadramento e Parametrização do Regime de IVA do IPCAG (Q-LEG-19, Q09-02)\|DEC-026]] | Issue #22; `Q-LEG-19`, `Q09-02` | Regime de IVA e obrigações fiscais do IPCAG | (a) SGE configurável multi-regime em parametros_instituicao (GERAL, SIMPLIFICADO, EXCLUSAO) com isenção material do ensino (CIVA art. 12.º n.º 1 l); NIF, regime concreto e contabilista remetidos como HITL para o questionário DSC-06-SUB-ADM em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-027 — Arquitetura técnica de base\|DEC-027]] | Fase 5 (ORG-00) | Arquitetura técnica de base | TypeScript em todo o sistema; construção pelo analista com agentes de IA e testes; repositório novo e privado; sincronização offline por fila própria (DOC-05 §1.2) | `decidida` | 2026-11-09 | Analista responsável do projeto | não exige (decisão técnica) |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -802,6 +803,20 @@ As entrevistas dizem duas coisas:
 - **DOC-05:** Tabela `parametros_instituicao` mantém suporte agnóstico a `regime_iva` e `motivo_isencao_codigo`.
 - **REG-12 / IDX-12:** `Q-LEG-19` e `Q09-02` passam a `respondida (DEC-026)`.
 - **Desbloqueio:** Desbloqueia a decisão `DEC-002` (Issue #21).
+
+---
+
+### DEC-027 — Arquitetura técnica de base
+
+- **Origem:** Fase 5 da [[00.3 - Proposta de Organizacao Documental|ORG-00]] · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** não exige, porque é uma decisão técnica sem efeito nas regras nem no âmbito
+
+**Decisão.**
+1. **Quem constrói:** o analista responsável dirige e revê; agentes de IA escrevem o código, sempre com testes.
+2. **Linguagem:** TypeScript em todo o sistema (servidor Node.js e PWA React). As regras de domínio ficam num pacote único que corre igual offline e no servidor.
+3. **Repositório:** novo e **privado**, separado deste vault. Liga à especificação pela etiqueta `v2.0`.
+4. **Offline:** fila própria de operações com chave de idempotência e o servidor como autoridade, como no DOC-05 §1.2. Sem bibliotecas de sincronização de terceiros.
+
+**Impacto.** O detalhe técnico, com os ADR `T01` a `T14`, os riscos e os protótipos, está no [[13 - Arquitetura Tecnica|ARQ-13]].
 
 ---
 
