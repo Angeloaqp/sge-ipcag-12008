@@ -247,7 +247,7 @@ Os 14 ADR estão **aceites** (T01, T02 e T04 pela `DEC-027` a 2026-11-09; os res
 ## 7. Próximos passos
 
 1. ~~Aceitar ou ajustar os ADR em `proposta`~~ — **feito a 2026-11-10** (todos aceites).
-2. ~~Criar o repositório privado e o esqueleto do monorepo~~ — **feito a 2026-11-10**: [`Angeloaqp/sge-ipcag-12008-sistema`](https://github.com/Angeloaqp/sge-ipcag-12008-sistema) (privado). Pasta local `Desktop/sge-ipcag-12008-sistema`. Tem 5 pacotes, 10 testes a passar e CI no GitHub Actions. Usa Node 24 LTS, a versão instalada; o `ADR-T01` dizia 22.
+2. ~~Criar o repositório privado e o esqueleto do monorepo~~ — **feito a 2026-11-10**: [`Angeloaqp/sge-ipcag-12008-sistema`](https://github.com/Angeloaqp/sge-ipcag-12008-sistema) (privado). Pasta local `Desktop/SGE IPCAG/sistema` (a documentação está em `Desktop/SGE IPCAG/documentacao`). Tem 5 pacotes, 10 testes a passar e CI no GitHub Actions. Usa Node 24 LTS, a versão instalada; o `ADR-T01` dizia 22.
 3. **Fazer os protótipos P1 a P3.**
 4. **Escrever a especificação de construção da E1** (skill `to-spec`) e dividi-la em tickets (skill `to-tickets`). Começar pelos fundamentos:
    - estrutura académica (C01);
