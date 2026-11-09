@@ -5,7 +5,7 @@ aliases:
   - "Catálogo de Requisitos Funcionais"
   - "RF-07"
 created: 2026-11-02
-updated: 2026-11-08
+updated: 2026-11-09
 status: rascunho
 version: "2.0-rc2"
 doc_id: "RF-07"
@@ -370,8 +370,8 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C17-10** | Relatórios de reconciliação exportáveis (contagens, totais de controlo, dívida, créditos, bolsas). | O-06 | M | E1 | MIG-10 §6.1, §6.2 | RN-09 | `US-MIG-05` | MOD-MIG-01 | — | tabelas de destino | definido |
 | **RF-C17-11** | Marcar a proveniência e auditar a carga, a aprovação e as correções. | O-06 | M | E1 | MIG-10 §7.1, §7.2 | RN-10 | `US-MIG-05` | MOD-MIG-01 | — | `audit_logs` | definido |
 | **RF-C17-12** | Marcar os documentos gerados em ensaio com "ENSAIO — SEM VALIDADE". | O-06 | S | E1 | MIG-10 §8.4 | RN-10 | `US-MIG-05` | MOD-MIG-01 | — | `documentos_oficiais_emitidos` | definido |
-| **RF-C17-13** | Ajustar um saldo migrado só com despacho do `SUB_ADM`. | O-03 | M | E1 | MIG-10 §7.4 | RN-09 | `US-MIG-05` | MOD-MIG-01 | — | `conta_corrente_propinas`, `ajustes_conta_corrente` | definido |
-| **RF-C17-14** | Obrigar à conferência do histórico migrado antes da primeira certificação de cada aluno. | O-06 | M | E2 | MIG-10 §7.6 | RN-10.5 | `US-MIG-06` | MOD-MIG-01 | — | `historico_externo_transcricoes` | definido |
+| **RF-C17-13** | Ajustar um saldo migrado só com despacho do `SUB_ADM` (tipo `AJUSTE_SALDO_MIGRADO` em `ajustes_conta_corrente`, lista 70). | O-03 | M | E1 | MIG-10 §7.4 | RN-09 | `US-MIG-05` | MOD-MIG-01 | — | `conta_corrente_propinas`, `ajustes_conta_corrente` | definido |
+| **RF-C17-14** | Obrigar à conferência do histórico migrado antes da primeira certificação de cada aluno. | O-06 | M | E2 | MIG-10 §7.6; DOC-05 §4.10 (item 3) | — | `US-MIG-06` | MOD-MIG-01 | — | `alunos` (`historico_conferido_para_certificacao`), `audit_logs` (`CONFERENCIA_HISTORICO_CERTIFICACAO`) | definido |
 | **RF-C17-15** | Migrar a pedido um antigo aluno (lote individual) depois do arranque. | O-06 | S | E4 | MIG-10 §2.3 | RN-10 | `US-MIG-07` | MOD-MIG-01 | — | tabelas de destino | definido |
 | **RF-C17-16** | Fechar a consola depois do último Termo de Aceitação (fica o modo a pedido) e desativar a conta técnica. | O-09 | M | E4 | MIG-10 §6.4 | RN-16.21 | `US-MIG-07` | MOD-MIG-01 | — | `usuarios_sistema` | definido |
 
@@ -410,7 +410,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C19-09** | Gerar o relatório de acesso do titular em PDF (dados por categoria, finalidades, destinatários, origem). | O-09 | S | E2 | APD-11 (art. 26.º) | RN-10 | US-APD-03 | MOD-GOV-09 | — | `pedidos_titulares`, `comunicacoes_destinatarios` | 🟡 DoR-E2 · `Q-APD-21` (saúde) |
 | **RF-C19-10** | Ao retificar dados de identificação, listar os documentos emitidos com o dado antigo e os destinatários a notificar. | O-09 | M | E1 *(`DEC-013`: a retificação existe desde a E1 — `US-PIN-06`)* | APD-11 (art. 28.º) | RN-11.8 | US-PIN-06 | MOD-PIN-04 | — | `pedidos_alteracao_dados`, `documentos_oficiais_emitidos` | definido |
 | **RF-C19-11** | Ao reemitir um documento, marcar o anterior `SUBSTITUIDO` e indicar no portal QR o substituto; recibos nunca se alteram. | O-09 | M | E2 | APD-11 (art. 28.º); `ALT-05-13` | RN-10.3, RN-09 | US-DOC-01, US-DOC-03 | MOD-PED-DOC, MOD-PUB-QR | — | `documentos_oficiais_emitidos` | 🟡 PC-E1 · `DEC-002` (aguarda a homologação da `DEC-002` e a escolha do software certificado) |
-| **RF-C19-12** | Marcar um registo como `BLOQUEADO`, retirando-o das listas operacionais. | O-09 | S | E3 | APD-11 (art. 28.º) | RN-10 | US-APD-05 | MOD-GOV-09 | — | `alunos` | definido |
+| **RF-C19-12** | Marcar o aluno como `BLOQUEADO` (`alunos.estado_conservacao`, lista 103), retirando-o das listas operacionais. | O-09 | S | E3 | APD-11 (art. 28.º) | RN-10 | US-APD-05 | MOD-GOV-09 | — | `alunos` | definido |
 | **RF-C19-13** | Motor de conservação: políticas por categoria, proposta mensal de lote a eliminar ou anonimizar, aprovação pela Direção e relatório, sem reproduzir os dados eliminados. | O-09 | M | E4 (antes do fim do 1.º ano) | APD-11 (art. 11.º) | RN-10 | US-APD-06 | MOD-GOV-09 | — | `politicas_conservacao`, `execucoes_conservacao` | 🟡 DoR-E4 · prazos a validar com jurista |
 | **RF-C19-14** | Anonimizar os candidatos não admitidos, mantendo os campos estatísticos. | O-09 | M | E5 | APD-11 (PC-02) | RN-01.2 | US-ADM-04 | MOD-PED-ADM | — | `candidaturas_10a` | definido |
 | **RF-C19-15** | Publicar uma versão minimizada da pauta de admissão (n.º, nome, resultado), separada da versão integral. | O-09 | M | E5 | APD-11 (arts. 6.º, 11.º) | RN-01.2 | US-ADM-04 | MOD-PED-ADM | DOF-02 | `candidaturas_10a` | 🟡 DoR-E5 · `Q-APD-07` |
@@ -554,3 +554,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc2 | 2026-11-09 | Âmbito e requisitos condicionais (`DEC-016`, Issue #23): avaliação de desempenho (`Q-036`) e expediente geral (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 (`DEC-008` itens 9 e 10); `RF-C19-33` passa a `W` fora da linha de base; totais recalculados (0 requisitos condicionais pendentes; 2 fora da linha de base); lacuna `L-RF-08` fechada. |
 | 2.0-rc2 | 2026-11-09 | Concurso de admissão 2027/2028 (`DEC-018`, Issue #25): confirmado fora do SGE com importação dos admitidos na E1 via C17; C02 na E5 para 2028/2029; `RF-C03-01` e notas de C02/C17 atualizados; `Q-017` resolvida. |
 | 2.0-rc2 | 2026-11-09 | **Aplicação da DEC-002 — VER-02 #43 (2026-11-09):** `DEC-002` decidida (b), homologação pendente (§1.3, C10); `RF-C10-10` redefinido como contingência via adaptador (balcão não bloqueia; recibo escolar provisório e fila de emissão; regularização automática), prioridade `C` → `M`, tabelas `recibos_oficiais` e `fila_emissao_fiscal`; marcas 🟡 PC-E1 de `RF-C10-06`, `-07`, `-08`, `-17`, `-20` e `RF-C19-11` passam a esperar a homologação e a escolha do software certificado; §4.1 e §4.2 recalculados (M 180 → 181, C 10 → 9; E1 72 → 73 `Must`). |
+| 2.0-rc2 | 2026-11-09 | **Correções da verificação VER-02 — #45 (2026-11-09):** `RF-C17-13` com o tipo `AJUSTE_SALDO_MIGRADO` em `ajustes_conta_corrente`; `RF-C17-14` passa a citar MIG-10 §7.6 e DOC-05 §4.10 (item 3) em vez de `RN-10.5`, com tabelas `alunos` (`historico_conferido_para_certificacao`) e `audit_logs`; `RF-C19-12` com `alunos.estado_conservacao = BLOQUEADO` (lista 103). |

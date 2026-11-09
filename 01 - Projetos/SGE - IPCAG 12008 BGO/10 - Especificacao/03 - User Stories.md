@@ -5,7 +5,7 @@ aliases:
   - "DOC-03"
   - "User Stories SGE"
 created: 2026-10-31
-updated: 2026-11-08
+updated: 2026-11-09
 status: ativo
 version: "2.0-rc2"
 doc_id: "DOC-03"
@@ -68,7 +68,7 @@ tags:
 | **`EP-PNL`** | **Épico 14:** Painéis de Gestão da Direção, Alertas e Estatísticas Impressas | C15 | `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, `COORD_CURSO`, `COORD_DISC`, `COORD_TURNO`, `DIR_TURMA` | `US-PNL-01` a `US-PNL-12` (12 US) | `RN-02`, `RN-03`, `RN-17` | **E3** (`US-PNL-08`: E2; `US-PNL-11`: E4) | Must / Should / Could |
 | **`EP-PAS`** | **Épico 15:** Encerramento do Ano Letivo e Passagem de Ano | C16 | `SUB_PED`, `DIR_GERAL`, `CHEFE_SEC_PED`, `OP_PED`, `SUB_ADM` | `US-PAS-01` a `US-PAS-08` (8 US) | `RN-02`, `RN-07`, `RN-10`, `RN-18` | **E4** | Must (`US-PAS-08`: Should) |
 | **`EP-MIG`** | **Épico 16:** Migração de Dados, Cargas Históricas, Digitação Assistida e Reconciliação | C17 | `ADMIN_TEC`, Conta Técnica (`RN-16.21`), `OP_PED`, `OP_TES`, `CHEFE_SEC_PED`, `CHEFE_SEC_GER`, `SUB_PED`, `SUB_ADM`, `DIR_GERAL` | `US-MIG-01` a `US-MIG-07` (7 US) | `RN-01`, `RN-02`, `RN-05`, `RN-06`, `RN-09`, `RN-10`, `RN-16.21` | **E1** (`US-MIG-06`: E2; `US-MIG-07`: E4) | Must |
-| **`EP-APD`** | **Épico 17:** Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade | C19 | `DIR_GERAL`, Ponto de Contacto APD, `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED` | `US-APD-01` a `US-APD-07` (7 US) | `RN-10`, `RN-11.12` | **E1** (`US-APD-03`/`-04`: E2; `US-APD-05`: E3; `US-APD-06`: E4; `US-APD-07`: Fora — `DEC-016`) | Must (`US-APD-05`: Should; `US-APD-07`: Won't) |
+| **`EP-APD`** | **Épico 17:** Governação da Proteção de Dados, Gestão de Direitos e Políticas de Privacidade | C19 | `DIR_GERAL`, `CHEFE_SEC_GER` (ponto de contacto APD, delegado do `DIR_GERAL` — `DEC-019`); `CHEFE_SEC_PED`, `SUB_PED`, `SUB_ADM`, `OP_TES` só nas ações que o DOC-01 §2.2–§2.3 lhes dá | `US-APD-01` a `US-APD-07` (7 US) | `RN-10`, `RN-11.12` | **E1** (`US-APD-03`/`-04`: E2; `US-APD-05`: E3; `US-APD-06`: E4; `US-APD-07`: Fora — `DEC-016`) | Must (`US-APD-05`: Should; `US-APD-07`: Won't) |
 
 > [!note] Decisões de entrega integradas
 > - **`Q-037` — Central de avisos na E3:** **decidido na `DEC-015`** (2026-11-09): a central de avisos (`US-COM-01` a `US-COM-06`) entra na **E3** sem abrir dados à internet (canal impresso garantido e SMS complementar sob teto); o portal (`US-COM-07`, `US-COM-08`) fica na **E5** (`DEC-003`). O [[06 - Visao e Ambito|VIS-06]] foi atualizado.
@@ -942,10 +942,10 @@ tags:
     - **Dado** que o candidato entregou o certificado da 9ª Classe na inscrição ao Teste de Admissão,
     - **Quando** é convertido em aluno (Fluxo 02, Cenário A),
     - **Então** esse documento entra no processo já como `Entregue`, com a mesma digitalização.
-  - **Cenário 5 (Sucesso — Devolução de Originais e Arquivo Histórico na Saída do Aluno — `RF-C03-15`, `RN-11.13`):**
-    - **Dado** um aluno que concluiu o curso (`Concluído`) ou pediu transferência externa de saída (`Transferido`),
-    - **Quando** o `OP_PED` ou `CHEFE_SEC_PED` procede à devolução física dos documentos originais depositados na matrícula (ex.: certificado da 9ª classe) ao encarregado ou aluno maior de idade,
-    - **Então** o sistema regista em `documentos_processo_aluno` a data, hora e identidade do levantador (`devolvido_em`, `devolvido_a`), emite a respetiva guia/protocolo de entrega física e transfere o processo digital para `Arquivo Histórico`, preservando os ficheiros digitalizados e metadados de forma permanente.
+  - **Cenário 5 (Sucesso 🟡 — Devolução de Originais e Arquivo Histórico na Saída do Aluno — `RF-C03-15`, `RN-11.13`; condicional à `Q-C03-14`):**
+    - **Dado** um aluno que passa a `Transferido (Saída)` (com `DOF-09C`) ou cuja matrícula é anulada (`Desistente / Anulado`) — âmbito da `RN-11.13`; a devolução a quem `Concluiu o Curso` só se aplica se a `Q-C03-14` o confirmar —,
+    - **Quando** o `OP_PED` ou o `CHEFE_SEC_PED` devolve ao encarregado os originais guardados no arquivo da escola (ex.: certificado da 9ª Classe), se a devolução for prática da escola (`Q-C03-14`),
+    - **Então** o sistema regista em `documentos_processo_aluno` a **Localização do Original** `DEVOLVIDO_AO_ENCARREGADO` (lista 54), a **Data e Destinatário da Devolução** e quem entregou, e o processo passa ao arquivo histórico (`RN-11.1.3`), com os ficheiros digitalizados e os metadados preservados.
 - **Pós-condições e Efeitos Colaterais:** `documentos_processo_aluno`, `ficheiros_digitalizados` e estado do aluno em `alunos` gravados/atualizados.
 
 ---
@@ -1978,7 +1978,7 @@ tags:
   - **Cenário 4 (Sucesso 🟡 — Parametrização da Escala de Comportamento e do Catálogo Disciplinar — `RF-C13-02`, `RN-15.4`, `MOD-DIS-05`, `DEC-009`, `DEC-013`):**
     - **Dado** a aprovação do regulamento interno da escola pela Direção (`DIR_GERAL`),
     - **Quando** o `SUB_PED` acede à consola de configuração disciplinar (`MOD-DIS-05`),
-    - **Então** parametriza para a **E3** a escala oficial de avaliação do comportamento trimestral (qualitativa ou numérica, conforme `Q-C13-02`), e para a **E5** os tipos de ocorrência, graus de gravidade (`LEVE`, `GRAVE`, `MUITO_GRAVE`), catálogo de medidas disciplinares e competências de aplicação (`tipos_ocorrencia`, `medidas_disciplinares_catalogo`), garantindo que nenhuma sanção fora do regulamento possa ser aplicada.
+    - **Então** parametriza para a **E3** a escala oficial de avaliação do comportamento trimestral (qualitativa ou numérica, conforme `Q-C13-02`), e para a **E5** os tipos de ocorrência, os graus de gravidade 🟡 (lista 46 do DOC-05, valores do regulamento interno — `Q-C13-04`), o catálogo de medidas disciplinares e competências de aplicação (`tipos_ocorrencia`, `medidas_disciplinares_catalogo`), garantindo que nenhuma sanção fora do regulamento possa ser aplicada.
 - **Pós-condições e Efeitos Colaterais:** `comportamento_trimestral` fechado com a Pauta Geral; catálogo disciplinar versionado em `tipos_ocorrencia` e `medidas_disciplinares_catalogo`; impresso no `DOF-06`; `COMPORTAMENTO_ALTERADO` em `audit_logs` se o conselho alterar a proposta.
 
 ---
@@ -2364,8 +2364,8 @@ tags:
     - **Então** os indicadores diários mostram o valor do dia anterior com a sua data e um aviso de cálculo em atraso.
   - **Cenário 4 (Sucesso — Catálogo Central de Indicadores Versionado e Homologado — `RF-C15-01`, `RN-17.1`, `RN-17.7`, `RN-17.13`, `MOD-GOV-08`):**
     - **Dado** o catálogo central de indicadores de gestão (`indicadores_catalogo`) gerido no módulo `MOD-GOV-08`,
-    - **Quando** a Direção (`DIR_GERAL`) homologa uma versão revista de um indicador (ex.: taxa de aproveitamento `IND-01` ou inadimplência `IND-07`), fixando fórmula de cálculo, fontes de dados, regras de agregação/denominador, limiares de alerta e perfis autorizados,
-    - **Então** o sistema congela a versão homologada com histórico de vigência, garante que os instantâneos dos trimestres anteriores mantêm os resultados da fórmula em vigor à data e passa a aplicar a nova métrica prospetivamente nos painéis de gestão.
+    - **Quando** o `SUB_PED` (indicadores pedagógicos, ex.: `IND-01`) ou o `SUB_ADM` (indicadores financeiros, ex.: dívida `IND-18`) fixa numa versão revista a fórmula de cálculo, as fontes de dados, as regras de agregação/denominador (`RN-17.7`), os limiares de alerta e os perfis autorizados, e o `DIR_GERAL` a homologa (DOC-01 §2.3.7, linha C15-f),
+    - **Então** o sistema cria uma **versão nova** do indicador (`RN-17.1`) e congela a versão homologada com histórico de vigência, garante que os instantâneos dos trimestres anteriores mantêm os resultados da fórmula em vigor à data e passa a aplicar a nova métrica prospetivamente nos painéis de gestão.
 - **Pós-condições e Efeitos Colaterais:** Linha atualizada em `indicadores_catalogo`; evento `INDICADOR_HOMOLOGADO` registado em `audit_logs`.
 
 ---
@@ -2790,19 +2790,19 @@ tags:
 ---
 
 ### `US-MIG-01`: Carregar e Validar Ficheiros Modelo na Área de Preparação
-- **História:** *Como* **Conta Técnica de Migração (`RN-16.21`)** sob supervisão do **Administrador Técnico (`ADMIN_TEC`)**, *quero* **carregar os ficheiros modelo de dados históricos (`MIG-F01` a `MIG-F08`) para a área de preparação e executar a validação sintática e semântica com anexo obrigatório da imagem digitalizada da fonte**, *para* **identificar anomalias e incoerências linha a linha antes de qualquer inserção na base de dados de produção**.
+- **História:** *Como* **Conta Técnica de Migração (`RN-16.21`)** sob supervisão do **Administrador Técnico (`ADMIN_TEC`)**, *quero* **carregar os ficheiros modelo de dados históricos (`MIG-Fnn`: `MIG-F01` a `MIG-F22`, MIG-10 §4) para a área de preparação e executar a validação sintática e semântica com anexo obrigatório da imagem digitalizada da fonte**, *para* **identificar anomalias e incoerências linha a linha antes de qualquer inserção na base de dados de produção**.
 - **Rastreabilidade:** `RF-C17-01`, `RF-C17-02`, `RF-C17-03`, `RF-C17-06` | `RN-10`, `RN-16.21` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §4, §5, §6.4, §7.1 | `MOD-MIG-01`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
 - **Pré-condições:** Autenticação com credencial nominal da conta `TECNICA_MIGRACAO`; formato de ficheiro compatível com os modelos normalizados; ficheiro digitalizado da fonte original em PDF/PNG anexado.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Carga e isolamento na área de preparação):**
-    - **Dado** um ficheiro `MIG-F01` (Alunos e Encarregados) preenchido e a imagem digitalizada do livro de matrícula anexada,
+    - **Dado** um ficheiro `MIG-F05` (Alunos), com o `MIG-F04` (Encarregados) já carregado, e a imagem digitalizada do livro de matrícula anexada,
     - **Quando** a conta técnica submete a carga na consola `MOD-MIG-01`,
-    - **Então** os registos são armazenados exclusivamente nas tabelas da área de preparação (`staging`), o estado do lote passa a `CARREGADO_EM_PREPARACAO`, nenhum registo é inserido nas tabelas de produção (`alunos`, `encarregados_educacao`) e o evento é registado em `audit_logs` com hash do ficheiro e utilizador.
+    - **Então** os registos são armazenados exclusivamente nas tabelas da área de preparação (`staging`), o estado do lote em `lotes_migracao` passa a `CARREGADO`, nenhum registo é inserido nas tabelas de produção (`alunos`, `encarregados_educacao`) e o evento é registado em `audit_logs` com hash do ficheiro e utilizador.
   - **Cenário 2 (Deteção de anomalias com ocorrências por linha):**
     - **Dado** um ficheiro de notas com classificações fora da escala [0, 20], datas inválidas ou campos obrigatórios em falta,
     - **Quando** a validação automática é executada contra as regras de domínio (`RN-01` a `RN-10`) e regras de qualidade do MIG-10 §5,
-    - **Então** o sistema gera entradas na tabela de ocorrências por linha (`ocorrencias_migracao`), identifica o número da linha, o campo faltoso e o código do erro, marca o lote como `VALIDADO_COM_ERROS` e impede o envio para aprovação até à correção ou justificação formal.
+    - **Então** o sistema gera entradas na tabela de ocorrências por linha (`ocorrencias_migracao`), identifica o número da linha, a regra violada e a mensagem, com severidade `BLOQUEANTE` (MIG-10 §5.1); o lote fica em `CARREGADO` e não passa a `VALIDADO` nem pode ser aprovado enquanto houver ocorrências `BLOQUEANTE` por decidir (`CORRIGIR_NA_FONTE`, `ACEITAR_COM_NOTA` ou `REJEITAR_LINHA`).
   - **Cenário 3 (Bloqueio — Tentativa de carga sem anexo do documento fonte digitalizado):**
     - **Dado** que a conta técnica tenta submeter um lote de histórico escolar sem anexar a digitalização correspondente da folha de termo ou pauta física,
     - **Quando** aciona o comando de validação,
@@ -2824,11 +2824,11 @@ tags:
   - **Cenário 1 (Sucesso — Dupla digitação cega coincidente):**
     - **Dado** um termo de exame físico digitalizado,
     - **Quando** o Operador A realiza a primeira digitação na grelha e o Operador B (sem visualização do que A digitou) realiza a segunda digitação dos mesmos dados,
-    - **Então** o sistema executa o batimento campo a campo dos dois lançamentos e, havendo 100% de coincidência e batimento com o total de controlo do papel (soma das notas e total de alunos), marca a grelha como `DIGITACAO_CONCILIADA_APTA` e disponibiliza para conferência de chefia.
+    - **Então** o sistema executa o batimento campo a campo dos dois lançamentos e, havendo 100% de coincidência e batimento com o total de controlo do papel (soma das notas e total de alunos), dá a digitação por conciliada: o lote fica em `CARREGADO`, sem ocorrências, e segue para a validação automática (`VALIDADO`) e a conferência da chefia (`CONFERIDO`).
   - **Cenário 2 (Divergência e arbitragem qualificada por terceiro):**
     - **Dado** que na disciplina de Matemática o Operador A digitou `14` e o Operador B digitou `11`,
     - **Quando** o batimento automático corre ao submeter a segunda digitação,
-    - **Então** o sistema sinaliza a célula divergente a vermelho, bloqueia o lote e encaminha a linha para a fila de arbitragem do `CHEFE_SEC_PED`, que visualiza lado a lado as duas digitações e a imagem do termo original para fixar o valor correto (`14`) com registo nominal do árbitro.
+    - **Então** o sistema sinaliza a célula divergente a vermelho, regista uma ocorrência `BLOQUEANTE` em `ocorrencias_migracao` (o lote não avança) e encaminha a linha para a fila de arbitragem do `CHEFE_SEC_PED`, que visualiza lado a lado as duas digitações e a imagem do termo original para fixar o valor correto (`14`) com registo nominal do árbitro.
   - **Cenário 3 (Bloqueio — Segregação de funções na digitação):**
     - **Dado** que o Operador A concluiu a primeira digitação de um termo ou pauta,
     - **Quando** tenta abrir a segunda digitação cega do mesmo documento,
@@ -2868,16 +2868,16 @@ tags:
   - **Cenário 1 (Sucesso — Coincidência integral de cálculo e deliberação):**
     - **Dado** um conjunto de classificações de 10ª, 11ª e 12ª classes de uma turma histórica,
     - **Quando** o motor do SGE recalcula as médias por disciplina, as médias anuais e a deliberação de transição segundo as regras vigentes na respetiva época,
-    - **Então** os resultados coincidem a 100% com o averbado no livro de termos em papel e os registos são marcados como `CALCULO_VERIFICADO_CONFORME`.
+    - **Então** os resultados coincidem a 100% com o averbado no livro de termos em papel e não se gera nenhuma ocorrência em `ocorrencias_migracao` para estes registos.
   - **Cenário 2 (Discrepância detetada — Alerta e preservação do averbamento oficial):**
     - **Dado** que no termo original em papel de 2021 consta *"Aprovado com 10 valores"* mas o recálculo aritmético exato das notas parcelares resulta em `9.4` (Não Transita / Recurso),
     - **Quando** o motor de recálculo processa a ficha do aluno,
-    - **Então** o sistema marca a linha com alerta crítico `DISCREPANCIA_CALCULO_HISTORICO`, exibe o valor calculado e o valor averbado no papel, e exige que o `SUB_PED` despache se mantém o valor histórico formal (juridicamente soberano) com anotação explicativa obrigatória ou se instaura averiguação pedagógica.
+    - **Então** o sistema regista em `ocorrencias_migracao` uma ocorrência `AVISO` (divergência entre a média recalculada e o valor oficial — MIG-10 §5.1), com o valor calculado e o averbado no papel na mensagem, e o `SUB_PED` decide: `ACEITAR_COM_NOTA` (mantém o valor histórico formal, com nota explicativa obrigatória) ou deixa a ocorrência por decidir enquanto corre a averiguação pedagógica.
   - **Cenário 3 (Tratamento de regimes de transição e disciplinas extintas):**
     - **Dado** um aluno proveniente de currículo técnico antigo com disciplina extinta ou sem equivalência direta,
     - **Quando** o sistema recalcula a `MFC` (13ª Classe),
-    - **Então** aplica os pesos da matriz curricular histórica aprovada para o plano do aluno (`RN-06`), sem impor requisitos de disciplinas dos planos novos, e valida a fórmula `MFC = round_med(0.40 * MFD + 0.30 * Estagio + 0.30 * PAP)` ou a fórmula legal aplicável ao ano de conclusão.
-- **Pós-condições e Efeitos Colaterais:** `resultados_anuais_disciplina` e `historico_externo_transcricoes` preenchidos com os sinalizadores de conformidade; pendências de discrepância registadas para despacho pedagógico.
+    - **Então** aplica a fórmula parametrizada da `MFC` da matriz do curso do aluno (`RN-06.4`: `MPC`, `NE`, `NPTEC` e `NPAP`, com pesos 🟡 sem valor por omissão), com a `MPC` calculada a partir de `MA10`, `MA11` e `MA12` migrados (MIG-10 §7.6), sem impor requisitos de disciplinas dos planos novos; enquanto os pesos não estiverem fixados (`Q-030`), a `MFC` migrada só é verificada por intervalos e completude (MIG-10 §5.2). *(A antiga `MFD` foi substituída pela `CF`.)*
+- **Pós-condições e Efeitos Colaterais:** `resultados_anuais_disciplina` e `historico_externo_transcricoes` preenchidos; as discrepâncias ficam como ocorrências `AVISO` em `ocorrencias_migracao`, com a decisão do `SUB_PED`.
 
 ---
 
@@ -2894,11 +2894,11 @@ tags:
   - **Cenário 2 (Sucesso — Ajuste de saldo devedor histórico migrado mediante despacho):**
     - **Dado** um aluno com saldo devedor de propinas migrado de 45.000 Kz contestado com apresentação de recibo bancário físico não contabilizado na folha antiga,
     - **Quando** o `SUB_ADM` aciona a funcionalidade de ajuste de saldo migrado na consola `MOD-MIG-01` e anexa o despacho fundamentado,
-    - **Então** o saldo da conta corrente é retificado, registando-se a operação como `AJUSTE_MIGRACAO_SUB_ADM` e gravando em `audit_logs` os valores anterior, corrigido e número do despacho.
+    - **Então** grava-se em `ajustes_conta_corrente`, sobre a prestação migrada (`origem_registo = MIGRADO`), um ajuste do tipo `AJUSTE_SALDO_MIGRADO` (lista 70) com o n.º do despacho, sem alterar a linha original, e o evento `AJUSTE_SALDO_MIGRADO` em `audit_logs` com o valor anterior e o corrigido (DOC-05 §4.9).
   - **Cenário 3 (Sucesso — Aprovação do lote e migração para produção):**
     - **Dado** que os relatórios de reconciliação de turmas, alunos e propinas foram validados pelo `SUB_PED` e `SUB_ADM`,
     - **Quando** o `SUB_PED` (para dados pedagógicos) e o `SUB_ADM` (para dados financeiros) confirmam a homologação com reautenticação obrigatória (palavra-passe + MFA),
-    - **Então** os dados são migrados atomicamente para as tabelas de produção com o campo `origem_registo = 'MIGRADO'`, o lote passa ao estado `MIGRADO_PRODUCAO` e é gerado o Termo de Aceitação para assinatura digital do `DIR_GERAL`.
+    - **Então** os dados são migrados atomicamente para as tabelas de produção com o campo `origem_registo = 'MIGRADO'`, o lote passa ao estado `APROVADO` (`APROVACAO_LOTE_MIGRACAO` em `audit_logs`) e é gerado o Termo de Aceitação para assinatura digital do `DIR_GERAL`.
   - **Cenário 4 (Bloqueio — Violação de reautenticação ou tentativa de aprovação por operador):**
     - **Dado** um utilizador sem perfil de Subdireção ou que falhe a confirmação de reautenticação,
     - **Quando** tenta aprovar um lote de migração,
@@ -2909,25 +2909,25 @@ tags:
 
 ### `US-MIG-06`: Bloqueio e Conferência Obrigatória do Histórico Migrado Antes da Certificação
 - **História:** *Como* **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **bloquear a emissão do primeiro documento de certificação oficial de qualquer aluno com dados migrados até à conferência e validação presencial contra o acervo físico em papel**, *para* **impedir a circulação de certificados ou diplomas baseados em dados importados sem comprovação documental fidedigna**.
-- **Rastreabilidade:** `RF-C17-14` | `RN-10.5` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §7.6 | `US-DOC-02` | `MOD-MIG-01`.
+- **Rastreabilidade:** `RF-C17-14` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §7.6; [[05 - Modelagem de Dados|DOC-05]] §4.10 (item 3, `AJ-05`) | `US-DOC-02` | `MOD-MIG-01`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
-- **Pré-condições:** Aluno concluinte ou solicitante de certificado com registos com proveniência `origem_registo = MIGRADO` e estado de histórico `MIGRADO_PENDENTE_CONFERENCIA`.
+- **Pré-condições:** Aluno com registos de proveniência `origem_registo = MIGRADO` e indicador `alunos.historico_conferido_para_certificacao` por marcar.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Bloqueio automático de emissão de certificado sem conferência física prévia):**
-    - **Dado** um aluno que concluiu o curso em ano migrado cujo histórico escolar no SGE se encontra no estado `MIGRADO_PENDENTE_CONFERENCIA`,
-    - **Quando** um operador da secretaria (`OP_PED`) tenta emitir o Certificado de Habilitações (`DOF-10A`) ou a Guia de Transferência (`DOF-09C`),
-    - **Então** o sistema bloqueia a emissão e emite a notificação impeditiva: *"Emissão bloqueada: o histórico migrado do aluno requer conferência prévia presencial do livro de termos/pautas pelo Chefe da Secretaria Pedagógica (RN-10.5 / RF-C17-14)"*.
+    - **Dado** um aluno com histórico migrado sem `historico_conferido_para_certificacao`,
+    - **Quando** um operador da secretaria (`OP_PED`) tenta emitir o primeiro documento de certificação — Declaração com Notas (`DOF-09B`), Ata de Defesa da PAP (`DOF-08B`) ou Certificado (`DOF-10A`) / dados do Diploma (`DOF-10B`) (MIG-10 §7.6),
+    - **Então** o sistema bloqueia a emissão e emite a notificação impeditiva: *"Emissão bloqueada: o histórico migrado do aluno requer conferência prévia com os registos físicos pelo Chefe da Secretaria Pedagógica (MIG-10 §7.6 / RF-C17-14)"*.
   - **Cenário 2 (Sucesso — Conferência física e desbloqueio do processo para certificação):**
     - **Dado** que o `CHEFE_SEC_PED` localizou os termos e pautas físicas no arquivo em papel e conferiu nome, filiação, notas de 10ª a 13ª classe e deliberação final,
     - **Quando** abre o ecrã de conferência do histórico migrado no `MOD-MIG-01`, introduz o livro, folha e termo do arquivo físico e aciona a homologação da conferência,
-    - **Então** o estado do histórico passa a `MIGRADO_CONFERIDO`, anexa-se o registo nominal de quem conferiu com carimbo temporal e a emissão do Certificado e pedido de Diploma fica imediatamente desbloqueada para a Secretaria.
-- **Pós-condições e Efeitos Colaterais:** Campo `historico_conferido = TRUE` com utilizador e data em `historico_externo_transcricoes` ou nos resultados anuais; desbloqueio das telas de certificação do aluno.
+    - **Então** o sistema marca `alunos.historico_conferido_para_certificacao`, grava o evento `CONFERENCIA_HISTORICO_CERTIFICACAO` em `audit_logs` com quem conferiu e quando, e a emissão dos documentos de certificação fica desbloqueada para a Secretaria.
+- **Pós-condições e Efeitos Colaterais:** `alunos.historico_conferido_para_certificacao` marcado; `CONFERENCIA_HISTORICO_CERTIFICACAO` em `audit_logs`; desbloqueio das telas de certificação do aluno. Para a coorte da 13ª, esta conferência faz parte da amostra a 100% do MIG-10 §6.3.
 
 ---
 
 ### `US-MIG-07`: Migração Individual a Pedido de Antigo Aluno e Desativação da Consola de Migração Massiva
-- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **encerrar formalmente a consola de migração massiva com desativação da conta técnica e disponibilizar o fluxo restrito de migração individual a pedido de antigos alunos**, *para* **blindar a integridade operacional pós-arranque mantendo a capacidade de atender alunos históricos sob demanda**.
-- **Rastreabilidade:** `RF-C17-15`, `RF-C17-16` | `RN-10`, `RN-16.21` | [[10 - Migracao de Dados e Implantacao|MIG-10]] §2.3, §6.4 | `MOD-MIG-01`.
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** (Termo de Aceitação Final), **Administrador Técnico (`ADMIN_TEC`)** (desativação da conta técnica — gestão de contas, `DEC-019`) e **Operador e Chefe da Secretaria Pedagógica (`OP_PED`, `CHEFE_SEC_PED`)** com o **Subdirector Pedagógico (`SUB_PED`)** (migração a pedido), *quero* **encerrar formalmente a consola de migração massiva com desativação da conta técnica e disponibilizar o fluxo restrito de migração individual a pedido de antigos alunos**, *para* **blindar a integridade operacional pós-arranque mantendo a capacidade de atender alunos históricos sob demanda**.
+- **Rastreabilidade:** `RF-C17-15`, `RF-C17-16` | `RN-10`, `RN-16.21` (`RN-16.21.4`) | [[10 - Migracao de Dados e Implantacao|MIG-10]] §2.3, §6.4 | `MOD-MIG-01`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E4`.
 - **Pré-condições:** Conclusão de todas as vagas de migração massiva; assinatura do Termo de Aceitação Final da migração pelo Director Geral.
 - **Critérios de Aceitação (BDD):**
@@ -2937,8 +2937,8 @@ tags:
     - **Então** o sistema desativa a consola de importação em lote (`MOD-MIG-01` modo massivo), comuta a conta de migração (`tipo_conta = TECNICA_MIGRACAO`) para `estado_conta = DESATIVADA` com motivo `"Fim da Migração Massiva"` (`RN-16.21`), revoga todas as sessões ativas dessa conta e regista a ação em `audit_logs`.
   - **Cenário 2 (Sucesso — Entrada de antigo aluno por migração individual a pedido):**
     - **Dado** um antigo aluno que concluiu o curso antes da informatização e requer Certificado na Secretaria durante o ano 2028,
-    - **Quando** o `CHEFE_SEC_PED` abre o módulo restrito de "Migração Individual a Pedido", digita os dados do processo a partir da ficha do arquivo histórico, anexa a imagem da pauta e submete o pedido,
-    - **Então** o sistema cria um lote individual na área de preparação, executa as validações de integridade, exige a aprovação do `SUB_PED` e, após homologação, insere o histórico como `MIGRADO` e desbloqueia a emissão requerida.
+    - **Quando** o `OP_PED` abre um **lote individual** no modo restrito de "Migração Individual a Pedido" do `MOD-MIG-01`, o histórico é digitado a partir da ficha do arquivo histórico (dupla digitação cega) com a imagem da pauta anexada,
+    - **Então** o sistema executa as validações de integridade (`VALIDADO`), o `CHEFE_SEC_PED` confere o lote (`CONFERIDO`) e o `SUB_PED` homologa-o com reautenticação (`APROVADO`); só então o histórico entra como `MIGRADO` e a emissão requerida fica disponível (`RN-16.21.4`; MIG-10 §2.3). A conta técnica não intervém.
   - **Cenário 3 (Bloqueio — Tentativa de reutilizar conta técnica desativada):**
     - **Dado** que a conta técnica de migração foi formalmente desativada após o encerramento da migração massiva,
     - **Quando** qualquer operador tentar autenticar-se com as credenciais da referida conta,
@@ -2953,78 +2953,78 @@ tags:
 > **Capacidade:** C19 ([[11 - Protecao de Dados (APD)|APD-11]]).  
 > **Módulo:** `MOD-GOV-09` Proteção de Dados (Workspace 01 — [[04 - Telas e Documentos|DOC-04]] §5) e `MOD-GER-RH`.  
 > **Base Legal:** Lei n.º 22/11 (Proteção de Dados Pessoais), DP n.º 60/21 e Circular n.º 2/2024 da APD.  
-> **Perfis RBAC:** `DIR_GERAL`, Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`, perfil técnico/institucional), `SUB_PED`, `SUB_ADM`, `CHEFE_SEC_PED`.
+> **Perfis RBAC:** os do `MOD-GOV-09` ([[04 - Telas e Documentos|DOC-04]]): `DIR_GERAL` (responsável pelo tratamento) e `CHEFE_SEC_GER` (ponto de contacto operacional, delegado do `DIR_GERAL`; **sem 13.º papel RBAC** — `DEC-019`). Os outros papéis entram só nas ações que a matriz do [[01 - Dominio e Regras|DOC-01]] §2.2–§2.3 lhes dá: `CHEFE_SEC_PED` (avisos e consentimentos recolhidos no balcão da matrícula — D6, D10), `SUB_PED` (leitura da informação de saúde — D4a), `SUB_ADM` e `OP_TES` (bolsas — linha 19); `PROF` e `SUB_PED` na `US-APD-07` (fora das E1–E5). *(VER-02 #45)*
 
 ---
 
 ### `US-APD-01`: Gestão de Versões dos Avisos de Privacidade e Notificação de Maioridade aos 18 Anos
-- **História:** *Como* **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)** e **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **gerir as versões dos avisos de privacidade (`AV-01` a `AV-12`), registar a entrega nominal a cada titular e receber a lista diária automatizada de alunos que completam 18 anos**, *para* **garantir o dever de informação (art. 25.º) e formalizar a transição dos consentimentos do representante legal para o próprio aluno maior de idade**.
+- **História:** *Como* **Chefe da Secretaria Geral (`CHEFE_SEC_GER`)**, ponto de contacto de proteção de dados delegado do `DIR_GERAL` (`DEC-019`), e **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)**, *quero* **gerir as versões dos avisos de privacidade (`AV-01` a `AV-12`), registar a entrega nominal a cada titular e receber a lista diária automatizada de alunos que completam 18 anos**, *para* **garantir o dever de informação (art. 25.º) e formalizar a transição dos consentimentos do representante legal para o próprio aluno maior de idade**.
 - **Rastreabilidade:** `RF-C19-01`, `RF-C19-04` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §3, §4, §7.1 | Lei n.º 22/11 arts. 13.º, 14.º, 25.º | `MOD-GOV-09`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
 - **Pré-condições:** Módulo `MOD-GOV-09` configurado; catálogo de modelos de avisos (`AV-01` a `AV-12`) carregado; data de nascimento dos alunos registada.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Criação de versão de aviso e registo de entrega):**
-    - **Dado** que a Direção aprova a versão 2.0 do Aviso de Matrícula (`AV-01`),
-    - **Quando** o ponto de contacto publica a nova versão no `MOD-GOV-09` e a Secretaria emite a confirmação de entrega ao encarregado no balcão,
+    - **Dado** que a Direção aprova a versão 2.0 do aviso de matrícula e confirmação anual (`AV-02`; o `AV-01` é o da inscrição no Teste de Seleção — APD-11 §4.3),
+    - **Quando** o `CHEFE_SEC_GER` publica a nova versão no `MOD-GOV-09` e a Secretaria emite a confirmação de entrega ao encarregado no balcão,
     - **Então** o sistema grava o evento em `avisos_entregues` com o código do aviso, versão, identificador do titular, data/hora e o operador emissor, mantendo o histórico de versões anteriores inalterado em `avisos_privacidade`.
   - **Cenário 2 (Sucesso — Deteção diária de maioridade e notificação de reconfirmação):**
     - **Dado** um aluno que completa 18 anos de idade no dia corrente,
     - **Quando** a rotina diária de verificação de maioridade corre às 06h00,
-    - **Então** o aluno é adicionado à lista de trabalho do `MOD-GOV-09` ("Alunos Recém-Maiores"), o sistema gera a pendência `AVISO_MAIORIDADE_PENDENTE`, notifica a Secretaria Pedagógica para entrega presencial do aviso `AV-10` (Maioridade) e disponibiliza o termo de reconfirmação de consentimentos em nome próprio.
+    - **Então** o aluno é adicionado à lista de trabalho do `MOD-GOV-09` ("Alunos Recém-Maiores"), o sistema cria a pendência de entrega do aviso de maioridade `AV-09` (APD-11 §4.3), notifica a Secretaria Pedagógica para a entrega presencial e disponibiliza o termo de reconfirmação de consentimentos em nome próprio.
   - **Cenário 3 (Efeito da reconfirmação pelo aluno aos 18 anos):**
     - **Dado** um aluno que atingiu os 18 anos e compareceu à Secretaria para formalizar a sua autonomia de dados,
-    - **Quando** o `CHEFE_SEC_PED` regista a aceitação do aviso e a opção do aluno sobre os consentimentos facultativos (`CON-01` a `CON-08`),
-    - **Então** os consentimentos anteriormente outorgados pelo encarregado de educação são arquivados como `CESSADOS_POR_MAIORIDADE` e os novos consentimentos do titular assumem plena validade jurídica.
+    - **Quando** o `CHEFE_SEC_PED` regista a entrega do `AV-09` em `avisos_entregues` e a opção do aluno sobre os consentimentos a reconfirmar (`CON-03`, `CON-05`, `CON-06` — APD-11 §4.3),
+    - **Então** os consentimentos dados pelo representante legal ficam cessados com **Motivo da Cessação** `MAIORIDADE` (lista 110 do [[05 - Modelagem de Dados|DOC-05]]; o histórico não se apaga) e os novos consentimentos do titular passam a ser os vigentes.
 - **Pós-condições e Efeitos Colaterais:** `avisos_entregues` e `consentimentos` atualizados; auditoria registada em `audit_logs`.
 
 ---
 
 ### `US-APD-02`: Gestão de Incidentes de Segurança e Notificação Formal à APD (Circular n.º 2/2024)
-- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)**, *quero* **registar formalmente qualquer incidente de violação de dados pessoais, classificar o seu nível de risco e emitir a minuta de comunicação à APD dentro do prazo regulamentar de 72 horas**, *para* **cumprir a obrigação legal de notificação (art. 30.º da Lei n.º 22/11 e Circular n.º 2/2024 da APD) e mitigar impactos aos titulares**.
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Chefe da Secretaria Geral (`CHEFE_SEC_GER`)**, ponto de contacto de proteção de dados delegado do `DIR_GERAL` (`DEC-019`), *quero* **registar formalmente qualquer incidente de violação de dados pessoais, classificar o seu nível de risco e emitir a minuta de comunicação à APD logo que o incidente seja conhecido (meta interna ≤ 72 h 🟡, a validar — APD-11 §7.2)**, *para* **cumprir a obrigação legal de notificação (art. 30.º da Lei n.º 22/11 e Circular n.º 2/2024 da APD) e mitigar impactos aos titulares**.
 - **Rastreabilidade:** `RF-C19-23` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §8.1; Circular APD 2/2024; Lei n.º 22/11 art. 30.º | `MOD-GOV-09`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
-- **Pré-condições:** Utilizador autenticado com perfil `DIR_GERAL` ou `PONT_CONT_APD`; ocorrência identificada (ex.: extravio de suporte, acesso indevido, ataque cibernético).
+- **Pré-condições:** Utilizador autenticado com perfil `DIR_GERAL` ou `CHEFE_SEC_GER` (ponto de contacto — `DEC-019`); ocorrência identificada (ex.: extravio de suporte, acesso indevido, ataque cibernético).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Registo de incidente com contagem de prazo regulamentar):**
     - **Dado** a deteção de um acesso indevido a dados de estudantes no servidor local,
-    - **Quando** o ponto de contacto regista o incidente no `MOD-GOV-09` indicando data/hora do conhecimento, categorias de dados afetadas, número estimado de titulares e medidas imediatas de contenção adotadas,
-    - **Então** o sistema atribui identificador único `INC-AAAA-NNNN`, inicia o cronómetro regressivo do prazo legal de 72 horas para notificação à APD e emite alerta de severidade alta para o painel da Direção Geral.
+    - **Quando** o `CHEFE_SEC_GER` regista o incidente no `MOD-GOV-09` indicando data/hora do conhecimento, categorias de dados afetadas, número estimado de titulares e medidas imediatas de contenção adotadas,
+    - **Então** o sistema atribui o **Código** único `INC-AAAA-NNNN`, grava o incidente em `incidentes_seguranca` com estado `REGISTADO` (lista 109 do DOC-05), inicia a contagem da meta interna de 72 h 🟡 para a comunicação à APD e emite alerta para o painel do `DIR_GERAL`.
   - **Cenário 2 (Sucesso — Geração de minuta normalizada para a APD):**
-    - **Dado** um incidente registado e classificado com risco aos direitos e liberdades dos titulares,
+    - **Dado** um incidente registado e com **Nível de Risco** 🟡 classificado (lista 111 do DOC-05; escala a fixar com a Direção/APD),
     - **Quando** a Direção aciona o comando "Gerar Comunicação Oficial APD",
     - **Então** o sistema compila os dados técnicos e gera o documento em PDF pré-formatado nos moldes do formulário oficial da Circular n.º 2/2024 da APD, com cabeçalho institucional, descrição das medidas corretivas e campo para assinatura do `DIR_GERAL`.
   - **Cenário 3 (Fecho e evidência de comunicação):**
     - **Dado** o protocolo ou recibo de envio do expediente à APD e as recomendações recebidas da autoridade,
-    - **Quando** o ponto de contacto anexa a prova de submissão e regista a data e o número de ofício no `MOD-GOV-09`,
-    - **Então** o incidente transita para o estado `NOTIFICADO_APD` e o processo é arquivado com todos os registos forenses associados.
-- **Pós-condições e Efeitos Colaterais:** Registo gravado em `incidentes_seguranca`; notificação arquivada; cópia retida no dossier de proteção de dados.
+    - **Quando** o `CHEFE_SEC_GER` anexa a prova de submissão e regista a data de comunicação e a referência da APD no `MOD-GOV-09`,
+    - **Então** o incidente passa ao estado `NOTIFICADO_APD` (lista 109) e, concluídas as medidas, a `ENCERRADO`, data a partir da qual conta o prazo de conservação `PC-22`.
+- **Pós-condições e Efeitos Colaterais:** Registo gravado em `incidentes_seguranca`; `INCIDENTE_SEGURANCA_REGISTADO` em `audit_logs`; notificação arquivada; cópia retida no dossier de proteção de dados.
 
 ---
 
 ### `US-APD-03`: Gestão de Pedidos dos Titulares, Prazos de Resposta e Relatório de Acesso em PDF
-- **História:** *Como* **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)** e **Secretaria Pedagógica**, *quero* **registar pedidos de exercício de direitos dos titulares (acesso, retificação, oposição, cancelamento), monitorizar o prazo legal de 60 dias úteis e exportar o Relatório de Acesso do Titular em PDF com salvaguarda médica**, *para* **atender escrupulosamente os direitos conferidos pelos artigos 26.º a 28.º da Lei n.º 22/11**.
+- **História:** *Como* **Chefe da Secretaria Geral (`CHEFE_SEC_GER`)**, ponto de contacto de proteção de dados delegado do `DIR_GERAL` (`DEC-019`), e **Director Geral (`DIR_GERAL`)**, *quero* **registar pedidos de exercício de direitos dos titulares (acesso, retificação, oposição, cancelamento), monitorizar o prazo legal de 60 dias úteis e exportar o Relatório de Acesso do Titular em PDF com salvaguarda médica**, *para* **atender escrupulosamente os direitos conferidos pelos artigos 26.º a 28.º da Lei n.º 22/11**.
 - **Rastreabilidade:** `RF-C19-08`, `RF-C19-09` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §8.3; Lei n.º 22/11 arts. 26.º, 27.º, 28.º | 🟡 DoR-E2 · `Q-APD-21` | `MOD-GOV-09`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
 - **Pré-condições:** Pedido formal apresentado pelo titular ou representante legal munido de documento de identificação comprovado.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Registo de pedido de acesso e contagem de prazo):**
     - **Dado** um encarregado de educação devidamente legitimado que solicita o acesso integral aos dados escolares e financeiros do seu educando,
-    - **Quando** o operador regista o pedido no `MOD-GOV-09` com número de processo, tipo de direito e contacto preferencial,
+    - **Quando** o `CHEFE_SEC_GER` regista o pedido no `MOD-GOV-09` com número de processo, tipo de direito e contacto preferencial,
     - **Então** o sistema emite comprovativo numerado com o prazo limite legal de 60 dias úteis e agenda um alerta preventivo aos 40 dias úteis para a Direção caso o pedido não esteja concluído.
   - **Cenário 2 (Sucesso — Emissão do Relatório de Acesso com mediação de dados clínicos):**
     - **Dado** um pedido de acesso com despacho de deferimento,
-    - **Quando** o ponto de contacto gera o "Relatório de Dados do Titular em PDF",
+    - **Quando** o `CHEFE_SEC_GER` gera o "Relatório de Dados do Titular em PDF",
     - **Então** o sistema extrai e estrutura os dados por categoria (identificação, frequência escolar, pautas, pagamentos, comunicações a terceiros), omitindo anotações médicas livres e indicando expressamente que relatórios clínicos detalhados só podem ser entregues através de médico designado pelo titular (art. 26.º n.º 7 da Lei n.º 22/11).
   - **Cenário 3 (Alerta preventivo de estouro de prazo):**
     - **Dado** um pedido de direito que atinge o 40.º dia útil sem parecer ou resposta final concluída,
     - **Quando** a rotina de monitorização corre,
-    - **Então** é gerado alerta amarelo crítico na caixa de alertas (`MOD-ALR`) do `DIR_GERAL` e do ponto de contacto para priorização imediata.
+    - **Então** é gerado alerta amarelo crítico na caixa de alertas (`MOD-ALR`) do `DIR_GERAL` e do `CHEFE_SEC_GER` para priorização imediata.
 - **Pós-condições e Efeitos Colaterais:** Registos em `pedidos_titulares`; arquivo da resposta e comprovativo de entrega ao titular.
 
 ---
 
 ### `US-APD-04`: Auditoria Reforçada de Acesso a Dados Sensíveis (Saúde e Apoio Social)
-- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)**, *quero* **auditar de forma nominal e segregada todas as consultas, leituras e descarregamentos de dados de saúde e comprovativos socioeconómicos de bolsas**, *para* **garantir a estrita confidencialidade dos dados sensíveis e comprovar a legitimidade funcional de cada acesso (art. 31.º da Lei n.º 22/11)**.
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Chefe da Secretaria Geral (`CHEFE_SEC_GER`)**, ponto de contacto de proteção de dados delegado do `DIR_GERAL` (`DEC-019`), *quero* **auditar de forma nominal e segregada todas as consultas, leituras e descarregamentos de dados de saúde e comprovativos socioeconómicos de bolsas**, *para* **garantir a estrita confidencialidade dos dados sensíveis e comprovar a legitimidade funcional de cada acesso (art. 31.º da Lei n.º 22/11)**.
 - **Rastreabilidade:** `RF-C19-20` | `RN-10`, `RN-11.12` | [[11 - Protecao de Dados (APD)|APD-11]] §6.2, §7.1 | `MOD-GOV-09`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E2`.
 - **Pré-condições:** Utilizador autenticado a tentar visualizar o compartimento de saúde (`documentos_saude`) ou dados financeiros de carência/bolsa.
@@ -3039,39 +3039,39 @@ tags:
     - **Então** gera-se registo de auditoria qualificado com a tag `ACESSO_DADO_SOCIOECONOMICO`.
   - **Cenário 3 (Relatório de acessos a dados sensíveis para fiscalização):**
     - **Dado** a realização de auditoria interna periódica ou inspeção pela APD,
-    - **Quando** o ponto de contacto extrai o mapa de rastreio de dados sensíveis no `MOD-GOV-09`,
+    - **Quando** o `DIR_GERAL` extrai o mapa de rastreio de dados sensíveis no `MOD-GOV-09` (leitura de `audit_logs` — DOC-01 §2.2, linha 26),
     - **Então** o sistema devolve o histórico integral cronológico por utilizador e por titular, destacando acessos fora do horário habitual de serviço.
 - **Pós-condições e Efeitos Colaterais:** Inserções invioláveis em `audit_logs`.
 
 ---
 
 ### `US-APD-05`: Bloqueio de Tratamento de Dados Pessoais em Disputa ou Oposição
-- **História:** *Como* **Chefe da Secretaria Pedagógica (`CHEFE_SEC_PED`)** e **Subdirector Administrativo (`SUB_ADM`)**, *quero* **comutar temporariamente o estado de dados pessoais de um titular para `BLOQUEADO`**, *para* **suspender o seu processamento operacional em caso de oposição fundada ou contestação de exatidão enquanto decorre a averiguação (art. 28.º da Lei n.º 22/11)**.
+- **História:** *Como* **Chefe da Secretaria Geral (`CHEFE_SEC_GER`)**, ponto de contacto de proteção de dados delegado do `DIR_GERAL` (`DEC-019`), e **Director Geral (`DIR_GERAL`)**, *quero* **comutar temporariamente o estado de conservação dos dados de um aluno para `BLOQUEADO` (`alunos.estado_conservacao`, lista 103)**, *para* **suspender o seu processamento operacional em caso de oposição fundada ou contestação de exatidão enquanto decorre a averiguação (art. 28.º da Lei n.º 22/11)**.
 - **Rastreabilidade:** `RF-C19-12` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §8.3; Lei n.º 22/11 art. 28.º | `MOD-GOV-09`.
 - **Prioridade (proposta):** `Should` | **Entrega:** `E3`.
 - **Pré-condições:** Pedido formal de oposição deferido ou pendência de averiguação sobre identidade/exatidão de dados.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Ativação do bloqueio de dados):**
     - **Dado** um aluno cujo encarregado contestou judicialmente a legitimidade de contactos ou morada registada,
-    - **Quando** a chefia aciona o comando "Bloquear Dados Pessoais" no `MOD-GOV-09` anexando o despacho,
-    - **Então** o titular passa a `estado_dados = BLOQUEADO`, os contactos deixam de constar nas centrais de avisos por SMS, as listas públicas omitem os dados contestados e é aposto um aviso de bloqueio no processo individual do aluno.
+    - **Quando** o `CHEFE_SEC_GER` aciona o comando "Bloquear Dados Pessoais" no `MOD-GOV-09` anexando o despacho do `DIR_GERAL`,
+    - **Então** o aluno passa a `alunos.estado_conservacao = BLOQUEADO` (lista 103), os contactos deixam de constar nas centrais de avisos por SMS, as listas públicas omitem os dados contestados e é aposto um aviso de bloqueio no processo individual do aluno.
   - **Cenário 2 (Tentativa de tratamento operacional sobre registo bloqueado):**
-    - **Dado** um registo no estado `BLOQUEADO`,
+    - **Dado** um aluno com `estado_conservacao = BLOQUEADO`,
     - **Quando** qualquer operador tenta enviar mensagens promocionais ou comunicações não essenciais ao titular,
     - **Então** o sistema impede o envio e exibe: *"Tratamento suspenso: registo encontra-se temporariamente bloqueado por determinação de proteção de dados (art. 28.º)"*.
   - **Cenário 3 (Desbloqueio após resolução da disputa):**
     - **Dado** a conclusão formal do processo de averiguação com confirmação de retificação ou improcedência,
-    - **Quando** o `SUB_PED` e o ponto de contacto homologam o desbloqueio,
-    - **Então** o registo retorna ao estado ativo regular com gravação da justificativa e autorização em auditoria.
-- **Pós-condições e Efeitos Colaterais:** Estado de bloqueio refletido em `alunos` ou `encarregados_educacao`; logs registados.
+    - **Quando** o `CHEFE_SEC_GER` propõe e o `DIR_GERAL` homologa o desbloqueio,
+    - **Então** o aluno volta a `estado_conservacao = ATIVO`, com a justificação e a autorização gravadas em `audit_logs`.
+- **Pós-condições e Efeitos Colaterais:** Estado de bloqueio refletido em `alunos.estado_conservacao` (o modelo não tem estado de conservação em `encarregados_educacao`; os contactos do encarregado contestados ficam abrangidos pelo bloqueio do educando); logs registados.
 
 ---
 
 ### `US-APD-06`: Motor de Conservação, Purga Automatizada e Relatório de Execução
-- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Ponto de Contacto de Proteção de Dados (`PONT_CONT_APD`)**, *quero* **configurar os prazos de conservação por categoria (`PC-01` a `PC-32`), avaliar propostas mensais automáticas de purga/anonimização e homologar a sua execução com emissão de relatório formal**, *para* **assegurar o cumprimento do princípio da limitação da conservação (art. 11.º da Lei n.º 22/11 e Lei n.º 14/17 de Arquivos) sem destruir património histórico escolar**.
+- **História:** *Como* **Director Geral (`DIR_GERAL`)** e **Chefe da Secretaria Geral (`CHEFE_SEC_GER`)**, ponto de contacto de proteção de dados delegado do `DIR_GERAL` (`DEC-019`), *quero* **configurar os prazos de conservação por categoria (`PC-01` a `PC-32`), avaliar propostas mensais automáticas de purga/anonimização e homologar a sua execução com emissão de relatório formal**, *para* **assegurar o cumprimento do princípio da limitação da conservação (art. 11.º da Lei n.º 22/11 e Lei n.º 14/17 de Arquivos) sem destruir património histórico escolar**.
 - **Rastreabilidade:** `RF-C19-13` | `RN-10` | [[11 - Protecao de Dados (APD)|APD-11]] §5; Lei n.º 14/17; Lei n.º 22/11 art. 11.º | 🟡 DoR-E4 | `MOD-GOV-09`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E4`.
-- **Pré-condições:** Catálogo de políticas de conservação configurado com prazos definitivos (ex.: pautas permanentes `PC-01`, recibos 10 anos `PC-10`, dados de migração intermediários 90 dias `PC-28`, processos disciplinares 5 anos `PC-30`).
+- **Pré-condições:** Catálogo de políticas de conservação configurado e aprovado pela Direção (todos os prazos 🟡 a validar — APD-11 §5; ex.: registo académico permanente `PC-01`, documentos fiscais 10 anos `PC-10`, registo diário de faltas 5 anos `PC-07`, ficheiros intermédios de migração 90 dias `PC-28`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Proposta mensal automática de lote de expiração):**
     - **Dado** que decorreu mais um mês e certos dados temporários (ex.: ficheiros de migração com mais de 90 dias ou comprovativos de justificação de faltas expirados) atingiram o termo do seu prazo de retenção,
@@ -3082,9 +3082,9 @@ tags:
     - **Quando** o motor de conservação analisa as tabelas do acervo escolar permanente,
     - **Então** o sistema classifica categoricamente estes registos como de preservação definitiva por força da Lei n.º 14/17, impedindo qualquer sugestão de eliminação física.
   - **Cenário 3 (Homologação de lote com reautenticação e relatório formal de destruição):**
-    - **Dado** um lote de purga validado pelo ponto de contacto contendo logs técnicos com mais de 12 meses,
+    - **Dado** um lote de purga `PROPOSTO`, conferido pelo `CHEFE_SEC_GER`, com eventos de autenticação com mais de 12 meses (`PC-27`),
     - **Quando** o `DIR_GERAL` comanda a execução no `MOD-GOV-09` e confirma com palavra-passe e MFA,
-    - **Então** os dados são purgados/anonimizados atomicamente da base de produção, gera-se o Relatório Oficial de Execução de Conservação (com contagens e hash do lote, sem reproduzir o conteúdo apagado) e arquiva-se permanentemente como prova de conformidade perante a APD.
+    - **Então** o lote passa a `APROVADO` e depois a `EXECUTADO` (lista 112 do DOC-05), os dados são purgados/anonimizados atomicamente da base de produção, gera-se o Relatório Oficial de Execução de Conservação (com contagens e hash do lote, sem reproduzir o conteúdo apagado) e arquiva-se permanentemente como prova de conformidade perante a APD.
 - **Pós-condições e Efeitos Colaterais:** Purga executada; registo em `execucoes_conservacao` e `audit_logs`.
 
 ---
@@ -3092,7 +3092,7 @@ tags:
 ### `US-APD-07`: Confidencialidade e Garantias do Titular na Avaliação de Desempenho Docente (Fora das E1–E5 `DEC-016`)
 - **História:** *Como* **Professor Avaliado (`PROF`)** e **Subdirector Pedagógico (`SUB_PED`)**, *quero* **aceder à ficha individual de avaliação de desempenho docente sob estrita confidencialidade, com garantia de vista prévia, registo de observações e manifestação formal de concordância ou discordância**, *para* **respeitar os princípios da lealdade e transparência no tratamento de dados laborais (art. 11.º da Lei n.º 22/11 e DP n.º 28/22)**.
 - **Rastreabilidade:** `RF-C19-33` | [[11 - Protecao de Dados (APD)|APD-11]] §7.1; DP n.º 28/22; Lei n.º 22/11 | fora da linha de base (`DEC-016`, `Q-036`) | `MOD-GER-RH`.
-- **Prioridade (proposta):** `Won't` (fora da linha de base das entregas E1–E5 por `DEC-016`) | **Entrega:** `Fora das E1–E5 (`DEC-016`)`.
+- **Prioridade (proposta):** `Won't` (fora da linha de base das entregas E1–E5 por `DEC-016`) | **Entrega:** `Fora das E1–E5` (`DEC-016`).
 - **Pré-condições:** Decisão formal favorável da Comissão de Gestão quanto à inclusão do módulo de avaliação de desempenho no SGE (`Q-036`); processo de avaliação do ano letivo aberto.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Restrição de visibilidade estrita da avaliação):**
@@ -3139,6 +3139,25 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 ---
 
 ## Alterações da v2.0
+
+### Correções da verificação VER-02 — #45 (2026-11-09)
+
+- **Ponto de contacto APD (`DEC-019`):** `PONT_CONT_APD` não existe; as 7 ocorrências passam a `CHEFE_SEC_GER` (delegado do `DIR_GERAL`). Atores do `EP-APD` (tabela de épicos e cabeçalho do Épico 17) alinhados com o `MOD-GOV-09` (`DIR_GERAL`, `CHEFE_SEC_GER`); os outros papéis só nas ações que a matriz do DOC-01 §2.2–§2.3 lhes dá. `US-APD-05`: bloqueio pelo `CHEFE_SEC_GER` com despacho e homologação do `DIR_GERAL`.
+- **`US-MIG-04`:** retirada a fórmula fixa da `MFC` com `MFD`; passa a fórmula parametrizada da matriz do curso (`RN-06.4`, pesos 🟡 sem valor por omissão). Discrepâncias como ocorrências `AVISO` em `ocorrencias_migracao` (MIG-10 §5.1), sem estados inventados.
+- **`US-MIG-06`:** regra = MIG-10 §7.6 + DOC-05 §4.10 (item 3), em vez de `RN-10.5`; atributo `alunos.historico_conferido_para_certificacao` e evento `CONFERENCIA_HISTORICO_CERTIFICACAO`; documentos bloqueados alinhados com o MIG-10 §7.6 (`DOF-09B`, `DOF-08B`, `DOF-10A`/`B`).
+- **`US-MIG-01`, `-02`, `-04`, `-05`:** estados do lote só os de `lotes_migracao` (`CARREGADO`, `VALIDADO`, `CONFERIDO`, `APROVADO`, `REJEITADO`, `REVERTIDO`); "com erros" = ocorrência `BLOQUEANTE`; retirados `CARREGADO_EM_PREPARACAO`, `VALIDADO_COM_ERROS`, `DIGITACAO_CONCILIADA_APTA`, `CALCULO_VERIFICADO_CONFORME`, `DISCREPANCIA_CALCULO_HISTORICO` e `MIGRADO_PRODUCAO`.
+- **`US-MIG-05` Cenário 2:** ajuste de saldo migrado como tipo `AJUSTE_SALDO_MIGRADO` em `ajustes_conta_corrente` (lista 70, acrescentada no DOC-05) e evento `AJUSTE_SALDO_MIGRADO` (DOC-05 §4.9).
+- **`US-MIG-01`:** ficheiros modelo `MIG-Fnn` (`MIG-F01` a `MIG-F22`); alunos = `MIG-F05`, encarregados = `MIG-F04`.
+- **`US-MIG-07`:** migração a pedido pelo `OP_PED` num lote individual, conferido pelo `CHEFE_SEC_PED` e homologado pelo `SUB_PED` (`RN-16.21.4`; MIG-10 §2.3); `ADMIN_TEC` só na desativação da conta técnica.
+- **`US-APD-01`:** aviso de maioridade = `AV-09` (não `AV-10`); aviso de matrícula = `AV-02`; reconfirmação de `CON-03`/`05`/`06`; cessação com motivo `MAIORIDADE` (DOC-05 `consentimentos`).
+- **`US-APD-02`:** código `INC-AAAA-NNNN`, nível de risco 🟡 e estados `REGISTADO`/`NOTIFICADO_APD`/`ENCERRADO` acrescentados a `incidentes_seguranca` no DOC-05; a meta de 72 h é interna e 🟡 (a Circular n.º 2/2024 pede comunicação logo que conhecido).
+- **`US-APD-05`:** `estado_dados` → `alunos.estado_conservacao = BLOQUEADO` (lista 103); `encarregados_educacao` retirado da US (sem estado de conservação no modelo).
+- **`US-APD-06`:** retirado o exemplo `PC-30` ("processos disciplinares 5 anos"), que não existe; exemplos passam a `PC-07` e `PC-27`; estados do lote (`PROPOSTO`, `APROVADO`, `EXECUTADO`) acrescentados a `execucoes_conservacao` no DOC-05.
+- **`US-PIN-02` Cenário 5:** 🟡 condicional à `Q-C03-14` e ao âmbito da `RN-11.13` (transferência de saída ou anulação); estados do DOC-01 (`Transferido (Saída)`, `Desistente / Anulado`, `Concluiu o Curso`); "Data e Destinatário da Devolução" acrescentado a `documentos_processo_aluno` no DOC-05, em vez de `devolvido_em`/`devolvido_a`.
+- **`US-PNL-01` Cenário 4:** `IND-07` não é inadimplência — exemplo financeiro passa a `IND-18` (dívida); versão nova pela `RN-17.1`; a fórmula é fixada pelo `SUB_PED`/`SUB_ADM` e homologada pelo `DIR_GERAL` (C15-f).
+- **`US-DIS-04` Cenário 4:** gravidades 🟡 (lista 46, `Q-C13-04`), sem `LEVE`/`GRAVE`/`MUITO_GRAVE`.
+- **`US-APD-07`:** corrigidas as crases aninhadas na entrega. Contagens inalteradas (130 US).
+
 
 ### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
 
