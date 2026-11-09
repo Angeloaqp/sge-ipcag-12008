@@ -2114,10 +2114,10 @@ Decisão de controlo interno (§2), **proposta a confirmar** (`Q-C14-05`). Uma c
 1. **Problema:** os documentos reais são assinados por uma *Coordenadora Geral da Comissão de Gestão*, um *Coordenador para a Área Pedagógica*, a *Chefe da Secretaria Pedagógica* e um *Director de Turma* também chamado *Coordenador de turma*; a estrutura pode mudar (a Comissão de Gestão pode ser transitória — `Q-028`) sem que mudem as permissões.
 2. **Regra:** o sistema guarda o **Papel no Sistema** (um dos 12 códigos ou `ADMIN_TEC`: o que a pessoa pode fazer — RBAC, RLS, MFA, reautenticação, incompatibilidades) e o **Título do Cargo** (texto configurável em `cargos_institucionais`: como o cargo se chama e aparece impresso).
 3. Cada título liga-se a **exatamente um** papel; vários títulos podem ligar-se ao mesmo papel (ex.: *Director de Turma* e *Coordenador de Turma* → `DIR_TURMA`). Uma Atribuição escolhe um **título**; o papel vem do título.
-4. **Mapeamento inicial proposto** (hipóteses — `Q-C14-14`): ver a tabela do §2.
+4. **Mapeamento inicial:** confirmado na `DEC-021` (ver tabela do §2).
 5. **Mudar um título não muda permissões.** Mudar o **papel** de um título com atribuições ativas é proibido: cria-se um título novo e as atribuições migram por término e nova atribuição (`RN-16.3.5`).
 6. **Documentos impressos:** o bloco de assinatura mostra o **título** e o **nome** de quem tinha a atribuição ativa na data, e o documento emitido guarda esse texto **congelado** (`RN-10.7`).
-7. **Órgãos colegiais:** uma homologação que exija decisão colegial da Comissão de Gestão **não** é tratada por esta regra; fica na `Q-C14-14` e, se confirmada, será regra de homologação neste documento.
+7. **Órgãos colegiais (`DEC-021`):** no sistema, todas as aprovações e homologações operacionais são executadas individualmente pelo titular do respetivo papel com reautenticação (`RN-16.14`), dispensando fluxos síncronos de quórum ou múltiplas assinaturas digitais na aplicação. Quando um ato decorrer de deliberação colegial da Comissão de Gestão ou conselho escolar, o homologador insere a referência documental formal (número da ata/despacho colegial) no campo de fundamentação.
 8. **Quem configura:** o `CHEFE_SEC_GER` propõe títulos e mapeamentos; o `DIR_GERAL` homologa (reautenticação); o `ADMIN_TEC` não altera títulos nem mapeamentos.
 
 ---
