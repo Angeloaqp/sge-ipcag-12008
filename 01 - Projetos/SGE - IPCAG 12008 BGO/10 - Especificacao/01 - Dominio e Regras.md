@@ -1305,9 +1305,7 @@ No encerramento do Conselho de Notas final (depois da Prova Global e do Exame de
 
 #### RN-02.2: 12ª Classe Aprovada com Cadeiras em Atraso Pendentes
 
-> 🟡 **Provisória** — validar em E2 (`DEC-009`). Fonte: [[C16 - Passagem de Ano Letivo|C16]] (`RN-18.5`); `Q-C16-06`, `Q-031`.
-
-O aluno da 12ª que aprova todas as disciplinas da 12ª mas ainda tem cadeiras em atraso da 10ª/11ª recebe a deliberação **`CONCLUIU_12_COM_CADEIRAS_PENDENTES`** (nome a validar). A passagem gera uma proposta `CONDICIONADA_13A`, bloqueada até à eliminação das cadeiras (`RN-18.9.3`). O vínculo do aluno no ano seguinte (só para exames?) é a `Q-C16-06`.
+O aluno da 12ª que aprova todas as disciplinas curriculares da 12ª mas ainda tem cadeiras em atraso da 10ª ou 11ª classes recebe a deliberação formal **`CONCLUIU_12_COM_CADEIRAS_PENDENTES`** ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-024 — Regime de Alunos da 12ª com Cadeiras em Atraso Vínculo e Inscrição em Exames Q-C16-06 Q-031|DEC-024]], que resolveu a `Q-C16-06` e confirmou a `Q-031`). A passagem de ano gera a proposta **`CONDICIONADA_13A`** (`RN-18.5`). No ano seguinte (`N+1`), o aluno não frequenta turma regular nem repete a 12ª classe: inscreve-se com matrícula sem turma no regime de eliminação de pendências para exames extraordinários (`MOD-PAS-02`). Eliminadas todas as cadeiras (nota $\ge 10$), a deliberação converte-se em `APTO_PARA_13_CLASSE` e a proposta desbloqueia para confirmação na 13ª classe.
 
 #### RN-02.3: Categorias Impressas na Pauta Geral
 
@@ -2250,7 +2248,7 @@ Para cada matrícula `Concluída`, `Transferida (Externa)` ou `Anulada / Desiste
 | **Transita** | `TRANSITA_APROVADO` (10ª ou 11ª) | Classe seguinte | `TRANSICAO` |
 | **Transita** | `APTO_PARA_13_CLASSE` (12ª, 0 cadeiras) | 13ª Classe | `TRANSICAO` |
 | **Transita com deficiência** | `TRANSITA_COM_DEFICIENCIA` (10ª ou 11ª) | Classe seguinte, com as cadeiras (até duas) | `TRANSICAO_COM_DEFICIENCIA` |
-| *(sem categoria — lacuna)* | `CONCLUIU_12_COM_CADEIRAS_PENDENTES` (`RN-02.2`) | Bloqueada até eliminar as cadeiras; depois 13ª | `CONDICIONADA_13A` |
+| **Não transita** *(retenção na transição para a 13ª)* | `CONCLUIU_12_COM_CADEIRAS_PENDENTES` (`RN-02.2`, `DEC-024`) | Inscrição sem turma para exames extraordinários; desbloqueia para 13ª após eliminação | `CONDICIONADA_13A` |
 | **Não transita** | `NAO_TRANSITA_RETIDO_NOTAS`, `NAO_TRANSITA_VETO_LP_NUCLEAR` (só 10ª/11ª), `NAO_TRANSITA_RETIDO_FALTAS` | Mesma classe (`RN-02.1`), mantendo as cadeiras de classes anteriores | `REPETENCIA` |
 | **Desistente** | `ANULADO_DESISTENTE` | **Sem proposta**; reingresso por pedido e despacho (`RN-18.14.3`) | — |
 | *(não aparece na estatística real — `Q-C16-18`)* | `TRANSFERIDO` (saída) | **Sem proposta** | — |

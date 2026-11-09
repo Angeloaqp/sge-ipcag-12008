@@ -72,6 +72,7 @@ tags:
 | [[#DEC-021 — Estrutura de Direção, Comissão de Gestão e Homologações Individuais vs Colegiais (Q-028, Q-C14-14)\|DEC-021]] | Issue #28; `Q-028`, `Q-C14-14` | Estrutura de direção: Comissão de Gestão e homologações | (a) Títulos reais mapeados em cargos_institucionais (RN-16.20); DIR_GERAL acumula SUB_ADM na vacatura transitória; homologações no SGE individuais com reautenticação e fundamentação de atas colegiais | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-022 — Modelo de Horários: Sem Desdobramentos/Aulas Conjuntas e Regime de Horário da 13ª Classe (Q-C04-07, Q-C04-14)\|DEC-022]] | Issue #29; `Q-C04-07`, `Q-C04-14` | Horários: desdobramentos, turmas conjuntas e regime da 13ª Classe | (a) Sem desdobramentos nem aulas conjuntas em E1–E5 (`aulas_horario` 1:1 com turma-disciplina e sala); 13ª Classe em regime tutorial de Projecto Tecnológico sem sala fixa permanente nem bloqueio de 30–32h | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-023 — Modelo de Tesouraria: Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial (Q-C10-07, Q-C10-16)\|DEC-023]] | Issue #30; `Q-C10-07`, `Q-C10-16` | Tesouraria: contas bancárias por banco e prestações inteiras | (a) Catálogo bancos_angola complementado com contas_bancarias_escola (1:N); motor opera estritamente com prestações inteiras sem pagamentos parciais de quitação (talão insuficiente vira crédito do aluno) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-024 — Regime de Alunos da 12ª com Cadeiras em Atraso: Vínculo e Inscrição em Exames (Q-C16-06, Q-031)\|DEC-024]] | Issue #31; `Q-C16-06`, `Q-031` | Situação de aluno da 12ª com cadeiras em atraso | (a) Deliberação CONCLUIU_12_COM_CADEIRAS_PENDENTES e proposta CONDICIONADA_13A; vínculo sem turma para exames extraordinários; desbloqueia para 13ª após eliminação (RN-02.2, RN-18.5) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -729,6 +730,33 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-024 — Regime de Alunos da 12ª com Cadeiras em Atraso: Vínculo e Inscrição em Exames (Q-C16-06, Q-031)
+
+- **Origem:** Issue #31 ([issue #31](https://github.com/Angeloaqp/sge-ipcag-12008/issues/31)); questões `Q-C16-06` e `Q-031`; [[01 - Dominio e Regras|DOC-01]] §1.3 (`RN-02.2`, `RN-18.5`, `RN-18.14`); [[02 - Fluxos de Trabalho|DOC-02]] Fluxo 05 (§4.2); [[Sintese das Respostas da Fase B|DESC-RESP]] §1 · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** A questão estrutural `Q-C16-06` (em articulação com a resposta preliminar de `Q-031`) colocava a dúvida sobre a situação académica e o vínculo no ano seguinte do estudante que aprova todas as disciplinas da 12ª Classe mas mantém cadeiras em atraso da 10ª ou 11ª classes. Como a `RN-02.6` proíbe o ingresso na 13ª Classe com deficiências e não faz sentido pedagógico forçar o aluno a repetir a 12ª classe completa (cujas notas foram aprovadas e homologadas), era necessário formalizar a deliberação na pauta, o estado vitalício e a modalidade de frequência no ano letivo seguinte.
+
+**Decisão.** **Formalização da deliberação da 12ª e regime de inscrição em exames extraordinários sem turma:**
+1. **Deliberação Final na Pauta Geral (`RN-02.2`):**
+   - O estudante da 12ª Classe que obtém aprovação (classificação $\ge 10$) em todas as disciplinas da 12ª Classe, mas possui 1 ou 2 cadeiras em atraso de classes anteriores, recebe a deliberação formal **`CONCLUIU_12_COM_CADEIRAS_PENDENTES`**.
+   - Para efeitos de agregação estatística no mapa de aproveitamento da Pauta Geral real (A10), é contabilizado na categoria de retenção/não transição para o ciclo seguinte.
+2. **Vínculo Académico no Ano Letivo Seguinte (`N+1` — `RN-18.5`):**
+   - A passagem de ano gera a proposta **`CONDICIONADA_13A`**.
+   - O aluno **não é alocado a nenhuma turma regular** da 10ª, 11ª, 12ª ou 13ª classes, não ocupando vagas nem salas físicas nos turnos diurnos.
+   - O seu vínculo no ano letivo `N+1` formaliza-se através de inscrição escolar anual no **regime de eliminação de pendências curriculares para exames extraordinários** (`MOD-PAS-02` / `exames_extraordinarios`), associado estritamente às disciplinas em atraso.
+   - A sua **Situação Académica vitalícia (`SITUACAO_ACADEMICA`)** mantém-se em **`Ativo`** (ou `Aguarda Confirmação`), assegurando a manutenção do N.º de Processo Individual, acesso ao portal e direito a requerer certidões e declarações de matrícula no regime de exames extraordinários.
+3. **Desfecho e Desbloqueio da 13ª Classe:**
+   - Realizados os exames extraordinários na época própria com classificação $\ge 10$, as pendências são arquivadas como eliminadas em `cadeiras_em_atraso`.
+   - A deliberação final é atualizada pelo sistema para **`APTO_PARA_13_CLASSE`** e a proposta `CONDICIONADA_13A` converte-se automaticamente em **`APTA_A_CONFIRMAR`** para a 13ª Classe (estágio e projeto tecnológico).
+   - Caso o estudante não elimine as pendências, mantém a inscrição no regime de pendências para a época subsequente, dentro dos limites do regulamento escolar.
+4. As questões `Q-C16-06` e `Q-031` são declaradas **respondidas (`DEC-024`)**.
+
+**Impacto.**
+- **DOC-01:** `RN-02.2` e tabela `RN-18.5` atualizados com referência à `DEC-024`.
+- **REG-12 / IDX-12:** `Q-C16-06` e `Q-031` passam a `respondida (DEC-024)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -846,3 +874,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-021`: estrutura de direção e Comissão de Gestão; confirmação do mapeamento de cargos (`RN-16.20`), assunção de `SUB_ADM` pelo `DIR_GERAL` na vacatura transitória; homologações no SGE operadas individualmente com reautenticação e fundamentação documental de deliberações colegiais; Issue #28 fechada (`Q-028`, `Q-C14-14`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-022`: modelo de horários; exclusão de desdobramentos e aulas conjuntas no âmbito E1–E5 (`aulas_horario` unívoca 1:1; `RN-12.8`, `RN-12.9`); regime tutorial de Projecto Tecnológico na 13ª Classe sem sala permanente e isenta do limite semanal de 30–32h (`RN-12.2 §4`); Issue #29 fechada (`Q-C04-07`, `Q-C04-14`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-023`: modelo de tesouraria; criação de `contas_bancarias_escola` suportando múltiplas contas por banco (`RN-13.14.1`, DOC-05 §4); preservação estrita de quitação por prestações inteiras sem pagamentos parciais no caixa (`RN-09.3`, `RN-13.7.4`); Issue #30 fechada (`Q-C10-07`, `Q-C10-16`). |
+| 2.0-rc2 | 2026-11-09 | `DEC-024`: regime de alunos da 12ª com cadeiras em atraso; deliberação `CONCLUIU_12_COM_CADEIRAS_PENDENTES` e proposta `CONDICIONADA_13A` (`RN-02.2`, `RN-18.5`); vínculo sem turma regular como candidato a exames extraordinários (`MOD-PAS-02`) mantendo situação `Ativo`; desbloqueia para confirmação na 13ª após eliminação; Issue #31 fechada (`Q-C16-06`, `Q-031`). |
