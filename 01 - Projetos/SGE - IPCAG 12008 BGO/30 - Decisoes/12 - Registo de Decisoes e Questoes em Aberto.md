@@ -74,6 +74,7 @@ tags:
 | [[#DEC-023 — Modelo de Tesouraria: Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial (Q-C10-07, Q-C10-16)\|DEC-023]] | Issue #30; `Q-C10-07`, `Q-C10-16` | Tesouraria: contas bancárias por banco e prestações inteiras | (a) Catálogo bancos_angola complementado com contas_bancarias_escola (1:N); motor opera estritamente com prestações inteiras sem pagamentos parciais de quitação (talão insuficiente vira crédito do aluno) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-024 — Regime de Alunos da 12ª com Cadeiras em Atraso: Vínculo e Inscrição em Exames (Q-C16-06, Q-031)\|DEC-024]] | Issue #31; `Q-C16-06`, `Q-031` | Situação de aluno da 12ª com cadeiras em atraso | (a) Deliberação CONCLUIU_12_COM_CADEIRAS_PENDENTES e proposta CONDICIONADA_13A; vínculo sem turma para exames extraordinários; desbloqueia para 13ª após eliminação (RN-02.2, RN-18.5) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-025 — Verificação de Documentos Pré-SGE: Exclusão do Portal Público e Autenticação por Reemissão (MIG-Q20)\|DEC-025]] | Issue #32; `MIG-Q20` | Verificação de documentos emitidos antes do SGE | (a) Exclusão do portal público (US-DOC-03 restrito a códigos com hash/QR do SGE/Plataforma Nacional); verificação interna pela Secretaria Pedagógica; autenticação pública requer emissão de 2.ª via no SGE | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-026 — Enquadramento e Parametrização do Regime de IVA do IPCAG (Q-LEG-19, Q09-02)\|DEC-026]] | Issue #22; `Q-LEG-19`, `Q09-02` | Regime de IVA e obrigações fiscais do IPCAG | (a) SGE configurável multi-regime em parametros_instituicao (GERAL, SIMPLIFICADO, EXCLUSAO) com isenção material do ensino (CIVA art. 12.º n.º 1 l); NIF, regime concreto e contabilista remetidos como HITL para questionário DSC-02 em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -777,6 +778,25 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-026 — Enquadramento e Parametrização do Regime de IVA do IPCAG (Q-LEG-19, Q09-02)
+
+- **Origem:** Issue #22 ([issue #22](https://github.com/Angeloaqp/sge-ipcag-12008/issues/22)); investigação legal #19 ([issue #19](https://github.com/Angeloaqp/sge-ipcag-12008/issues/19)); questões `Q-LEG-19` e `Q09-02`; [[Verificacao das Referencias Legais|LEG-VER]] §4; [[01 - Dominio e Regras|DOC-01]] §1.3 (`RN-09`, `RN-13`); [[05 - Modelagem de Dados|DOC-05]] `parametros_instituicao` · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** As questões legais e estruturais `Q-LEG-19` e `Q09-02` visavam determinar em que regime de IVA o IPCAG está inscrito (Regime Geral, Regime Simplificado ou Regime de Exclusão), qual é o seu NIF fiscal e quem é o contabilista responsável. A investigação legal #19 demonstrou que as entidades enquadradas no Regime Geral ou Simplificado estão obrigadas a utilizar programas informáticos de faturação previamente validados pela AGT e a emitir faturas/faturas-recibo eletrónicas desde 01/01/2027 (DP n.º 71/25). Por outro lado, caso estivesse em Regime de Exclusão, a emissão via portal web da AGT seria operacionalmente inviável para o volume do IPCAG (> 1.120 alunos e mais de 11.000 quitações anuais). Independentemente do regime, as propinas escolares de ensino técnico regular gozam de isenção objetiva de IVA ao abrigo do art. 12.º, n.º 1, alínea l) do Código do IVA (CIVA). Cabia garantir que a arquitetura do software não ficasse bloqueada pela identificação cadastral exata da escola.
+
+**Decisão.** **Parametrização multi-regime no SGE e roteamento dos dados cadastrais como HITL (`DEC-009`):**
+1. **Modelo de Dados Multi-Regime Agnóstico (`parametros_instituicao` / `RN-13.1`):** O modelo do SGE suporta nativamente a configuração de qualquer um dos regimes fiscais em `parametros_instituicao.regime_iva` (`GERAL`, `SIMPLIFICADO`, `EXCLUSAO`, `ISENCAO_PLENA`), garantindo total flexibilidade institucional.
+2. **Isenção Material do Ensino e Menção Fiscal (CIVA art. 12.º n.º 1 l)):** As prestações de serviços de ensino e propinas do plano curricular oficial têm a isenção de IVA registada com menção legal nos documentos emitidos (`"Isento de IVA nos termos da alínea l) do n.º 1 do artigo 12.º do CIVA"` — código de isenção AGT `M02`). A incidência de Imposto de Selo (1% no Regime Geral com operações isentas — art. 74.º CIVA) ou tributação de 7% sobre volume no Simplificado (art. 69.º-C CIVA) é de apuramento declarativo periódico da contabilidade da escola e não onera o valor facial da propina liquidada pelo estudante no balcão de atendimento.
+3. **Encaminhamento como Parâmetro HITL para PC-E1 (`DEC-009`):** A obtenção da certidão de registo fiscal da AGT com o NIF definitivo, confirmação do regime em vigor e identificação do contabilista responsável com cédula profissional é classificada como questão de parâmetro 🟡 (`DSC-02` / `DSC-03`), a ser respondida pela Secretaria Geral e Contabilidade no Ponto de Controlo E1 (PC-E1) antes do arranque de agosto de 2027, não impedindo o congelamento da especificação v2.0.
+4. As questões `Q-LEG-19` e `Q09-02` são declaradas **respondidas (`DEC-026`)**.
+
+**Impacto.**
+- **DOC-05:** Tabela `parametros_instituicao` mantém suporte agnóstico a `regime_iva` e `motivo_isencao_codigo`.
+- **REG-12 / IDX-12:** `Q-LEG-19` e `Q09-02` passam a `respondida (DEC-026)`.
+- **Desbloqueio:** Desbloqueia a decisão `DEC-002` (Issue #21).
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -896,3 +916,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-023`: modelo de tesouraria; criação de `contas_bancarias_escola` suportando múltiplas contas por banco (`RN-13.14.1`, DOC-05 §4); preservação estrita de quitação por prestações inteiras sem pagamentos parciais no caixa (`RN-09.3`, `RN-13.7.4`); Issue #30 fechada (`Q-C10-07`, `Q-C10-16`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-024`: regime de alunos da 12ª com cadeiras em atraso; deliberação `CONCLUIU_12_COM_CADEIRAS_PENDENTES` e proposta `CONDICIONADA_13A` (`RN-02.2`, `RN-18.5`); vínculo sem turma regular como candidato a exames extraordinários (`MOD-PAS-02`) mantendo situação `Ativo`; desbloqueia para confirmação na 13ª após eliminação; Issue #31 fechada (`Q-C16-06`, `Q-031`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-025`: verificação de documentos pré-SGE; exclusão de consulta no portal público (`US-DOC-03`), preservando dados pessoais contra raspagem (Lei n.º 22/11); autenticação de documentos antigos por conferência presencial no arquivo e nos livros de termos físicos; validação pública digital obtida por reemissão de 2.ª via com QR no SGE; Issue #32 fechada (`MIG-Q20`). |
+| 2.0-rc2 | 2026-11-09 | `DEC-026`: enquadramento e parametrização do regime de IVA do IPCAG; modelo desacoplado multi-regime em `parametros_instituicao` (GERAL, SIMPLIFICADO, EXCLUSAO) com isenção material do ensino regular (CIVA art. 12.º n.º 1 l); certidão do NIF, regime concreto da AGT e contabilista remetidos como HITL para questionário `DSC-02` em PC-E1 (`DEC-009`); Issue #22 fechada (`Q-LEG-19`, `Q09-02`). |
