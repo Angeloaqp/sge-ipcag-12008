@@ -71,6 +71,7 @@ tags:
 | [[#DEC-020 — Título Jurídico e Enquadramento Institucional do IPCAG (Issue #38, Q-APD-01, Q-APD-02, Q-LEG-13)\|DEC-020]] | Issue #38; `Q-APD-01`, `Q-APD-02`, `Q-LEG-13` | Título jurídico e enquadramento institucional | (a) SGE desacoplado via parametros_instituicao suportando tanto acordo de gestão (DP 302/19) como parceria privada (DP 37/23); pedido de cópia do alvará/acordo remetido como HITL para questionário DSC-02 em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-021 — Estrutura de Direção, Comissão de Gestão e Homologações Individuais vs Colegiais (Q-028, Q-C14-14)\|DEC-021]] | Issue #28; `Q-028`, `Q-C14-14` | Estrutura de direção: Comissão de Gestão e homologações | (a) Títulos reais mapeados em cargos_institucionais (RN-16.20); DIR_GERAL acumula SUB_ADM na vacatura transitória; homologações no SGE individuais com reautenticação e fundamentação de atas colegiais | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-022 — Modelo de Horários: Sem Desdobramentos/Aulas Conjuntas e Regime de Horário da 13ª Classe (Q-C04-07, Q-C04-14)\|DEC-022]] | Issue #29; `Q-C04-07`, `Q-C04-14` | Horários: desdobramentos, turmas conjuntas e regime da 13ª Classe | (a) Sem desdobramentos nem aulas conjuntas em E1–E5 (`aulas_horario` 1:1 com turma-disciplina e sala); 13ª Classe em regime tutorial de Projecto Tecnológico sem sala fixa permanente nem bloqueio de 30–32h | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
+| [[#DEC-023 — Modelo de Tesouraria: Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial (Q-C10-07, Q-C10-16)\|DEC-023]] | Issue #30; `Q-C10-07`, `Q-C10-16` | Tesouraria: contas bancárias por banco e prestações inteiras | (a) Catálogo bancos_angola complementado com contas_bancarias_escola (1:N); motor opera estritamente com prestações inteiras sem pagamentos parciais de quitação (talão insuficiente vira crédito do aluno) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -699,6 +700,35 @@ As entrevistas dizem duas coisas:
 
 ---
 
+### DEC-023 — Modelo de Tesouraria: Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial (Q-C10-07, Q-C10-16)
+
+- **Origem:** Issue #30 ([issue #30](https://github.com/Angeloaqp/sge-ipcag-12008/issues/30)); questões `Q-C10-07` e `Q-C10-16`; [[01 - Dominio e Regras|DOC-01]] §1.3 (`RN-09.3`, `RN-13.7.4`, `RN-13.14.1`); [[05 - Modelagem de Dados|DOC-05]] §4 (`bancos_angola`, `contas_bancarias_escola`, `extratos_bancarios`, `periodos_conciliacao`); [[Achados dos Documentos Reais - Lote 1|DESC-L1]] A10; [[Sintese das Respostas da Fase B|DESC-RESP]] R10, R11, R15 · **Estado:** `decidida` · **Data:** 2026-11-09 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente
+
+**Contexto.** Duas questões de tesouraria impactavam o modelo de dados e a integridade contabilística do sistema:
+1. **`Q-C10-07` (Contas Bancárias da Escola):** Saber se a escola possui mais de uma conta no mesmo banco comercial (ex.: contas separadas para propinas e para emolumentos/projetos) e se isso exigiria uma entidade dedicada no modelo de dados.
+2. **`Q-C10-16` (Prestações Divididas e Pagamentos Parciais):** Saber se uma prestação de propina pode ser liquidada em partes (ex.: dividir 15.000,00 Kz em dois pagamentos de 7.500,00 Kz), o que exigiria refatorar todo o motor de conta corrente, liquidação, emissão fiscal, SAF-T e acordos de pagamento.
+
+**Decisão.** **Suporte flexível a múltiplas contas bancárias e preservação estrita de prestações inteiras:**
+1. **Entidade `contas_bancarias_escola` (`Q-C10-07`):**
+   - O catálogo `bancos_angola` mantém os bancos comerciais homologados (BAI, BFA, BIC, SOL, ATLANTICO, KEVE, BPC, etc.).
+   - Modela-se a entidade **`contas_bancarias_escola`** (`1:N` a partir de `bancos_angola`), permitindo associar ao IPCAG uma ou várias contas no mesmo banco, com `numero_conta`, `iban`, `moeda` (`AOA`), `finalidade` e estado ativo.
+   - Os `extratos_bancarios` e os `periodos_conciliacao` ligam-se diretamente à `conta_bancaria_id` (`RN-13.14.1`), garantindo conciliação independente por conta.
+   - Os dados das contas em uso são recolhidos no questionário de tesouraria (`DSC-03` / Issue #20) no ponto de controlo **PC-E1/PC-E2** (`DEC-009`).
+2. **Prestações Inteiras e Proibição de Quitação Parcial no Caixa (`Q-C10-16`):**
+   - O motor de faturação e tesouraria do SGE opera rigorosamente com **prestações inteiras**: cada documento fiscal de quitação (`FATURA_RECIBO` ou `RECIBO`) liquida integralmente uma ou mais mensalidades ou rubricas de emolumento (`RN-09.3`, `RN-13.7.4`).
+   - Um depósito ou borderô bancário com valor inferior ao da prestação devida **não quita parcialmente** o mês: o montante entregue é registado integralmente em `borderos_bancarios`, gerando `saldo_disponivel` que figura como **crédito antecipado do aluno/encarregado**.
+   - A prestação só transita para `PAGA` e só é emitido o recibo de quitação quando o saldo for complementado até totalizar 100% do montante devido (`RN-09.1 Caso 3`).
+   - Os Acordos de Pagamento (`RN-13.7.4`) agrupam exclusivamente **prestações inteiras por parcela**.
+   - A única exceção histórica admitida foram os saldos de dívida parcial transitados de anos anteriores ao SGE, migrados em lote como saldo líquido consolidado na C17 (`DEC-010`, `AJ-09`).
+3. As questões estruturais `Q-C10-07` e `Q-C10-16` são declaradas **respondidas (`DEC-023`)**.
+
+**Impacto.**
+- **DOC-01:** `RN-09.3 §2`, `RN-13.7.4` e `RN-13.14.1` atualizados com referência à `DEC-023`.
+- **DOC-05:** `contas_bancarias_escola` adicionada ao catálogo de tabelas de Tesouraria; `bancos_angola`, `extratos_bancarios` e `periodos_conciliacao` ajustados.
+- **REG-12 / IDX-12:** `Q-C10-07` e `Q-C10-16` passam a `respondida (DEC-023)`.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -815,3 +845,4 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-020`: título jurídico e enquadramento institucional do IPCAG desacoplados por parametrização em `parametros_instituicao` (`RF-C01-07`); documento probatório remetido como HITL para o questionário `DSC-02` em PC-E1 (`DEC-009`); Issue #38 fechada (`Q-APD-01`, `Q-APD-02`, `Q-LEG-13`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-021`: estrutura de direção e Comissão de Gestão; confirmação do mapeamento de cargos (`RN-16.20`), assunção de `SUB_ADM` pelo `DIR_GERAL` na vacatura transitória; homologações no SGE operadas individualmente com reautenticação e fundamentação documental de deliberações colegiais; Issue #28 fechada (`Q-028`, `Q-C14-14`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-022`: modelo de horários; exclusão de desdobramentos e aulas conjuntas no âmbito E1–E5 (`aulas_horario` unívoca 1:1; `RN-12.8`, `RN-12.9`); regime tutorial de Projecto Tecnológico na 13ª Classe sem sala permanente e isenta do limite semanal de 30–32h (`RN-12.2 §4`); Issue #29 fechada (`Q-C04-07`, `Q-C04-14`). |
+| 2.0-rc2 | 2026-11-09 | `DEC-023`: modelo de tesouraria; criação de `contas_bancarias_escola` suportando múltiplas contas por banco (`RN-13.14.1`, DOC-05 §4); preservação estrita de quitação por prestações inteiras sem pagamentos parciais no caixa (`RN-09.3`, `RN-13.7.4`); Issue #30 fechada (`Q-C10-07`, `Q-C10-16`). |

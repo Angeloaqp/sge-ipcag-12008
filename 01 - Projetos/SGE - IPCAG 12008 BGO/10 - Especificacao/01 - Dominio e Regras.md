@@ -1446,7 +1446,7 @@ O SGE aplica a função `fn_verificar_aptidao_financeira(aluno_id, tipo_servico)
    - **Imutabilidade do Caixa Fechado:** depois de fechado e homologado, nenhum documento altera o mapa. Uma Nota de Crédito emitida hoje sobre um documento antigo conta na **sessão aberta na data da Nota de Crédito**, e a dívida reabre de imediato.
 7. **Crédito do Aluno com o Excedente do Talão (`RN-09.3`):** 🟡 (DESC-RESP R10, validar em E1)
    - Se o talão excede o valor quitado (ex.: `20.000,00 Kz` para uma propina de `15.000,00 Kz`), o excedente fica em `saldo_disponivel` do borderô e é mostrado como **crédito do aluno** (e do encarregado) na conta corrente, para abater no mês seguinte.
-   - Um talão com **valor inferior** à prestação **não quita** o mês: não há pagamento parcial de uma prestação (parcelas por prestações inteiras — `RN-13.7.4`); o saldo fica como crédito até ser completado por outro borderô (Caso 3).
+   - Um talão com **valor inferior** à prestação **não quita** o mês: não há pagamento parcial de uma prestação (parcelas por prestações inteiras — `RN-13.7.4`; [[12 - Registo de Decisoes e Questoes em Aberto#DEC-023 — Modelo de Tesouraria Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial Q-C10-07 Q-C10-16|DEC-023]]); o saldo fica como crédito até ser completado por outro borderô (Caso 3).
    - O crédito **não é receita** (não há documento de quitação) e entra na conciliação (`RN-13.11.7`). Não depende do Ano Letivo (`RN-18.10.4`).
 8. **Fecho Administrativo de Caixa (`RN-09.4`):** quando o operador não pode fechar a sua sessão, aplica-se o `RN-13.18` (execução por `CHEFE_SEC_GER` ou `SUB_ADM`, homologação por cargo diferente, menção no `DOF-11C`).
 9. **Contingência e comunicação à AGT (`RN-09.5` — `COR-LEG-06`):** **só se o SGE for o emissor** (`DEC-002` (a)): comunicação dos documentos à AGT, **modo de contingência** (documentos marcados e submetidos depois) e **bloqueio após 60 dias** sem comunicar (art. 17.º–18.º). Com a `DEC-002` (b), estas obrigações são do software certificado.
@@ -1746,7 +1746,7 @@ Parâmetros opcionais que avisam sem impedir a publicação: (1) máximo de temp
 1. **Quem:** o `OP_TES` ou o `CHEFE_SEC_GER` registam a proposta com o encarregado; o `SUB_ADM` homologa; acima dos limites (n.º de parcelas ou montante — `Q-C10-02`), homologa o `DIR_GERAL`.
 2. **Devedor:** o encarregado; pode abranger prestações vencidas de vários educandos.
 3. **Abrange:** só prestações `Em Atraso (com Multa)`; as `A Vencer` mantêm as datas.
-4. **Parcelas por prestações inteiras:** cada parcela agrupa uma ou mais prestações inteiras com nova data limite, sem pagamentos parciais de uma prestação (`Q-C10-16`).
+4. **Parcelas por prestações inteiras:** cada parcela agrupa uma ou mais prestações inteiras com nova data limite, sem pagamentos parciais de uma prestação ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-023 — Modelo de Tesouraria Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial Q-C10-07 Q-C10-16|DEC-023]], que resolveu a `Q-C10-16`).
 5. **Multa:** a acumulada fica congelada na homologação; o acordo pode incluir perdão (`RN-13.4`) no mesmo ato.
 6. **Semáforo:** o acordo indica se `liberta_semaforo` (`RN-13.8`). Corresponde ao "plano de pagamento autorizado que suspende o bloqueio enquanto estiver em dia" (DESC-RESP R11).
 7. **Documento:** gera o `DOF-18` (Acordo de Pagamento), assinado pelo encarregado e pelo homologador; a versão assinada digitalizada é anexada antes de o acordo ficar ativo.
@@ -1794,7 +1794,7 @@ Parâmetros opcionais que avisam sem impedir a publicação: (1) máximo de temp
 3. Os formulários reais de declaração não têm campo de pagamento (A11) e há indícios de RUPE (A15): até à `Q-C10-17`, o relatório cobre só os emolumentos pagos ao IPCAG por borderô.
 
 #### RN-13.14 — Objetos, estados e segregação da conciliação
-1. **Por conta bancária do IPCAG e por mês** (hoje uma conta por banco; mais contas → tabela própria — `Q-C10-07`).
+1. **Por conta bancária da escola e por mês:** o SGE suporta múltiplas contas bancárias por banco comercial através da entidade `contas_bancarias_escola`, permitindo associar cada movimento de extrato e cada período de conciliação à conta bancária respetiva ([[12 - Registo de Decisoes e Questoes em Aberto#DEC-023 — Modelo de Tesouraria Contas Bancárias da Escola e Prestações Inteiras sem Pagamento Parcial Q-C10-07 Q-C10-16|DEC-023]], que resolveu a `Q-C10-07`).
 2. **Extrato:** importado de ficheiro (formato por banco — `Q-C10-08`) ou registado à mão; ficheiro original guardado com *hash*.
 3. **Estado de conciliação do borderô** (separado do saldo, §3.7): `POR_CONCILIAR`, `CONCILIADO`, `DIVERGENTE`, `NAO_ENCONTRADO`.
 4. **Estado da linha do extrato:** `POR_CONCILIAR`, `CONCILIADA`, `SEM_BORDERO`, `FORA_DO_AMBITO`.
