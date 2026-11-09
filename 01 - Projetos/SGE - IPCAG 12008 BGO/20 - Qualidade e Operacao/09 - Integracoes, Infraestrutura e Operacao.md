@@ -34,13 +34,13 @@ tags:
 
 > [!warning] Decisões por tomar — nada aqui assume a escolha
 > Várias partes dependem de decisões ainda pendentes, que serão registadas em [[12 - Registo de Decisoes e Questoes em Aberto]]:
-> - **`DEC-002`** — Faturação AGT (D2 do plano) → §3.1
+> - **`DEC-002`** — Faturação AGT (D2 do plano) → §3.1 — **decidida (b) a 2026-11-09**, homologação pendente
 > - **`DEC-005`** — Pagamentos (D5) → §3.2
 > - **`DEC-006`** — Alojamento (D6) → §3.3
 >
 > Para cada uma, as alternativas estão **lado a lado** e tudo o que delas depende está marcado `depende de DEC-00x`. Os valores de dimensionamento são **propostas a validar**; os custos estão listados **sem valores** (a orçamentar).
 >
-> **Estado no REG-12 a 2026-11-02** (reproduzido, não decidido aqui): `DEC-002` `aguarda Direção`, com proposta do analista (b) *software* certificado atrás de um adaptador; `DEC-005` `decidida` (a) registo manual de borderôs na E1, (b) reavaliada depois da E5; `DEC-006` `decidida` (a) servidor local + réplica na nuvem, com condições. Nenhuma está ainda homologada pela Direção, por isso as alternativas mantêm-se descritas por inteiro.
+> **Estado no REG-12** (reproduzido, não decidido aqui): `DEC-002` `decidida` a 2026-11-09 na opção (b) — *software* certificado pela AGT atrás de um adaptador; o SGE gere o balcão e emite o recibo escolar interno —, homologação pendente; `DEC-005` `decidida` (a) registo manual de borderôs na E1, (b) reavaliada depois da E5; `DEC-006` `decidida` (a) servidor local + réplica na nuvem, com condições. Nenhuma está ainda homologada pela Direção, por isso as alternativas mantêm-se descritas por inteiro.
 
 ---
 
@@ -75,7 +75,7 @@ flowchart LR
     SGE(["SGE IPCAG 12008 BGO<br>servidor local"])
     SGE -->|"INT-01 conciliacao<br>depende de DEC-005"| BANCO["Bancos do IPCAG<br>extratos"]
     SGE -->|"INT-02 referencias e confirmacoes<br>depende de DEC-005"| PAG["Rede Multicaixa / EMIS<br>via banco ou agregador"]
-    SGE -->|"INT-03 documentos fiscais, SAF-T AO<br>depende de DEC-002"| AGT["AGT ou software<br>de faturacao certificado"]
+    SGE -->|"INT-03 pedidos de emissao via adaptador<br>DEC-002 (b)"| AGT["Software de faturacao certificado<br>e AGT"]
     SGE -->|"INT-04 avisos"| SMS["Gateway de SMS<br>operadoras moveis"]
     SGE -->|"INT-05 notificacoes e alertas"| MAIL["Servico de email"]
     SGE -->|"INT-06 DOF-12 PDF e Excel/CSV<br>entrega manual"| GEPE["Gabinete Provincial da<br>Educacao do Bengo / GEPE-MED"]
@@ -92,7 +92,7 @@ flowchart LR
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **INT-01** | Bancos onde o IPCAG tem conta | Conciliar os borderôs registados com o que entrou de facto na conta; detetar talões falsos | **Entrada:** movimentos do extrato (data, valor, referência da operação). Nada sai do SGE | Diária ou semanal | Hoje: conferência física dos talões no fecho de caixa (Fluxo 07). Possível: importação do extrato em ficheiro descarregado do *homebanking* (formato por banco, a confirmar). A regra de conciliação é especificada na [[C10 - Cobranca, Relatorios Financeiros e Conciliacao\|C10]], como prevê o REG-12 para `DEC-005` | Conferência manual dos talões e do extrato em papel | `DEC-005`; `Q-007` |
 | **INT-02** | Rede Multicaixa / referências de pagamento | Gerar uma referência por prestação ou emolumento e receber a confirmação automática do pagamento | **Saída:** referência, valor, validade. **Entrada:** confirmação (referência, valor, data/hora, identificador da operação) | Contínua | Através do banco, da EMIS (gestora da rede Multicaixa) ou de um agregador de pagamentos autorizado (a identificar) | Pagamento ao balcão com borderô (alternativa (a) de `DEC-005`, que se mantém) | `DEC-005` |
-| **INT-03** | AGT — faturação e SAF-T (AO) | Cumprir as obrigações fiscais dos documentos de cobrança (hoje chamados "recibos" e "notas de estorno"; a lei fala de fatura, fatura-recibo, recibo e nota de crédito — [[Verificacao das Referencias Legais]] §4.2) | Depende da alternativa: o SGE gera os documentos, comunica-os à AGT e produz o SAF-T, **ou** envia os dados ao *software* certificado e recebe o número e o código do documento | Por documento (comunicação em tempo real, se aplicável ao IPCAG) e periódica (SAF-T) | Ver §3.1 | Modo de contingência legal (DP n.º 71/25, art. 18.º, segundo a verificação legal) e questão Q08-06 de [[08 - Requisitos Nao Funcionais]] | `DEC-002`; `Q-LEG-19` |
+| **INT-03** | AGT — faturação e SAF-T (AO) | Cumprir as obrigações fiscais dos documentos de cobrança (hoje chamados "recibos" e "notas de estorno"; a lei fala de fatura, fatura-recibo, recibo e nota de crédito — [[Verificacao das Referencias Legais]] §4.2) | Com a `DEC-002` (b): o SGE envia os dados ao *software* certificado através do adaptador e recebe o número e o código (*hash*) do documento (`fatura_externa_numero`, `fatura_externa_hash`); o SAF-T e a comunicação à AGT são do *software* certificado | Por documento (comunicação em tempo real, se aplicável ao IPCAG) e periódica (SAF-T) | Ver §3.1 | Sem ligação, o balcão não bloqueia: recibo escolar provisório e pedido em `fila_emissao_fiscal`, regularizado quando o canal volta (`RN-09.5`); a contingência fiscal (DP n.º 71/25, art. 17.º–18.º) é do *software* certificado — ver Q08-06 de [[08 - Requisitos Nao Funcionais]] | `DEC-002`; `Q-LEG-19` |
 | **INT-04** | Gateway de SMS | Avisos aos encarregados (cobrança, faltas, convocatórias) e, eventualmente, 2.º fator alternativo | **Saída:** número de telefone (+244) e texto de um modelo aprovado. **Entrada:** estado de entrega | Assíncrona, em fila | Contrato com operadora (Unitel, Africell, Movicel) ou agregador de SMS; condições e preço a apurar | Mensagens ficam em fila e são reenviadas; avisos urgentes em papel | `DEC-003`; nota [[11 - Protecao de Dados (APD)]] (RNF-PRV-10) |
 | **INT-05** | Email | Notificações a funcionários, alertas técnicos de monitorização, envio de relatórios | **Saída:** mensagens a partir de um domínio da escola | Assíncrona, em fila | Fornecedor de envio de email com o domínio próprio configurado para não cair no lixo eletrónico | Fila com reenvio; alertas técnicos também no painel local (§5.3) | Domínio próprio (Q09-10) |
 | **INT-06** | Exportação MED / GEPE | Reporte estatístico oficial | **Saída:** `DOF-12` em PDF e Excel/CSV (US-DOC-05) | Por trimestre e no fim do ano (a confirmar) | Exportação no SGE e entrega pelo canal que o Gabinete Provincial e o GEPE indicarem; modelo a confirmar com o último mapa enviado (§5.2 do plano) | A exportação não precisa de internet; a entrega faz-se depois | Q09-11 |
@@ -130,12 +130,15 @@ flowchart LR
 > [!info] Como ler esta secção
 > Para cada decisão: o contexto, as alternativas **lado a lado** pelos mesmos critérios, a informação que falta para decidir e o que muda na especificação. **Não há recomendação**: a decisão cabe à Direção do IPCAG e fica registada em [[12 - Registo de Decisoes e Questoes em Aberto]].
 
-### 3.1 `DEC-002` — Faturação AGT (depende de DEC-002)
+### 3.1 `DEC-002` — Faturação AGT (decidida (b) a 2026-11-09)
 
-**Contexto.** A especificação atual (RN-09; DOC-05 Grupo 5; `DOF-11A`, `DOF-11B`, `DOF-11C`) trata recibos e notas de estorno como documentos fiscais imutáveis emitidos pelo próprio SGE, com numeração sequencial anual sem saltos. Não está decidido se o SGE será certificado pela AGT como *software* de faturação (com SAF-T AO) ou se se liga a um *software* já certificado (lacuna L7).
+> [!success] Decisão (2026-11-09, homologação pendente)
+> A `DEC-002` adotou a **opção (b)**: os documentos fiscais (`FT`, `FR`, `RC`, `NC`, `RE`) são emitidos pelo *software* certificado pela AGT, através de um adaptador; o SGE gere o balcão (conta corrente, borderôs, semáforo, fecho de caixa) e emite o recibo escolar interno. Sem ligação, o balcão **não bloqueia**: recibo escolar provisório e pedido em `fila_emissao_fiscal`; a contingência fiscal é do *software* certificado. 🟡 Falta escolher o *software* (`Q-002`) e confirmar o regime de IVA (`DEC-026`). A comparação abaixo fica como registo das alternativas avaliadas.
 
-> [!note] Estado e enquadramento legal (2026-11-02)
-> - **REG-12:** `aguarda Direção`. Proposta do analista: (b), com um adaptador como ponto único de emissão, de forma a poder mudar para (a) mais tarde. Para fechar: parecer fiscal (`Q-001`, `Q-003`), inventário do *software* atual (`Q-002`), custo e prazo (`Q-013`) e despacho do `DIR_GERAL`.
+**Contexto (antes da decisão).** A especificação atual (RN-09; DOC-05 Grupo 5; `DOF-11A`, `DOF-11B`, `DOF-11C`) trata recibos e notas de estorno como documentos fiscais imutáveis emitidos pelo próprio SGE, com numeração sequencial anual sem saltos. Não está decidido se o SGE será certificado pela AGT como *software* de faturação (com SAF-T AO) ou se se liga a um *software* já certificado (lacuna L7).
+
+> [!note] Estado e enquadramento legal (2026-11-02, antes da decisão)
+> - **REG-12 (então):** `aguarda Direção`. Proposta do analista: (b), com um adaptador como ponto único de emissão, de forma a poder mudar para (a) mais tarde. Para fechar: parecer fiscal (`Q-001`, `Q-003`), inventário do *software* atual (`Q-002`), custo e prazo (`Q-013`) e despacho do `DIR_GERAL`.
 > - **Verificação legal** ([[Verificacao das Referencias Legais]] §4): o DP n.º 292/18 foi **revogado** pelo DP n.º 71/25; a base atual é o DP n.º 71/25, o DE n.º 683/25 e o Código do IVA. A obrigação de faturar existe mesmo com isenção de IVA; a correção faz-se por **nota de crédito**; no Regime Geral de IVA há comunicação em tempo real à AGT, com modo de contingência. Qual destas obrigações se aplica ao IPCAG depende do seu regime de IVA, ainda desconhecido (`Q-LEG-19`). A tabela abaixo incorpora estes pontos sem os repetir em detalhe.
 
 | Critério | **(a) SGE certificado pela AGT, com SAF-T (AO)** | **(b) Integração com *software* de faturação já certificado** |
@@ -155,7 +158,7 @@ flowchart LR
 | Impacto na especificação | Nenhum no desenho atual; acrescentar os requisitos de certificação ao catálogo | Rever RN-09, DOC-05 Grupo 5 (`recibos_oficiais`, `notas_estorno` passam a espelho) e `DOF-11A` / `DOF-11B` |
 | Prazo até estar operacional | Inclui o processo de certificação (duração a confirmar) | Inclui a escolha do fornecedor e a integração |
 
-**Informação que falta para decidir:**
+**Informação que faltava para decidir** (o que ainda está em aberto depois da decisão: o regime de IVA — `DEC-026` — e o *software* em uso — `Q-002`):
 - Em que regime de IVA está o IPCAG (ou a Diocese, se for ela a faturar) e que obrigações concretas daí decorrem (*software* validado, fatura eletrónica, comunicação em tempo real)? (`Q-001`, parcialmente respondida; `Q-003`; `Q-LEG-16` a `Q-LEG-19`)
 - A escola já usa algum *software* de faturação ou de contabilidade? (`Q-002`)
 - Que requisitos, prazo e custo tem a validação junto da AGT? (`Q-013`)
@@ -230,7 +233,7 @@ Estas consequências decorrem das próprias alternativas; servem para evitar com
 
 | Combinação | Consequência |
 | :--- | :--- |
-| `DEC-002 (b)` com *software* de faturação só na nuvem | A emissão de recibos passa a depender da internet, em qualquer alternativa de `DEC-006`. Conflitua com RNF-DIS-02, salvo se a contingência (Q08-06) o permitir. |
+| `DEC-002 (b)` com *software* de faturação só na nuvem | A emissão dos documentos fiscais depende da internet, em qualquer alternativa de `DEC-006`; o balcão continua a funcionar com o recibo escolar provisório e a `fila_emissao_fiscal` (`RN-09.5`), e os documentos são regularizados quando a ligação volta (RNF-DIS-02). |
 | `DEC-005 (b)` com `DEC-006 (c)` | O servidor local tem de consultar periodicamente o fornecedor de pagamentos, porque receber notificações exige um ponto acessível da internet. |
 | `DEC-006 (c)` | O portal QR depende da energia e da internet do Panguila; RNF-DIS-06 dificilmente se cumpre. |
 | `DEC-003` com portal ou app para encarregados | Exige acesso público a partir da internet, logo uma componente na nuvem: (a) ou (b) de `DEC-006`. |
@@ -297,7 +300,7 @@ flowchart TB
     FW -->|"ligacao principal"| NET(("Internet"))
     FW -.->|"ligacao de reserva<br>outro operador"| NET
     NET -.->|"depende de DEC-006"| NUV["Nuvem<br>replica, copias fora do edificio,<br>portal publico QR"]
-    NET -.->|"depende de DEC-002"| AGT["AGT ou software<br>de faturacao certificado"]
+    NET -.->|"DEC-002 (b) via adaptador"| AGT["Software de faturacao certificado<br>e AGT"]
     NET -.->|"depende de DEC-005"| PAG["Banco / EMIS<br>referencias de pagamento"]
     NET --> MSG["Gateway de SMS<br>e servico de email"]
     EXT(["Entidades externas"]) --> NUV
@@ -438,7 +441,7 @@ flowchart TD
 | Passo | O quê | Quem | Notas |
 | :---: | :--- | :--- | :--- |
 | 1 | **Diagnosticar** (máximo 30 min) e informar o `SUB_ADM` | Administrador técnico | Registar a hora de início: conta para o RTO |
-| 2 | **Declarar o desastre** e ativar a contingência | `SUB_ADM` ou `DIR_GERAL` | O que o balcão pode fazer em contingência `depende de DEC-002` e de Q08-06 (recibos). Os atos de contingência são registados num formulário próprio para entrada posterior no sistema (RNF-DIS-07) |
+| 2 | **Declarar o desastre** e ativar a contingência | `SUB_ADM` ou `DIR_GERAL` | Em contingência, o balcão emite o recibo escolar provisório e guarda os pedidos fiscais em `fila_emissao_fiscal` (`DEC-002` §5, `RN-09.5`); a contingência fiscal é do *software* certificado (Q08-06). Os atos de contingência são registados num formulário próprio para entrada posterior no sistema (RNF-DIS-07) |
 | 3 | **Avisar os professores** | `SUB_PED` (via utilizadores-chave) | Continuar a lançar *offline*; **não reinstalar a aplicação nem limpar os dados do navegador** (perderiam a fila) |
 | 4 | **Obter equipamento** | Administrador técnico | Promover o servidor de reserva (variante 1 do §4.2) ou preparar substituto |
 | 5 | **Restaurar** a cópia mais recente disponível, por ordem: cópia contínua local → backup diário → cópia fora do edifício | Administrador técnico, com N3 | Restauro em produção só com 2 pessoas presentes (§5.5) |
@@ -671,14 +674,14 @@ Questões a transcrever para [[12 - Registo de Decisoes e Questoes em Aberto]] (
 | Q09-14 | Os funcionários e professores têm email? (se não, a recuperação de palavra-passe é presencial) | INT-05, RNF-SEG-05 | `CHEFE_SEC_GER` | `Q-C14-03` |
 | Q09-15 | A Diocese de Caxito precisa de receber relatórios periódicos (bolsas, isenções, mapas financeiros)? Em que formato e periodicidade? | INT-09 | `SUB_ADM` | Nova |
 | Q09-16 | Há restrições à localização dos dados na nuvem (em Angola ou no estrangeiro)? | `DEC-006`, RNF-PRV-07, nota 11 | Nota 11; confirmação legal | `Q-016`; `RNF-PRV-07` |
-| Q09-17 | Como se trata um documento fiscal impresso que se perdeu na base num desastre (sem reutilizar o número)? | §5.2 passo 7, RN-09, `DEC-002` | `SUB_ADM`; confirmação legal | Nova; depende de `DEC-002` |
+| Q09-17 | Como se trata um documento fiscal impresso que se perdeu na base num desastre (sem reutilizar o número)? | §5.2 passo 7, RN-09, `DEC-002` | `SUB_ADM`; confirmação legal | Nova; com a `DEC-002` (b), os documentos fiscais ficam também no software certificado (OPS-09 §3.1) |
 | Q09-18 | A Plataforma Nacional de Certificação do DP n.º 227/25 já funciona? Como se registam os títulos e se obtém o QR (ficheiro, formulário, integração)? | INT-10, RNF-AUD-08, §2.3 | `CHEFE_SEC_PED`; MED | `Q-LEG-14` |
 
 ---
 
 ## 9. O que Mais Precisa de Validação com a Escola
 
-1. **As três decisões (`DEC-002`, `DEC-005`, `DEC-006`)** — `DEC-002` ainda `aguarda Direção` e é a mais urgente (recibos desde a primeira matrícula; obrigações fiscais dependentes do regime de IVA). `DEC-005` e `DEC-006` têm escolha registada no REG-12 mas falta a homologação, e a `DEC-006` tem condições por cumprir (`Q-006`, `Q-015` — proposta no §3.5 —, `Q-016`).
+1. **As três decisões (`DEC-002`, `DEC-005`, `DEC-006`)** — `DEC-002` decidida (b) a 2026-11-09, com homologação pendente; o mais urgente é escolher o *software* certificado (`Q-002`) e confirmar o regime de IVA (`DEC-026`), porque os recibos existem desde a primeira matrícula. `DEC-005` e `DEC-006` têm escolha registada no REG-12 mas falta a homologação, e a `DEC-006` tem condições por cumprir (`Q-006`, `Q-015` — proposta no §3.5 —, `Q-016`).
 2. **Quem opera o sistema (Q09-07, Q09-08, Q09-09)** — sem administrador técnico, suplente e suporte N3 definidos, nenhuma meta de backup ou recuperação é credível.
 3. **Energia e internet reais (Q09-04, Q09-05; medições M1 e M2)** — determinam a UPS, o gerador, a ligação de reserva e a viabilidade de cada alternativa de alojamento.
 4. **Local seguro fora do edifício e guarda das chaves (Q09-06)** — condição para cumprir a regra 3-2-1.

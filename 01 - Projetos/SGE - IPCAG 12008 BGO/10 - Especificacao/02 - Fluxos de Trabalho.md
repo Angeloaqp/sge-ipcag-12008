@@ -40,7 +40,7 @@ tags:
 > - **🟡 Provisória.** Uma regra marcada 🟡 é um **parâmetro configurável** cujo valor ainda depende de validação (`DEC-009`). Pontos de controlo: homologação das decisões → **E1**; recálculo de pautas preenchidas → **E2**; regulamento interno → **E3**. Quando o bloqueio é uma questão legal ou da escola, cita-se a questão (`Q-nnn`, `Q-LEG-nn`, `Q-Cxx-nn`).
 > - **Papéis e títulos.** Os códigos `DIR_GERAL`, `SUB_PED`, `SUB_ADM`, … são **papéis no sistema** (permissões). O título impresso é configurável (`RN-16.20`): hoje, segundo os documentos reais, *Coordenadora Geral da Comissão de Gestão* (`DIR_GERAL`), *Coordenador para a Área Pedagógica* (`SUB_PED`), *Director/Coordenador de Turma* (`DIR_TURMA`). Ainda não há título conhecido para `SUB_ADM` (`Q-028`, `Q-C14-14`) 🟡 E1.
 > - **Avaliação.** Nomenclatura canónica `MTP`, `PP`, `PT`, `PG`, `M1`–`M3`, `CF`, `CA`; `MAC`/`NPP`/`NPT` são rótulos alternativos de impressão. Todas as fórmulas são 🟡 E2 (`Q-025`).
-> - **Fiscal.** Os documentos de Tesouraria são os do DP n.º 71/25: **Fatura, Fatura-Recibo, Recibo e Nota de Crédito**. Os fluxos descrevem o documento, não quem o emite: pode ser o SGE ou um software certificado por trás de um adaptador (`DEC-002`, pendente da Direção).
+> - **Fiscal.** Os documentos de Tesouraria são os do DP n.º 71/25: **Fatura, Fatura-Recibo, Recibo e Nota de Crédito**. São emitidos pelo software certificado pela AGT, por trás de um adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente); o SGE gere o balcão e emite o recibo escolar interno, que não pode parecer fatura.
 > - **Termos impressos.** "Período" é o rótulo impresso de "Turno"; "Cadeira" é sinónimo aceite de "Disciplina" (`Q-033`).
 > - **Diagramas.** Os rótulos Mermaid estão sem acentos de propósito, para não partir a renderização.
 
@@ -713,8 +713,10 @@ flowchart TD
         T7_10["Fim do turno: FECHO DE CAIXA por canal<br>(TPA, deposito ou transferencia, Multicaixa Express)"]
     end
 
-    subgraph RaiaEmissao ["Raia 2: Emissao Fiscal (SGE ou software certificado - DEC-002)"]
-        X1["Numeracao por tipo de documento e ano fiscal; NIF do IPCAG<br>e mencao de isencao (CIVA art. 12)"]
+    subgraph RaiaEmissao ["Raia 2: Emissao Fiscal (software certificado via adaptador - DEC-002)"]
+        X1["Numeracao por tipo de documento e ano civil (series AGT); NIF do IPCAG<br>e mencao de isencao (CIVA art. 12)"]
+        X2["Sem ligacao: recibo escolar provisorio<br>e pedido na fila de emissao fiscal"]
+        X2 -.->|"canal restabelecido"| X1
     end
 
     subgraph RaiaSubAdm ["Raia 3: Secretaria Geral e Subdirecao Administrativa (CHEFE_SEC_GER / SUB_ADM)"]
@@ -741,7 +743,7 @@ flowchart TD
    - **Passo 2A (Irmão 1):** o `OP_TES` regista o talão; o sistema cria o borderô `Registado` (`saldo_disponivel = 30.000,00 Kz`), quita a propina do Irmão 1 e emite o **documento fiscal de pagamento** (ex.: `RC 2026/00105` — formato ilustrativo, `Q-004`). O borderô passa a **`Parcialmente Utilizado`** (`saldo_disponivel = 15.000,00 Kz`).
    - **Passo 2B (Irmão 2):** com o mesmo talão, o sistema lê o borderô com bloqueio transacional (`SELECT ... FOR UPDATE`), mostra o saldo de `15.000,00 Kz`, quita a propina do Irmão 2 e emite o segundo documento (`RC 2026/00106`). O borderô fica **`Esgotado / Trancado`**.
 3. **Documentos Fiscais (`COR-LEG-02` a `05`):** cada operação gera o tipo legal adequado — **Fatura** (serviço prestado), **Recibo** (pagamento de algo faturado), **Fatura-Recibo** (emolumentos pagos no ato) e **Nota de Crédito** (correções). A numeração é **sequencial por tipo de documento e por ano fiscal** (não por Ano Letivo); a fatura leva o **NIF do IPCAG** e a **menção do motivo de isenção** de IVA com a norma. O SGE guarda o número e o código AGT devolvidos pelo emissor.
-   > 🟡 **Provisória** — modelo de emissão das propinas (Fatura mensal por aluno + Recibo a cada pagamento, ou Fatura-Recibo), quem é o adquirente (aluno ou encarregado) e fatura de bolseiro a 100% dependem das `Q-LEG-16` a `18` e da `Q-003`; quem emite depende da `DEC-002` (aguarda a Direção) (`DEC-009`). Fonte: [[Verificacao das Referencias Legais|LEG-VER]] §4.2–4.4.
+   > 🟡 **Provisória** — modelo de emissão das propinas (Fatura mensal por aluno + Recibo a cada pagamento, ou Fatura-Recibo), quem é o adquirente (aluno ou encarregado) e fatura de bolseiro a 100% dependem das `Q-LEG-16` a `18` e da `Q-003`; o modelo de emissão está decidido na `DEC-002` §3 (`FR` ao balcão; `FT` + `RC` na liquidação desfasada) e o emissor é o software certificado, com homologação pendente (`DEC-009`). Fonte: [[Verificacao das Referencias Legais|LEG-VER]] §4.2–4.4.
 4. **Crédito do Aluno (sub-regra nova de `RN-09` — DESC-RESP R10):** se o talão excede o valor das prestações liquidadas, o **excedente fica como crédito do aluno** (saldo disponível do borderô ligado ao aluno e ao encarregado) e é proposto no pagamento da prestação seguinte; um talão com **valor a menos não quita** a prestação (sem pagamentos parciais de uma prestação).
    > 🟡 **Provisória** — aplicação automática ou proposta ao operador, e tratamento fiscal do adiantamento: parâmetro e questão `Q-LEG-16`; validar em **E1** (`DEC-009`). Fonte: [[Sintese das Respostas da Fase B|DESC-RESP]] R10; `RN-13.11.7`.
 5. **Fecho de Caixa por Período e por Canal (`RN-09.2`, DESC-RESP R13):**
@@ -761,7 +763,7 @@ flowchart TD
 - **Exceção E7.7 — Prestações em Acordo de Pagamento (`RN-13.8`):** a parcela liquida-se com um pagamento normal das prestações que agrupa; com todas pagas, o acordo passa a `Cumprido` (Fluxo 11).
 - **Exceção E7.8 — Borderô `NAO_ENCONTRADO` ou `DIVERGENTE` na Conciliação (`RN-13.16`):** o saldo desse borderô **não pode ser usado** (`HTTP 409 — BORDERÔ EM INVESTIGAÇÃO`) até a decisão do `SUB_ADM` (Fluxo 12).
 - **Exceção E7.9 — Caixa Aberto sem Operador (saída, doença, ausência):** a sessão fica bloqueada a novos documentos e segue o **fecho administrativo** (`RN-13.18`, Fluxo 12).
-- **Exceção E7.10 — Sem Comunicação com a AGT (`COR-LEG-06`):** se o SGE for o emissor, os documentos emitidos sem comunicação ficam em **modo de contingência**, marcados e submetidos depois; o emissor bloqueia após 60 dias sem comunicar 🟡 (`DEC-002`).
+- **Exceção E7.10 — Sem Ligação ao Software Certificado (`RN-09.5`, `DEC-002` §5):** o balcão **não bloqueia**: o SGE emite o **recibo escolar provisório** e põe o pedido em `fila_emissao_fiscal`; quando o canal volta, o adaptador envia os pedidos e o documento fiscal é regularizado (`EMITIDO` ou, se rejeitado, `REJEITADO_AGT` com alerta ao `SUB_ADM`). A contingência fiscal junto da AGT (emissão em contingência, comunicação posterior, bloqueio após 60 dias — `COR-LEG-06`) é do software certificado.
 
 ### 7.6 Pós-condições e Registos Gerados
 - Documentos fiscais imutáveis em `AOA`, numerados por tipo e ano fiscal; Conta Corrente atualizada e semáforo verde.
@@ -1614,6 +1616,13 @@ flowchart TD
 
 ## Alterações da v2.0
 
+### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
+
+- Nota fiscal inicial e Fluxo 07: emissor = software certificado pela AGT através do adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente).
+- Diagrama do Fluxo 07, Raia 2: numeração por ano civil (séries da AGT) e caminho sem ligação (recibo escolar provisório + fila de emissão).
+- Exceção E7.10 reescrita: o balcão não bloqueia; `fila_emissao_fiscal`; a contingência fiscal é do software certificado.
+- Quadro das questões abertas: fica o software certificado (`Q-002`) e o regime de IVA (`DEC-026`).
+
 ### Decisão [[12 - Registo de Decisoes e Questoes em Aberto#DEC-012 — Alinhar permissões RBAC e RLS|DEC-012]] — permissões (2026-11-05)
 
 - Fluxo 03: o atestado é carregado pelo `OP_PED` e conferido pelo `CHEFE_SEC_PED`.
@@ -1696,7 +1705,7 @@ Os fluxos C03 (processo individual) e C15 (indicadores) não ganharam fluxo pró
 | Títulos dos cargos, signatários, aprovações de contas, `SUB_ADM` | Todos | `Q-028`, `Q-C14-14` | E1 |
 | Admissão: secções como provas, desempate, repescagem, idade máxima | 01 | `Q-LEG-09` a `12` | — |
 | Confirmação automática, bloqueio por dívida, 60 dias, perda por faltas | 02, 09 | `Q-LEG-04`, `Q-LEG-05`, `Q-C16-01` | E1 |
-| Modelo fiscal, emissor, crédito do aluno, contingência AGT, RUPE | 01, 05, 07, 08, 12 | `DEC-002`, `Q-LEG-14`, `Q-LEG-16` a `19`, `Q-034` | E1 |
+| Software certificado (emissor decidido na `DEC-002` (b)), regime de IVA, crédito do aluno, RUPE | 01, 05, 07, 08, 12 | `DEC-002` (homologação), `Q-002`, `DEC-026`, `Q-LEG-14`, `Q-LEG-18`, `Q-LEG-19`, `Q-034` | E1 |
 | Livro/Folha/Termo, QR da Plataforma Nacional, Diploma | 05, 06, 08 | `Q-020`, `Q-021`, `Q-LEG-14` | — |
 | Boletim retido por dívida | 04 | Direção; APD-11 | E1 |
 | Grelha horária (32 h semanais), limites de carga | 10 | `Q-012`, `Q-C04-18`, `Q-C04-04/05` | — |

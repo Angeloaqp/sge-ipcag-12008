@@ -36,7 +36,7 @@ tags:
 > - 🟡 **Provisória** — regra ou valor parametrizável, ainda por validar pela escola (`DEC-009`). Pontos de controlo: homologação → **E1**; recálculo de pautas → **E2**; regulamento interno → **E3**. Cada 🟡 cita a questão que o bloqueia.
 > - **Avaliação:** nomenclatura canónica `MTP`, `PP`, `PT`, `PG`, `M1`–`M3`, `CF`, `CA`; `MAC`/`NPP`/`NPT` são só rótulos alternativos de impressão (INT-V2 §3.3).
 > - **Papéis e títulos:** os perfis RBAC (`DIR_GERAL`, `SUB_PED`, `DIR_TURMA`, …) são **papéis no sistema**; o título impresso é configurável (ex.: *Coordenadora Geral da Comissão de Gestão* para `DIR_GERAL`, *Coordenador para a Área Pedagógica* para `SUB_PED`, *Coordenador de Turma* para `DIR_TURMA` — `US-CTA-15`).
-> - **Documentos fiscais:** Fatura, Fatura-Recibo, Recibo e Nota de Crédito (DP n.º 71/25); a história descreve o documento, não quem o emite (`DEC-002` pendente).
+> - **Documentos fiscais:** Fatura, Fatura-Recibo, Recibo, Nota de Crédito e Recibo de Estorno (DP n.º 71/25, DE n.º 683/25), emitidos pelo software certificado pela AGT através do adaptador; o SGE emite o recibo escolar interno (`DEC-002` (b), decidida a 2026-11-09, homologação pendente).
 > - **Termos impressos:** "Período" = Turno; "Cadeira" = Disciplina.
 > - **Prioridade e entrega:** cada história tem uma prioridade **MoSCoW proposta** e a entrega **E1–E5** (VIS-06 §5.1; PLN-00 §6). A classificação final é feita na Fase E e fica no catálogo `07` (PLN-00 §3, fase E).
 > - **Operação do Sistema (C18):** os 7 requisitos da capacidade C18 (backups, replicação, recuperação, monitorização, atualizações, suporte, formação) são atributos de qualidade e infraestrutura aceites pelas metas do [[08 - Requisitos Nao Funcionais|RNF-08]] e procedimentos de [[09 - Integracoes, Infraestrutura e Operacao|OPS-09]] conforme a [[12 - Registo de Decisoes e Questoes em Aberto#DEC-014 — Critérios de aceitação da operação (C18)|DEC-014]] (lacuna `L-RF-02` fechada), não gerando US funcionais no DOC-03.
@@ -682,7 +682,7 @@ tags:
 - **História:** *Como* **Operador de Caixa / Tesouraria (`OP_TES`)**, *quero* **registar comprovativos bancários (`Borderô / Talão / Multicaixa Express`) validando a unicidade do número de operação e controlando o `valor_total_talao` vs. `saldo_utilizado`**, *para* **permitir que um Encarregado pague vários meses ou os 2 ou mais irmãos com um único talão verdadeiro, guardar o excedente como crédito do aluno e bloquear o talão quando o saldo chega a `0,00 Kz` (`RN-09`)**.
 - **Rastreabilidade:** `RN-08`, `RN-09.1`, `RN-09` (sub-regra nova de crédito do aluno — numeração no [[01 - Dominio e Regras|DOC-01]]), `RN-09.5`, `RN-10`, `RN-13.11`, `RN-13.16` | `RF-C10-10`, `RF-C10-24` | `Fluxo 07` | DESC-RESP R10, R14, R15 | `COR-LEG-02`, `COR-LEG-04`, `COR-LEG-06`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
-- **Pré-condições:** Sessão de caixa do turno aberta pelo `OP_TES`; aluno(s) com propinas ou emolumentos a pagar. O documento fiscal emitido é **Fatura-Recibo** ou **Recibo** (DP n.º 71/25), com numeração por tipo e ano fiscal; o emissor (SGE ou software certificado) depende da `DEC-002` 🟡 — os números abaixo são ilustrativos (`Q-004`).
+- **Pré-condições:** Sessão de caixa do turno aberta pelo `OP_TES`; aluno(s) com propinas ou emolumentos a pagar. O documento fiscal é **Fatura-Recibo** ou **Recibo** (DP n.º 71/25), emitido pelo software certificado através do adaptador, com numeração por tipo e ano civil nas séries da AGT (`DEC-002` (b)); o SGE emite o recibo escolar de quitação. Os números abaixo são ilustrativos (`Q-004`).
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Sucesso — Pagamento de 2 Irmãos com um Único Talão Bancário Verdadeiro):**
     - **Dado** que o Encarregado apresenta um talão do banco `BAI` com número de operação `OP-2026-778899` no valor total de **`30.000,00 Kz`** para a propina de Outubro dos dois filhos (`Irmão 1 = 15.000,00 Kz` e `Irmão 2 = 15.000,00 Kz`),
@@ -706,10 +706,12 @@ tags:
     - **Dado** um borderô marcado `NAO_ENCONTRADO` na conciliação bancária (`US-COB-12`),
     - **Quando** o `OP_TES` tenta usar o seu saldo,
     - **Então** o sistema recusa até a investigação terminar (`RN-13.16`).
-  - **Cenário 6 (Condicional 🟡 — Emissão em Modo de Contingência Fiscal — `RF-C10-10`, `RN-09.5`, `DEC-002` (a)):**
-    - **Dado** uma quebra de ligação externa ou indisponibilidade temporária de comunicação com a AGT durante o atendimento na Tesouraria (`MOD-TES-CXA`), assumindo o SGE como emissor certificado (`DEC-002` opção a),
-    - **Quando** o `OP_TES` emite a Fatura-Recibo ou Recibo,
-    - **Então** o sistema emite o documento sob série de contingência homologada pela AGT com a menção expressa *"Emitido em Contingência"*, armazena o hash criptográfico e encaminha automaticamente para transmissão à AGT assim que a conectividade for restabelecida.
+  - **Cenário 6 (Contingência do Adaptador Fiscal — o Balcão Não Bloqueia — `RF-C10-10`, `RN-09.5`, `DEC-002` (b)):**
+    - **Dado** que, durante o atendimento na Tesouraria (`MOD-TES-CXA`), a ligação ao software certificado falha (sem internet, software indisponível ou erro do adaptador),
+    - **Quando** o `OP_TES` liquida a propina ou o emolumento,
+    - **Então** o sistema emite o **recibo escolar provisório** (quitação académica, sem aspeto de fatura — DP n.º 71/25, art. 4.º, n.º 9), regista o documento em `recibos_oficiais` com `estado_emissao_fiscal = PENDENTE_EMISSAO` e põe o pedido `EMITIR` em `fila_emissao_fiscal`, sem bloquear o atendimento;
+    - **E quando** o canal volta, o adaptador envia os pedidos em fila, grava `fatura_externa_numero` e `fatura_externa_hash` e passa o documento a `EMITIDO`; uma rejeição passa-o a `REJEITADO_AGT` e alerta o `SUB_ADM`;
+    - **E** os pedidos ainda por confirmar aparecem no fecho de caixa do turno. A contingência fiscal junto da AGT (emissão "em contingência", comunicação posterior, bloqueio após 60 dias) é do software certificado, não do SGE.
   - **Cenário 7 (Sucesso 🟡 — Registo de Emolumento Liquidado por RUPE — `RF-C10-24`, `RN-08`, `RN-13.11`, `Q-034`):**
     - **Dado** o pedido de um ato ou documento escolar cujo pagamento deva ser recolhido a favor do Tesouro Nacional via RUPE (Referência Única de Pagamento ao Estado),
     - **Quando** o encarregado apresenta a prova de liquidação da RUPE e o `OP_TES` valida o comprovativo e insere a referência no sistema,
@@ -722,7 +724,7 @@ tags:
 - **História:** *Como* **Subdirector Administrativo (`SUB_ADM`)**, *quero* **corrigir erros de faturação ou invalidar talões fraudulentos exclusivamente através de uma Nota de Crédito (`NC`) sequencial com a menção "anulação" ou "rectificação" e a referência ao documento original**, *para* **cumprir a proibição de apagar ou editar documentos fiscais emitidos (DP n.º 71/25, de 20 de Março, que revogou o DP n.º 292/18 — `COR-LEG-01`, `COR-LEG-03`) (`RN-09`)**.
 - **Rastreabilidade:** `RN-08`, `RN-09`, `RN-10`, `RN-13.16`, `RN-13.20` | `Fluxo 07` | `US-COB-12` | `COR-LEG-01`, `COR-LEG-02`, `COR-LEG-03`.
 - **Prioridade (proposta):** `Must` | **Entrega:** `E1`.
-- **Pré-condições:** Documento fiscal emitido na base de dados (ou recebido do software certificado, se a `DEC-002` for (b)); utilizador autenticado como `SUB_ADM` ou `DIR_GERAL`.
+- **Pré-condições:** Documento fiscal emitido pelo software certificado e registado em `recibos_oficiais` (`DEC-002` (b)); a Nota de Crédito ou o Recibo de Estorno é pedido ao software certificado pela fila (`ANULAR_NC`/`ANULAR_RE`); utilizador autenticado como `SUB_ADM` ou `DIR_GERAL`.
 - **Critérios de Aceitação (BDD):**
   - **Cenário 1 (Bloqueio Absoluto de `DELETE` / `UPDATE` nos Documentos Fiscais):**
     - **Dado** qualquer Fatura, Fatura-Recibo ou Recibo emitido,
@@ -3132,11 +3134,17 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 
 - **MoSCoW proposto:** 104 `Must`, 21 `Should`, 3 `Could`, 2 `Won't` (`US-COB-15` por `DEC-005` e `US-APD-07` por `DEC-016`, fora da linha de base).
 - **Faseamento da Central de Avisos (`DEC-015`, 2026-11-09):** `US-COM-01` a `US-COM-06` integradas na **E3** (E3 sobe para 20 US, E5 desce para 11 US); `US-COM-07` e `-08` mantêm-se na **E5** (`DEC-003`).
-- **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, documento fiscal `DEC-002`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina) e modelos de aviso (`EP-COM`).
+- **Pontos de controlo da `DEC-009`** que afetam as histórias: **E1** — homologação das decisões (modo de confirmação `US-MAT-02`, bloqueio por dívida, software certificado e regime de IVA da `DEC-002`/`DEC-026`); **E2** — recálculo de pautas (`US-PED-04`, `US-PED-06`, `US-13C-02`, `US-GOV-02`); **E3** — regulamento interno (`EP-DIS`, `US-PED-02` faltas por indisciplina) e modelos de aviso (`EP-COM`).
 
 ---
 
 ## Alterações da v2.0
+
+### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
+
+- Nota de leitura e `US-TES-03`/`US-TES-04`: os documentos fiscais vêm do software certificado através do adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente); deixam de dizer "pendente".
+- `US-TES-03` Cenário 6 reescrito: contingência do adaptador — recibo escolar provisório + `fila_emissao_fiscal`, sem bloquear o balcão; regularização quando o canal volta.
+- Nota de cobertura de `RF-C10-10` atualizada (deixa de ser condicional à `DEC-002` (a)).
 
 ### Âmbito: Avaliação de desempenho e expediente geral fora das entregas E1–E5 (2026-11-09 — Issue #23, DEC-016)
 
@@ -3158,7 +3166,7 @@ Contagem pela **primeira entrega** em que cada história tem de estar em produç
 - Cobertos integralmente os restantes 7 requisitos funcionais pendentes do catálogo através de cenários específicos nas histórias existentes e explicitação de rastreabilidade:
   - `RF-C03-15` (devolução de originais e arquivo histórico na saída): coberto em `US-PIN-02` (Cenário 5);
   - `RF-C09-11` (registo de certificados na Plataforma Nacional de Certificação): coberto em `US-DOC-02` (Cenários 1 e 5) e `DOF-10`;
-  - `RF-C10-10` (emissão em modo de contingência fiscal da AGT, condicional `DEC-002` (a)): coberto em `US-TES-03` (Cenário 6);
+  - `RF-C10-10` (contingência via adaptador: o balcão não bloqueia, recibo escolar provisório e fila de emissão — `DEC-002` (b); redefinido na VER-02 #43): coberto em `US-TES-03` (Cenário 6);
   - `RF-C10-24` (distinção de emolumentos pagos por RUPE ao Estado sem documento fiscal da escola): coberto em `US-TES-03` (Cenário 7);
   - `RF-C10-25` (mapas de bolsas e isenções para a Diocese de Caxito): coberto em `US-TES-02` (Cenário 4);
   - `RF-C13-02` (parametrização do regulamento interno, escala do comportamento na E3 e catálogo disciplinar na E5): coberto em `US-DIS-04` (Cenário 4, `MOD-DIS-05`);

@@ -29,7 +29,7 @@ tags:
 
 > [!important] Estado desta nota
 > - **Rascunho para aprovação da Direção Executiva do IPCAG** (o `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer — ver [[#10. Aprovação]]).
-> - Aplica as decisões registadas no REG-12 a 2026-11-02: **`DEC-001` e `DEC-003` a `DEC-008` estão `decidida`** pelo analista responsável do projeto, com homologação da Direção pendente; **`DEC-002` (Faturação AGT) está `aguarda Direção`**.
+> - Aplica as decisões registadas no REG-12 a 2026-11-02: **`DEC-001` e `DEC-003` a `DEC-008` estão `decidida`** pelo analista responsável do projeto, com homologação da Direção pendente; **`DEC-002` (Faturação AGT) foi decidida a 2026-11-09 na opção (b)** — software certificado pela AGT através de adaptador —, homologação pendente.
 > - As metas são **propostas a validar na Fase B**. Os valores de qualidade (tempos, disponibilidade, cópias de segurança) são detalhados no [[08 - Requisitos Nao Funcionais|RNF-08]] e, em caso de diferença, prevalece o RNF-08.
 
 ---
@@ -78,7 +78,7 @@ flowchart LR
     DOC --- SGE
     ENC["Encarregados e Alunos<br>balcão nas E1–E4;<br>portal na E5 (DEC-003)"]
     MED["MED / GEPE /<br>Órgão provincial da Educação<br>(DOF-12; Q-018)"]
-    FIS["Software de faturação certificado<br>e AGT (DEC-002 — aguarda Direção)"]
+    FIS["Software de faturação certificado<br>e AGT (DEC-002 (b) — via adaptador)"]
     BAN["Bancos<br>extratos para conciliação (DEC-005)"]
     VER["Entidades verificadoras<br>(portal público QR)"]
     DIO["Diocese de Caxito<br>bolsas e isenções (RN-07)"]
@@ -189,7 +189,7 @@ flowchart LR
 
 | Entrega | Tem de estar em produção antes de | Mês indicativo | Condições já conhecidas |
 | :---: | :--- | :--- | :--- |
-| **E1** | Início das matrículas de 2027/2028 | Antes de setembro de 2027 | Exige a `DEC-002` decidida (documento fiscal), a infraestrutura da `DEC-006` instalada e a migração (C17) reconciliada |
+| **E1** | Início das matrículas de 2027/2028 | Antes de setembro de 2027 | Exige a `DEC-002` homologada e o software certificado escolhido e ligado pelo adaptador (documento fiscal — `Q-002`), a infraestrutura da `DEC-006` instalada e a migração (C17) reconciliada |
 | **E2** | Primeira semana de aulas | Setembro de 2027 | Exige o horário (C04, `DEC-004`) e o regulamento de avaliação do ESTP (Q-LEG-01) |
 | **E3** | Fim do I Trimestre | Fim do I Trimestre de 2027/2028 | Exige modelos de aviso aprovados (`DEC-015`) e escala de comportamento (C13, `DEC-013`) |
 | **E4** | Conselhos finais, exames e certificação | Maio–junho de 2028 | Exige o histórico 10ª–12ª migrado e a resposta às Q-020 e Q-021 (Plataforma Nacional de Certificação, Diploma) |
@@ -216,7 +216,7 @@ Legenda: **Dentro** · **Dentro (parcial)**: parte da capacidade fica fora · **
 | C07 | Conselho de notas, transição e exames | **Dentro** | E3 e E4 | E3: conselho de notas trimestral, pauta geral (`DOF-05`). E4: recurso, transição, cadeiras em atraso, exame extraordinário (`DOF-07`) | — | O-01 | Q-025, Q-031; Q-LEG-03, Q-LEG-06; Q-023 | Fluxos 04–05; RN-02 |
 | C08 | Regime da 13ª Classe | **Dentro** | E4 | Estágio, Projecto Tecnológico / PAP (terminologia por confirmar — DESC-L1 A6), júri, `MFC` (`DOF-08`) | — | O-01, O-06 | Q-030; Q-LEG-07; `COR-LEG-16`, `COR-LEG-17` | Fluxo 06; RN-06 |
 | C09 | Emissão documental e certificação | **Dentro** | E2, E3 e E4 | E2: circuito real **requerimento → recibo de pedido → declaração** (DESC-L1 A11), declarações e guia de transferência (`DOF-09`); portal público de verificação por QR. E3: boletins (`DOF-06`). E4: certificados (`DOF-10`), registo de arquivo. Em todos: numeração anual por tipo de documento (DESC-L1 A13) e cabeçalho e rodapé oficiais | **Por decidir:** se o Diploma é emitido pelo Ministério e não pela escola (Q-021); registo na Plataforma Nacional de Certificação (Q-020); modelo oficial de cabeçalho (Q-035) | O-04, O-05, O-06 | Q-020, Q-021, Q-024, Q-027, Q-034, Q-035; `COR-LEG-18`, `COR-LEG-19` | Fluxo 08; RN-10 |
-| C10 | Tesouraria | **Dentro (parcial)** | E1 (balcão: propinas, bolsas, documentos fiscais, caixa) + E2 (dívidas, acordos, relatórios, conciliação) — `DEC-013` | Tabelas de propinas e emolumentos, bolsas e isenções (RN-07), **registo manual de borderôs**, Conta Corrente, semáforo financeiro, fecho de caixa, **conciliação bancária por extrato**, gestão de dívidas e avisos de cobrança, relatórios financeiros de gestão | **Fora:** referências Multicaixa / gateway nas E1–E5 (reavaliar depois da E5); contabilidade geral. **Por decidir:** emissão do documento fiscal — certificar o SGE ou integrar com software certificado; se alguns emolumentos se pagam por RUPE ao Estado (DESC-L1 A15) | O-03, O-04, O-05, O-08 | **DEC-002 (aguarda Direção)**, DEC-005, DEC-008; Q-001 a Q-004, Q-007, Q-034 | Fluxo 07; `EP-TES`; RN-08, RN-09 |
+| C10 | Tesouraria | **Dentro (parcial)** | E1 (balcão: propinas, bolsas, documentos fiscais, caixa) + E2 (dívidas, acordos, relatórios, conciliação) — `DEC-013` | Tabelas de propinas e emolumentos, bolsas e isenções (RN-07), **registo manual de borderôs**, Conta Corrente, semáforo financeiro, fecho de caixa, **conciliação bancária por extrato**, gestão de dívidas e avisos de cobrança, relatórios financeiros de gestão | **Fora:** referências Multicaixa / gateway nas E1–E5 (reavaliar depois da E5); contabilidade geral. **Documento fiscal:** emitido pelo software certificado pela AGT através de adaptador; o SGE gere o balcão e emite o recibo escolar interno (`DEC-002` (b)). **Por decidir:** que software certificado (`Q-002`) e o regime de IVA (`DEC-026`); se alguns emolumentos se pagam por RUPE ao Estado (DESC-L1 A15) | O-03, O-04, O-05, O-08 | **DEC-002 (decidida (b), homologação pendente)**, DEC-005, DEC-008; Q-001 a Q-004, Q-007, Q-034 | Fluxo 07; `EP-TES`; RN-08, RN-09 |
 | C11 | Recursos humanos | **Dentro (parcial)** | E1 e E2 | Cadastro de docentes e funcionários, incluindo o N.º de Agente (E1); ponto e assiduidade laboral com mapa de efetividade exportado (E2) | **Fora:** processamento salarial; avaliação de desempenho anual do pessoal (`DEC-008`, `DEC-016`) | O-02 | DEC-008, DEC-016; Q-010, Q-036 | `US-DOC-04` |
 | C12 | Comunicação com encarregados e alunos | **Dentro (parcial)** | E3 (central de avisos) e E5 (portal) — `DEC-015` | E3: **Central de avisos interna** (`US-COM-01` a `06`), avisos automáticos de faltas e propinas, convocatórias numeradas (`DOF-21`), listas de avisos impressos (`DOF-22`), SMS sob teto mensal e verificação de contactos (`RN-14`). E5: **Portal** web de consulta (`US-COM-07`, `08`) e ativação de contas (`US-CTA-14`) | Contas e portal para encarregados e alunos antes da E5 (`DEC-003`) | O-11 | DEC-003, DEC-015; Q-008, Q-037 | DOC-01 `RN-14`; `EP-COM` (`US-COM-01` a `08`) |
 | C13 | Disciplina e comportamento | **Dentro** | E2/E3 (núcleo: tipos de falta e comportamento) + E5 (resto) — `DEC-013` | Participações disciplinares, ocorrências, medidas e sanções do regulamento interno; avaliação do **comportamento** que já aparece no boletim (DESC-L1 A8) | — | O-12 | Q-032 | A especificar (Fase C); regulamento interno (PLN-00 §5.2) |
@@ -253,11 +253,10 @@ Ficam **fora das entregas E1–E5**. Cada um destes pontos só entra com um pedi
 
 | Tema | De que depende | Bloqueia |
 | :--- | :--- | :--- |
-| Quem emite o documento fiscal: o SGE certificado ou um software certificado integrado | **DEC-002** (aguarda Direção); Q-001 a Q-004; Q-LEG-16 a Q-LEG-19 | C10; **E1** |
+| Que software certificado emite os documentos fiscais e em que regime de IVA está o IPCAG (o modelo de emissão está decidido na **DEC-002** (b), homologação pendente) | Q-002 (questionário `DSC-06-SUB-ADM`); **DEC-026**; Q-003, Q-004 | C10; **E1** |
 | Registo na Plataforma Nacional de Certificação | Q-020 (Q-LEG-14) | C09; E4 |
 | Emissão do Diploma pela escola ou pelo Ministério | Q-021 | C09; E4 |
 | Inscrição no concurso de admissão por portal | Q-LEG-12 | C02; E5 |
-| SMS como canal da C12 | **DEC-015** (central de avisos na E3 com SMS sob teto mensal e degradação para impresso); contratação de fornecedor e custo: Q-008, Q-013 | C12; **E3** |
 | Pagamento de emolumentos por RUPE ao Estado | Q-034 (Q-LEG-14) | C10; C09; DEC-005 |
 | Fórmulas da Prova Global e da Classificação Anual no motor de pautas | Q-025, Q-026 (prioridade n.º 1 do [[Plano de Validacao de Pautas\|VAL-01]]) | C06; C07; **E2** |
 
@@ -272,7 +271,7 @@ Ficam **fora das entregas E1–E5**. Cada um destes pontos só entra com um pedi
 | R-03 | **Energia e internet instáveis** no Panguila. | RN-10; DEC-006 | *Offline-First* nos professores; servidor local para os balcões |
 | R-04 | **Linguagem ubíqua** do glossário do DOC-01 em ecrãs, documentos, dados e código. Os documentos reais usam outros termos ("Período" por Turno, "Cadeira" por Disciplina, `MTP`/`PP`/`PT`), que ficam por integrar como sinónimos ou termos oficiais (Q-026, Q-033). | DOC-01 §1; DESC-L1 A2, A9 | Proibidos termos de outros sistemas educativos |
 | R-05 | **Segregação de funções** por cargo (matriz RBAC). A LEG-VER §3.10 indica que o DP n.º 93/21 não a impõe: mantém-se como requisito de controlo interno. | DOC-01 §2.2 | Cada função crítica só é acessível ao cargo previsto |
-| R-06 | **Imutabilidade** dos documentos de cobrança e da trilha de auditoria. | RN-09; RN-10 | Correções só por documento de anulação (tipo legal a confirmar — DEC-002) |
+| R-06 | **Imutabilidade** dos documentos de cobrança e da trilha de auditoria. | RN-09; RN-10 | Correções só por Nota de Crédito ou Recibo de Estorno, emitidos no software certificado (DEC-002) |
 | R-07 | **Dados de menores** e eventual transferência internacional. | Lei n.º 22/11; APD-11 | Sem acesso externo aos dados de alunos antes da E5; localização do alojamento condicionada (Q-016) |
 | R-08 | **Uma escola, uma instalação.** | DEC-001 | Sem separação de dados por instituição |
 | R-09 | **Equipamentos:** computador nos balcões; telemóvel Android nos professores (proposta do PLN-00 §5.3, a validar). | PLN-00 §5.3; RNF-08 | Interfaces adequadas a ecrãs pequenos e a impressão A4 |
@@ -290,7 +289,7 @@ Cada pressuposto é tratado como verdadeiro até à Fase B. Se se revelar falso,
 | PR-02 | O órgão provincial fornece o regulamento de avaliação do ESTP em vigor a tempo da Fase C. | O motor de pautas (C06, C07) não pode ser construído; a E2 fica em risco | Q-LEG-01 | DEC-007 |
 | PR-03 | A escola tem, ou pode instalar antes da E1, rede local, servidor e energia protegida. | A DEC-006 tem de ser revista | Q-006; [[Questionario de Volumetria e Infraestrutura\|DSC-03]] | DEC-006 |
 | PR-04 | Os professores têm telemóvel Android ou acesso a um computador para lançar notas e faltas. | É preciso prever postos partilhados na escola | DSC-03 | DEC-006 |
-| PR-05 | Se a DEC-002 for (b), o software de faturação certificado permite integração, ou pelo menos importação e exportação de ficheiros. | Dupla digitação no balcão; o O-05 fica em risco | Q-002 | DEC-002 |
+| PR-05 | O software de faturação certificado escolhido (DEC-002 (b)) permite integração pelo adaptador, por API ou, pelo menos, por importação e exportação de ficheiros. | Dupla digitação no balcão; o O-05 fica em risco | Q-002 | DEC-002 |
 | PR-06 | O histórico dos alunos atuais (10ª–12ª) e os registos do livro de termos existem em forma recuperável. | A E4 não consegue certificar os finalistas de 2027/2028 | [[10 - Migracao de Dados e Implantacao\|MIG-10]] | DEC-007 |
 | PR-07 | O calendário de 2027/2028 mantém três trimestres, de setembro a julho. | As datas da secção 5.1 mudam | Q-005 | DEC-007 |
 | PR-08 | Existe modelo definido de equipa, suporte N1–N3 e sustentabilidade orçamental via receitas próprias da escola (`DEC-017`). | Degradação para operação offline local a custo zero em contingência extrema | `DEC-017` (responde à `Q-013`) | `DEC-007`, `DEC-008`, `DEC-017` |
@@ -318,7 +317,7 @@ Cada pressuposto é tratado como verdadeiro até à Fase B. Se se revelar falso,
 | Decisão | Estado (2026-11-02) | O que fixa nesta nota | Secções |
 | :---: | :---: | :--- | :--- |
 | [[12 - Registo de Decisoes e Questoes em Aberto#DEC-001 — Instalação única IPCAG ou produto multi-instituição\|DEC-001]] | `decidida` | Instalação única IPCAG, dados institucionais parametrizáveis | 5.2 (C01, C14), 5.3 (F-09), 6 (R-08) |
-| [[12 - Registo de Decisoes e Questoes em Aberto#DEC-002 — Faturação AGT\|DEC-002]] | `aguarda Direção` | Quem emite o documento fiscal: fica por decidir; condiciona a E1 | 5.1 (E1), 5.2 (C10), 5.4, 6 (R-06), 7 (PR-05) |
+| [[12 - Registo de Decisoes e Questoes em Aberto#DEC-002 — Faturação AGT\|DEC-002]] | `decidida` (2026-11-09, homologação pendente) | Opção (b): software certificado pela AGT através de adaptador; o SGE gere o balcão e o recibo escolar; falta escolher o software (`Q-002`); condiciona a E1 | 5.1 (E1), 5.2 (C10), 5.4, 6 (R-06), 7 (PR-05) |
 | [[12 - Registo de Decisoes e Questoes em Aberto#DEC-003 — Portal ou aplicação para encarregados e alunos\|DEC-003]] | `decidida` | Portal para encarregados e alunos só na E5 | 4.2, 5.2 (C03, C12, C14), 5.3 (F-10), 6 (R-07) |
 | [[12 - Registo de Decisoes e Questoes em Aberto#DEC-004 — Horários\|DEC-004]] | `decidida` | O SGE regista o horário feito à mão, com deteção de choques | 5.2 (C04), 5.3 (F-06) |
 | [[12 - Registo de Decisoes e Questoes em Aberto#DEC-005 — Pagamentos\|DEC-005]] | `decidida` | Registo manual de borderôs na E1, com conciliação bancária; gateway fora | 3 (O-03), 5.2 (C10), 5.3 (F-11) |
@@ -356,3 +355,4 @@ Cada pressuposto é tratado como verdadeiro até à Fase B. Se se revelar falso,
 | 2.0-rc2 | 2026-11-09 | `DEC-016` (Issue #23): avaliação de desempenho do pessoal (`Q-036`) e expediente geral (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 e integrados em `DEC-008` (`F-13` e `F-14`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-017` (Issue #24): modelo de governação, operação (N1/N2/N3) e sustentabilidade financeira formalizados; `R-10` e `PR-08` atualizados com resolução da `Q-013`. |
 | 2.0-rc2 | 2026-11-09 | `DEC-018` (Issue #25): concurso de admissão de 2027/2028 confirmado fora do SGE com importação dos admitidos na E1 via C17 (`MIG-D06`); C02 na E5; `Q-017` resolvida. |
+| 2.0-rc2 | 2026-11-09 | **Aplicação da DEC-002 — VER-02 #43 (2026-11-09):** `DEC-002` deixa de estar `aguarda Direção` — decidida (b), homologação pendente (aviso inicial, diagrama de contexto, E1, C10, §5.4, R-06, PR-05, §9); em §5.4 o tema passa a ser a escolha do software certificado (`Q-002`) e o regime de IVA (`DEC-026`); sai a linha "SMS como canal da C12", já decidida na `DEC-015`. |

@@ -725,7 +725,7 @@ flowchart TD
 ## 4. Workspace 04 — Tesouraria, Fiscalidade e Secretaria Geral / RH
 
 > [!info] Base fiscal (`COR-LEG-01`)
-> A base fiscal é o **DP n.º 71/25, de 20 de Março** (Regime Jurídico das Facturas), o **DE n.º 683/25** e o **Código do IVA, art. 12.º, n.º 1, l)** (isenção do ensino). O DP n.º 292/18, citado na v1.2, foi **revogado** (art. 40.º do DP n.º 71/25). Os documentos fiscais podem vir a ser emitidos por um **software de faturação validado pela AGT**, através de um adaptador (`DEC-002`, pendente): este DOC descreve os documentos, **não** quem os emite.
+> A base fiscal é o **DP n.º 71/25, de 20 de Março** (Regime Jurídico das Facturas), o **DE n.º 683/25** e o **Código do IVA, art. 12.º, n.º 1, l)** (isenção do ensino). O DP n.º 292/18, citado na v1.2, foi **revogado** (art. 40.º do DP n.º 71/25). Os documentos fiscais são emitidos por um **software de faturação validado pela AGT**, através de um adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente); o SGE emite o recibo escolar interno (quitação académica), que **não pode parecer fatura** (DP n.º 71/25, art. 4.º, n.º 9). Este DOC descreve os documentos e o que o SGE imprime.
 
 ### `MOD-TES-TAB`: Tabelas Financeiras em Kwanzas (`AOA`) e Motor de Bolsas/Descontos (`US-TES-01`, `US-TES-02`)
 - **Perfis RBAC Autorizados:** `SUB_ADM` *(configuração)*, `DIR_GERAL` *(homologação de tabelas e bolsas)*, `OP_TES` *(leitura)*.
@@ -758,8 +758,8 @@ flowchart TD
   3. **Fraude sem marca sobre a pessoa:** o estado `INVALIDADO_POR_FRAUDE` qualifica o **documento bancário**, nunca o encarregado; o detalhe só é visível a `SUB_ADM` e `DIR_GERAL` (`ALT-04-08`; RF-C19-25; 🟡 `Q-APD-17`).
   4. Atualiza o **Semáforo Financeiro (`RN-08`)** em tempo real.
   5. **Documento fiscal:** a liquidação gera o **Recibo** (`DOF-11A`) de uma Fatura já emitida, ou a **Fatura-Recibo** (`DOF-11E`) quando o serviço é faturado e pago no ato.
-     > 🟡 **Provisória** — modelo "fatura mensal + recibo" ou "fatura-recibo" no pagamento; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-16`, `DEC-002`. Fonte: LEG-VER §4.2.
-  6. Se o emissor for o software certificado, o SGE guarda o **número e o código AGT** devolvidos pelo adaptador; em contingência (*offline*), os documentos ficam marcados e são submetidos depois, com bloqueio após 60 dias sem comunicar (DP n.º 71/25, art. 17.º–18.º — `COR-LEG-06`).
+     > 🟡 **Provisória** — modelo decidido na `DEC-002` §3 (`FR` no pagamento imediato ao balcão; `FT` + `RC` na liquidação desfasada), homologação pendente; falta escolher o software certificado (`Q-002`); validar em **E1** (`DEC-009`). Fonte: LEG-VER §4.2; `DEC-002`.
+  6. O SGE guarda o **número e o código AGT** devolvidos pelo adaptador (`fatura_externa_numero`, `fatura_externa_hash`). Sem ligação ao software certificado, o balcão **não bloqueia**: imprime o **recibo escolar provisório** e põe o pedido em `fila_emissao_fiscal`; o documento fiscal é regularizado quando o canal volta (`RN-09.5`). A contingência fiscal (60 dias sem comunicar — DP n.º 71/25, art. 17.º–18.º, `COR-LEG-06`) é do software certificado.
 - **Ações Disparo e Dados de Saída (Outputs):**
   - **Comandos:** `ValidarBorderoBancario`, `EmitirDocumentoFiscal` (via adaptador — `DEC-002`).
   - **Outputs:** **`DOF-11A`** / **`DOF-11E`** com QR.
@@ -970,7 +970,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 1. **Fonte única:** `series_numeracao_documental` (Grupo 6 do DOC-05) — uma série por **tipo de documento** e por **período** (ano civil, ano letivo ou ano fiscal), com prefixo, formato e último número; usada também pelas convocatórias (C12) e pelas declarações (Mapa de Integração §2.4).
 2. **Formato real:** `N.º nnn/IPCAG N.º {n.º} BGO/AAAA` na maioria dos documentos; `N.º nnn/AAAA-AAAA` nos boletins de matrícula e de confirmação (`RN-11.14`).
-3. **Documentos fiscais:** numeração **sequencial e cronológica por tipo de documento e por ano fiscal** (DP n.º 71/25, art. 10.º, n.º 1, b) — `COR-LEG-04`), ou a do software certificado se a `DEC-002` assim o decidir. 🟡 Formato oficial por confirmar (`Q-004`; E1).
+3. **Documentos fiscais:** numeração **sequencial e cronológica por tipo de documento e por ano fiscal** (DP n.º 71/25, art. 10.º, n.º 1, b) — `COR-LEG-04`), atribuída pelo software certificado nas séries da AGT, por ano civil (`DEC-002` (b)). 🟡 O formato concreto depende do software escolhido (`Q-002`, `Q-004`; E1).
 4. Um número nunca é reutilizado; um documento anulado mantém o seu número.
 5. No arranque, o último número usado de cada série no ano corrente é carregado como ponto de partida (nota [[10 - Migracao de Dados e Implantacao|10]]).
 6. 🟡 **Provisória** — séries, períodos de reinício e formatos de cada tipo; validar em **E1** (`DEC-009`). Bloqueado por `Q-C03-18`. Fonte: DESC-L1 A13; C03 `RN-11.14`.
@@ -1240,7 +1240,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 > [!important] Regras comuns aos documentos fiscais (`DOF-11A`, `B`, `D`, `E`)
 > 1. **Tipos legais** (DP n.º 71/25, art. 3.º): Fatura, Fatura-Recibo, Recibo, Nota de Crédito. A "Nota de Estorno" da v1.2 não é tipo legal e a sigla `NE` colidia com a Nota do Estágio (`COR-LEG-03`). A Nota de Débito (multas) 🟡 só se o contabilista a pedir (`Q-LEG-17`; E1).
 > 2. **Menções obrigatórias** (art. 10.º): **NIF do IPCAG** (🟡 `Q-LEG-19`; E1), numeração sequencial e cronológica **por tipo e por ano fiscal**, e o **motivo de não liquidação do IVA com a norma** — *"Isento nos termos do art. 12.º, n.º 1, alínea l) do Código do IVA"* (`COR-LEG-05`). 🟡 Que operações são isentas (emolumentos, cartão, multas) é a `Q-LEG-17` (E1).
-> 3. **Emissor:** o SGE ou um software validado pela AGT, através do adaptador (`DEC-002` pendente). Se for o software certificado, o SGE guarda e imprime o número e o código AGT devolvidos. Os comprovativos internos do SGE **não podem parecer fatura**.
+> 3. **Emissor:** o software validado pela AGT, através do adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente). O SGE guarda e imprime o número e o código AGT devolvidos. O recibo escolar interno e o recibo provisório do SGE **não podem parecer fatura** (DP n.º 71/25, art. 4.º, n.º 9). A Nota de Crédito e o Recibo de Estorno (`RE`, DE n.º 683/25) também saem do software certificado.
 > 4. **Adquirente:** aluno ou Encarregado de Educação, com BI/NIF — 🟡 rever a necessidade do BI no documento (`ALT-04-13`; `Q-003`; E1).
 > 5. **Imutabilidade (`RN-09`, `RN-13.20`):** nenhum documento fiscal é alterado ou apagado; corrige-se por Nota de Crédito ou anulação no software validado.
 > 6. **Verificação QR:** o portal devolve só valor total e estado; nunca nomes, BI/NIF ou dados bancários.
@@ -1286,7 +1286,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 | Tesouraria ou software certificado | Não exige assinatura manuscrita (documento fiscal) | `FT {série}/{ano fiscal}/nnnnnn` | Sim | Regras comuns |
 
 - Emitida em cada prestação de serviços (art. 4.º), até ao 5.º dia útil seguinte (art. 8.º); para propinas, uma fatura mensal por aluno (≈ 1.120/mês). Bolsa de 100% 🟡 (`Q-LEG-18`; E1).
-  > 🟡 **Provisória** — modelo de faturação das propinas; validar em **E1** (`DEC-009`). Bloqueado por `Q-LEG-16`, `DEC-002`. Fonte: LEG-VER §4.2.
+  > 🟡 **Provisória** — modelo de faturação das propinas decidido na `DEC-002` §3 (`FT` no vencimento + `RC` após confirmação), homologação pendente; bolsa a 100% (`Q-LEG-18`); validar em **E1** (`DEC-009`). Fonte: LEG-VER §4.2; `DEC-002`.
 
 ### `DOF-11E` — Fatura-Recibo
 
@@ -1470,6 +1470,13 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 ## Alterações da v2.0
 
+### Aplicação da DEC-002 — VER-02 #43 (2026-11-09)
+
+- Base fiscal, regras do `MOD-TES-CXA` e regras comuns do `DOF-11`: emissor = software certificado pela AGT através do adaptador (`DEC-002` (b), decidida a 2026-11-09, homologação pendente); deixa de dizer "pendente".
+- `MOD-TES-CXA` regra 6: sem ligação, o balcão não bloqueia — recibo escolar provisório + `fila_emissao_fiscal`; a contingência fiscal é do software certificado.
+- Numeração fiscal: a do software certificado, por tipo e ano civil, séries da AGT; o formato fica 🟡 até se escolher o software (`Q-002`).
+- Notas 🟡 do modelo de faturação: o modelo está decidido (`DEC-002` §3); fica a homologação e a escolha do software.
+
 ### Plataforma Nacional de Certificação — [ticket #40](https://github.com/Angeloaqp/sge-ipcag-12008/issues/40) (2026-11-08)
 
 - `DOF-10A`: exportação do histórico na E4, campos externos (número, código, QR) e QR da plataforma nos títulos.
@@ -1574,7 +1581,7 @@ Código do modelo: {codigo_modelo, ex.: IPCAG.SG-ACE | DEE-PEEP-001-ACE}
 
 | Ponto de controlo | O que fica provisório neste DOC | Questões que bloqueiam |
 | :--- | :--- | :--- |
-| **E1 — homologação** | Cabeçalho, rodapé e número da instituição por documento; títulos dos cargos e assinantes; séries de numeração; idade máxima; média da 9ª e repescagem na admissão; nota final do teste; confirmação balcão/automática e bloqueio por dívida; encarregado no boletim; ocupação do pai; efeitos da declaração; emolumentos e RUPE; folha/termo e Plataforma Nacional; Diploma e nacionalidade; modelo fiscal (fatura + recibo ou fatura-recibo), NIF, isenção, bolsa a 100%, anulação do recibo; multa e avisos de cobrança; retenção de boletins por dívida; Central de Avisos (SMS antes da E5); descargas no portal; ponto de contacto APD; DSD, horário e mapa de passagem como documentos oficiais; modelo do GEPE; janelas do período; avaliação de desempenho | `Q-003`, `Q-004`, `Q-018`, `Q-020`, `Q-021`, `Q-022`, `Q-023`, `Q-027`, `Q-028`, `Q-034`, `Q-035`, `Q-036`, `Q-037`, `Q-C03-01`, `Q-C03-08`, `Q-C03-14`, `Q-C03-17`, `Q-C03-18`, `Q-C03-20`, `Q-C04-03`, `Q-C04-16`, `Q-C04-18`, `Q-C10-01`, `Q-C10-02`, `Q-C10-05`, `Q-C10-13`, `Q-C12-03`, `Q-C14-14`, `Q-C16-01`, `Q-C16-05`, `Q-C16-15`, `Q-LEG-04`, `Q-LEG-05`, `Q-LEG-09`–`12`, `Q-LEG-14`–`19`, `Q-APD-01`, `Q-APD-04`, `Q-APD-12`, `Q-APD-16`–`18`, `Q-APD-29`, `Q-APD-30`, `DEC-002` |
+| **E1 — homologação** | Cabeçalho, rodapé e número da instituição por documento; títulos dos cargos e assinantes; séries de numeração; idade máxima; média da 9ª e repescagem na admissão; nota final do teste; confirmação balcão/automática e bloqueio por dívida; encarregado no boletim; ocupação do pai; efeitos da declaração; emolumentos e RUPE; folha/termo e Plataforma Nacional; Diploma e nacionalidade; modelo fiscal (`DEC-002` §3) e software certificado (`Q-002`), NIF, isenção, bolsa a 100%, anulação do recibo; multa e avisos de cobrança; retenção de boletins por dívida; Central de Avisos (SMS antes da E5); descargas no portal; ponto de contacto APD; DSD, horário e mapa de passagem como documentos oficiais; modelo do GEPE; janelas do período; avaliação de desempenho | `Q-003`, `Q-004`, `Q-018`, `Q-020`, `Q-021`, `Q-022`, `Q-023`, `Q-027`, `Q-028`, `Q-034`, `Q-035`, `Q-036`, `Q-037`, `Q-C03-01`, `Q-C03-08`, `Q-C03-14`, `Q-C03-17`, `Q-C03-18`, `Q-C03-20`, `Q-C04-03`, `Q-C04-16`, `Q-C04-18`, `Q-C10-01`, `Q-C10-02`, `Q-C10-05`, `Q-C10-13`, `Q-C12-03`, `Q-C14-14`, `Q-C16-01`, `Q-C16-05`, `Q-C16-15`, `Q-LEG-04`, `Q-LEG-05`, `Q-LEG-09`–`12`, `Q-LEG-14`–`19`, `Q-APD-01`, `Q-APD-04`, `Q-APD-12`, `Q-APD-16`–`18`, `Q-APD-29`, `Q-APD-30`, `DEC-002` |
 | **E2 — recálculo de pautas** | Modelo de avaliação (`M3`, `CF`, `CA`, `PG`, recurso, arredondamento); rótulos `MTP`/`MAC`; coluna `M3/CF`; prova de 2.ª chamada; disciplinas nucleares; deficiências e regra da 12ª; categorias da Pauta Geral e linhas a cor; estatísticas `MT`/`NV`; Projecto Tecnológico, PAP e pesos da `MFC` | `Q-025`, `Q-026`, `Q-030`, `Q-031`, `Q-C15-12`, `Q-C16-06`, `Q-LEG-03`, `Q-LEG-06`, `Q-LEG-07`, `Q-LEG-21`–`23` |
 | **E3 — regulamento interno** | Regra de faltas; circuito de justificação; faltas por indisciplina e comportamento; catálogo disciplinar, processo e recurso | `Q-032`, `Q-C13-02`, `Q-C13-03`, `Q-C13-06`, `Q-LEG-04`, `Q-APD-32` |
 

@@ -55,7 +55,7 @@ flowchart LR
         D1["DOC-01 Domínio<br>RN-01..RN-18, RBAC"] --> D2["DOC-02 Fluxos<br>16 fluxos"]
         D2 --> D3["DOC-03 User Stories<br>17 épicos, 130 US"]
         D3 --> D4["DOC-04 Telas e Documentos<br>26 DOF"]
-        D4 --> D5["DOC-05 Dados<br>120 tabelas, 7 grupos"]
+        D4 --> D5["DOC-05 Dados<br>121 tabelas, 7 grupos"]
         RF["07 Requisitos Funcionais<br>224 RF"]
     end
     ESP --> QO["20 - Qualidade e Operacao<br>06, 08, 09, 10, 11"]
@@ -90,7 +90,7 @@ flowchart LR
 | `DOC-02` | [[02 - Fluxos de Trabalho]] | 16 fluxos ponta a ponta com exceções | [DOC-02](https://www.figma.com/board/klMnPKkxorDv9NEfvvpSRq) | `2.0-rc1` |
 | `DOC-03` | [[03 - User Stories]] | 17 épicos e 130 user stories com critérios BDD, distribuídas por E1–E5 | [DOC-03](https://www.figma.com/board/PZgRkbRHrNR6UfehirGDPd) | `2.0-rc1` |
 | `DOC-04` | [[04 - Telas e Documentos]] | 5 workspaces, alertas, portal QR, portal do encarregado; 26 documentos oficiais `DOF-01`–`DOF-26` | [DOC-04](https://www.figma.com/board/ceE1mzcDmB2bT9RUAZxOcN) | `2.0-rc1` |
-| `DOC-05` | [[05 - Modelagem de Dados]] | 120 tabelas em 7 grupos, sincronização *offline-first*, integridade, RLS | [DOC-05](https://www.figma.com/board/lGrzPwEBaxgExyewDXnEAt) | `2.0-rc1` |
+| `DOC-05` | [[05 - Modelagem de Dados]] | 121 tabelas em 7 grupos, sincronização *offline-first*, integridade, RLS | [DOC-05](https://www.figma.com/board/lGrzPwEBaxgExyewDXnEAt) | `2.0-rc1` |
 | `RF-07` | [[07 - Catalogo de Requisitos Funcionais]] | 224 requisitos `RF-Cxx-nn` por capacidade, prioridade e entrega | — | `2.0-rc1` |
 
 ### 2.3 `20 - Qualidade e Operacao` — Como e onde tem de funcionar

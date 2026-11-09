@@ -63,7 +63,7 @@ tags:
 | Marca | Significado |
 | :--- | :--- |
 | `definido` | Regra com fonte (lei confirmada pela LEG-VER, documento real, prática descrita pela escola ou decisão registada) e sem valor por validar. Como todas as decisões, fica sujeito à homologação geral da `DEC-009`. |
-| `🟡 PC-E1` | **Provisório** — depende da **homologação das decisões** `DEC-001`–`DEC-009` pela Comissão de Gestão (inclui a `DEC-002`, que aguarda a Direção). Ponto de controlo **antes da E1**. |
+| `🟡 PC-E1` | **Provisório** — depende da **homologação das decisões** `DEC-001`–`DEC-009` pela Comissão de Gestão (inclui a `DEC-002`, decidida (b) a 2026-11-09, homologação pendente, e a escolha do software certificado — `Q-002`). Ponto de controlo **antes da E1**. |
 | `🟡 PC-E2` | **Provisório** — depende do **recálculo de pautas preenchidas** ([[Plano de Validacao de Pautas|VAL-01]]; fórmulas, limiares, pesos). Ponto de controlo **antes da E2**. |
 | `🟡 PC-E3` | **Provisório** — depende do **regulamento interno** (C13: tipos, medidas, escala de comportamento, tolerâncias). Ponto de controlo **antes da E3**. |
 | `🟡 DoR-Ex` | **Provisório** — depende de uma questão em aberto que não pertence a nenhum dos três pontos de controlo da `DEC-009`; segundo a *Definition of Ready* (PLN-00 §8), tem de estar respondida **antes da entrega `Ex`** do requisito. |
@@ -214,10 +214,10 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C09-12** | Responder no **portal público de verificação QR** com o mínimo (tipo, número, data, estado, titular, curso e classificação final nos certificados), com aviso de privacidade e registo das consultas. | O-06 | M | E2 | v1.2; `R-19` (G-01); `RF-C19-16`, `-17`; OPS-09 `INT-07` | RN-10.3 | US-DOC-03 | MOD-PUB-QR | — | `documentos_oficiais_emitidos`, `consultas_portal_verificacao` | definido |
 
 ### C10 — Tesouraria
-**Âmbito:** dentro (parcial — sem gateway, sem contabilidade geral) · **Entrega:** E1 (propinas, bolsas, documentos fiscais, caixa — PLN-00 §6) e E2 (dívidas, relatórios e conciliação, antes do fim do primeiro mês de cobrança — CAP-C10 §12) · **Objetivos:** `O-03`, `O-04`, `O-05`, `O-08` · **Decisões:** `DEC-002` (aguarda Direção), `DEC-005` · **Regras:** `RN-07`, `RN-08`, `RN-09`, `RN-13`
+**Âmbito:** dentro (parcial — sem gateway, sem contabilidade geral) · **Entrega:** E1 (propinas, bolsas, documentos fiscais, caixa — PLN-00 §6) e E2 (dívidas, relatórios e conciliação, antes do fim do primeiro mês de cobrança — CAP-C10 §12) · **Objetivos:** `O-03`, `O-04`, `O-05`, `O-08` · **Decisões:** `DEC-002` (decidida (b), homologação pendente), `DEC-005` · **Regras:** `RN-07`, `RN-08`, `RN-09`, `RN-13`
 
 > [!warning] Documento fiscal (`DEC-002`)
-> O catálogo descreve o **documento** (Fatura, Fatura-Recibo, Recibo, Nota de Crédito — `COR-LEG-01` a `06`), não quem o emite: o SGE certificado ou o software certificado atrás de um adaptador (INT-V2 §3.8). Todos os RF que tocam o documento fiscal ficam 🟡 PC-E1 até a `DEC-002` ser decidida.
+> Com a `DEC-002` (b) (decidida a 2026-11-09, homologação pendente), os documentos fiscais (Fatura, Fatura-Recibo, Recibo, Nota de Crédito, Recibo de Estorno — `COR-LEG-01` a `06`) são emitidos pelo **software certificado pela AGT, através de um adaptador** (INT-V2 §3.8); o SGE gere o balcão e emite o recibo escolar interno. Os RF que tocam o documento fiscal ficam 🟡 PC-E1 só à espera da **homologação** da `DEC-002` e da **escolha do software certificado** (`Q-002`), não da decisão.
 
 | ID | Requisito | O | Prio. | Entrega | Origem | RN | US | Módulo | DOF | Tabelas | Estado |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -226,21 +226,21 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C10-03** | Manter a conta corrente de propinas por matrícula com os estados da prestação (incluindo `Em Acordo de Pagamento`) e o semáforo financeiro. | O-04 | M | E1 | v1.2; CAP-C10 | RN-08, RN-13.1, RN-13.8 | US-TES-03, US-COB-01 | MOD-TES-CXA | — | `conta_corrente_propinas` | definido |
 | **RF-C10-04** | Registar cada borderô / talão bancário uma só vez e usar o seu saldo para liquidar várias prestações ou irmãos, sem nunca ultrapassar o valor. | O-03 | M | E1 | v1.2 | RN-09.1 | US-TES-03 | MOD-TES-CXA | — | `borderos_bancarios`, `alocacoes_saldo_bordero` | definido |
 | **RF-C10-05** | Guardar o excedente de um talão como **crédito do aluno** para o mês seguinte; um talão de valor inferior não quita o mês. | O-03 | M | E1 | `R-10` (G-03, G-07); INT-V2 §3.11 | RN-09.3 | US-TES-03 | MOD-TES-CXA | — | `alocacoes_saldo_bordero`, `conta_corrente_propinas` | 🟡 PC-E1 · validar em E1 |
-| **RF-C10-06** | Emitir o documento fiscal do tipo legal (Fatura, Fatura-Recibo ou Recibo) com numeração sequencial por tipo e ano fiscal, NIF do IPCAG e menção do motivo de isenção, por um **ponto único de emissão**. | O-03 | M | E1 | `COR-LEG-01` a `-05`; `R-14` (G-03); `DEC-002` | RN-09 | US-TES-03 | MOD-TES-CXA | DOF-11 (`DOF-11A`, `-11D`, `-11E`) | `recibos_oficiais`, `itens_recibo` | 🟡 PC-E1 · `DEC-002`, `Q-001`, `Q-003`, `Q-004` |
-| **RF-C10-07** | Corrigir só por **Nota de Crédito** e declarar fraude de borderô sem alterar nem apagar documentos; `INVALIDADO_POR_FRAUDE` qualifica o documento bancário, nunca a pessoa. | O-03 | M | E1 | v1.2; `COR-LEG-03`; `RF-C19-25` | RN-09, RN-13.20 | US-TES-04 | MOD-TES-EST | DOF-11 (`DOF-11B`) | `notas_estorno`, `borderos_bancarios` | 🟡 PC-E1 · `DEC-002` |
-| **RF-C10-08** | Fechar o caixa por turno e por canal (TPA, depósito/transferência, Multicaixa Express e RUPE — `DEC-011`), com conferência pela Secretaria Geral e homologação pelo `SUB_ADM`. | O-03 | M | E1 | v1.2; `R-13` (G-03, G-06, G-07) | RN-09.2 | US-TES-05 | MOD-TES-EST | DOF-11 (`DOF-11C`) | `sessoes_fecho_caixa` | 🟡 PC-E1 · `DEC-002` (consolida documentos fiscais; canal RUPE decidido na `DEC-011`) |
+| **RF-C10-06** | Emitir o documento fiscal do tipo legal (Fatura, Fatura-Recibo ou Recibo) com numeração sequencial por tipo e ano fiscal, NIF do IPCAG e menção do motivo de isenção, por um **ponto único de emissão**. | O-03 | M | E1 | `COR-LEG-01` a `-05`; `R-14` (G-03); `DEC-002` | RN-09 | US-TES-03 | MOD-TES-CXA | DOF-11 (`DOF-11A`, `-11D`, `-11E`) | `recibos_oficiais`, `itens_recibo` | 🟡 PC-E1 · `DEC-002` (aguarda a homologação da `DEC-002` e a escolha do software certificado), `Q-003`, `Q-004` |
+| **RF-C10-07** | Corrigir só por **Nota de Crédito** e declarar fraude de borderô sem alterar nem apagar documentos; `INVALIDADO_POR_FRAUDE` qualifica o documento bancário, nunca a pessoa. | O-03 | M | E1 | v1.2; `COR-LEG-03`; `RF-C19-25` | RN-09, RN-13.20 | US-TES-04 | MOD-TES-EST | DOF-11 (`DOF-11B`) | `notas_estorno`, `borderos_bancarios` | 🟡 PC-E1 · `DEC-002` (aguarda a homologação da `DEC-002` e a escolha do software certificado) |
+| **RF-C10-08** | Fechar o caixa por turno e por canal (TPA, depósito/transferência, Multicaixa Express e RUPE — `DEC-011`), com conferência pela Secretaria Geral e homologação pelo `SUB_ADM`. | O-03 | M | E1 | v1.2; `R-13` (G-03, G-06, G-07) | RN-09.2 | US-TES-05 | MOD-TES-EST | DOF-11 (`DOF-11C`) | `sessoes_fecho_caixa` | 🟡 PC-E1 · `DEC-002` (consolida documentos fiscais; aguarda a homologação da `DEC-002` e a escolha do software certificado; canal RUPE decidido na `DEC-011`) |
 | **RF-C10-09** | Fechar administrativamente o caixa de um operador ausente, com dupla autorização e menção no mapa de fecho. | O-03 | M | E1 | CAP-C10 | RN-09.4, RN-13.18 | US-COB-14 | MOD-TES-EST | DOF-11 (`DOF-11C`) | `sessoes_fecho_caixa` | definido |
-| **RF-C10-10** | **Só se o SGE for o emissor** (`DEC-002` (a)): modo de contingência com documentos marcados e comunicados à AGT depois. | O-08 | C | E1 | `COR-LEG-06` | RN-09.5 | US-TES-03 | MOD-TES-CXA | DOF-11 | `recibos_oficiais` | 🟡 PC-E1 · `DEC-002` (passa a `M` com a opção (a), a `W` com a (b)) |
+| **RF-C10-10** | **Contingência via adaptador:** o balcão não bloqueia quando falha a ligação ao software certificado; emite o recibo escolar provisório e põe o pedido na fila de emissão; regularização automática quando o canal volta (a contingência fiscal junto da AGT é do software certificado). | O-08 | M | E1 | `DEC-002` §5; `COR-LEG-06` | RN-09.5 | US-TES-03 | MOD-TES-CXA | DOF-11 | `recibos_oficiais`, `fila_emissao_fiscal` | 🟡 PC-E1 · `DEC-002` (aguarda a homologação da `DEC-002` e a escolha do software certificado) |
 | **RF-C10-11** | Consultar a dívida de cada aluno separada em exigível, reescalonada e vincenda, com a antiguidade por escalões, incluindo dívidas de anos anteriores e de ex-alunos. | O-04 | M | E2 | CAP-C10; `R-11` | RN-13.1, RN-13.2, RN-13.10, RN-18.10 | US-COB-01 | MOD-TES-COB | — | `conta_corrente_propinas` | definido |
 | **RF-C10-12** | Gerar avisos de cobrança escalonados (níveis 1, 2 e 3) só com os dados financeiros mínimos, impressos até haver outro canal. | O-03 | S | E2 | CAP-C10; `DEC-003` | RN-13.5, RN-13.6, RN-14.4 | US-COB-02 | MOD-TES-COB | DOF-17 | `avisos_cobranca`, `avisos` | 🟡 PC-E1 · níveis e prazos a homologar |
 | **RF-C10-13** | Propor e homologar um **acordo de pagamento**; enquanto estiver em dia, o semáforo deixa de bloquear. | O-04 | S | E2 | CAP-C10; `R-11` | RN-13.7, RN-13.8 | US-COB-03 | MOD-TES-COB | DOF-18 | `acordos_pagamento`, `parcelas_acordo`, `parcelas_acordo_prestacoes` | 🟡 PC-E1 · quem homologa |
 | **RF-C10-14** | Declarar automaticamente o incumprimento de um acordo e repor o bloqueio. | O-04 | S | E2 | CAP-C10 | RN-13.9 | US-COB-04 | MOD-TES-COB | — | `acordos_pagamento` | definido |
 | **RF-C10-15** | Perdoar a multa por mora só com autorização registada e motivo. | O-03 | S | E1 | CAP-C10 | RN-13.4 | US-COB-05 | MOD-TES-COB | — | `ajustes_conta_corrente` | 🟡 PC-E1 · quem autoriza |
 | **RF-C10-16** | Emitir o extrato de conta corrente para o encarregado (documento informativo, não fiscal). | O-05 | C | E2 | CAP-C10 | RN-13.6 | US-COB-06 | MOD-TES-COB | DOF-19 | `conta_corrente_propinas` | 🟡 DoR-E2 · `Q-C10-13` (emolumento?) |
-| **RF-C10-17** | Relatório de receita mensal por canal, curso e turno, reprodutível e com exportação auditada. | O-03 | M | E2 | CAP-C10; `R-28` | RN-13.11, RN-13.17 | US-COB-07 | MOD-TES-REL | — | `recibos_oficiais`, `itens_recibo` | 🟡 PC-E1 · `DEC-002` (dados do documento fiscal vêm do emissor) |
+| **RF-C10-17** | Relatório de receita mensal por canal, curso e turno, reprodutível e com exportação auditada. | O-03 | M | E2 | CAP-C10; `R-28` | RN-13.11, RN-13.17 | US-COB-07 | MOD-TES-REL | — | `recibos_oficiais`, `itens_recibo` | 🟡 PC-E1 · `DEC-002` (dados do documento fiscal vêm do software certificado; aguarda a homologação da `DEC-002` e a escolha do software certificado) |
 | **RF-C10-18** | Relatório de dívida acumulada e taxa de inadimplência. | O-03 | M | E2 | CAP-C10; `R-28` | RN-13.11 | US-COB-08 | MOD-TES-REL | — | `conta_corrente_propinas` | definido |
 | **RF-C10-19** | Relatório do custo das bolsas, dos descontos e das multas perdoadas. | O-03 | S | E2 | CAP-C10 | RN-13.12 | US-COB-09 | MOD-TES-REL | — | `beneficios_bolsas_matricula`, `ajustes_conta_corrente` | definido |
-| **RF-C10-20** | Relatório de emolumentos pagos, consumidos e por consumir. | O-03 | C | E2 | CAP-C10 | RN-13.13 | US-COB-10 | MOD-TES-REL | — | `itens_recibo`, `documentos_oficiais_emitidos` | 🟡 PC-E1 · `DEC-002` (dados do documento fiscal vêm do emissor) |
+| **RF-C10-20** | Relatório de emolumentos pagos, consumidos e por consumir. | O-03 | C | E2 | CAP-C10 | RN-13.13 | US-COB-10 | MOD-TES-REL | — | `itens_recibo`, `documentos_oficiais_emitidos` | 🟡 PC-E1 · `DEC-002` (dados do documento fiscal vêm do software certificado; aguarda a homologação da `DEC-002` e a escolha do software certificado) |
 | **RF-C10-21** | Importar o extrato bancário e conciliar as linhas com os borderôs registados (correspondência e diferenças). | O-03 | M | E2 | `DEC-005`; CAP-C10; OPS-09 `INT-01` | RN-13.14, RN-13.15 | US-COB-11 | MOD-TES-CON | — | `extratos_bancarios`, `linhas_extrato_bancario`, `correspondencias_conciliacao`, `periodos_conciliacao` | 🟡 DoR-E2 · `Q-007` (bancos e formato do extrato) |
 | **RF-C10-22** | Tratar o borderô não encontrado ou divergente no extrato até à confirmação ou à declaração de fraude. | O-03 | M | E2 | CAP-C10 | RN-13.16 | US-COB-12 | MOD-TES-CON | — | `correspondencias_conciliacao`, `borderos_bancarios` | definido |
 | **RF-C10-23** | Homologar o fecho mensal da conciliação por conta e imprimir o mapa. | O-03 | S | E2 | CAP-C10 | RN-13.19 | US-COB-13 | MOD-TES-CON | DOF-20 | `periodos_conciliacao` | definido |
@@ -409,7 +409,7 @@ Em todos os casos 🟡 o valor é **parâmetro configurável**, nunca constante 
 | **RF-C19-08** | Registar os pedidos dos titulares, contar o prazo de 60 dias úteis, alertar aos 40 dias e guardar a resposta e a prova de envio. | O-09 | M | E2 | APD-11 (arts. 26.º–28.º) | RN-10 | US-APD-03 | MOD-GOV-09 | — | `pedidos_titulares` | definido |
 | **RF-C19-09** | Gerar o relatório de acesso do titular em PDF (dados por categoria, finalidades, destinatários, origem). | O-09 | S | E2 | APD-11 (art. 26.º) | RN-10 | US-APD-03 | MOD-GOV-09 | — | `pedidos_titulares`, `comunicacoes_destinatarios` | 🟡 DoR-E2 · `Q-APD-21` (saúde) |
 | **RF-C19-10** | Ao retificar dados de identificação, listar os documentos emitidos com o dado antigo e os destinatários a notificar. | O-09 | M | E1 *(`DEC-013`: a retificação existe desde a E1 — `US-PIN-06`)* | APD-11 (art. 28.º) | RN-11.8 | US-PIN-06 | MOD-PIN-04 | — | `pedidos_alteracao_dados`, `documentos_oficiais_emitidos` | definido |
-| **RF-C19-11** | Ao reemitir um documento, marcar o anterior `SUBSTITUIDO` e indicar no portal QR o substituto; recibos nunca se alteram. | O-09 | M | E2 | APD-11 (art. 28.º); `ALT-05-13` | RN-10.3, RN-09 | US-DOC-01, US-DOC-03 | MOD-PED-DOC, MOD-PUB-QR | — | `documentos_oficiais_emitidos` | 🟡 PC-E1 · `DEC-002` |
+| **RF-C19-11** | Ao reemitir um documento, marcar o anterior `SUBSTITUIDO` e indicar no portal QR o substituto; recibos nunca se alteram. | O-09 | M | E2 | APD-11 (art. 28.º); `ALT-05-13` | RN-10.3, RN-09 | US-DOC-01, US-DOC-03 | MOD-PED-DOC, MOD-PUB-QR | — | `documentos_oficiais_emitidos` | 🟡 PC-E1 · `DEC-002` (aguarda a homologação da `DEC-002` e a escolha do software certificado) |
 | **RF-C19-12** | Marcar um registo como `BLOQUEADO`, retirando-o das listas operacionais. | O-09 | S | E3 | APD-11 (art. 28.º) | RN-10 | US-APD-05 | MOD-GOV-09 | — | `alunos` | definido |
 | **RF-C19-13** | Motor de conservação: políticas por categoria, proposta mensal de lote a eliminar ou anonimizar, aprovação pela Direção e relatório, sem reproduzir os dados eliminados. | O-09 | M | E4 (antes do fim do 1.º ano) | APD-11 (art. 11.º) | RN-10 | US-APD-06 | MOD-GOV-09 | — | `politicas_conservacao`, `execucoes_conservacao` | 🟡 DoR-E4 · prazos a validar com jurista |
 | **RF-C19-14** | Anonimizar os candidatos não admitidos, mantendo os campos estatísticos. | O-09 | M | E5 | APD-11 (PC-02) | RN-01.2 | US-ADM-04 | MOD-PED-ADM | — | `candidaturas_10a` | definido |
@@ -491,7 +491,7 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | C07 Conselho, transição, exames | 7 | 7 | — | — | — | — | — | 1 | 6 | — | — |
 | C08 13ª Classe | 7 | 7 | — | — | — | — | — | — | 7 | — | — |
 | C09 Emissão documental | 12 | 11 | 1 | — | — | 2 | 5 | 1 | 4 | — | — |
-| C10 Tesouraria | 26 | 14 | 6 | 5 | 1 | 12 | 13 | — | — | — | 1 fora (`DEC-005`) |
+| C10 Tesouraria | 26 | 15 | 6 | 4 | 1 | 12 | 13 | — | — | — | 1 fora (`DEC-005`) |
 | C11 Recursos humanos | 4 | 3 | 1 | — | — | 1 | 3 | — | — | — | — |
 | C12 Comunicação | 9 | 7 | 2 | — | — | — | — | 7 | — | 2 | — |
 | C13 Disciplina | 8 | 6 | 2 | — | — | — | 1 | 2 | — | 5 | — |
@@ -501,29 +501,29 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | C17 Migração | 16 | 13 | 3 | — | — | 13 | 1 | — | 2 | — | — |
 | C18 Operação | 7 | 4 | 2 | 1 | — | 3 | 4 | — | — | — | — |
 | C19 Proteção de dados | 33 | 28 | 3 | 1 | 1 | 16 | 11 | 1 | 2 | 2 | 1 fora (`DEC-016`) |
-| **Total** | **224** | **180** | **32** | **10** | **2** | **82** | **66** | **22** | **35** | **17** | **2** |
+| **Total** | **224** | **181** | **32** | **9** | **2** | **82** | **66** | **22** | **35** | **17** | **2** |
 
 ### 4.2 Por entrega e prioridade
 
 | Entrega | M | S | C | W | Total |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **E1** — Arrancar o ano | 72 | 6 | 4 | — | **82** |
+| **E1** — Arrancar o ano | 73 | 6 | 3 | — | **82** |
 | **E2** — I Trimestre | 50 | 12 | 4 | — | **66** |
 | **E3** — Fecho de trimestre | 18 | 4 | — | — | **22** |
 | **E4** — Fecho do ano | 28 | 6 | 1 | — | **35** |
 | **E5** — Próximo ciclo | 12 | 4 | 1 | — | **17** |
 | Fora da linha de base (`DEC-005`, `DEC-016`) | — | — | — | 2 | **2** |
-| **Total** | **180** | **32** | **10** | **2** | **224** |
+| **Total** | **181** | **32** | **9** | **2** | **224** |
 
 > [!warning] Peso da E1 e reforço da E3
-> A E1 concentra 82 RF (72 `Must`), porque junta a estrutura académica, a matrícula, a tesouraria, as contas, a migração e a base da proteção de dados. Com a `DEC-013` (Q-038) e a `DEC-015` (Q-037) decididas, a E3 absorveu o núcleo de comportamento (`RF-C13-02`, `-04`) e a central de avisos interna (`RF-C12-01` a `07`), totalizando 22 RF (18 `Must`, 4 `Should`).
+> A E1 concentra 82 RF (73 `Must`), porque junta a estrutura académica, a matrícula, a tesouraria, as contas, a migração e a base da proteção de dados. Com a `DEC-013` (Q-038) e a `DEC-015` (Q-037) decididas, a E3 absorveu o núcleo de comportamento (`RF-C13-02`, `-04`) e a central de avisos interna (`RF-C12-01` a `07`), totalizando 22 RF (18 `Must`, 4 `Should`).
 
 ### 4.3 Por estado (`DEC-009`)
 
 | Estado | RF | Ponto de controlo |
 | :--- | :---: | :--- |
 | `definido` | 136 | — |
-| `🟡 PC-E1` | 22 | Homologação das decisões e `DEC-002` — antes da E1 |
+| `🟡 PC-E1` | 22 | Homologação das decisões (incluindo a `DEC-002`, decidida (b)) e escolha do software certificado — antes da E1 |
 | `🟡 PC-E2` | 17 | Recálculo de pautas — antes da E2 |
 | `🟡 PC-E3` | 9 | Regulamento interno — antes da E3 |
 | `🟡 DoR-E1` … `DoR-E5` | 38 (E1 9, E2 11, E3 2, E4 11, E5 5) | Questão respondida antes da entrega do RF |
@@ -553,3 +553,4 @@ Não têm RF. Só entram por pedido de alteração registado no [[12 - Registo d
 | 2.0-rc2 | 2026-11-09 | Faseamento da C12 (`DEC-015`, Issue #18): atualizada a coluna Entrega de `RF-C12-01` a `RF-C12-07` de `pendente (Q-037)` para `E3`; totais recalculados (§4.1, §4.2: E3 sobe de 15 para 22 RF; pendentes descem de 7 para 0). Lacuna `L-RF-07` fechada. |
 | 2.0-rc2 | 2026-11-09 | Âmbito e requisitos condicionais (`DEC-016`, Issue #23): avaliação de desempenho (`Q-036`) e expediente geral (`Q-039`) formalmente excluídos da linha de base das entregas E1–E5 (`DEC-008` itens 9 e 10); `RF-C19-33` passa a `W` fora da linha de base; totais recalculados (0 requisitos condicionais pendentes; 2 fora da linha de base); lacuna `L-RF-08` fechada. |
 | 2.0-rc2 | 2026-11-09 | Concurso de admissão 2027/2028 (`DEC-018`, Issue #25): confirmado fora do SGE com importação dos admitidos na E1 via C17; C02 na E5 para 2028/2029; `RF-C03-01` e notas de C02/C17 atualizados; `Q-017` resolvida. |
+| 2.0-rc2 | 2026-11-09 | **Aplicação da DEC-002 — VER-02 #43 (2026-11-09):** `DEC-002` decidida (b), homologação pendente (§1.3, C10); `RF-C10-10` redefinido como contingência via adaptador (balcão não bloqueia; recibo escolar provisório e fila de emissão; regularização automática), prioridade `C` → `M`, tabelas `recibos_oficiais` e `fila_emissao_fiscal`; marcas 🟡 PC-E1 de `RF-C10-06`, `-07`, `-08`, `-17`, `-20` e `RF-C19-11` passam a esperar a homologação e a escolha do software certificado; §4.1 e §4.2 recalculados (M 180 → 181, C 10 → 9; E1 72 → 73 `Must`). |
