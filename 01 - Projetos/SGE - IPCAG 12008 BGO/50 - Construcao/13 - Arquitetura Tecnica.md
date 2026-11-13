@@ -184,7 +184,10 @@ Os 14 ADR estão **aceites** (T01, T02 e T04 pela `DEC-027` a 2026-11-09; os res
 ### ADR-T07 — PDF a partir de HTML, gerado no servidor *(aceite 2026-11-10)*
 - **Decisão:** os modelos dos `DOF` são HTML/CSS em A4, convertidos em PDF por **Playwright (Chromium)** no `worker`, com um pool aquecido para cumprir os 3 s. O QR leva o código HMAC-SHA256 (`RN-10.3`).
 - **Porquê:** o mesmo HTML serve para pré-visualizar e para imprimir. Os cabeçalhos e rodapés vêm de `modelos_documento`.
-- **A validar no protótipo P2.**
+- **Validado no protótipo P2 (2026-11-13):** cumpre os 3 s com folga, desde que o Chromium do `worker` fique sempre aberto e se use um **conjunto de páginas já abertas e reutilizadas**:
+  - medido num i5-7200U (2 núcleos): p95 ≈ 0,1–0,2 s por documento, também com a CPU 4× mais lenta e com 3 balcões ao mesmo tempo;
+  - a frio, ou com uma página nova por documento, não chega: abrir uma página custa ≈ 1 s;
+  - resultados e script descartável no ramo `prototipo/p2-pdf` do repositório do código (issue #15).
 
 ### ADR-T08 — Adaptador fiscal como porta *(aceite 2026-11-10; segue a `DEC-002`)*
 - **Decisão:** a interface `EmissorFiscal` tem as operações `emitir(FT|FR|RC)`, `anular(NC|RE)` e `estado()`. Há duas implementações:
