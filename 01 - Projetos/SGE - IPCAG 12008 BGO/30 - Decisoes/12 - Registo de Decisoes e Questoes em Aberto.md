@@ -5,7 +5,7 @@ aliases:
   - "Registo de Decisões SGE"
   - "REG-12"
 created: 2026-11-02
-updated: 2026-11-09
+updated: 2026-11-14
 status: ativo
 version: "2.0"
 doc_id: "REG-12"
@@ -78,6 +78,7 @@ baseline: "v2.0 — congelada a 2026-11-09; homologação pendente (ATA-HOM-01)"
 | [[#DEC-026 — Enquadramento e Parametrização do Regime de IVA do IPCAG (Q-LEG-19, Q09-02)\|DEC-026]] | Issue #22; `Q-LEG-19`, `Q09-02` | Regime de IVA e obrigações fiscais do IPCAG | (a) SGE configurável multi-regime em parametros_instituicao (GERAL, SIMPLIFICADO, EXCLUSAO) com isenção material do ensino (CIVA art. 12.º n.º 1 l); NIF, regime concreto e contabilista remetidos como HITL para o questionário DSC-06-SUB-ADM em PC-E1 (DEC-009) | `decidida` | 2026-11-09 | Analista responsável do projeto | pendente |
 | [[#DEC-027 — Arquitetura técnica de base\|DEC-027]] | Fase 5 (ORG-00) | Arquitetura técnica de base | TypeScript em todo o sistema; construção pelo analista com agentes de IA e testes; repositório novo e privado; sincronização offline por fila própria (DOC-05 §1.2) | `decidida` | 2026-11-09 | Analista responsável do projeto | não exige (decisão técnica) |
 | [[#DEC-028 — Topologia da escola e canais de acesso (pedido de alteração à v2.0)\|DEC-028]] | Ideia do analista (2026-11-10); ARQ-13.1 | Topologia e canais de acesso | Quiosque do aluno na E3; telemóvel + tablet de sala; caixa de correio na nuvem para sincronizar fora da escola; servidor de reserva pronto; três redes separadas | `decidida` | 2026-11-10 | Analista responsável do projeto | pendente (altera `DEC-003`) |
+| [[#DEC-029 — Ajustes da construção do Bloco 1 da E1 (pedido de alteração à v2.0)\|DEC-029]] | Construção da E1 — Bloco 1 (tickets `#3` a `#16`; `ROTEIRO.md` §5) | Ajustes de modelo de dados, eventos de auditoria e desempates RBAC/US do Bloco 1 | (a) Integrar na v2.1 as tabelas auxiliares, colunas, eventos de auditoria e desempates pela matriz RBAC (`DEC-012`) aplicados nos 15 tickets da Fundação | `decidida` | 2026-11-14 | Analista responsável do projeto | pendente (nos pontos que alteram regras/RBAC) |
 
 > [!note] Autoridade que aprova as decisões (registado a 2026-11-02)
 > - **Aprova formalmente:** a **Direção Executiva do IPCAG**. O `DIR_GERAL` homologa; o `SUB_PED` e o `SUB_ADM` dão parecer nas decisões da sua área (pedagógica e administrativa/financeira).
@@ -849,6 +850,46 @@ A análise (ARQ-13.1 §1) mostrou que a ideia coincide com a v2.0 no essencial. 
 
 ---
 
+### DEC-029 — Ajustes da construção do Bloco 1 da E1 (pedido de alteração à v2.0)
+
+- **Origem:** Construção da E1 — Bloco 1 (Fundação, tickets `#2` a `#16` de `Angeloaqp/sge-ipcag-12008-sistema`, consolidando os pontos de `ROTEIRO.md §5` e migrações `0003` a `0016`) · **Estado:** `decidida` · **Data:** 2026-11-14 · **Quem decidiu:** analista responsável do projeto · **Homologação da Direção:** pendente nos pontos que alteram regras ou permissões RBAC; ajustes puramente técnicos de esquema e auditoria seguem a `DEC-027`
+- **Natureza:** é o **segundo pedido de alteração à `v2.0` congelada** (complementa a [[#DEC-028 — Topologia da escola e canais de acesso (pedido de alteração à v2.0)|DEC-028]], que já corresponde ao item 11 de `ROTEIRO.md §5`). Será integrado na versão `2.1` da especificação.
+
+**Contexto.** Durante a construção, revisão e testes dos 15 tickets do Bloco 1 (`PR #17` a `PR #32`, incluindo os protótipos `P2` e `P3`), surgiram lacunas de esquema em [[05 - Modelagem de Dados|DOC-05]], eventos de auditoria em falta no catálogo `DOC-05 §4.9`, parâmetros novos sem valor de referência e contradições pontuais entre histórias (`DOC-03`), ecrãs (`DOC-04`), matriz RBAC (`DOC-01 §2.2`) e regras `RN-xx`. Sempre que houve conflito de permissões aplicou-se a `DEC-012` («o `DOC-01` manda»), registando cada ponto para consolidação na `v2.1`.
+
+**Decisão (pontos a integrar na `v2.1`).**
+
+#### A. Estrutura académica, calendário, currículo e turmas (`#3`, `#13`, `#14`)
+1. **Homologação do Ano Letivo e parâmetros (`#3`):** resolve o conflito entre `US-GOV-01`, `RF-C01-01` e `DOC-01 §2.2` linha 1 pela matriz RBAC (`DEC-012`): `SUB_PED` e `DIR_GERAL` homologam o Ano Letivo; apenas `DIR_GERAL` homologa os parâmetros institucionais.
+2. **Época de exames extraordinários (`#3`):** acrescentar em `trimestres_letivos` (`DOC-05`) as colunas `epoca_exames_extraordinarios_inicio` e `epoca_exames_extraordinarios_fim` (preenchidas apenas no `III_TRIMESTRE`, conforme `US-GOV-01` cenário 1 e `RF-C01-01`).
+3. **Evento de parâmetros (`#3`):** uniformizar o nome do evento `PARAMETROS_INSTITUICAO_*` entre `DOC-01` e `DOC-05 §4.9`.
+4. **Matrizes curriculares e modelo de avaliação (`#13`):** acrescentar a `matrizes_curriculares` (`DOC-05`) as colunas `estado` (reutilizando a lista fechada 108: `PROPOSTO`, `HOMOLOGADO`, `SUBSTITUIDO`), `proposto_por`, `proposto_em`, `homologado_por` e `homologado_em` (`US-GOV-02`, `RF-C01-03`), criar o evento `MATRIZ_CURRICULAR_HOMOLOGADA` no `§4.9`, e alinhar a homologação por `SUB_PED` ou `DIR_GERAL` (`DOC-01 §2.2` linha 2 vs `US-GOV-02` / `RF-C01-03` / nota «SUB_PED + DIR_GERAL» no `DOC-05`).
+5. **Formação de turmas e nomeações (`#14`):** adotar o evento `ATRIBUICAO_APROVADA` para nomeações de cargo no módulo de origem e clarificar o alcance da homologação (`H`) de `turmas` (`DOC-01 §2.2` linha 3, hoje sem máquina de estados no `DOC-01`).
+
+#### B. Cadastro de funcionários e títulos dos cargos (`#4`, `#12`)
+6. **Auditoria do cadastro (`#4`):** acrescentar o evento `CADASTRO_FUNCIONARIO_ALTERADO` ao catálogo `DOC-05 §4.9`.
+7. **Versões e homologação dos títulos dos cargos (`#12`):** acrescentar a tabela `versoes_cargo_institucional` ao `DOC-05` para suportar a «Vigência» (`PROPOSTO`, `HOMOLOGADO`, `SUBSTITUIDO` — acrescentando `SUBSTITUIDO` à lista 80); fixar a categoria de `TITULO_CARGO_HOMOLOGADO` em `DOCUMENTAL` (seguindo `DOC-05 §4.9` em vez de `SEGURANCA_CONTAS` em `US-CTA-15`); interpretar «atribuições ativas» (`RN-16.20.5`) como atribuições «em uso» (`ATIVA` ou `AGENDADA`); esclarecer retirada de proposta, inativação de título sem fluxo próprio e ausência de evento de auditoria para meras propostas.
+
+#### C. Contas, escopo, ciclo de vida, MFA, sessões e acessos (`#5`, `#6`, `#7`, `#8`, `#9`, `#10`, `#11`)
+8. **Pedidos de conta e termo de sigilo (`#5`):** acrescentar a tabela `termos_sigilo` ao `DOC-05` (versionamento do texto aceite, já que o `DOC-05` só prevê `termo_sigilo_versao` em `usuarios_sistema`), os eventos `CODIGO_PRESENCIAL_EMITIDO` e `CODIGO_PRESENCIAL_APROVADO` no `§4.9`, e definir quem escolhe e em que formato nasce `nome_utilizador`.
+9. **Cargos com escopo e nomeações futuras (`#6`):** acrescentar a coluna `escopo_turno` (`MANHA`/`TARDE`) em `atribuicoes_cargo` (`DOC-05` só referia «ID do Escopo»); estender o estado `AGENDADA` (`DOC-01 §3.17`) também às nomeações com data de início futura (além de `aprovarComInicioFuturo`); alinhar quem nomeia `COORD_CURSO`, `COORD_DISC` e `COORD_TURNO` (`DOC-01 §2.2` linha 2 vs linha 3 e `§3.17`).
+10. **Suspensão, saída e alertas de gestão (`#9`):** acrescentar a `usuarios_sistema` as colunas da suspensão (`suspensa_em`, `suspensa_ate`, `motivo_suspensao`, `suspensa_por`, `suspensao_emergencia`) e prever na `§3.16` o término do prazo de uma suspensão normal; acrescentar `SAIDA_FUNCIONARIO_REGISTADA` ao `§4.9`; formalizar as travas de governação (`CHEFE_SEC_GER` não regista a saída de cargos de direção; `ADMIN_TEC` não suspende `DIR_GERAL`/`SUB_ADM`); fechar a lista de `gravidade` em `alertas_gestao` (`INFORMATIVA`, `ALTA`, `BLOQUEANTE`) e acrescentar à lista 92 os tipos para «cargo sem titular» e «emergência caducada».
+11. **Administração técnica e revisão de acessos (`#11`):** acrescentar a tabela `revisoes_acessos` e o evento `REVISAO_ACESSOS_CONFIRMADA` ao `DOC-05`; resolver a contradição entre `§3.16` (`desbloquearManual` por `ADMIN_TEC`/`CHEFE_SEC_GER`) e `C14-f` (incluindo `DIR_GERAL` e `SUB_ADM`, aplicada na implementação); manter intangível a atribuição de `DIR_GERAL` na revisão periódica por ausência de fluxo de sucessão da Direção.
+12. **Segundo fator TOTP (`#7`):** acrescentar o estado `POR_CONFIRMAR` em `fatores_autenticacao` (`DOC-05`) para o registo presencial pendente da confirmação do 1.º código, e incluir os parâmetros `mfa.janela_passos` e `mfa.minutos_para_codigo` em `parametros_seguranca`.
+13. **Reposição presencial de acesso (`#10`):** acrescentar as colunas `gerado_em` e `fator_perdido` em `codigos_acesso_presencial` (`DOC-05` não distinguia o pedido à espera do 2.º cargo da geração do código); acrescentar `REPOSICAO_PEDIDA` ao `§4.9`; usar `codigo_presencial.horas_validade` como prazo do pedido pendente; prever na `§3.16` que a reposição presencial também desbloqueia a conta (`BLOQUEADA_TENTATIVAS` → `ATIVA`).
+14. **Sessões simultâneas e desbloqueio de ecrã (`#8`):** em `RN-16.13`, generalizar a todos os cargos a regra de terminar a sessão mais antiga ao exceder o limite (não apenas ao `OP_TES`), aplicando o limite mais apertado em caso de acumulação de cargos e contando apenas sessões que já concluíram o MFA; permitir o desbloqueio do ecrã apenas com a palavra-passe também em contas com MFA, com eventos próprios `DESBLOQUEIO_ECRA_SUCESSO` e `DESBLOQUEIO_ECRA_FALHADO` (fora da lista atual do `DOC-05`) para não apagar falhas de reautenticação (`RN-16.14.4`).
+
+#### D. Numeração documental, modelos e registo de exportações (`#15`, `#16`)
+15. **Numeração documental única e modelos (`#15`):** acrescentar a tabela `formatos_series`, a coluna `ano_fiscal` em `series_numeracao_documental` (criando a série anual no 1.º uso com `{sigla}` vinda de `parametros_instituicao`) e o tipo de série/documento `ENSAIO` (fora da lista 59); guardar os signatários em `modelos_documento` por **papel** em vez de ligações fixas a `cargos_institucionais` (`RN-10.7`), incluir `imprime_designacao_complementar` e aceitar ausência de ecrã próprio de homologação/vigência de modelos nesta fase; interpretar o «registo» assinado por HMAC-SHA256 (`RN-10.3`) como o número impresso completo do documento; considerar a linha de `documentos_oficiais_emitidos` como registo suficiente da emissão (reservando `TENTATIVA_ALTERACAO_NUMERO_BOLETIM` para os boletins na E2).
+16. **Registo de exportações e impressões com dados pessoais (`#16`):** fixar a estrutura JSON de `valor_novo` no evento `EXPORTACAO_DADOS_PESSOAIS` (`recurso`, `formato`, `titulares`, `filtro`) validada por `CHECK` em `sge.audit_logs`; confirmar que a consulta da categoria `PROTECAO_DADOS` fica reservada ao `DIR_GERAL` conforme `DOC-01 §2.2` linha 26 e `DOC-05 §5` linha 8 (em detrimento da referência a `SUB_PED`/`SUB_ADM` em `MOD-GOV-05` no `DOC-04`).
+
+**Impacto (a integrar na `v2.1`).**
+- **Regras, histórias e ecrãs:** `DOC-01` (§2.2, §3.16, §3.17, `RN-10.3`, `RN-10.7`, `RN-16.13`, `RN-16.20.5`), `DOC-03` (`US-GOV-01/02/03`, `US-CTA-08/10/12/13/15`), `DOC-04` (`MOD-GOV-05`), `RF-07`.
+- **Modelo de dados:** `DOC-05` (listas 59, 80, 92, 108; catálogo de auditoria `§4.9`; matriz `§5`; novas tabelas `termos_sigilo`, `versoes_cargo_institucional`, `revisoes_acessos`, `formatos_series` e novas colunas em `trimestres_letivos`, `matrizes_curriculares`, `atribuicoes_cargo`, `usuarios_sistema`, `codigos_acesso_presencial`, `series_numeracao_documental`, `modelos_documento`).
+- **Construção:** já operacionalizado nos `PR #17` a `PR #32`; a atualização editorial da especificação `v2.1` será executada após homologação pela Direção Executiva ou antes da E2, sem bloquear o início do **Bloco 2 (Alunos)** da E1.
+
+---
+
 ## 3. Questões em Aberto
 
 | ID | Questão | Onde surgiu | Bloqueia | A quem perguntar | Fase | Estado | Resposta (fonte, data) |
@@ -972,3 +1013,5 @@ Para manter uma só fonte por facto, as questões abaixo **continuam nas notas o
 | 2.0-rc2 | 2026-11-09 | `DEC-002`: faturação AGT decidida na Opção (b) — integração com software certificado via adaptador fiscal na E1; o SGE gere caixa, semáforo, conta corrente e quitação escolar (`DOF-11`); emissão em contingência com fila assíncrona; Issue #21 fechada (`Q-001`, `Q-002`, `Q-024`, `Q-LEG-16`, `Q-LEG-17`). |
 | 2.0-rc2 | 2026-11-09 | `DEC-002` (VER-02 #43): enum do emissor corrigido para `SOFTWARE_CERTIFICADO_EXTERNO` (o valor usado no DOC-05); Contexto ponto 1 com a condição do regime de IVA (🟡 `DEC-026`); Decisão ponto 5 alinhado — a contingência fiscal é do software certificado. A decisão não muda; aplicada no DOC-01 a DOC-05, RF-07, VIS-06, OPS-09, RNF-08 e PLN-00. |
 | 2.0-rc2 | 2026-11-09 | Correções da verificação VER-02 (#46): referências aos questionários corrigidas (`DEC-020` → `DSC-08-DIR-GERAL`; `DEC-023` e `DEC-026` → `DSC-06-SUB-ADM`); valores de `regime_iva` iguais em todo o lado (`GERAL`, `SIMPLIFICADO`, `EXCLUSAO`; isenção do ensino à parte); `Q-004` atualizada (`DEC-002` decidida (b), formato do software certificado 🟡 `DSC-06-SUB-ADM`); `Q-031` respondida (`DEC-024`); contagens do §3.1 atualizadas (41 legais, 45 respondidas); front-matter com `version` e `updated` alinhados com este histórico. As decisões não mudam. |
+| 2.0 (pedido `v2.1`) | 2026-11-10 | `DEC-028`: pedido de alteração à `v2.0` para topologia da escola e canais de acesso (quiosque na E3 alterando `DEC-003`, tablet `PARTILHADO_SALA`, caixa de correio na nuvem, servidor de reserva e três redes). |
+| 2.0 (pedido `v2.1`) | 2026-11-14 | `DEC-029`: consolidação dos 16 pontos de ajustes de modelo de dados, catálogo de eventos (`DOC-05 §4.9`) e desempates RBAC/US levantados durante a construção dos 15 tickets do **Bloco 1 (Fundação)** da E1 (`#2`–`#16`, `ROTEIRO.md §5`); `updated` atualizado para `2026-11-14`. |
