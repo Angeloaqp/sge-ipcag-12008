@@ -153,6 +153,10 @@ Os 14 ADR estão **aceites** (T01, T02 e T04 pela `DEC-027` a 2026-11-09; os res
   - as travas do DOC-05 §4 exigem SQL explícito: triggers de imutabilidade fiscal, `audit_logs` só de acrescentar e RLS por papel;
   - um ORM esconderia isso.
 - **Testes:** cada política RLS tem um teste que tenta ler e escrever com cada papel.
+- **Validado no protótipo P3 (2026-11-14):** cumpre `< 200 ms` com 1.500 alunos, 40 turmas, 480 mini-pautas, 54.000 avaliações e 150 contas (i5-7200U, PostgreSQL 16 em contentor), **desde que o escopo seja calculado uma vez por consulta** (`SETOF uuid` + `IN (SELECT ...)`, Variante B):
+  - **Variante B (conjunto de IDs visíveis por consulta):** mini-pauta com p50 `6,4–23,9 ms` e p95 `10,3–64,4 ms`; pauta geral (1.368 linhas) com p50 `19,7–65,6 ms` e p95 `32,5–153,1 ms` em todos os papéis (`PROF`, `DIR_TURMA`, `COORD_DISC`, `COORD_CURSO`, `SUB_PED`);
+  - **Variante A (funções de escopo por linha, padrão da migração `0008`):** não chega para tabelas grandes — mini-pauta até `362,7 ms` (p95) e pauta geral até `4.605,7 ms` (p95);
+  - resultados e script descartável no ramo `prototipo/p3-rls` do repositório do código (issue #1).
 
 ### ADR-T04 — Sincronização offline por fila própria de operações *(aceite: `DEC-027`)*
 - **Decisão:** a PWA guarda cada lançamento como **operação** (`tipo`, `chave_idempotencia`, `dispositivo`, `data_local`, `dados`) numa fila em IndexedDB. Envia em lote quando há rede. O servidor regista em `operacoes_sincronizacao`, aplica pela ordem e devolve o resultado por operação: aceite, rejeitada ou conflito, que vai para `conflitos_sincronizacao`.
